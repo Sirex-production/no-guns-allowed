@@ -1,2 +1,1 @@
-# VoizTemplate
-Unity project template
+
