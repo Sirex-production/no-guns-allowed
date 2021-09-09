@@ -6,7 +6,7 @@ namespace Ingame
     [RequireComponent(typeof(Rigidbody), typeof(PlayerStatsController))]
     public class PlayerMovementController : MonoBehaviour
     {
-        private const float MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASH = .01f;
+        private const float MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASH = .001f;
         
         private Rigidbody _rigidbody;
         private PlayerStatsController _playerStatsController;
@@ -34,7 +34,7 @@ namespace Ingame
         {
             StopDash();
         }
-
+        
         private void OnDestroy()
         {
             InputSystem.Instance.OnDirectionalSwipeAction -= Dash;
@@ -54,8 +54,10 @@ namespace Ingame
             if(!_isDashing)
                 return;
             
-            if(Vector3.Distance(_dashStartPos, transform.position) > _playerStatsController.Data.MaximalDashDistance /*|| _rigidbody.velocity.magnitude < MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASH*/)
+            if(Vector3.Distance(_dashStartPos, transform.position) > _playerStatsController.Data.MaximalDashDistance)
                 StopDash();
+            // else if(_rigidbody.velocity.magnitude < MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASH)
+            //     StopDash();
         }
 
         private void Dash(Vector2 dashDirection)
