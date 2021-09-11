@@ -1,3 +1,4 @@
+using Extensions;
 using Support;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Ingame
     [RequireComponent(typeof(Rigidbody), typeof(PlayerStatsController))]
     public class PlayerMovementController : MonoBehaviour
     {
-        private const float MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASH = .001f;
+        private const float MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASHING = .001f;
         
         private Rigidbody _rigidbody;
         private PlayerStatsController _playerStatsController;
@@ -27,14 +28,9 @@ namespace Ingame
 
         private void Update()
         {
-            ManageDash();
+            ManageDashState();
         }
 
-        private void OnCollisionEnter(Collision other)
-        {
-            StopDash();
-        }
-        
         private void OnDestroy()
         {
             InputSystem.Instance.OnDirectionalSwipeAction -= Dash;
@@ -44,20 +40,20 @@ namespace Ingame
         {
             if(_playerStatsController == null)
                 return;
-            
-            Gizmos.DrawWireSphere(_dashStartPos, _playerStatsController.Data.MaximalDashDistance);
-            Gizmos.color = Color.red;
+
+            Gizmos.DrawWireSphere(!_isDashing ? transform.position : _dashStartPos, _playerStatsController.Data.MaximalDashDistance);
         }
 
-        private void ManageDash()
+        private void ManageDashState()
         {
             if(!_isDashing)
                 return;
             
-            if(Vector3.Distance(_dashStartPos, transform.position) > _playerStatsController.Data.MaximalDashDistance)
+            var isDashDistanceWasPassed = Vector3.Distance(_dashStartPos, transform.position) > _playerStatsController.Data.MaximalDashDistance;
+            var isInRestingState = _rigidbody.velocity.magnitude < MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASHING;
+
+            if(isDashDistanceWasPassed || isInRestingState)
                 StopDash();
-            // else if(_rigidbody.velocity.magnitude < MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASH)
-            //     StopDash();
         }
 
         private void Dash(Vector2 dashDirection)
@@ -65,10 +61,12 @@ namespace Ingame
             if(_isDashing)
                 return;
             
-            _isDashing = true;
             _dashStartPos = transform.position;
             dashDirection = dashDirection.normalized;
+            
             _rigidbody.AddForce(dashDirection * _playerStatsController.Data.DashForce, ForceMode.Impulse);
+            
+            this.DoAfterNextFrame(() => _isDashing = true);
         }
 
         private void StopDash()
@@ -77,7 +75,8 @@ namespace Ingame
                 return;
             
             _rigidbody.velocity *= _playerStatsController.Data.VelocityScaleFactorAfterDash;
-            _isDashing = false;
+            
+            this.DoAfterNextFrame(() => _isDashing = false);
         }
     }
 }
