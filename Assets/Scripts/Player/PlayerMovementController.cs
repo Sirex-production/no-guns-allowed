@@ -35,7 +35,7 @@ namespace Ingame
         {
             InputSystem.Instance.OnDirectionalSwipeAction -= Dash;
         }
-
+        
         private void OnDrawGizmos()
         {
             if(_playerStatsController == null)
