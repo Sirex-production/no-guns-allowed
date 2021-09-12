@@ -413,7 +413,7 @@
     "m_Guid": {
         "m_GuidSerialized": "fbe329e2-1b37-44fb-995d-c688cddaaa3e"
     },
-    "m_Name": "Width",
+    "m_Name": "Pixel Size",
     "m_DefaultReferenceName": "Vector1_17717dcfb29b4a6b9f8796e28822854a",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
