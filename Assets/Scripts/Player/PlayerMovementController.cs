@@ -66,7 +66,7 @@ namespace Ingame
                 return;
             
             _playerStatsController.UseCharges(CHARGES_USED_TO_PERFORM_DASH);
-            
+
             _dashStartPos = transform.position;
             dashDirection = dashDirection.normalized;
             

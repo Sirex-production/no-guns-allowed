@@ -53,6 +53,8 @@ namespace Ingame
             
             _currentNumberOfCharges += numberOfChargesToRegenerate;
             _currentNumberOfCharges = Mathf.Min(_currentNumberOfCharges, data.InitialNumberOfCharges);
+            
+            UiController.Instance.UiDashesController.SetNumberOfCharges(_currentNumberOfCharges, data.InitialNumberOfCharges);
         }
 
         public void UseCharges(int numberOfChargesToUse)
@@ -62,6 +64,8 @@ namespace Ingame
             
             numberOfChargesToUse = Mathf.Abs(numberOfChargesToUse);
             _currentNumberOfCharges = Mathf.Max(0, _currentNumberOfCharges - numberOfChargesToUse);
+            
+            UiController.Instance.UiDashesController.SetNumberOfCharges(_currentNumberOfCharges, data.InitialNumberOfCharges);
         }
     }
 }
