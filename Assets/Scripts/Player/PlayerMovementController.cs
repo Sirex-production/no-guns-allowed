@@ -8,6 +8,7 @@ namespace Ingame
     public class PlayerMovementController : MonoBehaviour
     {
         private const float MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASHING = .001f;
+        private const int CHARGES_USED_TO_PERFORM_DASH = 1;
         
         private Rigidbody _rigidbody;
         private PlayerStatsController _playerStatsController;
@@ -58,14 +59,19 @@ namespace Ingame
 
         private void Dash(Vector2 dashDirection)
         {
-            if(_isDashing)
+            // if(_isDashing)
+            //     return;
+            
+            if(!_playerStatsController.IsAbleToDash)
                 return;
+            
+            _playerStatsController.UseCharges(CHARGES_USED_TO_PERFORM_DASH);
             
             _dashStartPos = transform.position;
             dashDirection = dashDirection.normalized;
             
             _rigidbody.AddForce(dashDirection * _playerStatsController.Data.DashForce, ForceMode.Impulse);
-            
+
             this.DoAfterNextFrame(() => _isDashing = true);
         }
 
