@@ -7,6 +7,8 @@ namespace Support
 {
 	public class InputSystem : MonoSingleton<InputSystem>, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
+		[SerializeField] private float minimumDeltaSwipe = 2f;
+		
 		public event Action<Vector2> OnTouchAction;
 		public event Action<Vector2> OnReleaseAction;
 		public event Action<SwipeDirection> OnSwipeAction;
@@ -48,7 +50,7 @@ namespace Support
 
 		private void CheckIfSwipeWasPerformed()
 		{
-			if (_isHolding || _deltaSwipe.magnitude < TemplateManager.Instance.TemplateSettingsData.MinimumDeltaSwipe || !_isAbleToInput)
+			if (_isHolding || _deltaSwipe.magnitude < minimumDeltaSwipe || !_isAbleToInput)
 				return;
 
 			var absDelta = _deltaSwipe.Abs();

@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40b723c20083594f86e872faf01bb7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimumDeltaSwipe: 0
 --- !u!1 &3380718857357169741
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29033a1098697c643b02775c383f83c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templateSettingsData: {fileID: 11400000, guid: 45b803c1b61ddc445bcf12641584c293, type: 2}
+  targetFpsOnCurrentScene: 60
 --- !u!1 &3380718857491081259
 GameObject:
   m_ObjectHideFlags: 0
