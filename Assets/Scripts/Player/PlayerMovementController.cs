@@ -4,22 +4,17 @@ using UnityEngine;
 
 namespace Ingame
 {
-    [RequireComponent(typeof(Rigidbody), typeof(PlayerStatsController))]
     public class PlayerMovementController : MonoBehaviour
     {
         private const float MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASHING = .001f;
-        private const int CHARGES_USED_TO_PERFORM_DASH = 1;
-        
-        private Rigidbody _rigidbody;
-        private PlayerStatsController _playerStatsController;
 
+        private Rigidbody _rigidbody;
         private bool _isDashing = false;
         private Vector3 _dashStartPos;
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _playerStatsController = GetComponent<PlayerStatsController>();
         }
 
         private void Start()
@@ -39,18 +34,21 @@ namespace Ingame
         
         private void OnDrawGizmos()
         {
-            if(_playerStatsController == null)
+            if(PlayerEventController.Instance == null)
                 return;
 
-            Gizmos.DrawWireSphere(!_isDashing ? transform.position : _dashStartPos, _playerStatsController.Data.MaximalDashDistance);
+            var maxDashDistance = PlayerEventController.Instance.StatsController.Data.MaximalDashDistance;
+
+            Gizmos.DrawWireSphere(!_isDashing ? transform.position : _dashStartPos, maxDashDistance);
         }
 
         private void ManageDashState()
         {
             if(!_isDashing)
                 return;
-            
-            var isDashDistanceWasPassed = Vector3.Distance(_dashStartPos, transform.position) > _playerStatsController.Data.MaximalDashDistance;
+
+            var maximalDashDistance = PlayerEventController.Instance.StatsController.Data.MaximalDashDistance;
+            var isDashDistanceWasPassed = Vector3.Distance(_dashStartPos, transform.position) > maximalDashDistance;
             var isInRestingState = _rigidbody.velocity.magnitude < MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASHING;
 
             if(isDashDistanceWasPassed || isInRestingState)
@@ -62,15 +60,17 @@ namespace Ingame
             // if(_isDashing)
             //     return;
             
-            if(!_playerStatsController.IsAbleToDash)
+            if(!PlayerEventController.Instance.StatsController.IsAbleToDash)
                 return;
-            
-            _playerStatsController.UseCharges(CHARGES_USED_TO_PERFORM_DASH);
+
+            var playerStatsController = PlayerEventController.Instance.StatsController;
 
             _dashStartPos = transform.position;
             dashDirection = dashDirection.normalized;
             
-            _rigidbody.AddForce(dashDirection * _playerStatsController.Data.DashForce, ForceMode.Impulse);
+            _rigidbody.AddForce(dashDirection * playerStatsController.Data.DashForce, ForceMode.Impulse);
+            
+            PlayerEventController.Instance.PerformDash(dashDirection);
 
             this.DoAfterNextFrame(() => _isDashing = true);
         }
@@ -79,8 +79,10 @@ namespace Ingame
         {
             if(!_isDashing)
                 return;
+
+            var velocityScaleAfterDash = PlayerEventController.Instance.StatsController.Data.VelocityScaleFactorAfterDash;
             
-            _rigidbody.velocity *= _playerStatsController.Data.VelocityScaleFactorAfterDash;
+            _rigidbody.velocity *= velocityScaleAfterDash;
             
             this.DoAfterNextFrame(() => _isDashing = false);
         }

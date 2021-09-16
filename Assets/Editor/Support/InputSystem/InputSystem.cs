@@ -54,7 +54,10 @@ namespace Support
 				return;
 
 			var absDelta = _deltaSwipe.Abs();
-
+			
+			if(_deltaSwipe.magnitude <= 0)
+				return;
+			
 			OnDirectionalSwipeAction?.Invoke(_deltaSwipe.normalized);
 			if (_deltaSwipe.x > 0 && absDelta.x > absDelta.y) OnSwipeAction?.Invoke(SwipeDirection.Right);
 			if (_deltaSwipe.x < 0 && absDelta.x > absDelta.y) OnSwipeAction?.Invoke(SwipeDirection.Left);

@@ -1,16 +1,20 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Ingame
+namespace Ingame.UI
 {
     public class UiPlayerDashesController : MonoBehaviour
     {
-        [SerializeField] private Image dashesDisplayBar;
+        [SerializeField] private UiCharge[] _uiCharges;
 
-        public void SetNumberOfCharges(int currentNumberOfDashes, int maxNumberOfDashes)
+        public void SetNumberOfActiveCharges(int numberOfActiveCharges)
         {
-            var displayValue = Mathf.InverseLerp(0, maxNumberOfDashes, currentNumberOfDashes);
-            dashesDisplayBar.fillAmount = displayValue;
+            for (var i = 0; i < _uiCharges.Length; i++)
+            {
+                if (i < numberOfActiveCharges)
+                    _uiCharges[i].PlayRegenerateAnimation();
+                else
+                    _uiCharges[i].PlayDisappearanceAnimation();
+            }
         }
     }
 }

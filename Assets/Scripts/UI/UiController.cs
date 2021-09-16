@@ -1,7 +1,7 @@
 using Support;
 using UnityEngine;
 
-namespace Ingame
+namespace Ingame.UI
 {
     public class UiController : MonoSingleton<UiController>
     {
