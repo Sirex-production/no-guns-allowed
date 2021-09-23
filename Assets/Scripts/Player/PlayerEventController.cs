@@ -12,13 +12,14 @@ namespace Ingame
         private PlayerStatsController _statsController;
         private PlayerMovementController _movementController;
         private PlayerAnimationController _animationController;
-
-        public event Action<Vector3> OnDashPerformed;
-
+        
         public PlayerStatsController StatsController => _statsController;
         public PlayerMovementController MovementController => _movementController;
         public PlayerAnimationController AnimationController => _animationController;
-        
+        public PlayerData Data => _statsController.Data;
+
+        public event Action<Vector3> OnDashPerformed;
+
         protected override void Awake()
         {
             base.Awake();
@@ -27,7 +28,7 @@ namespace Ingame
             _movementController = GetComponent<PlayerMovementController>();
             _animationController = GetComponent<PlayerAnimationController>();
         }
-        
+
         public void PerformDash(Vector3 dashingDirection)
         {
             OnDashPerformed?.Invoke(dashingDirection);
