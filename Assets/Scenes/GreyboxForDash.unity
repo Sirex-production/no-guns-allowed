@@ -521,7 +521,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 109357945}
   aimingOrigin: {fileID: 724675920}
-  maxAimDistance: 30
+  maxAimDistance: 10
+  sensitivity: 0.05
 --- !u!1 &364693265
 GameObject:
   m_ObjectHideFlags: 0

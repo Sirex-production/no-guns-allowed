@@ -1,4 +1,3 @@
-using System;
 using Extensions;
 using Support;
 using UnityEngine;
@@ -9,8 +8,8 @@ namespace Ingame
     {
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private Transform aimingOrigin;
-        [Space] 
-        [SerializeField] [Min(0)] private float maxAimDistance = 10f; 
+        [Space]
+        [SerializeField] [Range(0, 1)] private float sensitivity = 1f;
         
         private Vector3 _initialLocalPosition;
 
@@ -50,9 +49,9 @@ namespace Ingame
 
         private void Move(Vector2 movingDirection)
         { 
-            var nextPos = transform.localPosition + (Vector3)movingDirection;
+            var nextPos = transform.localPosition + (Vector3)movingDirection * sensitivity;
 
-            transform.localPosition = Vector3.ClampMagnitude(nextPos, maxAimDistance);
+            transform.localPosition = Vector3.ClampMagnitude(nextPos, PlayerEventController.Instance.Data.MaxDashDistance);
         }
 
         private void ResetLocalPosition(Vector2 _)
