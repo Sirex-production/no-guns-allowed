@@ -67,8 +67,11 @@ namespace Ingame
 
         private void StopDash()
         {
+            var dashingDirection = Vector3.Normalize(transform.position - _initialDashPosition);
+            
             _rigidbody.useGravity = true;
             _rigidbody.velocity = Vector3.zero;
+            _rigidbody.AddForce(dashingDirection * PlayerEventController.Instance.Data.AfterDashForce, ForceMode.Impulse);
 
             _currentDashLength = 0;
         }
