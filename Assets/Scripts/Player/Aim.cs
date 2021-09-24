@@ -8,7 +8,8 @@ namespace Ingame
     {
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private Transform aimingOrigin;
-        [Space]
+        [Space] 
+        [SerializeField] private bool obstaclesPreventAiming = true;
         [SerializeField] [Range(0, 1)] private float sensitivity = 1f;
         
         private Vector3 _initialLocalPosition;
@@ -16,7 +17,8 @@ namespace Ingame
         private void Awake()
         {
             _initialLocalPosition = transform.localPosition;
-
+            transform.parent = aimingOrigin;
+            
             if (lineRenderer != null)
                 lineRenderer.positionCount = 2;
         }
@@ -48,7 +50,11 @@ namespace Ingame
         }
 
         private void Move(Vector2 movingDirection)
-        { 
+        {
+            if(obstaclesPreventAiming)
+                if(Physics.Linecast(aimingOrigin.transform.position, transform.position, out RaycastHit hit))
+                    transform.position = hit.point;
+
             var nextPos = transform.localPosition + (Vector3)movingDirection * sensitivity;
 
             transform.localPosition = Vector3.ClampMagnitude(nextPos, PlayerEventController.Instance.Data.MaxDashDistance);

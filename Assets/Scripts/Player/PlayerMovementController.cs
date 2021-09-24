@@ -12,7 +12,8 @@ namespace Ingame
         
         private Vector3 _initialDashPosition;
         private float _currentDashLength;
-
+        private bool _isDashing;
+        
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
@@ -30,8 +31,7 @@ namespace Ingame
 
         private void OnCollisionEnter(Collision other)
         {
-            StopAllCoroutines();
-            StopDash();
+            StopDash(); 
         }
 
         private void Update()
@@ -39,11 +39,8 @@ namespace Ingame
             if(_currentDashLength <= 0)
                 return;
 
-            if (Vector3.Distance(_initialDashPosition, transform.position) > _currentDashLength)
-            {
-                StopAllCoroutines();
+            if (Vector3.Distance(_initialDashPosition, transform.position) > _currentDashLength) 
                 StopDash();
-            }
         }
 
         private void Dash(Vector2 _)
@@ -57,23 +54,29 @@ namespace Ingame
 
             _initialDashPosition = transform.position;
             _currentDashLength = dashVector.magnitude;
+            _isDashing = true;
             
             _rigidbody.useGravity = false;
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.AddForce(impulseVelocity, ForceMode.Impulse);
-            
+
             PlayerEventController.Instance.PerformDash(dashDirection);
         }
 
         private void StopDash()
         {
+            if(!_isDashing)
+                return;
+            
             var dashingDirection = Vector3.Normalize(transform.position - _initialDashPosition);
             
             _rigidbody.useGravity = true;
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.AddForce(dashingDirection * PlayerEventController.Instance.Data.AfterDashForce, ForceMode.Impulse);
 
+            _initialDashPosition = transform.position;
             _currentDashLength = 0;
+            _isDashing = false;
         }
     }
 }
