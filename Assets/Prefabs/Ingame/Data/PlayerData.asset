@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0444b6a44187da409d4db114e04bea5, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  dashForce: 150
-  velocityScaleFactorAfterDash: 0.25
-  maximalDashDistance: 5
+  dashForce: 500
+  afterDashForce: 10
+  maxDashDistance: 10
+  initialNumberOfCharges: 5
+  chargeRegenerationTime: 1

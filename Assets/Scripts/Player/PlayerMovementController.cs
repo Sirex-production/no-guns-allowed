@@ -1,72 +1,66 @@
-using Extensions;
 using Support;
 using UnityEngine;
 
 namespace Ingame
 {
-    [RequireComponent(typeof(Rigidbody), typeof(PlayerStatsController))]
+    [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovementController : MonoBehaviour
     {
-        private const float MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASHING = .001f;
+        [SerializeField] private Aim aim;
         
         private Rigidbody _rigidbody;
-        private PlayerStatsController _playerStatsController;
-
-        private bool _isDashing = false;
-        private Vector3 _dashStartPos;
-
+        
+        private Vector3 _initialDashPosition;
+        private float _currentDashLength;
+        private bool _isDashing;
+        
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _playerStatsController = GetComponent<PlayerStatsController>();
         }
 
         private void Start()
         {
-            InputSystem.Instance.OnDirectionalSwipeAction += Dash;
-        }
-
-        private void Update()
-        {
-            ManageDashState();
+            InputSystem.Instance.OnReleaseAction += Dash;
         }
 
         private void OnDestroy()
         {
-            InputSystem.Instance.OnDirectionalSwipeAction -= Dash;
-        }
-        
-        private void OnDrawGizmos()
-        {
-            if(_playerStatsController == null)
-                return;
-
-            Gizmos.DrawWireSphere(!_isDashing ? transform.position : _dashStartPos, _playerStatsController.Data.MaximalDashDistance);
+            InputSystem.Instance.OnReleaseAction -= Dash;
         }
 
-        private void ManageDashState()
+        private void OnCollisionEnter(Collision other)
         {
-            if(!_isDashing)
-                return;
-            
-            var isDashDistanceWasPassed = Vector3.Distance(_dashStartPos, transform.position) > _playerStatsController.Data.MaximalDashDistance;
-            var isInRestingState = _rigidbody.velocity.magnitude < MINIMAL_SPEED_FOR_RIGIDBODY_TO_STOP_DASHING;
+            StopDash(); 
+        }
 
-            if(isDashDistanceWasPassed || isInRestingState)
+        private void Update()
+        {
+            if(_currentDashLength <= 0)
+                return;
+
+            if (Vector3.Distance(_initialDashPosition, transform.position) > _currentDashLength) 
                 StopDash();
         }
 
-        private void Dash(Vector2 dashDirection)
+        private void Dash(Vector2 _)
         {
-            if(_isDashing)
+            if(aim == null || !PlayerEventController.Instance.StatsController.IsAbleToDash)
                 return;
             
-            _dashStartPos = transform.position;
-            dashDirection = dashDirection.normalized;
+            var dashVector = aim.transform.position - transform.position;
+            var dashDirection = dashVector.normalized;
+            var impulseVelocity = dashDirection * PlayerEventController.Instance.Data.DashForce;
+
+            _initialDashPosition = transform.position;
+            _currentDashLength = dashVector.magnitude;
+            _isDashing = true;
             
-            _rigidbody.AddForce(dashDirection * _playerStatsController.Data.DashForce, ForceMode.Impulse);
-            
-            this.DoAfterNextFrame(() => _isDashing = true);
+            _rigidbody.useGravity = false;
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.AddForce(impulseVelocity, ForceMode.Impulse);
+
+            PlayerEventController.Instance.PerformDash(dashDirection);
         }
 
         private void StopDash()
@@ -74,9 +68,15 @@ namespace Ingame
             if(!_isDashing)
                 return;
             
-            _rigidbody.velocity *= _playerStatsController.Data.VelocityScaleFactorAfterDash;
+            var dashingDirection = Vector3.Normalize(transform.position - _initialDashPosition);
             
-            this.DoAfterNextFrame(() => _isDashing = false);
+            _rigidbody.useGravity = true;
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.AddForce(dashingDirection * PlayerEventController.Instance.Data.AfterDashForce, ForceMode.Impulse);
+
+            _initialDashPosition = transform.position;
+            _currentDashLength = 0;
+            _isDashing = false;
         }
     }
 }
