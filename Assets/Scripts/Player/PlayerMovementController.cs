@@ -13,6 +13,8 @@ namespace Ingame
         private Vector3 _initialDashPosition;
         private float _currentDashLength;
         private bool _isDashing;
+
+        public bool IsDashing => _isDashing;
         
         private void Awake()
         {
