@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &6611048328504160815
+--- !u!114 &-7447691060870214278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7609532099211477828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274f78bdf90655440ad41e910b472225, type: 3}
+  m_Script: {fileID: 11500000, guid: c0b2e7a6677abcd40b304554ef19cdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPeriod: 0.01
@@ -24,7 +24,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8382941299903223842, guid: 0c81c88dbaf015546ac40c1db8baef7e, type: 3}
       propertyPath: m_Name
-      value: Player (Echo Dash)
+      value: Player (EchoTime Dash)
       objectReference: {fileID: 0}
     - target: {fileID: 8382941299903223870, guid: 0c81c88dbaf015546ac40c1db8baef7e, type: 3}
       propertyPath: m_RootOrder
