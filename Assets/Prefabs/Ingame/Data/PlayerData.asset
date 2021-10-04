@@ -15,5 +15,6 @@ MonoBehaviour:
   dashForce: 500
   afterDashForce: 10
   maxDashDistance: 10
+  areChargesUsed: 0
   initialNumberOfCharges: 5
   chargeRegenerationTime: 1
