@@ -49,9 +49,10 @@ public class BlintFeature : ScriptableRendererFeature
     
     public override void Create()
     {
-        m_ScriptablePass = new CustomRenderPass(settings.Material);
-        
-        m_ScriptablePass.renderPassEvent = RenderPassEvent.BeforeRenderingTransparents;
+        m_ScriptablePass = new CustomRenderPass(settings.Material)
+        {
+            renderPassEvent = RenderPassEvent.AfterRenderingTransparents
+        };
     }
     
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
