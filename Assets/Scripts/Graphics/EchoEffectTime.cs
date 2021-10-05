@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 namespace Ingame
@@ -10,39 +12,39 @@ namespace Ingame
         [SerializeField] private float timeToLive;
         [SerializeField] private GameObject echoPrefab;
 
-        private PlayerMovementController _pmcComponent;
-        private float _timeElapsed;
-
         // Start is called before the first frame update
         private void Start()
         {
-            PlayerEventController.Instance.OnDashPerformed += ResetTime;
-
-            _pmcComponent = GetComponent<PlayerMovementController>();
-            _timeElapsed = 0f;
-        }
-
-        // Update is called once per frame
-        private void Update()
-        {
-            if (!_pmcComponent.IsDashing) return;
-            _timeElapsed += Time.deltaTime;
-
-            if (!(_timeElapsed >= spawnPeriod)) return;
-
-            var go = Instantiate(echoPrefab);
-            go.transform.position = this.transform.position;
-            Destroy(go, timeToLive);
+            PlayerEventController.Instance.OnDashPerformed += StartSpawningGhosts;
+            PlayerEventController.Instance.OnDashStop += StopSpawningGhosts;
         }
 
         private void OnDestroy()
         {
-            PlayerEventController.Instance.OnDashPerformed -= ResetTime;
+            PlayerEventController.Instance.OnDashPerformed -= StartSpawningGhosts;
+            PlayerEventController.Instance.OnDashStop -= StopSpawningGhosts;
         }
 
-        private void ResetTime(Vector3 _)
+        private void StartSpawningGhosts(Vector3 _)
         {
-            _timeElapsed = 0f;
+            StartCoroutine(SpawnGhostsRoutine());
+        }
+
+        private void StopSpawningGhosts()
+        {
+            StopAllCoroutines();
+        }
+
+        private IEnumerator SpawnGhostsRoutine()
+        {
+            while (true)
+            {
+                var go = Instantiate(echoPrefab);
+                go.transform.position = this.transform.position;
+                Destroy(go, timeToLive);
+
+                yield return new WaitForSeconds(spawnPeriod);
+            }
         }
     }
 }
