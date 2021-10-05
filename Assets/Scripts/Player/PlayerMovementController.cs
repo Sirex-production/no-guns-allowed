@@ -79,6 +79,8 @@ namespace Ingame
             _initialDashPosition = transform.position;
             _currentDashLength = 0;
             _isDashing = false;
+            
+            PlayerEventController.Instance.StopDash();
         }
     }
 }
