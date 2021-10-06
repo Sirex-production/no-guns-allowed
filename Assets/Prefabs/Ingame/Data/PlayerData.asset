@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   dashForce: 500
-  afterDashForce: 10
+  afterDashForce: 5
   maxDashDistance: 10
   areChargesUsed: 1
   initialNumberOfCharges: 5
