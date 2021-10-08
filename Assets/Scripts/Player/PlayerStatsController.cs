@@ -17,7 +17,7 @@ namespace Ingame
         public PlayerData Data => data;
 
         public int CurrentNumberOfCharges => _currentNumberOfCharges;
-        public bool IsAbleToDash => _isAlive && _currentNumberOfCharges > 0;
+        public bool IsAbleToDash => _isAlive && _currentNumberOfCharges > 0 || !Data.AreChargesUsed;
 
         private void Awake()
         {
@@ -63,7 +63,7 @@ namespace Ingame
 
         public void UseCharges(int numberOfChargesToUse)
         {
-            if(_currentNumberOfCharges < 1)
+            if(_currentNumberOfCharges < 1 || !data.AreChargesUsed)
                 return;
             
             numberOfChargesToUse = Mathf.Abs(numberOfChargesToUse);

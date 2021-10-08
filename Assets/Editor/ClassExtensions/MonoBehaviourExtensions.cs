@@ -6,14 +6,14 @@ namespace Extensions
 {
     public static class MonoBehaviourExtensions
     {
-        public static void DoAfterNextFrame(this MonoBehaviour monoBehaviour, Action action)
+        public static Coroutine DoAfterNextFrame(this MonoBehaviour monoBehaviour, Action action)
         {
-            monoBehaviour.StartCoroutine(WaitOneFrameAndDoRoutine(action));
+            return monoBehaviour.StartCoroutine(WaitOneFrameAndDoRoutine(action));
         }
 
-        public static void WaitAndDo(this MonoBehaviour monoBehaviour, float timeToWait, Action action)
+        public static Coroutine WaitAndDo(this MonoBehaviour monoBehaviour, float timeToWait, Action action)
         {
-            monoBehaviour.StartCoroutine(WaitAndDoRoutine(timeToWait, action));
+            return monoBehaviour.StartCoroutine(WaitAndDoRoutine(timeToWait, action));
         }
 
         private static IEnumerator WaitOneFrameAndDoRoutine(Action action)
