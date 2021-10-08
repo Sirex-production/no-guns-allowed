@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8382941299903223870}
   - component: {fileID: 8382941299903223841}
   - component: {fileID: 8382941299903223840}
+  - component: {fileID: -5742993115669769555}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-5742993115669769555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8382941299903223842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6fce5f2241397c4a959ba2f0a36e8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToLive: 0.2

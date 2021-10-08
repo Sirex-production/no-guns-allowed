@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using Support;
 using UnityEngine;
 
 namespace Ingame
@@ -10,8 +9,7 @@ namespace Ingame
     public class TrailController : MonoBehaviour
     {
         [SerializeField] private float spawnPeriod;
-        [SerializeField] private float timeToLive;
-        [SerializeField] private GameObject echoPrefab;
+        [SerializeField] private GameObject ghostPrefab;
         [SerializeField] private TrailRenderer primaryTrail;
         [SerializeField] private List<TrailRenderer> secondaryTrails;
 
@@ -21,6 +19,8 @@ namespace Ingame
             primaryTrail.emitting = false;
             foreach (var trail in secondaryTrails)
                 trail.emitting = true;
+
+            PoolManager.Instance.CreatePool(ghostPrefab, 7);
             
             PlayerEventController.Instance.OnDashPerformed += StartSpawningGhosts;
             PlayerEventController.Instance.OnDashStop += StopSpawningGhosts;
@@ -56,12 +56,11 @@ namespace Ingame
             SwitchActiveTrails();
             while (true)
             {
-                var go = Instantiate(echoPrefab);
-                go.transform.position = this.transform.position;
-                Destroy(go, timeToLive);
+                PoolManager.Instance.ReuseObject(ghostPrefab, this.transform.position);
 
                 yield return new WaitForSeconds(spawnPeriod);
             }
+            // ReSharper disable once IteratorNeverReturns
         }
     }
 }
