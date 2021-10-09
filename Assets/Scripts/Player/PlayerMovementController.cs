@@ -14,8 +14,6 @@ namespace Ingame
         private float _currentDashLength;
         private bool _isDashing;
 
-        public bool IsDashing => _isDashing;
-        
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();

@@ -19,11 +19,9 @@ namespace Support
 
                 return objectToReuse;
             }
-            else
-            {
-                this.SafeDebug($"{prefab.transform.name} prefab has not been added to the obejct pool");
-                return null;
-            }
+
+            this.SafeDebug($"{prefab.transform.name} prefab has not been added to the object pool");
+            return null;
         }
 
         public void CreatePool(GameObject prefab, int poolSize)
