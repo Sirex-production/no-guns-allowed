@@ -5,6 +5,24 @@ namespace Support
 {
     public class LevelManager : MonoSingleton<LevelManager>
     {
+        private void Start()
+        {
+            GameController.Instance.OnLevelEnded += ManageLevelWhenLevelEnds;
+        }
+
+        private void OnDestroy()
+        {
+            GameController.Instance.OnLevelEnded -= ManageLevelWhenLevelEnds;
+        }
+
+        private void ManageLevelWhenLevelEnds(bool isWin)
+        {
+            if (isWin)
+                LoadNextLevel();
+            else
+                RestartLevel();
+        }
+
         public void LoadLevel(int levelNumber)
         {
             if (levelNumber < 0)
