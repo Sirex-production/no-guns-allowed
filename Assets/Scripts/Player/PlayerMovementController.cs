@@ -16,8 +16,9 @@ namespace Ingame
         private Vector3 _initialDashPosition;
         private float _currentDashLength;
         private bool _isDashing;
+
         private Coroutine _stopDashCoroutine;
-        
+
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
@@ -94,6 +95,8 @@ namespace Ingame
             _initialDashPosition = transform.position;
             _currentDashLength = 0;
             _isDashing = false;
+            
+            PlayerEventController.Instance.StopDash();
         }
     }
 }

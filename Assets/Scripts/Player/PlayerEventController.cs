@@ -1,4 +1,5 @@
 using System;
+using Extensions;
 using Support;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ namespace Ingame
         public PlayerData Data => _statsController.Data;
 
         public event Action<Vector3> OnDashPerformed;
+        public event Action OnDashStop;
 
         protected override void Awake()
         {
@@ -32,6 +34,11 @@ namespace Ingame
         public void PerformDash(Vector3 dashingDirection)
         {
             OnDashPerformed?.Invoke(dashingDirection);
+        }
+
+        public void StopDash()
+        {
+            OnDashStop?.Invoke();
         }
     }
 }
