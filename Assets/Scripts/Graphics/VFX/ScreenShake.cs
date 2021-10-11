@@ -24,6 +24,12 @@ public class ScreenShake : MonoBehaviour
         cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = frequencyGain;
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+            StartScreenShake();
+    }
+
     private IEnumerator ScreenShakeRoutine()
     {
         var timeElapsed = 0.0f;
