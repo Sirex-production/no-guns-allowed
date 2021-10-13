@@ -31,7 +31,7 @@ namespace Ingame.AI
             {
                 if(patrolPoint == null)
                     continue;
-                
+
                 Gizmos.color = Color.green;
                 Gizmos.DrawSphere(patrolPoint.position, GIZMOS_SPHERE_RADIUS);
                 Gizmos.color = Color.white;
@@ -41,6 +41,9 @@ namespace Ingame.AI
 
                 prevTransform = patrolPoint;
             }
+            
+            if(isLooped)
+                Gizmos.DrawLine(patrolPoints[0].position, patrolPoints[patrolPoints.Count - 1].position);
         }
         
         private void MoveToNextPoint()
@@ -49,9 +52,13 @@ namespace Ingame.AI
                 return;
             
             _currentPatrolPointIndex++;
+            
+            if(_currentPatrolPointIndex >= patrolPoints.Count && !isLooped)
+                return;
+            
             if (_currentPatrolPointIndex >= patrolPoints.Count && isLooped)
                 _currentPatrolPointIndex = 0;
-            
+
             _aiBehaviourController.AiMovementController.Follow(patrolPoints[_currentPatrolPointIndex], 10, MoveToNextPoint); //todo reduce hardcode with AI stats
         }
 
