@@ -2,17 +2,15 @@ namespace Ingame.AI
 {
     public class ShootingEnemyRestStage : State
     {
-        public ShootingEnemyRestStage(Context currentContext) : base(currentContext) { }
-
-        protected override void OnStateEntered()
+        public override void OnStateEntered()
         {
-            _currentContext.AiBehaviourController.AiPatrolController.StartPatrolling();
+            currentContext.AiBehaviourController.AiPatrolController.StartPatrolling();
         }
 
         public override void SpotEnemy()
         {
             //todo play spot animation
-            _currentContext.CurrentState = new ShootingEnemyCombatState(_currentContext);
+            currentContext.CurrentState = new ShootingEnemyCombatState();
         }
 
         public override void TakeDamage()

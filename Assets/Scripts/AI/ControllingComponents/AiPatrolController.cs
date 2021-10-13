@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Ingame.AI
 {
     [RequireComponent(typeof(AiBehaviourController))]
-    public class AiPatrolController : MonoBehaviour
+    public class AiPatrolController : MonoBehaviour, IPatrolable
     {
         [SerializeField] private bool isLooped;
         [SerializeField] private List<Transform> patrolPoints;
@@ -25,16 +25,15 @@ namespace Ingame.AI
             if(patrolPoints == null || patrolPoints.Count < 1)
                 return;
 
-            Transform prevTransform = transform;
+            var prevTransform = transform;
             
+            Gizmos.color = Color.green;
             foreach (var patrolPoint in patrolPoints)
             {
                 if(patrolPoint == null)
                     continue;
-
-                Gizmos.color = Color.green;
+                
                 Gizmos.DrawSphere(patrolPoint.position, GIZMOS_SPHERE_RADIUS);
-                Gizmos.color = Color.white;
                 Gizmos.DrawLine(prevTransform.position, patrolPoint.position);
                 
                 patrolPoint.position = new Vector3(patrolPoint.position.x, patrolPoint.position.y, transform.position.z);
@@ -71,7 +70,7 @@ namespace Ingame.AI
         public void StopPatrolling()
         {
             _isPatrolling = false;
-            _aiBehaviourController.AiMovementController.StopMoving();
+            _aiBehaviourController.AiMovementController.StopMotion();
         }
     }
 }

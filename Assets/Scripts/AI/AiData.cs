@@ -6,11 +6,7 @@ namespace Ingame.AI
     public class AiData : ScriptableObject
     {
         [SerializeField] private EnemyType enemyType;
-        [Space]
-        [SerializeField] private Projectile projectilePrefab;
 
         public EnemyType EnemyType => enemyType;
-        
-        public Projectile ProjectilePrefab => projectilePrefab;
     }
 }

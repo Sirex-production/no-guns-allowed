@@ -1,24 +1,28 @@
 using System.Collections;
 using Ingame.UI;
+using Support;
 using UnityEngine;
 
 namespace Ingame
 {
-    public class PlayerStatsController : MonoBehaviour
+    public class PlayerStatsController : ActorStats
     {
         [SerializeField] private PlayerData data;
 
         private const int NUMBER_OF_REGENERATED_CHARGES_PER_TICK = 1;
         private const int CHARGES_USED_TO_PERFORM_DASH = 1;
-        
+
+        private float _currentHp;
         private bool _isAlive = true;
         private int _currentNumberOfCharges;
 
         public PlayerData Data => data;
 
+        public override float CurrentHp => _currentHp;
         public int CurrentNumberOfCharges => _currentNumberOfCharges;
         public bool IsAbleToDash => _isAlive && _currentNumberOfCharges > 0 || !Data.AreChargesUsed;
-
+        
+        
         private void Awake()
         {
             _currentNumberOfCharges = data.InitialNumberOfCharges;
@@ -39,6 +43,11 @@ namespace Ingame
         private void OnDashPerformed(Vector3 _)
         {
             UseCharges(CHARGES_USED_TO_PERFORM_DASH);
+        }
+        
+        private void Die()
+        {
+            GameController.Instance.EndLevel(false);
         }
 
         private IEnumerator RegenerateChargesRoutine()
@@ -70,6 +79,23 @@ namespace Ingame
             _currentNumberOfCharges = Mathf.Max(0, _currentNumberOfCharges - numberOfChargesToUse);
             
             UiController.Instance.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
+        }
+
+        public override void TakeDamage(float amountOfDamage)
+        {
+            amountOfDamage = Mathf.Abs(amountOfDamage);
+
+            _currentHp -= amountOfDamage;
+            
+            if(_currentHp < 0)
+                Die();
+        }
+
+        public override void Heal(float amountOfHp)
+        {
+            amountOfHp = Mathf.Abs(amountOfHp);
+
+            _currentHp = Mathf.Min(_currentHp + amountOfHp, data.InitialHp);
         }
     }
 }

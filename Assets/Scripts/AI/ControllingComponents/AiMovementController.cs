@@ -6,7 +6,7 @@ namespace Ingame.AI
 {
     [RequireComponent(typeof(CharacterController))]
     [DisallowMultipleComponent]
-    public class AiMovementController : MonoBehaviour
+    public class AiMovementController : MonoBehaviour, IMovable
     {
         [SerializeField] private bool useGravity;
 
@@ -22,7 +22,8 @@ namespace Ingame.AI
         {
             _characterController = GetComponent<CharacterController>();
         }
-
+        
+        #region Routines
         private IEnumerator ApplyGravityRoutine()
         {
             while (useGravity)
@@ -87,6 +88,7 @@ namespace Ingame.AI
                 yield return null;
             }
         }
+        #endregion
 
         public void Follow(Transform transformToFollow, float speed, Action onEnd = null)
         {
@@ -124,7 +126,7 @@ namespace Ingame.AI
             _rotateCoroutine = StartCoroutine(RotateRoutine(rotation, speed));
         }
 
-        public void StopMoving()
+        public void StopMotion()
         {
             StopAllCoroutines();
         }

@@ -2,11 +2,9 @@ namespace Ingame.AI
 {
     public class ShootingEnemyCombatState : State
     {
-        public ShootingEnemyCombatState(Context currentContext) : base(currentContext) { }
-
-        protected override void OnStateEntered()
+        public override void OnStateEntered()
         {
-            //todo shoot player
+            currentContext.AiBehaviourController.AiCombatController.Attack(PlayerEventController.Instance.StatsController);
         }
 
         public override void SpotEnemy()
@@ -22,7 +20,7 @@ namespace Ingame.AI
         public override void EnterRest()
         {
             //todo enter sleep state
-            _currentContext.CurrentState = new ShootingEnemyRestStage(_currentContext);
+            currentContext.CurrentState = new ShootingEnemyRestStage();
         }
     }
 }
