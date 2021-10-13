@@ -234,7 +234,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2501182}
-  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018861279, w: 0.9977923}
+  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018862279, w: 0.9977923}
   m_LocalPosition: {x: 2.5, y: 29, z: -108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 40053702}
   - component: {fileID: 40053705}
   - component: {fileID: 40053704}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a32f3e3cb175094ca4670bb6a2e6818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1943383758317234265, guid: 7c16e710d972ab04185918f83edd3c54, type: 3}
+  bulletPrefab: {fileID: -9079038487790073711, guid: 7c16e710d972ab04185918f83edd3c54, type: 3}
   pauseBetweenShots: 1
 --- !u!1 &97742864
 GameObject:
@@ -3247,7 +3247,7 @@ GameObject:
   - component: {fileID: 1582795478}
   - component: {fileID: 1582795480}
   - component: {fileID: 1582795479}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DetectionArea
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}

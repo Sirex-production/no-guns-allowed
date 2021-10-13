@@ -21,12 +21,12 @@ namespace Ingame.AI
 
             while (_isInCombat)
             {
-                var bullet = Instantiate(bulletPrefab, transform.position,
-                    Quaternion.LookRotation(actorStats.transform.position - transform.position));
+                //todo reduce hardcode (setup prober place for spawning bullet)
+                 var bullet = Instantiate(bulletPrefab, transform.position + Vector3.down * 2.5f,
+                    Quaternion.identity);
 
-                bullet.Launch(actorStats.transform);
-
-
+                bullet.Launch(actorStats.transform); //todo add stats to ignore
+                
                 yield return new WaitForSeconds(pauseBetweenShots);
             }
         }

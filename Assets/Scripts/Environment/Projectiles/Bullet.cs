@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Ingame
 {
-    [RequireComponent(typeof(Rigidbody), typeof(Collider))]
+    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
     public class Bullet : MonoBehaviour, Projectile
     {
         [SerializeField] [Min(0)] private int maxNumberOfBounces = 0;
@@ -10,20 +10,10 @@ namespace Ingame
 
         private Vector3 _flyingDirection = Vector3.zero;
         private int _bounceCount = 0;
-        private Rigidbody _rigidbody;
-        
-        private void Awake()
-        {
-            _rigidbody = GetComponent<Rigidbody>();
-
-            _rigidbody.useGravity = false;
-
-            Launch(-transform.right);
-        }
 
         private void FixedUpdate()
         {
-            _rigidbody.position += _flyingDirection * speed * Time.deltaTime;
+            transform.position += _flyingDirection * speed * Time.deltaTime;
         }
 
         private void OnCollisionEnter(Collision other)
@@ -35,20 +25,23 @@ namespace Ingame
             }
 
             var contactPoint = other.GetContact(0);
-            var bulletDirectionRelativeToTheSurface = Vector3.Normalize(contactPoint.point - _rigidbody.position);
+            var bulletDirectionRelativeToTheSurface = Vector3.Normalize(contactPoint.point - transform.position);
             
             _flyingDirection = Vector3.Reflect(bulletDirectionRelativeToTheSurface, contactPoint.normal);
             _bounceCount++;
    
             //todo apply damage to others
         }
-
-        public void Launch(Transform destination)
+        
+        //todo ignore actors from the input array
+        public void Launch(Transform destination, params ActorStats[] ignoreHitActors)
         {
-            _flyingDirection = Vector3.Normalize(destination.position - _rigidbody.position);
+            transform.LookAt(destination);
+            _flyingDirection = Vector3.Normalize(destination.position - transform.position);
         }
 
-        public void Launch(Vector3 direction)
+        //todo ignore actors from the input array
+        public void Launch(Vector3 direction, params ActorStats[] ignoreHitActors)
         {
             _flyingDirection = Vector3.Normalize(direction);
         }
