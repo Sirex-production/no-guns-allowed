@@ -17,8 +17,6 @@ namespace Ingame.AI
 
         private IEnumerator ShootRoutine(ActorStats actorStats)
         {
-            this.SafeDebug("Shoot");
-
             while (_isInCombat)
             {
                 //todo reduce hardcode (setup prober place for spawning bullet)
