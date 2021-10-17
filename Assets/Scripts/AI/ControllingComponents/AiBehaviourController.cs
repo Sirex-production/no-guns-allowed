@@ -9,18 +9,21 @@ namespace Ingame.AI
         private IMovable _aiMovementController;
         private IPatrolable _aiPatrolController;
         private ICombatable _aiCombatController;
+        private ActorStats _aiActorStats;
         private Context _context;
 
         public AiData AiData => _aiData;
         public IMovable AiMovementController => _aiMovementController;
         public IPatrolable AiPatrolController => _aiPatrolController;
-        public ICombatable AiCombatController => _aiCombatController; 
+        public ICombatable AiCombatController => _aiCombatController;
+        public ActorStats AiActorStats => _aiActorStats;
         
         private void Awake()
         {
             _aiMovementController = GetComponent<IMovable>();
             _aiPatrolController = GetComponent<IPatrolable>();
             _aiCombatController = GetComponent<ICombatable>();
+            _aiActorStats = GetComponent<ActorStats>();
         }
 
         private void Start()

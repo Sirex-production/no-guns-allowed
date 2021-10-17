@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Ingame
 {
-    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
+    [RequireComponent(typeof(Collider))]
     public class Bullet : MonoBehaviour, Projectile
     {
         [SerializeField] [Min(0)] private int maxNumberOfBounces = 0;
@@ -19,30 +19,46 @@ namespace Ingame
             transform.position += _flyingDirection * speed * Time.deltaTime;
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.TryGetComponent(out ActorStats actorStats) && !_ignoreHitActors.Contains(actorStats))
+            void ManageReflection()
             {
-                actorStats.TakeDamage(damage);
-                Destroy(gameObject); //todo play destruction VFX
-             
-                return;
+                if (other.isTrigger)
+                    return;
+                
+                var contactPoint = other.ClosestPoint(transform.position);
+                var bulletDirectionRelativeToTheSurface = Vector3.Normalize(transform.position - contactPoint);
+
+                Reflect(bulletDirectionRelativeToTheSurface);
+                _bounceCount++;
             }
 
+            if (other.TryGetComponent(out ActorStats actor))
+            {
+                if (_ignoreHitActors.Contains(actor))
+                    return;
+                
+                if (!actor.IsInvincible)
+                {
+                    actor.TakeDamage(damage);
+                    Destroy(gameObject);
+                    return;
+                }
+                
+                _ignoreHitActors.Clear();
+                Reflect(-_flyingDirection);
+                return;
+            }
+            
             if (_bounceCount >= maxNumberOfBounces)
             {
-                Destroy(gameObject); //todo play destruction VFX
+                Destroy(gameObject);
                 return;
             }
-
-            var contactPoint = other.GetContact(0);
-            var bulletDirectionRelativeToTheSurface = Vector3.Normalize(contactPoint.point - transform.position);
-
-            _flyingDirection = Vector3.Reflect(bulletDirectionRelativeToTheSurface, contactPoint.normal);
-            _bounceCount++;
+            
+            ManageReflection();
         }
 
-        //todo ignore actors from the input array
         public void Launch(Transform destination, params ActorStats[] ignoreHitActors)
         {
             _ignoreHitActors = new List<ActorStats>(ignoreHitActors);
@@ -51,13 +67,23 @@ namespace Ingame
             _flyingDirection = Vector3.Normalize(destination.position - transform.position);
         }
 
-        //todo ignore actors from the input array
         public void Launch(Vector3 direction, params ActorStats[] ignoreHitActors)
         {
             _ignoreHitActors = new List<ActorStats>(ignoreHitActors);
             
             transform.rotation = Quaternion.LookRotation(direction - transform.position);
             _flyingDirection = Vector3.Normalize(direction);
+        }
+
+        public void Reflect(Vector3 direction)
+        {
+            if (direction.magnitude == 0)
+                direction = new Vector3(Random.Range(.1f, 1), Random.Range(.1f, 1), 0);
+            
+            direction = direction.normalized;
+
+            _flyingDirection = direction;
+            transform.rotation = Quaternion.LookRotation(direction);
         }
     }
 }

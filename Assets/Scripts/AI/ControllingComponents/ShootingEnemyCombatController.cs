@@ -1,5 +1,4 @@
 using System.Collections;
-using Extensions;
 using UnityEngine;
 
 namespace Ingame.AI
@@ -12,18 +11,21 @@ namespace Ingame.AI
         [SerializeField] [Min(0)] private float pauseBetweenShots = 1;
         
         private AiBehaviourController _aiBehaviourController;
-        
         private bool _isInCombat = false;
+
+        private void Awake()
+        {
+            _aiBehaviourController = GetComponent<AiBehaviourController>();
+        }
 
         private IEnumerator ShootRoutine(ActorStats actorStats)
         {
             while (_isInCombat)
             {
                 //todo reduce hardcode (setup prober place for spawning bullet)
-                 var bullet = Instantiate(bulletPrefab, transform.position + Vector3.down * 2.5f,
-                    Quaternion.identity);
+                 var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-                bullet.Launch(actorStats.transform); //todo add stats to ignore
+                bullet.Launch(actorStats.transform, _aiBehaviourController.AiActorStats);
                 
                 yield return new WaitForSeconds(pauseBetweenShots);
             }

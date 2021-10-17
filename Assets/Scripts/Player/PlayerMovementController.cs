@@ -19,6 +19,8 @@ namespace Ingame
 
         private Coroutine _stopDashCoroutine;
 
+        public bool IsDashing => _isDashing;
+
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();

@@ -18,6 +18,7 @@ namespace Ingame
 
         public PlayerData Data => data;
 
+        public override bool IsInvincible => PlayerEventController.Instance.MovementController.IsDashing;
         public override float CurrentHp => _currentHp;
         public int CurrentNumberOfCharges => _currentNumberOfCharges;
         public bool IsAbleToDash => _isAlive && _currentNumberOfCharges > 0 || !Data.AreChargesUsed;
