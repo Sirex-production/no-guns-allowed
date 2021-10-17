@@ -26,6 +26,12 @@ namespace Ingame
                 if (other.isTrigger)
                     return;
                 
+                if (_bounceCount >= maxNumberOfBounces)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
+                
                 var contactPoint = other.ClosestPoint(transform.position);
                 var bulletDirectionRelativeToTheSurface = Vector3.Normalize(transform.position - contactPoint);
 
@@ -49,13 +55,7 @@ namespace Ingame
                 Reflect(-_flyingDirection);
                 return;
             }
-            
-            if (_bounceCount >= maxNumberOfBounces)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            
+
             ManageReflection();
         }
 

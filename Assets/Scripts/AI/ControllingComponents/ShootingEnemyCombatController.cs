@@ -22,12 +22,13 @@ namespace Ingame.AI
         {
             while (_isInCombat)
             {
-                //todo reduce hardcode (setup prober place for spawning bullet)
-                 var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                //todo add detection time before shot
+                yield return new WaitForSeconds(pauseBetweenShots);
+                
+                var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
                 bullet.Launch(actorStats.transform, _aiBehaviourController.AiActorStats);
                 
-                yield return new WaitForSeconds(pauseBetweenShots);
             }
         }
 
