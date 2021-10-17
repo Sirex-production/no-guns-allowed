@@ -23,6 +23,9 @@ namespace Ingame.AI
 
         public override void TakeDamage(float amountOfDamage)
         {
+            if(IsInvincible)
+                return;
+            
             amountOfDamage = Mathf.Abs(amountOfDamage);
 
             _currentHp -= amountOfDamage;

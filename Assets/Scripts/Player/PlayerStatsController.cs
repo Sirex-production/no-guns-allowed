@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Ingame.UI;
 using Support;
@@ -34,6 +35,12 @@ namespace Ingame
             PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
             
             StartCoroutine(RegenerateChargesRoutine());
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (other.transform.TryGetComponent(out ActorStats actorStats)) 
+                actorStats.TakeDamage(data.Damage);
         }
 
         private void OnDestroy()
@@ -84,6 +91,9 @@ namespace Ingame
 
         public override void TakeDamage(float amountOfDamage)
         {
+            if(IsInvincible)
+                return;
+            
             amountOfDamage = Mathf.Abs(amountOfDamage);
 
             _currentHp -= amountOfDamage;

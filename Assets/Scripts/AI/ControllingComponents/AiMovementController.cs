@@ -36,7 +36,15 @@ namespace Ingame.AI
 
         private IEnumerator FollowRoutine(Transform transformToFollow, float speed, Action onEnd)
         {
-            while (Vector3.Distance(transform.position, transformToFollow.position) > DISTANCE_OFFSET)
+            bool IsPatrollingPointReached()
+            {
+                if (!useGravity)
+                    return Vector3.Distance(transform.position, transformToFollow.position) > DISTANCE_OFFSET;
+
+                return Mathf.Abs(transformToFollow.position.x - transform.position.x) > DISTANCE_OFFSET;
+            }
+
+            while (IsPatrollingPointReached())
             {
                 var velocity = Vector3.Normalize(transformToFollow.position - transform.position);
                 velocity *= speed;
@@ -57,8 +65,16 @@ namespace Ingame.AI
         private IEnumerator MoveToRoutine(Vector3 destination, float speed, Action onEnd)
         {
             destination.z = transform.position.z;
+            
+            bool IsPatrollingPointReached()
+            {
+                if (!useGravity)
+                    return Vector3.Distance(transform.position, destination) > DISTANCE_OFFSET;
 
-            while (Vector3.Distance(transform.position, destination) > DISTANCE_OFFSET)
+                return Mathf.Abs(destination.x - transform.position.x) > DISTANCE_OFFSET;
+            }
+
+            while (IsPatrollingPointReached())
             {
                 var velocity = Vector3.Normalize(destination - transform.position);
                 velocity *= speed;
