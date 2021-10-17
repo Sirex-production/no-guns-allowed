@@ -32,9 +32,9 @@ namespace Ingame
             PlayerEventController.Instance.OnDashStop -= StopSpawningGhosts;
         }
 
-        private void SwitchActiveTrails()
+        private void SwitchActiveTrails(bool primaryTrailEmittingValue)
         {
-            primaryTrail.emitting = !primaryTrail.emitting;
+            primaryTrail.emitting = primaryTrailEmittingValue;
             foreach (var trail in secondaryTrails)
                 trail.emitting = !trail.emitting;
         }
@@ -46,14 +46,14 @@ namespace Ingame
 
         private void StopSpawningGhosts()
         {
-            SwitchActiveTrails();
+            SwitchActiveTrails(false);
             StopAllCoroutines();
         }
 
 
         private IEnumerator SpawnGhostsRoutine()
         {
-            SwitchActiveTrails();
+            SwitchActiveTrails(true);
             while (true)
             {
                 PoolManager.Instance.ReuseObject(ghostPrefab, this.transform.position);
