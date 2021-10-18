@@ -9,7 +9,7 @@ namespace Ingame.AI
         [SerializeField] private Bullet bulletPrefab;
         [Space] 
         [SerializeField] [Min(0)] private float pauseBetweenShots = 1;
-        
+
         private AiBehaviourController _aiBehaviourController;
         private bool _isInCombat = false;
 
@@ -28,7 +28,6 @@ namespace Ingame.AI
                 var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
                 bullet.Launch(actorStats.transform, _aiBehaviourController.AiActorStats);
-                
             }
         }
 

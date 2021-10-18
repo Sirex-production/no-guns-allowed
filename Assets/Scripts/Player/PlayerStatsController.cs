@@ -39,7 +39,7 @@ namespace Ingame
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.transform.TryGetComponent(out ActorStats actorStats)) 
+            if (other.transform.TryGetComponent(out ActorStats actorStats) && PlayerEventController.Instance.MovementController.IsDashing) 
                 actorStats.TakeDamage(data.Damage);
         }
 

@@ -16,6 +16,14 @@ namespace Ingame.AI
         private void Awake()
         {
             _aiBehaviourController = GetComponent<AiBehaviourController>();
+            
+            foreach (var detectionArea in _detectionAreas)
+            {
+                if(detectionArea == null)
+                    return;
+
+                detectionArea.OriginSight = this;
+            }
         }
 
         private void OnValidate()
@@ -50,6 +58,9 @@ namespace Ingame.AI
 
         public void Detect(ActorStats actorStats)
         {
+            if(actorStats == _aiBehaviourController.AiActorStats)
+                return;
+            
             if (actorStats == PlayerEventController.Instance.StatsController)
                 _aiBehaviourController.SpotEnemy();
             else if (!onlyPlayerCanBeDetected)
