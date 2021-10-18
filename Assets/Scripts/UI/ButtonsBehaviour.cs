@@ -1,3 +1,4 @@
+using Support;
 using UnityEngine;
 
 namespace Ingame
@@ -10,6 +11,11 @@ namespace Ingame
         public void OpenUrl()
         {
             Application.OpenURL(urlToOpen);
+        }
+
+        public void RestartLevel()
+        {
+            GameController.Instance.RestartLevel();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Ingame.UI
 {
     public class TutorialsManager : MonoSingleton<TutorialsManager>
     {
-        [SerializeField] private List<Tutorial> tutorials;
+        [SerializeField] private List<MonoTutorial> tutorials;
 
         private int _currentTutorialIndex = 0;
         

@@ -10,11 +10,13 @@ namespace Support
         public void RestartLevel()
         {
             OnLevelRestart?.Invoke();
+            LevelManager.Instance.RestartLevel();
         }
 
         public void EndLevel(bool isVictory)
         {
             OnLevelEnded?.Invoke(isVictory);
+            LevelManager.Instance.ManageLevelDependingOnWinningCondition(isVictory);
         }
     }
 }

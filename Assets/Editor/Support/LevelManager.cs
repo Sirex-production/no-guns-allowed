@@ -5,21 +5,9 @@ namespace Support
 {
     public class LevelManager : MonoSingleton<LevelManager>
     {
-        private void Start()
+        public void ManageLevelDependingOnWinningCondition(bool isVictory)
         {
-            GameController.Instance.OnLevelEnded += ManageLevelWhenLevelEnds;
-            GameController.Instance.OnLevelRestart += RestartLevel;
-        }
-
-        private void OnDestroy()
-        {
-            GameController.Instance.OnLevelEnded -= ManageLevelWhenLevelEnds;
-            GameController.Instance.OnLevelRestart -= RestartLevel;
-        }
-
-        private void ManageLevelWhenLevelEnds(bool isWin)
-        {
-            if (isWin)
+            if (isVictory)
                 LoadNextLevel();
             else
                 RestartLevel();
@@ -37,7 +25,7 @@ namespace Support
             SceneManager.LoadScene(sceneIndex);
         }
 
-        private void RestartLevel()
+        public void RestartLevel()
         {
             LoadLevel(SaveLoadSystem.Instance.SaveData.currentLevel);
         }

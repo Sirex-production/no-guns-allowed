@@ -1,10 +1,12 @@
 using DG.Tweening;
+using Extensions;
+using Support;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Ingame.UI
 {
-    public class SwipeDashTutorial : Tutorial
+    public class SwipeDashMonoTutorial : MonoTutorial
     {
         [SerializeField] private CanvasGroup parentCanvasGroup;
         [SerializeField] private Image fingerImage;
@@ -26,11 +28,31 @@ namespace Ingame.UI
         private void Start()
         {
             PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
+            GameController.Instance.OnLevelEnded += OnLevelEnd;
+            GameController.Instance.OnLevelRestart += OnLevelRestart;
         }
 
         private void OnDestroy()
         {
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
+            GameController.Instance.OnLevelEnded -= OnLevelEnd;
+            GameController.Instance.OnLevelRestart -= OnLevelRestart;
+        }
+
+        private void OnLevelEnd(bool _)
+        {
+            if(_animationSequence != null)
+                _animationSequence.Kill();
+            
+            this.SetGameObjectInactive();
+        }
+
+        private void OnLevelRestart()
+        {
+            if(_animationSequence != null)
+                _animationSequence.Kill();
+            
+            this.SetGameObjectInactive();
         }
 
         private void OnDashPerformed(Vector3 _)
@@ -39,12 +61,12 @@ namespace Ingame.UI
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
         }
 
-        protected override void Complete()
+        private void Complete()
         {
             if(_animationSequence != null)
                 _animationSequence.Kill();
             if (parentCanvasGroup != null)
-                parentCanvasGroup.DOFade(0, animationSpeed).OnComplete(base.Complete);
+                parentCanvasGroup.DOFade(0, animationSpeed).OnComplete(() => TutorialsManager.Instance.ActivateNext());
         }
 
         public override void Activate()
