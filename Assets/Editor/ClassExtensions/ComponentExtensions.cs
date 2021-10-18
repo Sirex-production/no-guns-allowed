@@ -16,13 +16,13 @@ namespace Extensions
             switch (logType)
             {
                 case LogType.Log:
-                    Debug.Log(content.ToString());
+                    Debug.Log(content == null ? "null" : content.ToString());
                     break;
                 case LogType.Warning:
-                    Debug.LogWarning(content.ToString());
+                    Debug.LogWarning(content == null ? "null" : content.ToString());
                     break;
                 default:
-                    Debug.LogError(content.ToString());
+                    Debug.LogError(content == null ? "null" : content.ToString());
                     break;
             }
 #endif

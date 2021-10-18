@@ -6,7 +6,7 @@ namespace EditorExtensions
     {
         [SerializeField] private bool isDisplayed = true;
         [Space(10)]
-        [SerializeField] [Range(0, 15)] private int fontSize = 10;
+        [SerializeField] [Range(0, 15)] private int fontSize = 13;
         [SerializeField] private FontStyle fontStyle = FontStyle.Normal;
         [SerializeField] private Color fontColor = Color.black;
         [Space]

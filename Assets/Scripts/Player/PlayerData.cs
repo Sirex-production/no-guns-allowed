@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/Ingame/Player data", fileName = "NewPlayerData")]
 public class PlayerData : ScriptableObject
 {
+    [Header("Lifetime options")]
+    [SerializeField] [Min(0)] private float initialHp = 1;
+    [SerializeField] [Min(0)] private float damage = 1f;
+    
     [Header("Dash options")]
     [SerializeField] [Min(0)] private float dashForce = 50;
     [SerializeField] [Min(0)] private float afterDashForce = 10;
@@ -13,6 +17,9 @@ public class PlayerData : ScriptableObject
     [SerializeField] [Min(0)] private int initialNumberOfCharges = 5;
     [SerializeField] [Min(0)] private float chargeRegenerationTime = 1f;
 
+    public float InitialHp => initialHp;
+    public float Damage => damage;
+    
     public bool AreChargesUsed => areChargesUsed;
     public float DashForce => dashForce;
     public float AfterDashForce => afterDashForce;
