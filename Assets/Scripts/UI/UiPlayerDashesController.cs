@@ -1,20 +1,40 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ingame.UI
 {
     public class UiPlayerDashesController : MonoBehaviour
     {
-        [SerializeField] private UiCharge[] _uiCharges;
+        [SerializeField] private UiCharge[] uiCharges;
+        [SerializeField] private UiOutOfCharges uiOutOfChargesComponent;
 
         public void SetNumberOfActiveCharges(int numberOfActiveCharges)
         {
-            for (var i = 0; i < _uiCharges.Length; i++)
+            for (var i = 0; i < uiCharges.Length; i++)
             {
                 if (i < numberOfActiveCharges)
-                    _uiCharges[i].PlayRegenerateAnimation();
+                    uiCharges[i].PlayRegenerateAnimation();
                 else
-                    _uiCharges[i].PlayDisappearanceAnimation();
+                    uiCharges[i].PlayDisappearanceAnimation();
             }
+        }
+
+        public void HideCharges()
+        {
+            foreach (var uiCharge in uiCharges)
+                uiCharge.GetComponent<Image>().enabled = false;
+        }
+
+        public void ShowCharges()
+        {
+            foreach (var uiCharge in uiCharges)
+                uiCharge.GetComponent<Image>().enabled = true;
+        }
+
+        //TODO: try to find a way to get rid of this encapsulation layer
+        public void TriggerOutOfChargesMessage()
+        {
+            uiOutOfChargesComponent.TriggerMessage();
         }
     }
 }

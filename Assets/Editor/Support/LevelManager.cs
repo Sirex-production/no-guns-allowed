@@ -8,11 +8,13 @@ namespace Support
         private void Start()
         {
             GameController.Instance.OnLevelEnded += ManageLevelWhenLevelEnds;
+            GameController.Instance.OnLevelRestart += RestartLevel;
         }
 
         private void OnDestroy()
         {
             GameController.Instance.OnLevelEnded -= ManageLevelWhenLevelEnds;
+            GameController.Instance.OnLevelRestart -= RestartLevel;
         }
 
         private void ManageLevelWhenLevelEnds(bool isWin)
@@ -35,7 +37,7 @@ namespace Support
             SceneManager.LoadScene(sceneIndex);
         }
 
-        public void RestartLevel()
+        private void RestartLevel()
         {
             LoadLevel(SaveLoadSystem.Instance.SaveData.currentLevel);
         }
