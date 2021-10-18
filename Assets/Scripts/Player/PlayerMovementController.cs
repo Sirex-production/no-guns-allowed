@@ -52,8 +52,11 @@ namespace Ingame
 
         private void Dash(Vector2 _)
         {
-            if(aim == null || !PlayerEventController.Instance.StatsController.IsAbleToDash)
+            if (aim == null || !PlayerEventController.Instance.StatsController.IsAbleToDash)
+            {
+                PlayerEventController.Instance.StatsController.TriggerOutOfChargesMessage();
                 return;
+            }
             
             if(Vector3.Distance(aim.transform.position, transform.position) < MINIMAL_DISTANCE_TO_PERFORM_DASH)
                 return;

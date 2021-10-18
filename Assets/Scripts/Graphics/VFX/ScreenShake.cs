@@ -59,7 +59,7 @@ public class ScreenShake : MonoBehaviour
         transform1.rotation = _cameraRotation;
     }
 
-    private void StartScreenShake()
+    public void StartScreenShake()
     {
         StopAllCoroutines();
         StartCoroutine(ScreenShakeRoutine());
