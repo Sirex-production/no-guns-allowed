@@ -50,8 +50,10 @@ namespace Ingame
                     Destroy(gameObject);
                     return;
                 }
-                
+
                 _ignoreHitActors.Clear();
+                _ignoreHitActors.Add(actor);
+                _bounceCount = maxNumberOfBounces;
                 Reflect(-_flyingDirection);
                 return;
             }
