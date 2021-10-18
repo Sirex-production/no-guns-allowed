@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Extensions;
 using Support;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Ingame.UI
 
         private int _currentTutorialIndex = 0;
         
-        private void Awake()
+        private void Start()
         {
             ActivateNext();
         }
@@ -19,8 +20,11 @@ namespace Ingame.UI
         {
             if(tutorials == null || _currentTutorialIndex >= tutorials.Count)
                 return;
+
+            var tutorial = tutorials[_currentTutorialIndex]; 
+            tutorial.SetGameObjectActive();
+            tutorial.Activate();
             
-            tutorials[_currentTutorialIndex].Activate();
             _currentTutorialIndex++;
         }
     }

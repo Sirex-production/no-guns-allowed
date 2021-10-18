@@ -19,8 +19,8 @@ namespace Ingame.UI
 
         private void Awake()
         {
-            _initialFingerScale = fingerImage.transform.localScale;
-            _initialFingerPosition = fingerImage.transform.position;
+            _initialFingerScale = fingerImage.rectTransform.localScale;
+            _initialFingerPosition = fingerImage.rectTransform.position;
         }
 
         private void Start()
@@ -28,28 +28,35 @@ namespace Ingame.UI
             PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
         }
 
+        private void OnDestroy()
+        {
+            PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
+        }
+
         private void OnDashPerformed(Vector3 _)
         {
             Complete();
-        }
-
-        public override void Activate()
-        {
-            DOTween.Sequence()
-                .Append(fingerImage.transform.DOScale(_initialFingerScale * fingerScaleOffset, animationSpeed))
-                .Append(fingerImage.transform.DOScale(_initialFingerScale, animationSpeed))
-                .Append(fingerImage.transform.DOMove(_initialFingerPosition + Vector2.right * fingerDistanceOffset, animationSpeed))
-                .Append(fingerImage.transform.DOMove(_initialFingerPosition + Vector2.left * fingerDistanceOffset, animationSpeed))
-                .Append(fingerImage.transform.DOMove(_initialFingerPosition, animationSpeed))
-                .SetLoops(-1);
+            PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
         }
 
         protected override void Complete()
         {
             if(_animationSequence != null)
                 _animationSequence.Kill();
+            if (parentCanvasGroup != null)
+                parentCanvasGroup.DOFade(0, animationSpeed).OnComplete(base.Complete);
+        }
 
-            parentCanvasGroup.DOFade(0, animationSpeed);
+        public override void Activate()
+        {
+            parentCanvasGroup.alpha = 1;
+            _animationSequence = DOTween.Sequence()
+                .Append(fingerImage.rectTransform.DOScale(_initialFingerScale * fingerScaleOffset, animationSpeed))
+                .Append(fingerImage.rectTransform.DOScale(_initialFingerScale, animationSpeed))
+                .Append(fingerImage.rectTransform.DOMove(_initialFingerPosition + Vector2.right * fingerDistanceOffset, animationSpeed))
+                .Append(fingerImage.rectTransform.DOMove(_initialFingerPosition + Vector2.left * fingerDistanceOffset, animationSpeed))
+                .Append(fingerImage.rectTransform.DOMove(_initialFingerPosition, animationSpeed))
+                .SetLoops(-1);
         }
     }
 }
