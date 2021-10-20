@@ -56,6 +56,7 @@ namespace Ingame
         private void Die()
         {
             GameController.Instance.EndLevel(false);
+            Destroy(gameObject);
         }
 
         private IEnumerator RegenerateChargesRoutine()

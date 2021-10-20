@@ -234,7 +234,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2501182}
-  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018916251, w: 0.9977923}
+  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018916569, w: 0.9977923}
   m_LocalPosition: {x: -0.6, y: 30.8, z: -130.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 40053700}
   - component: {fileID: 40053699}
   - component: {fileID: 40053698}
+  - component: {fileID: 40053708}
   - component: {fileID: 40053697}
   - component: {fileID: 40053701}
   - component: {fileID: 40053703}
@@ -565,8 +566,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: -9079038487790073711, guid: 7c16e710d972ab04185918f83edd3c54, type: 3}
+  meleeDamage: 5
   ignoreBarriers: 0
-  pauseBetweenShots: 1
+  pauseBetweenShots: 200
 --- !u!114 &40053706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,6 +596,20 @@ MonoBehaviour:
   effectEntities:
   - effectPrefab: {fileID: 2721195039067608632, guid: bbac6d8ccf8bdbd4da1eb957c7fe8184, type: 3}
     effectTransform: {fileID: 40053700}
+--- !u!136 &40053708
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40053696}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.6536719
+  m_Height: 2.1377246
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.06886228, z: 0}
 --- !u!1 &89507116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,7 +1992,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: -0.000061035, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587264072
@@ -2561,7 +2577,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.15
+  m_fontSize: 23.2
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3874,7 +3890,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.5
+  m_fontSize: 26.55
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5547,7 +5563,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: -0.000061035, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1398508061
@@ -5600,6 +5616,7 @@ GameObject:
   - component: {fileID: 1417488250}
   - component: {fileID: 1417488249}
   - component: {fileID: 1417488248}
+  - component: {fileID: 1417488252}
   - component: {fileID: 1417488247}
   - component: {fileID: 1417488246}
   - component: {fileID: 1417488245}
@@ -5669,6 +5686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: -9079038487790073711, guid: 7c16e710d972ab04185918f83edd3c54, type: 3}
+  meleeDamage: 5
   ignoreBarriers: 0
   pauseBetweenShots: 1.5
 --- !u!114 &1417488245
@@ -5797,6 +5815,20 @@ MonoBehaviour:
   effectEntities:
   - effectPrefab: {fileID: 2721195039067608632, guid: bbac6d8ccf8bdbd4da1eb957c7fe8184, type: 3}
     effectTransform: {fileID: 1417488241}
+--- !u!136 &1417488252
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417488240}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.6536719
+  m_Height: 2.1377246
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.06886228, z: 0}
 --- !u!1001 &1421530166
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,20 +8,31 @@ namespace Ingame.AI
     public class ShootingEnemyCombatController : MonoBehaviour, ICombatable
     {
         [SerializeField] private Bullet bulletPrefab;
+        [SerializeField] [Min(0)] private float meleeDamage = 5f;
         [Space] 
         [Tooltip("Controls whether AI will shoot if the opponent cannot be seen directly or not")]
         [SerializeField] private bool ignoreBarriers = true;
         [SerializeField] [Min(0)] private float pauseBetweenShots = 1;
 
-        private WaitForSeconds _pause;
-        
         private AiBehaviourController _aiBehaviourController;
         private bool _isInCombat = false;
+        
+        private WaitForSeconds _pause;
 
         private void Awake()
         {
             _aiBehaviourController = GetComponent<AiBehaviourController>();
             _pause = new WaitForSeconds(pauseBetweenShots);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(!_isInCombat)
+                return;
+
+            //todo replace with enemy list
+            if (other.transform.TryGetComponent(out PlayerStatsController player)) 
+                player.TakeDamage(meleeDamage);
         }
 
         private IEnumerator ShootRoutine(ActorStats actorStats)
@@ -29,6 +41,12 @@ namespace Ingame.AI
             
             while (_isInCombat)
             {
+                if (actorStats == null)
+                {
+                    yield return null;
+                    continue;
+                }
+
                 Bullet bullet;
                 
                 if (!ignoreBarriers)
