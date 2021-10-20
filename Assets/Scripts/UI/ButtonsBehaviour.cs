@@ -6,7 +6,7 @@ namespace Ingame
     public class ButtonsBehaviour : MonoBehaviour
     {
         [Header("OpenUrl parameters")]
-        [SerializeField] private string urlToOpen = "https://www.google.com/";
+        [SerializeField] private string urlToOpen = "https://discord.gg/p8rmcv2dJk";
         
         public void OpenUrl()
         {
@@ -16,6 +16,11 @@ namespace Ingame
         public void RestartLevel()
         {
             GameController.Instance.RestartLevel();
+        }
+
+        public void LoadNextLevel()
+        {
+            LevelManager.Instance.LoadNextLevel();
         }
     }
 }
