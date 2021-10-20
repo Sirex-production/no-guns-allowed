@@ -2,24 +2,27 @@ using System.Collections;
 using Support;
 using UnityEngine;
 
-public class PlayerGhost : PoolObject
+namespace Ingame.Graphics
 {
-    [SerializeField] private float timeToLive;
-
-    private IEnumerator DeactivationDelayRoutine(float ttl)
+    public class PlayerGhost : PoolObject
     {
-        yield return new WaitForSeconds(ttl);
+        [SerializeField] private float timeToLive;
 
-        this.transform.gameObject.SetActive(false);
-    }
+        private IEnumerator DeactivationDelayRoutine(float ttl)
+        {
+            yield return new WaitForSeconds(ttl);
 
-    public void Destroy(float ttl)
-    {
-        StartCoroutine(DeactivationDelayRoutine(ttl));
-    }
+            this.transform.gameObject.SetActive(false);
+        }
 
-    public override void OnObjectReuse()
-    {
-        Destroy(timeToLive);
+        public void Destroy(float ttl)
+        {
+            StartCoroutine(DeactivationDelayRoutine(ttl));
+        }
+
+        public override void OnObjectReuse()
+        {
+            Destroy(timeToLive);
+        }
     }
 }

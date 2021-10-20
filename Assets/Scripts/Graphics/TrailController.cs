@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Support;
 using UnityEngine;
 
-namespace Ingame
+namespace Ingame.Graphics
 {
     [RequireComponent(typeof(PlayerMovementController))]
     public class TrailController : MonoBehaviour

@@ -1,3 +1,4 @@
+using Ingame.Graphics;
 using Random = UnityEngine.Random;
 
 namespace Ingame.AI
@@ -11,7 +12,7 @@ namespace Ingame.AI
             currentContext.AiBehaviourController.AiPatrolController.StartPatrolling();
         }
 
-        public override void SpotEnemy()
+        public override void HandleSpotEnemy()
         {
             //todo play spot animation
             if(Random.Range(0, 100) <= CHANCE_TO_STOP_PATROLLING)
@@ -20,14 +21,21 @@ namespace Ingame.AI
             currentContext.CurrentState = new ShootingEnemyCombatState();
         }
 
-        public override void TakeDamage()
+        public override void HandleTakeDamage()
         {
             //todo die
         }
 
-        public override void EnterRest()
+        public override void HandleEnterRest()
         {
             //todo do nothing
+        }
+
+        public override void HandleDeath()
+        {
+            currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
+            currentContext.AiBehaviourController.EffectsManager.PlayAllEffects(EffectType.Destruction);
+            currentContext.AiBehaviourController.DestroyActor();
         }
     }
 }

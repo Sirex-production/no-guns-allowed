@@ -1,3 +1,5 @@
+using Ingame.Graphics;
+
 namespace Ingame.AI
 {
     public class ShootingEnemyCombatState : State
@@ -7,20 +9,27 @@ namespace Ingame.AI
             currentContext.AiBehaviourController.AiCombatController.Attack(PlayerEventController.Instance.StatsController);
         }
 
-        public override void SpotEnemy()
+        public override void HandleSpotEnemy()
         {
             //todo do nothing
         }
 
-        public override void TakeDamage()
+        public override void HandleTakeDamage()
         {
-            //todo die
+            //todo play effect
         }
 
-        public override void EnterRest()
+        public override void HandleEnterRest()
         {
             //todo enter sleep state
             currentContext.CurrentState = new ShootingEnemyRestStage();
+        }
+
+        public override void HandleDeath()
+        {
+            currentContext.AiBehaviourController.AiCombatController.StopCombat();
+            currentContext.AiBehaviourController.EffectsManager.PlayAllEffects(EffectType.Destruction);
+            currentContext.AiBehaviourController.DestroyActor();
         }
     }
 }

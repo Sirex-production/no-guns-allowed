@@ -6,7 +6,9 @@ namespace Ingame.AI
     public class AiData : ScriptableObject
     {
         [SerializeField] private EnemyType enemyType;
+        [SerializeField] [Min(0)] private float initialHp = 1; 
 
         public EnemyType EnemyType => enemyType;
+        public float InitialHp => initialHp;
     }
 }

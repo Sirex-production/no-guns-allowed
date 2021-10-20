@@ -2,25 +2,21 @@ using UnityEngine;
 
 namespace Ingame.AI
 {
+    [RequireComponent(typeof(AiBehaviourController))]
     public class AiStats : ActorStats
     {
-        [SerializeField] private float initialHp;
-
         private float _currentHp;
-
+        private AiBehaviourController _aiBehaviourController;
+        
         public override float CurrentHp => _currentHp;
         public override bool IsInvincible => false;
         
         private void Awake()
         {
-            _currentHp = initialHp;
+            _aiBehaviourController = GetComponent<AiBehaviourController>();
+            _currentHp = _aiBehaviourController.AiData.InitialHp;
         }
-
-        private void Die()
-        {
-            Destroy(gameObject);
-        }
-
+        
         public override void TakeDamage(float amountOfDamage)
         {
             if(IsInvincible)
@@ -31,7 +27,7 @@ namespace Ingame.AI
             _currentHp -= amountOfDamage;
             
             if(_currentHp < 1)
-                Die();
+                _aiBehaviourController.Die();
         }
 
         public override void Heal(float amountOfHp)
@@ -39,7 +35,7 @@ namespace Ingame.AI
             amountOfHp = Mathf.Abs(amountOfHp);
 
             _currentHp += amountOfHp;
-            _currentHp = Mathf.Min(initialHp, _currentHp);
+            _currentHp = Mathf.Min(_aiBehaviourController.AiData.InitialHp, _currentHp);
         }
     }
 }

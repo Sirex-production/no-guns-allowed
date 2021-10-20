@@ -2,32 +2,35 @@ using System.Collections;
 using Ingame;
 using UnityEngine;
 
-public class TimeFreeze : MonoBehaviour
+namespace Ingame.Graphics
 {
-    [SerializeField] [Range(0.0f, 0.2f)] private float timeScale;
-    [SerializeField] [Min(0.0f)] private float freezeDuration;
-
-    private float _defaultFixedDeltaTime;
-
-    private void Awake()
+    public class TimeFreeze : MonoBehaviour
     {
-        _defaultFixedDeltaTime = Time.fixedDeltaTime;
-    }
+        [SerializeField] [Range(0.0f, 0.2f)] private float timeScale;
+        [SerializeField] [Min(0.0f)] private float freezeDuration;
 
-    private IEnumerator TimeFreezeRoutine()
-    {
-        Time.timeScale = timeScale;
-        //Time.fixedDeltaTime = _defaultFixedDeltaTime * Time.timeScale;
+        private float _defaultFixedDeltaTime;
 
-        yield return new WaitForSeconds(freezeDuration * timeScale);
+        private void Awake()
+        {
+            _defaultFixedDeltaTime = Time.fixedDeltaTime;
+        }
 
-        //Time.fixedDeltaTime = _defaultFixedDeltaTime;
-        Time.timeScale = 1.0f;
-    }
+        private IEnumerator TimeFreezeRoutine()
+        {
+            Time.timeScale = timeScale;
+            //Time.fixedDeltaTime = _defaultFixedDeltaTime * Time.timeScale;
 
-    private void FreezeTime(Vector3 _)
-    {
-        StopAllCoroutines();
-        StartCoroutine(TimeFreezeRoutine());
+            yield return new WaitForSeconds(freezeDuration * timeScale);
+
+            //Time.fixedDeltaTime = _defaultFixedDeltaTime;
+            Time.timeScale = 1.0f;
+        }
+
+        private void FreezeTime(Vector3 _)
+        {
+            StopAllCoroutines();
+            StartCoroutine(TimeFreezeRoutine());
+        }
     }
 }

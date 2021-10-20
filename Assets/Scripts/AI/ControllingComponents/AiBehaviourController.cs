@@ -1,3 +1,4 @@
+using Ingame.Graphics;
 using UnityEngine;
 
 namespace Ingame.AI
@@ -10,6 +11,7 @@ namespace Ingame.AI
         private IPatrolable _aiPatrolController;
         private ICombatable _aiCombatController;
         private ActorStats _aiActorStats;
+        private EffectsManager _effectsManager;
         private Context _context;
 
         public AiData AiData => _aiData;
@@ -17,6 +19,7 @@ namespace Ingame.AI
         public IPatrolable AiPatrolController => _aiPatrolController;
         public ICombatable AiCombatController => _aiCombatController;
         public ActorStats AiActorStats => _aiActorStats;
+        public EffectsManager EffectsManager => _effectsManager;
         
         private void Awake()
         {
@@ -24,6 +27,7 @@ namespace Ingame.AI
             _aiPatrolController = GetComponent<IPatrolable>();
             _aiCombatController = GetComponent<ICombatable>();
             _aiActorStats = GetComponent<ActorStats>();
+            _effectsManager = GetComponent<EffectsManager>();
         }
 
         private void Start()
@@ -49,6 +53,16 @@ namespace Ingame.AI
         public void EnterRest()
         {
             _context.EnterRest();
+        }
+
+        public void Die()
+        {
+            _context.Die();
+        }
+
+        public void DestroyActor()
+        {
+            Destroy(gameObject);
         }
     }
 

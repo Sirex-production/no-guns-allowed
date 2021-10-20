@@ -27,17 +27,22 @@ namespace Ingame.AI
         
         public virtual void SpotEnemy()
         {
-            CurrentState.SpotEnemy();
+            CurrentState.HandleSpotEnemy();
         }
 
         public virtual void TakeDamage()
         {
-            CurrentState.TakeDamage();
+            CurrentState.HandleTakeDamage();
         }
 
         public virtual void EnterRest()
         {
-            CurrentState.EnterRest();
+            CurrentState.HandleEnterRest();
+        }
+
+        public virtual void Die()
+        {
+            CurrentState.HandleDeath();
         }
     }
 }
