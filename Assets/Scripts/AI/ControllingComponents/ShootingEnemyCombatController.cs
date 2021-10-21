@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -52,9 +51,8 @@ namespace Ingame.AI
                 if (!ignoreBarriers)
                 {
                     var direction = Vector3.Normalize(actorStats.transform.position - transform.position);
-                    RaycastHit hit;
 
-                    if (Physics.Raycast(transform.position, direction, out hit))
+                    if (Physics.Raycast(transform.position, direction, out RaycastHit hit))
                     {
                         if (hit.collider.transform == actorStats.transform)
                         {
