@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Extensions;
+using MoreMountains.NiceVibrations;
 using Support;
 using TMPro;
 using UnityEngine;
@@ -60,9 +61,11 @@ namespace Ingame.UI
             winScreenParentCanvas.SetGameObjectActive();
 
             _animationSequence = DOTween.Sequence()
-                .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f))
+                .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
+                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.SoftImpact)))
                 .Append(winText.rectTransform.DOScale(_initialWinTextScale * TEXT_ANIMATIN_SCALE_MODIFIER, animationDuration / 2))
-                .Append(winText.rectTransform.DOScale(_initialWinTextScale, animationDuration));
+                .Append(winText.rectTransform.DOScale(_initialWinTextScale, animationDuration)
+                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.Success)));
 
         }
 
@@ -73,9 +76,11 @@ namespace Ingame.UI
             looseScreenParentCanvas.SetGameObjectActive();
 
             _animationSequence = DOTween.Sequence()
-                .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f))
+                .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
+                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.SoftImpact)))
                 .Append(looseText.rectTransform.DOScale(_initialLooseTextScale * TEXT_ANIMATIN_SCALE_MODIFIER, animationDuration / 2))
-                .Append(looseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration));
+                .Append(looseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration)
+                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.HeavyImpact)));
         }
     }
 }

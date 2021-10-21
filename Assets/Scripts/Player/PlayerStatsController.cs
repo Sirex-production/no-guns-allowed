@@ -1,6 +1,7 @@
 using System.Collections;
 using Ingame.Graphics;
 using Ingame.UI;
+using MoreMountains.NiceVibrations;
 using Support;
 using UnityEngine;
 
@@ -39,8 +40,12 @@ namespace Ingame
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.transform.TryGetComponent(out ActorStats actorStats) && PlayerEventController.Instance.MovementController.IsDashing) 
+            if (other.transform.TryGetComponent(out ActorStats actorStats) && PlayerEventController.Instance.MovementController.IsDashing)
+            {
+                VibrationController.Vibrate(HapticTypes.RigidImpact);
+                
                 actorStats.TakeDamage(data.Damage);
+            }
         }
 
         private void OnDestroy()

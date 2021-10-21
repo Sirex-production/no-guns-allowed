@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using MoreMountains.NiceVibrations;
+using Support;
 using UnityEngine;
 
 namespace Ingame.UI
@@ -46,6 +48,8 @@ namespace Ingame.UI
 
         public void TriggerMessage()
         {
+            VibrationController.Vibrate(HapticTypes.SoftImpact);
+            
             StopAllCoroutines();
             StartCoroutine(OutOfChargesRoutine());
         }

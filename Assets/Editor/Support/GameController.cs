@@ -1,4 +1,5 @@
 using System;
+using MoreMountains.NiceVibrations;
 
 namespace Support
 {
@@ -21,6 +22,9 @@ namespace Support
                 return;
 
             _isLevelEnded = true;
+            
+            if(!isVictory)
+                VibrationController.Vibrate(HapticTypes.Failure);
             
             OnLevelEnded?.Invoke(isVictory);
         }

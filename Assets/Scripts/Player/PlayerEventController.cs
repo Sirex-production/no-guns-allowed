@@ -1,5 +1,6 @@
 using System;
-using Extensions;
+using Ingame.UI;
+using MoreMountains.NiceVibrations;
 using Support;
 using UnityEngine;
 
@@ -33,6 +34,8 @@ namespace Ingame
 
         public void PerformDash(Vector3 dashingDirection)
         {
+            VibrationController.Vibrate(HapticTypes.Selection);
+
             OnDashPerformed?.Invoke(dashingDirection);
         }
 
