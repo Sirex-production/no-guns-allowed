@@ -15,9 +15,9 @@ namespace Ingame.UI
         [SerializeField] private TMP_Text winText;
         [Space]
         [SerializeField] private CanvasGroup looseScreenParentCanvas;
-        [SerializeField] private TMP_Text looseText;
+        [SerializeField] private TMP_Text loseText;
 
-        private const float TEXT_ANIMATIN_SCALE_MODIFIER = 1.2f;
+        private const float TEXT_ANIMATING_SCALE_MODIFIER = 1.2f;
         
         private Vector3 _initialWinTextScale;
         private Vector3 _initialLooseTextScale;
@@ -26,8 +26,10 @@ namespace Ingame.UI
 
         private void Awake()
         {
-            _initialWinTextScale = winText.rectTransform.localScale;
-            _initialLooseTextScale = looseText.rectTransform.localScale;
+            if(winText != null)
+                _initialWinTextScale = winText.rectTransform.localScale;
+            if(loseText != null)
+                _initialLooseTextScale = loseText.rectTransform.localScale;
             
             winScreenParentCanvas.SetGameObjectInactive();
             looseScreenParentCanvas.SetGameObjectInactive();
@@ -54,7 +56,7 @@ namespace Ingame.UI
                 ShowLooseScreen();
         }
 
-        public void ShowWinScreen()
+        private void ShowWinScreen()
         {
             winScreenParentCanvas.alpha = 0;
             winText.rectTransform.localScale = Vector3.zero;
@@ -63,23 +65,23 @@ namespace Ingame.UI
             _animationSequence = DOTween.Sequence()
                 .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
                     .OnComplete(()=>VibrationController.Vibrate(HapticTypes.SoftImpact)))
-                .Append(winText.rectTransform.DOScale(_initialWinTextScale * TEXT_ANIMATIN_SCALE_MODIFIER, animationDuration / 2))
+                .Append(winText.rectTransform.DOScale(_initialWinTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
                 .Append(winText.rectTransform.DOScale(_initialWinTextScale, animationDuration)
                     .OnComplete(()=>VibrationController.Vibrate(HapticTypes.Success)));
 
         }
 
-        public void ShowLooseScreen()
+        private void ShowLooseScreen()
         {
             looseScreenParentCanvas.alpha = 0;
-            looseText.rectTransform.localScale = Vector3.zero;
+            loseText.rectTransform.localScale = Vector3.zero;
             looseScreenParentCanvas.SetGameObjectActive();
 
             _animationSequence = DOTween.Sequence()
                 .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
                     .OnComplete(()=>VibrationController.Vibrate(HapticTypes.SoftImpact)))
-                .Append(looseText.rectTransform.DOScale(_initialLooseTextScale * TEXT_ANIMATIN_SCALE_MODIFIER, animationDuration / 2))
-                .Append(looseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration)
+                .Append(loseText.rectTransform.DOScale(_initialLooseTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
+                .Append(loseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration)
                     .OnComplete(()=>VibrationController.Vibrate(HapticTypes.HeavyImpact)));
         }
     }
