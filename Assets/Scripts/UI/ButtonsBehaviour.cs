@@ -6,10 +6,7 @@ namespace Ingame
 {
     public class ButtonsBehaviour : MonoBehaviour
     {
-        [Header("OpenUrl parameters")]
-        [SerializeField] private string urlToOpen = "https://discord.gg/p8rmcv2dJk";
-        
-        public void OpenUrl()
+        public void OpenUrl(string urlToOpen)
         {
             VibrationController.Vibrate(HapticTypes.Selection);
             
