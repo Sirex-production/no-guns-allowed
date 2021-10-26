@@ -75,9 +75,9 @@ namespace Ingame.UI
             _animationSequence = DOTween.Sequence()
                 .Append(fingerImage.rectTransform.DOScale(_initialFingerScale * fingerScaleOffset, animationDuration))
                 .Append(fingerImage.rectTransform.DOScale(_initialFingerScale, animationDuration))
-                .Append(fingerImage.rectTransform.DOMove(_initialFingerPosition + Vector2.right * fingerDistanceOffset, animationDuration))
-                .Append(fingerImage.rectTransform.DOMove(_initialFingerPosition + Vector2.left * fingerDistanceOffset, animationDuration))
-                .Append(fingerImage.rectTransform.DOMove(_initialFingerPosition, animationDuration))
+                .Append(fingerImage.rectTransform.DOMoveX(_initialFingerPosition.x + fingerDistanceOffset, animationDuration))
+                .Append(fingerImage.rectTransform.DOMoveX(_initialFingerPosition.x - fingerDistanceOffset, animationDuration))
+                .Append(fingerImage.rectTransform.DOMoveX(_initialFingerPosition.x, animationDuration))
                 .SetLoops(-1);
         }
     }
