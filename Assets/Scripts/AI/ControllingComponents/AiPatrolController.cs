@@ -8,6 +8,8 @@ namespace Ingame.AI
     {
         [SerializeField] private bool isLooped;
         [SerializeField] private List<Transform> patrolPoints;
+        [Space] 
+        [SerializeField] private float speed = 10f;
 
         private const float GIZMOS_SPHERE_RADIUS = .5f;
         
@@ -58,7 +60,7 @@ namespace Ingame.AI
             if (_currentPatrolPointIndex >= patrolPoints.Count && isLooped)
                 _currentPatrolPointIndex = 0;
 
-            _aiBehaviourController.AiMovementController.Follow(patrolPoints[_currentPatrolPointIndex], 10, MoveToNextPoint); //todo reduce hardcode with AI stats
+            _aiBehaviourController.AiMovementController.Follow(patrolPoints[_currentPatrolPointIndex], speed, MoveToNextPoint); //todo reduce hardcode with AI stats
         }
 
         public void StartPatrolling()

@@ -1384,7 +1384,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 417128940}
-  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018887627, w: 0.9977923}
+  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018887785, w: 0.9977923}
   m_LocalPosition: {x: -0.6, y: 30.8, z: -130.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2293,6 +2293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFpsOnCurrentScene: 60
+  vibrationMode: 1
 --- !u!114 &1067817234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3602,12 +3603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08eabaa6d4a6f2a4585d9ec734cbc19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiCharges:
-  - {fileID: 395773153}
-  - {fileID: 1984156865}
-  - {fileID: 1931575115}
-  - {fileID: 891330893}
-  - {fileID: 1623196698}
+  uiCharges: []
+  uiOutOfChargesComponent: {fileID: 0}
 --- !u!1 &1931575113
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Tutorials/DashingTutorial.unity
+    guid: 0d51d1cc7328a81428d443aedc3858e8
+  - enabled: 1
+    path: Assets/Scenes/Tutorials/KillingTutorial.unity
+    guid: 9e29cf3a87dc0824492502cb3d874205
+  - enabled: 1
     path: Assets/Scenes/GreyboxForDash.unity
     guid: 7edd7b2c2e6f9e143870c63b549a9b36
   m_configObjects: {}
