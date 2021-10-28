@@ -1,10 +1,15 @@
+using Extensions;
 using UnityEngine;
 
 namespace Ingame.Graphics
 {
     public class BloodSprayEffect : Effect
     {
+        [Space]
+        [SerializeField] [Min(0)] private float bodyPartsForce = 5f; 
+        [Space]
         [SerializeField] private ParticleSystem[] bloodParticles;
+        [SerializeField] private Rigidbody[] bodyParts;
 
         private void Awake()
         {
@@ -23,16 +28,23 @@ namespace Ingame.Graphics
 
         public override void PlayEffect()
         {
-            if(bloodParticles == null || bloodParticles.Length < 1)
-                return;
+            if (bloodParticles != null && bloodParticles.Length > 0)
+                foreach (var bloodParticle in bloodParticles)
+                {
+                    if (bloodParticle == null)
+                        continue;
 
-            foreach (var bloodParticle in bloodParticles)
-            {
-                if(bloodParticle == null)
-                    continue;
-                
-                bloodParticle.Play();
-            }
+                    bloodParticle.Play();
+                }
+            
+            if(bodyParts != null && bodyParts.Length > 0)
+                foreach (var body in bodyParts)
+                {
+                    if(body == null)
+                        continue;
+                    
+                    body.AddForce(VectorExtensions.RandomDirection() * bodyPartsForce);
+                }
         }
     }
 }

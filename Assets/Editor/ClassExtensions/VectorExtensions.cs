@@ -17,5 +17,10 @@ namespace Extensions
 
             return vector2;
         }
+
+        public static Vector3 RandomDirection()
+        {
+            return new Vector3(Random.Range(0, 1), Random.Range(0, 1), Random.Range(0, 1)).normalized;
+        }
     }
 }

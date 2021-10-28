@@ -23,6 +23,9 @@ namespace Ingame.AI
 
         private void OnTriggerEnter(Collider other)
         {
+            if(_origin == null || !_origin)
+                return;
+            
             if (other.TryGetComponent(out ActorStats actor)) 
                 _origin.Detect(actor);
         }
