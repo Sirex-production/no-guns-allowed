@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace Ingame.AI
@@ -37,6 +39,20 @@ namespace Ingame.AI
                     return;
 
                 detectionArea.OriginSight = this;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if(_detectionAreas == null || _detectionAreas.Count < 1)
+                return;
+            
+            foreach (var detectionArea in _detectionAreas)
+            {
+                if(detectionArea == null)
+                    return;
+
+                Destroy(detectionArea);
             }
         }
 
