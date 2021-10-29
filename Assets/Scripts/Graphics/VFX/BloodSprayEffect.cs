@@ -42,8 +42,9 @@ namespace Ingame.Graphics
                 {
                     if(body == null)
                         continue;
-                    
-                    body.AddForce(VectorExtensions.RandomDirection() * bodyPartsForce);
+
+                    var directionModifier = Random.Range(0, 2) == 0 ? Vector3.right : Vector3.left; 
+                    body.AddForce((VectorExtensions.RandomDirection() + directionModifier) * bodyPartsForce, ForceMode.Impulse);
                 }
         }
     }
