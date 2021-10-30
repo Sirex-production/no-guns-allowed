@@ -15,8 +15,8 @@ namespace Ingame.AI
         public override void HandleSpotEnemy()
         {
             //todo play spot animation
-            if(Random.Range(0, 100) <= CHANCE_TO_STOP_PATROLLING)
-                currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
+            //if(Random.Range(0, 100) <= CHANCE_TO_STOP_PATROLLING)
+            //    currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
             
             currentContext.CurrentState = new ShootingEnemyCombatState();
         }

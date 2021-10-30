@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1433267549321585454}
   - component: {fileID: 4511269306022262350}
   - component: {fileID: -9079038487790073711}
-  m_Layer: 7
-  m_Name: Bullet
+  m_Layer: 2
+  m_Name: BulletNoBounce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69075582e7b02843b590c56b54db902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNumberOfBounces: 1
+  maxNumberOfBounces: 0
   speed: 20
   damage: 10
 --- !u!1 &7531186544453426146
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 3958149845978471715}
   - component: {fileID: 3078191426018381778}
   - component: {fileID: 5465759452062435634}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
