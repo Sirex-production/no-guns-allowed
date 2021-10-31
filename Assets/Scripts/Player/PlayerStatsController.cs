@@ -1,4 +1,5 @@
 using System.Collections;
+using Extensions;
 using Ingame.Graphics;
 using Ingame.UI;
 using MoreMountains.NiceVibrations;
@@ -14,13 +15,16 @@ namespace Ingame
         private const int NUMBER_OF_REGENERATED_CHARGES_PER_TICK = 1;
         private const int CHARGES_USED_TO_PERFORM_DASH = 1;
 
+        private const float TIME_AFTER_DASH_WHEN_PLAYER_IS_INVINCIBLE = .2f;
+        
         private float _currentHp;
         private bool _isAlive = true;
+        private bool _isInvincible = false;
         private int _currentNumberOfCharges;
 
         public PlayerData Data => data;
 
-        public override bool IsInvincible => PlayerEventController.Instance.MovementController.IsDashing;
+        public override bool IsInvincible => PlayerEventController.Instance.MovementController.IsDashing || _isInvincible;
         public override float CurrentHp => _currentHp;
         public int CurrentNumberOfCharges => _currentNumberOfCharges;
         public bool IsAbleToDash => _isAlive && _currentNumberOfCharges > 0 || !Data.AreChargesUsed;
@@ -40,7 +44,7 @@ namespace Ingame
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.transform.TryGetComponent(out ActorStats actorStats) && PlayerEventController.Instance.MovementController.IsDashing)
+            if (other.transform.TryGetComponent(out ActorStats actorStats) && IsInvincible)
             {
                 VibrationController.Vibrate(HapticTypes.RigidImpact);
                 
@@ -95,11 +99,14 @@ namespace Ingame
         {
             if(_currentNumberOfCharges < 1 || !data.AreChargesUsed)
                 return;
+
+            _isInvincible = true;
             
             numberOfChargesToUse = Mathf.Abs(numberOfChargesToUse);
             _currentNumberOfCharges = Mathf.Max(0, _currentNumberOfCharges - numberOfChargesToUse);
             
             UiController.Instance.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
+            this.WaitAndDo(TIME_AFTER_DASH_WHEN_PLAYER_IS_INVINCIBLE, () => _isInvincible = false);
         }
 
         public override void TakeDamage(float amountOfDamage)
