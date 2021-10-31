@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: a935f91d587662744a77320e6a4876b0, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1347,12 +1347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08eabaa6d4a6f2a4585d9ec734cbc19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiCharges:
-  - {fileID: 1832152657}
-  - {fileID: 1375294027}
-  - {fileID: 426320631}
-  - {fileID: 68499577}
-  - {fileID: 814913723}
+  uiCharges: []
+  uiOutOfChargesComponent: {fileID: 0}
 --- !u!1 &455771679
 GameObject:
   m_ObjectHideFlags: 0
@@ -4655,6 +4651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFpsOnCurrentScene: 60
+  vibrationMode: 1
 --- !u!114 &1580130827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7002,7 +6999,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124333662}
-  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018894501, w: 0.9977923}
+  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018894507, w: 0.9977923}
   m_LocalPosition: {x: -0.6, y: 30.8, z: -130.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

@@ -11,6 +11,8 @@ namespace Ingame
         [Space] 
         [SerializeField] private bool obstaclesPreventAiming = true;
         [SerializeField] [Range(0, 1)] private float sensitivity = 1f;
+
+        private int ignoreRaycastLayers;
         
         private Vector3 _initialLocalPosition;
 
@@ -18,6 +20,10 @@ namespace Ingame
         {
             _initialLocalPosition = transform.localPosition;
             transform.parent = aimingOrigin;
+         
+            ignoreRaycastLayers = LayerMask.GetMask("Ignore Raycast") | 
+                                  LayerMask.GetMask("Ignore Collision With Player");
+            ignoreRaycastLayers = ~ignoreRaycastLayers;
             
             if (lineRenderer != null)
                 lineRenderer.positionCount = 2;
@@ -52,8 +58,7 @@ namespace Ingame
         private void Move(Vector2 movingDirection)
         {
             if(obstaclesPreventAiming)
-                if(Physics.Linecast(aimingOrigin.transform.position, transform.position, out RaycastHit hit, ~LayerMask.GetMask("Ignore Raycast"), QueryTriggerInteraction.Ignore))
-                    
+                if(Physics.Linecast(aimingOrigin.transform.position, transform.position, out RaycastHit hit, ignoreRaycastLayers, QueryTriggerInteraction.Ignore))
                     transform.position = hit.point;
 
             var nextPos = transform.localPosition + (Vector3)movingDirection * sensitivity;

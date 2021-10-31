@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxNumberOfBounces: 0
-  speed: 20
+  speed: 40
   damage: 10
 --- !u!1 &7531186544453426146
 GameObject:
