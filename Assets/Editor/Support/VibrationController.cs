@@ -61,6 +61,12 @@ namespace Support
                 case VibrationMode.Improved:
                     ImprovedVibrate(hapticType);
                     break;
+                case VibrationMode.Auto:
+                    if(MMVibrationManager.HapticsSupported())
+                        ImprovedVibrate(hapticType);
+                    else
+                        UniversalVibrate(hapticType);
+                    break;
             }
         }
     }
@@ -69,6 +75,7 @@ namespace Support
     {
         Disabled,
         Universal,
-        Improved
+        Improved,
+        Auto
     }
 }

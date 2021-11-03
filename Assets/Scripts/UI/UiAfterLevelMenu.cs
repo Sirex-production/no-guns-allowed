@@ -64,10 +64,9 @@ namespace Ingame.UI
 
             _animationSequence = DOTween.Sequence()
                 .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
-                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.SoftImpact)))
+                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.Success)))
                 .Append(winText.rectTransform.DOScale(_initialWinTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
-                .Append(winText.rectTransform.DOScale(_initialWinTextScale, animationDuration)
-                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.Success)));
+                .Append(winText.rectTransform.DOScale(_initialWinTextScale, animationDuration));
 
         }
 
@@ -79,10 +78,9 @@ namespace Ingame.UI
 
             _animationSequence = DOTween.Sequence()
                 .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
-                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.SoftImpact)))
+                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.Failure)))
                 .Append(loseText.rectTransform.DOScale(_initialLooseTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
-                .Append(loseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration)
-                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.HeavyImpact)));
+                .Append(loseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration));
         }
     }
 }

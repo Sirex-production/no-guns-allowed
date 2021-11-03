@@ -10,13 +10,6 @@ namespace Support
 
         private bool _isLevelEnded = false;
 
-        private void Start()
-        {
-#if !UNITY_EDITOR
-            RestartLevel();      
-#endif
-        }
-
         public void RestartLevel()
         {
             OnLevelRestart?.Invoke();
