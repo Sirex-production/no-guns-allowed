@@ -1570,6 +1570,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4756849344122687849, guid: c5d9a0b52eb5cea41ad6200f5510661a, type: 3}
+      propertyPath: _aiData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e1930aae1789034aaf376a589331b5a, type: 2}
     - target: {fileID: 4756849344122687851, guid: c5d9a0b52eb5cea41ad6200f5510661a, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5
@@ -2523,6 +2527,10 @@ PrefabInstance:
       propertyPath: m_text
       value: <color=red>4</color>/9
       objectReference: {fileID: 0}
+    - target: {fileID: 7943477415453351724, guid: 2ba63fe3fec44e5448c7b5fe222d7f92, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -11.307129
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ba63fe3fec44e5448c7b5fe222d7f92, type: 3}
 --- !u!1 &1620804988
@@ -3367,7 +3375,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956362634}
-  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018892186, w: 0.9977923}
+  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018892194, w: 0.9977923}
   m_LocalPosition: {x: -0.6, y: 30.8, z: -130.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

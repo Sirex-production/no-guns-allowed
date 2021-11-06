@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af278dfecb72e9c40b4ad3dacabb74d7, type: 3}
-  m_Name: ShootinEnemyAiData
+  m_Name: FlyingShootingEnemyAiData
   m_EditorClassIdentifier: 
   enemyType: 0
   initialHp: 1

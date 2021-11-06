@@ -234,7 +234,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2501182}
-  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018947438, w: 0.9977923}
+  m_LocalRotation: {x: 0.026340967, y: 0.06093601, z: 0.0018947581, w: 0.9977923}
   m_LocalPosition: {x: 0.49964008, y: 29.8, z: -130.49399}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1378,7 +1378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644443659}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3400002, y: 0, z: 0}
+  m_LocalPosition: {x: 3.9099998, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1501834538}
@@ -2748,9 +2748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16a4ac5bac5b304b8894809f86deacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onlyPlayerCanBeDetected: 1
-  _detectionAreas:
-  - {fileID: 862648159}
+  detectionAreasParent: {fileID: 1275461419}
+  detectionAreas: []
 --- !u!114 &1275461423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2763,10 +2762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a32f3e3cb175094ca4670bb6a2e6818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: -9079038487790073711, guid: 7c16e710d972ab04185918f83edd3c54, type: 3}
-  meleeDamage: 0
-  ignoreBarriers: 0
-  pauseBetweenShots: 99999
 --- !u!114 &1275461424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2779,11 +2774,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8326b693f7514b948be4d78f623d2fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLooped: 1
+  patrollingPointsParent: {fileID: 1275461419}
   patrolPoints:
   - {fileID: 965711191}
   - {fileID: 644443660}
-  speed: 2
 --- !u!114 &1275461425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2796,7 +2790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31a6cfd5c285e14bb2e12b291e0e3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useGravity: 1
 --- !u!114 &1275461426
 MonoBehaviour:
   m_ObjectHideFlags: 0
