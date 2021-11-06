@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Ingame.AI
@@ -8,8 +7,9 @@ namespace Ingame.AI
     [RequireComponent(typeof(AiBehaviourController))]
     public class AiSight : MonoBehaviour
     {
-        [SerializeField] private bool onlyPlayerCanBeDetected = true;
-        [SerializeField] private List<AiDetectionArea> _detectionAreas = new List<AiDetectionArea>();
+        [Required]
+        [SerializeField] private Transform detectionAreasParent;
+        [SerializeField] private List<AiDetectionArea> detectionAreas = new List<AiDetectionArea>();
 
         private const float GIZMOS_SPHERE_RADIUS = .5f;
         
@@ -19,7 +19,7 @@ namespace Ingame.AI
         {
             _aiBehaviourController = GetComponent<AiBehaviourController>();
             
-            foreach (var detectionArea in _detectionAreas)
+            foreach (var detectionArea in detectionAreas)
             {
                 if(detectionArea == null)
                     return;
@@ -30,24 +30,27 @@ namespace Ingame.AI
 
         private void OnValidate()
         {
-            if(_detectionAreas == null || _detectionAreas.Count < 1)
-                return;
+            if (detectionAreasParent == null)
+                detectionAreasParent = transform;
             
-            foreach (var detectionArea in _detectionAreas)
-            {
-                if(detectionArea == null)
-                    return;
+            if(detectionAreas == null || detectionAreas.Count < 1)
+                return;
 
-                detectionArea.OriginSight = this;
+            for (var detectionAreaIndex = 0; detectionAreaIndex < detectionAreas.Count; detectionAreaIndex++)
+            {
+                if(detectionAreas[detectionAreaIndex] == null)
+                    detectionAreas.RemoveAt(detectionAreaIndex);
+                else
+                    detectionAreas[detectionAreaIndex].OriginSight = this;
             }
         }
 
         private void OnDestroy()
         {
-            if(_detectionAreas == null || _detectionAreas.Count < 1)
+            if(detectionAreas == null || detectionAreas.Count < 1)
                 return;
             
-            foreach (var detectionArea in _detectionAreas)
+            foreach (var detectionArea in detectionAreas)
             {
                 if(detectionArea == null)
                     return;
@@ -58,18 +61,33 @@ namespace Ingame.AI
 
         private void OnDrawGizmos()
         {
-            if(_detectionAreas == null || _detectionAreas.Count < 1)
+            if(detectionAreas == null || detectionAreas.Count < 1)
                 return;
 
             Gizmos.color = Color.red;
-            foreach (var detectionArea in _detectionAreas)
+            foreach (var detectionArea in detectionAreas)
             {
                 if(detectionArea == null)
                     return;
                 
-                Gizmos.DrawLine(transform.position, detectionArea.transform.position);
-                Gizmos.DrawSphere(detectionArea.transform.position, GIZMOS_SPHERE_RADIUS);
+                var detectionAreaPosition = detectionArea.transform.position;
+                
+                Gizmos.DrawLine(transform.position, detectionAreaPosition);
+                Gizmos.DrawSphere(detectionAreaPosition, GIZMOS_SPHERE_RADIUS);
             }
+        }
+
+        [Button("Add new detection area")]
+        private void AddNewDetectionArea()
+        {
+            var detectionArea =
+                new GameObject("DetectionArea", typeof(BoxCollider), typeof(AiDetectionArea))
+                .GetComponent<AiDetectionArea>();
+
+            detectionArea.transform.parent = detectionAreasParent;
+            detectionArea.transform.position = transform.position;
+
+            detectionAreas.Add(detectionArea);
         }
 
         public void Detect(ActorStats actorStats)
@@ -79,7 +97,7 @@ namespace Ingame.AI
             
             if (actorStats == PlayerEventController.Instance.StatsController)
                 _aiBehaviourController.SpotEnemy();
-            else if (!onlyPlayerCanBeDetected)
+            else if (!_aiBehaviourController.AiData.OnlyPlayerCanBeDetected)
                 _aiBehaviourController.SpotEnemy();
         }
     }

@@ -4,15 +4,9 @@ using UnityEngine;
 namespace Ingame.AI
 {
     [RequireComponent(typeof(AiBehaviourController))]
-    public class ShootingEnemyCombatController : MonoBehaviour, ICombatable
+    [DisallowMultipleComponent]
+    public class AiCombatController : MonoBehaviour, ICombatable
     {
-        [SerializeField] private Bullet bulletPrefab;
-        [SerializeField] [Min(0)] private float meleeDamage = 5f;
-        [Space] 
-        [Tooltip("Controls whether AI will shoot if the opponent cannot be seen directly or not")]
-        [SerializeField] private bool ignoreBarriers = true;
-        [SerializeField] [Min(0)] private float pauseBetweenShots = 1;
-
         private AiBehaviourController _aiBehaviourController;
         private bool _isInCombat = false;
         
@@ -21,7 +15,7 @@ namespace Ingame.AI
         private void Awake()
         {
             _aiBehaviourController = GetComponent<AiBehaviourController>();
-            _pause = new WaitForSeconds(pauseBetweenShots);
+            _pause = new WaitForSeconds(_aiBehaviourController.AiData.PauseBetweenShots);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -31,7 +25,7 @@ namespace Ingame.AI
 
             //todo replace with enemy list
             if (other.transform.TryGetComponent(out PlayerStatsController player)) 
-                player.TakeDamage(meleeDamage);
+                player.TakeDamage(_aiBehaviourController.AiData.MeleeDamage);
         }
 
         private IEnumerator ShootRoutine(ActorStats actorStats)
@@ -48,7 +42,7 @@ namespace Ingame.AI
 
                 Bullet bullet;
                 
-                if (!ignoreBarriers)
+                if (!_aiBehaviourController.AiData.IgnoreBarriers)
                 {
                     var direction = Vector3.Normalize(actorStats.transform.position - transform.position);
 
@@ -56,7 +50,7 @@ namespace Ingame.AI
                     {
                         if (hit.collider.transform == actorStats.transform)
                         {
-                            bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                            bullet = Instantiate(_aiBehaviourController.AiData.BulletPrefab, transform.position, Quaternion.identity);
                             bullet.Launch(actorStats.transform, _aiBehaviourController.AiActorStats);
 
                             yield return _pause;
@@ -68,7 +62,7 @@ namespace Ingame.AI
                     continue;
                 }
                 
-                bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet = Instantiate(_aiBehaviourController.AiData.BulletPrefab, transform.position, Quaternion.identity);
                 bullet.Launch(actorStats.transform, _aiBehaviourController.AiActorStats);
                 
                 yield return _pause;

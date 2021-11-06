@@ -1,10 +1,13 @@
 using Ingame.Graphics;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Ingame.AI
 {
+    [DisallowMultipleComponent]
     public class AiBehaviourController : MonoBehaviour
     {
+        [Required]
         [SerializeField] private AiData _aiData;
 
         private IMovable _aiMovementController;

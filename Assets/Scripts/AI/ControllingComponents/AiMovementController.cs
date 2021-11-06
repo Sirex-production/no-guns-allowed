@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace Ingame.AI
 {
-    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(AiBehaviourController), typeof(CharacterController))]
     [DisallowMultipleComponent]
     public class AiMovementController : MonoBehaviour, IMovable
     {
-        [SerializeField] private bool useGravity;
-
         private const float DISTANCE_OFFSET = .1f;
-        
+
+        private AiBehaviourController _aiBehaviourController;
         private CharacterController _characterController;
         private Coroutine _moveCoroutine;
         private Coroutine _rotateCoroutine;
@@ -20,13 +19,14 @@ namespace Ingame.AI
 
         private void Awake()
         {
+            _aiBehaviourController = GetComponent<AiBehaviourController>();
             _characterController = GetComponent<CharacterController>();
         }
         
         #region Routines
         private IEnumerator ApplyGravityRoutine()
         {
-            while (useGravity)
+            while (_aiBehaviourController.AiData.UseGravity)
             {
                 _characterController.Move(Physics.gravity * Time.fixedDeltaTime);
 
@@ -38,7 +38,7 @@ namespace Ingame.AI
         {
             bool IsPatrollingPointReached()
             {
-                if (!useGravity)
+                if (!_aiBehaviourController.AiData.UseGravity)
                     return Vector3.Distance(transform.position, transformToFollow.position) > DISTANCE_OFFSET;
 
                 return Mathf.Abs(transformToFollow.position.x - transform.position.x) > DISTANCE_OFFSET;
@@ -48,7 +48,7 @@ namespace Ingame.AI
             {
                 var velocity = Vector3.Normalize(transformToFollow.position - transform.position);
                 velocity *= speed;
-                if (useGravity)
+                if (_aiBehaviourController.AiData.UseGravity)
                     velocity += Physics.gravity;
                 velocity *= Time.deltaTime;
 
@@ -68,7 +68,7 @@ namespace Ingame.AI
             
             bool IsPatrollingPointReached()
             {
-                if (!useGravity)
+                if (!_aiBehaviourController.AiData.UseGravity)
                     return Vector3.Distance(transform.position, destination) > DISTANCE_OFFSET;
 
                 return Mathf.Abs(destination.x - transform.position.x) > DISTANCE_OFFSET;
@@ -78,7 +78,7 @@ namespace Ingame.AI
             {
                 var velocity = Vector3.Normalize(destination - transform.position);
                 velocity *= speed;
-                if(useGravity)
+                if(_aiBehaviourController.AiData.UseGravity)
                     velocity += Physics.gravity;
                 velocity *= Time.deltaTime;
                 

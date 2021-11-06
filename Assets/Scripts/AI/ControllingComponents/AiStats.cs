@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Ingame.AI
 {
     [RequireComponent(typeof(AiBehaviourController))]
+    [DisallowMultipleComponent]
     public class AiStats : ActorStats
     {
         private float _currentHp;

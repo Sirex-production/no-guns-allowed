@@ -1,15 +1,16 @@
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Ingame.AI
 {
     [RequireComponent(typeof(AiBehaviourController))]
+    [DisallowMultipleComponent]
     public class AiPatrolController : MonoBehaviour, IPatrolable
     {
-        [SerializeField] private bool isLooped;
-        [SerializeField] private List<Transform> patrolPoints;
-        [Space] 
-        [SerializeField] private float speed = 10f;
+        [Required]
+        [SerializeField] private Transform patrollingPointsParent;
+        [SerializeField] private List<Transform> patrolPoints = new List<Transform>();
 
         private const float GIZMOS_SPHERE_RADIUS = .5f;
         
@@ -20,6 +21,16 @@ namespace Ingame.AI
         private void Awake()
         {
             _aiBehaviourController = GetComponent<AiBehaviourController>();
+        }
+
+        private void OnValidate()
+        {
+            if (patrollingPointsParent == null)
+                patrollingPointsParent = transform;
+
+            for (var patrollingPointIndex = 0; patrollingPointIndex < patrolPoints.Count; patrollingPointIndex++)
+                if (patrolPoints[patrollingPointIndex] == null)
+                    patrolPoints.RemoveAt(patrollingPointIndex);
         }
 
         private void OnDrawGizmos()
@@ -43,24 +54,40 @@ namespace Ingame.AI
                 prevTransform = patrolPoint;
             }
             
-            if(isLooped)
+            if (_aiBehaviourController == null)
+                _aiBehaviourController = GetComponent<AiBehaviourController>();
+                
+            if(_aiBehaviourController.AiData.IsLooped)
                 Gizmos.DrawLine(patrolPoints[0].position, patrolPoints[patrolPoints.Count - 1].position);
         }
-        
+
+        [Button("Add new patrolling point")]
+        private void AddNewPatrollingPoint()
+        {
+            var patrollingPoint = new GameObject("PatrolPoint");
+            patrollingPoint.transform.parent = patrollingPointsParent;
+            patrollingPoint.transform.position = transform.position;
+
+            patrolPoints.Add(patrollingPoint.transform);
+        }
+
         private void MoveToNextPoint()
         {
             if(!_isPatrolling)
                 return;
             
-            _currentPatrolPointIndex++;
-            
-            if(_currentPatrolPointIndex >= patrolPoints.Count && !isLooped)
+            if(patrolPoints == null || patrolPoints.Count < 1)
                 return;
             
-            if (_currentPatrolPointIndex >= patrolPoints.Count && isLooped)
+            _currentPatrolPointIndex++;
+            
+            if(_currentPatrolPointIndex >= patrolPoints.Count && !_aiBehaviourController.AiData.IsLooped)
+                return;
+            
+            if (_currentPatrolPointIndex >= patrolPoints.Count && _aiBehaviourController.AiData.IsLooped)
                 _currentPatrolPointIndex = 0;
 
-            _aiBehaviourController.AiMovementController.Follow(patrolPoints[_currentPatrolPointIndex], speed, MoveToNextPoint); //todo reduce hardcode with AI stats
+            _aiBehaviourController.AiMovementController.Follow(patrolPoints[_currentPatrolPointIndex], _aiBehaviourController.AiData.Speed, MoveToNextPoint);
         }
 
         public void StartPatrolling()

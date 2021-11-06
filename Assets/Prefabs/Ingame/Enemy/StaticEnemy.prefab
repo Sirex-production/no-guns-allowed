@@ -95,14 +95,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1153622866706627059, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: 9183205498705783138, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: detectionAreas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9183205498705783138, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: _detectionAreas.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9183205498705783138, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: detectionAreas.Array.data[0]
+      value: 
+      objectReference: {fileID: 2559303522226488750}
+    - target: {fileID: 9183205498705783138, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: _detectionAreas.Array.data[0]
       value: 
       objectReference: {fileID: 2559303522226488750}
+    - target: {fileID: 9183205498705783164, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: patrolPoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9183205499099260349, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: m_Name
       value: StaticEnemy
