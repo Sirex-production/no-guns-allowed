@@ -1,10 +1,13 @@
-using UnityEngine;
+using System;
 
-namespace Support
+namespace Support.SLS
 {
-    [CreateAssetMenu(menuName = "Data/Save load system/Save", fileName = "NewSave")]
-    public class SaveData : ScriptableObject
+    /// <summary>
+    /// Class that stores all the data that can be saved
+    /// </summary>
+    [Serializable]
+    public class SaveData
     {
-        [Min(0)] public int currentLevel;
+        public SaveDataHolder<int> CurrentLevelNumber { get; } = new SaveDataHolder<int>();
     }
 }

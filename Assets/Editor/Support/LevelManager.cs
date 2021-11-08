@@ -1,4 +1,5 @@
 using System;
+using Support.SLS;
 using UnityEngine.SceneManagement;
 
 namespace Support
@@ -25,15 +26,19 @@ namespace Support
             SceneManager.LoadScene(sceneIndex);
         }
 
+        /// <summary>Restarts last level that was saved in progress(SaveLoadSystem)</summary>
         public void RestartLevel()
         {
-            LoadLevel(SaveLoadSystem.Instance.SaveData.currentLevel);
+            LoadLevel(SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Data);
         }
         
+        /// <summary>Loads next level and modifies progress in SaveLoadSystem</summary>
         public void LoadNextLevel()
         {
-            SaveLoadSystem.Instance.SaveData.currentLevel++;
-            LoadLevel(SaveLoadSystem.Instance.SaveData.currentLevel);
+            SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Data++;
+            SaveLoadSystem.Instance.PerformSave();
+            
+            LoadLevel(SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Data);
         }
     }
 }
