@@ -64,6 +64,8 @@ namespace Ingame
             var nextPos = transform.localPosition + (Vector3)movingDirection * sensitivity;
 
             transform.localPosition = Vector3.ClampMagnitude(nextPos, PlayerEventController.Instance.Data.MaxDashDistance);
+            
+            PlayerEventController.Instance.Aim(transform.position);
         }
 
         private void ResetLocalPosition(Vector2 _)

@@ -21,6 +21,7 @@ namespace Ingame
         public PlayerData Data => _statsController.Data;
 
         public event Action<Vector3> OnDashPerformed;
+        public event Action<Vector3> OnAim;
         public event Action OnDashStop;
 
         protected override void Awake()
@@ -37,6 +38,11 @@ namespace Ingame
             VibrationController.Vibrate(HapticTypes.Selection);
 
             OnDashPerformed?.Invoke(dashingDirection);
+        }
+
+        public void Aim(Vector3 aimPos)
+        {
+            OnAim?.Invoke(aimPos);
         }
 
         public void StopDash()
