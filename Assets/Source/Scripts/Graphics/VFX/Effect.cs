@@ -26,13 +26,12 @@ namespace Ingame.Graphics
             Destroy(gameObject);
         }
 
-        public abstract void PlayEffect();
+        public abstract void PlayEffect(Transform instanceTargetTransform);
     }
 
     public enum EffectType
     {
         Destruction,
-        TakeDamage,
-        Shooting
+        Detection
     }
 }

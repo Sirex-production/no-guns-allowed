@@ -26,7 +26,7 @@ namespace Ingame.Graphics
             }
         }
 
-        public override void PlayEffect()
+        public override void PlayEffect(Transform instanceTargetTransform)
         {
             if (bloodParticles != null && bloodParticles.Length > 0)
                 foreach (var bloodParticle in bloodParticles)

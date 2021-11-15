@@ -18,6 +18,8 @@ namespace Ingame.AI
             //if(Random.Range(0, 100) <= CHANCE_TO_STOP_PATROLLING)
             //    currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
             
+            currentContext.AiBehaviourController.EffectsManager.PlayAllEffects(EffectType.Detection);
+            
             currentContext.CurrentState = new ShootingEnemyCombatState();
         }
 
@@ -34,8 +36,6 @@ namespace Ingame.AI
         public override void HandleDeath()
         {
             currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
-            if(currentContext.AiBehaviourController.EffectsManager != null)
-                currentContext.AiBehaviourController.EffectsManager.PlayAllEffects(EffectType.Destruction);
             currentContext.AiBehaviourController.DestroyActor();
         }
     }
