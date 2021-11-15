@@ -10,6 +10,7 @@ namespace Ingame.AI
         private AiBehaviourController _aiBehaviourController;
         
         public override float CurrentHp => _currentHp;
+        public override float CurrentDamage => _aiBehaviourController.AiData.MeleeDamage;
         public override bool IsInvincible => false;
         
         private void Awake()

@@ -24,6 +24,7 @@ namespace Ingame
 
         public PlayerData Data => data;
 
+        public override float CurrentDamage => data.Damage;
         public override bool IsInvincible => PlayerEventController.Instance.MovementController.IsDashing || _isInvincible;
         public override float CurrentHp => _currentHp;
         public int CurrentNumberOfCharges => _currentNumberOfCharges;
