@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ingame
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody), typeof(PlayerEventController))]
     public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField] private Aim aim;

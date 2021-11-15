@@ -1,5 +1,4 @@
 using Ingame.Graphics;
-using Random = UnityEngine.Random;
 
 namespace Ingame.AI
 {

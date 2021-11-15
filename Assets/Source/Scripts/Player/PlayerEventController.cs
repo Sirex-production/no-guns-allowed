@@ -6,9 +6,6 @@ using UnityEngine;
 
 namespace Ingame
 {
-    [RequireComponent(typeof(PlayerStatsController))]
-    [RequireComponent(typeof(PlayerMovementController))]
-    [RequireComponent(typeof(PlayerAnimationController))]
     public class PlayerEventController : MonoSingleton<PlayerEventController>
     {
         private PlayerStatsController _statsController;

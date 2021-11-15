@@ -1,5 +1,6 @@
 using System.Collections;
 using Extensions;
+using Ingame.AI;
 using Ingame.Graphics;
 using Ingame.UI;
 using MoreMountains.NiceVibrations;
@@ -8,6 +9,7 @@ using UnityEngine;
 
 namespace Ingame
 {
+    [RequireComponent(typeof(PlayerEventController))]
     public class PlayerStatsController : ActorStats
     {
         [SerializeField] private PlayerData data;
@@ -43,6 +45,15 @@ namespace Ingame
             StartCoroutine(RegenerateChargesRoutine());
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.transform.TryGetComponent(out HitBox actorStats) && IsInvincible)
+            {
+                actorStats.TakeDamage(data.Damage);
+                VibrationController.Vibrate(HapticTypes.RigidImpact);
+            }
+        }
+        
         private void OnDestroy()
         {
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;

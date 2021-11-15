@@ -59,7 +59,8 @@ namespace Ingame.AI
                 
             if(_aiBehaviourController.AiData != null)
                 if(_aiBehaviourController.AiData.IsLooped)
-                    Gizmos.DrawLine(patrolPoints[0].position, patrolPoints[patrolPoints.Count - 1].position);
+                    if(patrolPoints[0] != null && patrolPoints[patrolPoints.Count - 1] != null)
+                        Gizmos.DrawLine(patrolPoints[0].position, patrolPoints[patrolPoints.Count - 1].position);
         }
 
         [Button("Add new patrolling point")]

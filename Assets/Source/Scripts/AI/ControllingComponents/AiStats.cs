@@ -12,7 +12,7 @@ namespace Ingame.AI
         public override float CurrentHp => _currentHp;
         public override float CurrentDamage => _aiBehaviourController.AiData.MeleeDamage;
         public override bool IsInvincible => false;
-        
+
         private void Awake()
         {
             _aiBehaviourController = GetComponent<AiBehaviourController>();
@@ -21,7 +21,7 @@ namespace Ingame.AI
         
         public override void TakeDamage(float amountOfDamage)
         {
-            if(IsInvincible)
+            if(IsInvincible || _currentHp < 1)
                 return;
             
             amountOfDamage = Mathf.Abs(amountOfDamage);

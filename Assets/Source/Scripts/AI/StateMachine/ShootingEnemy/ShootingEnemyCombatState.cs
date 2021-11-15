@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Ingame.AI
 {
     public class ShootingEnemyCombatState : State

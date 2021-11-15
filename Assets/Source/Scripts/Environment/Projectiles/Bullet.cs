@@ -24,9 +24,9 @@ namespace Ingame
         {
             void ManageReflection()
             {
-                if (other.isTrigger && !other.TryGetComponent(out HitBox otherHitBox))
+                if (other.isTrigger)
                     return;
-
+                
                 if (_bounceCount >= maxNumberOfBounces)
                 {
                     Destroy(gameObject);
@@ -40,13 +40,15 @@ namespace Ingame
                 _bounceCount++;
             }
 
-            //Checks whether hit box was hit and attached to ignore actors 
-            if (other.TryGetComponent(out HitBox hitBox) && !_ignoreHitActors.Contains(hitBox.AttachedActorStats))
+            
+            if (other.TryGetComponent(out HitBox hitBox))
             {
-                //If hit box 
+                if (_ignoreHitActors.Contains(hitBox.AttachedActorStats))
+                    return;
+                
                 if (!hitBox.AttachedActorStats.IsInvincible)
                 {
-                    hitBox.AttachedActorStats.TakeDamage(damage);
+                    hitBox.TakeDamage(damage);
                     Destroy(gameObject);
                     return;
                 }
@@ -57,6 +59,9 @@ namespace Ingame
                 Reflect(-_flyingDirection);
                 return;
             }
+            
+            if (other.TryGetComponent(out ActorStats actor) && _ignoreHitActors.Contains(actor))
+                return;
 
             ManageReflection();
         }

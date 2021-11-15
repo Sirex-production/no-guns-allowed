@@ -47,12 +47,7 @@ namespace Ingame.AI
             if (attachedCollider is MeshCollider meshCollider)
                 Gizmos.DrawWireMesh(meshCollider.sharedMesh);
         }
-
-        private bool IsAttachedToGivenActor(ActorStats actorStatsToCheck)
-        {
-            return attachedStatsController == actorStatsToCheck;
-        }
-
+        
         public void TakeDamage(float amountOfDamage)
         {
             attachedStatsController.TakeDamage(amountOfDamage);
