@@ -2560,6 +2560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2164137757104817554}
   - component: {fileID: 2164137757104817555}
+  - component: {fileID: 3636761466374985225}
   m_Layer: 0
   m_Name: PostProcessing
   m_TagString: Untagged
@@ -2598,6 +2599,22 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+--- !u!114 &3636761466374985225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2164137757104817553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537c032607c67f34fb47dc1e4ab0494d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeReference: {fileID: 2164137757104817555}
+  startValue: 0.1
+  endValue: 0.7
+  lerpDuration: 0.5
 --- !u!1 &2164137757154498344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2954,6 +2971,8 @@ GameObject:
   - component: {fileID: 3522437443895571984}
   - component: {fileID: 3522437443895571987}
   - component: {fileID: 2164137756695143004}
+  - component: {fileID: 5427462429002143007}
+  - component: {fileID: 788507280848122422}
   m_Layer: 0
   m_Name: GameManagement
   m_TagString: Untagged
@@ -3038,6 +3057,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDashesController: {fileID: 2164137757079717154}
+--- !u!114 &5427462429002143007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522437443895571996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aceb42b04f3a054aa098d788e3ab081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessingEffect: {fileID: 3636761466374985225}
+  timeScale: 0.25
+  lerpDuration: 0.5
+--- !u!114 &788507280848122422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522437443895571996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aceb42b04f3a054aa098d788e3ab081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessingEffect: {fileID: 3636761466374985225}
+  timeScale: 0.25
+  lerpDuration: 0.5
 --- !u!1 &3522437444162760646
 GameObject:
   m_ObjectHideFlags: 0

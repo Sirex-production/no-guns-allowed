@@ -43,7 +43,6 @@ namespace Ingame
         public void Aim(Vector3 aimPos)
         {
             OnAim?.Invoke(aimPos);
-            Debug.LogWarning("AAAAA");
         }
 
         public void StopDash()

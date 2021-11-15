@@ -4,41 +4,89 @@ using Ingame;
 using Support;
 using UnityEngine;
 
-namespace Ingame.Graphics
+namespace Ingame.Graphics.VFX
 {
     public class SlowMotionEffect : MonoBehaviour
     {
+        [SerializeField] private ChromaticAbberationController postProcessingEffect;
         [SerializeField] [Range(0.0f, 1.0f)] private float timeScale;
+        [SerializeField] [Min(0)] private float lerpDuration;
 
+        private bool _routineIsCalled;
+        private float _timeElapsed; 
         private float _defaultFixedDeltaTime;
 
         private void Awake()
         {
             _defaultFixedDeltaTime = Time.fixedDeltaTime;
+            _routineIsCalled = false;
+            _timeElapsed = 0.0f;
         }
 
         private void Start()
         {
-            InputSystem.Instance.OnDragAction += SlowDownTime;
-            InputSystem.Instance.OnReleaseAction += ResetTime;
+            PlayerEventController.Instance.OnAim += SlowDownTime;
+            PlayerEventController.Instance.OnDashPerformed += ResetTimeWhenDashPerformed;
+            GameController.Instance.OnLevelRestart += ResetTimeOnLevelRestart;
+            GameController.Instance.OnLevelEnded += ResetTimeOnLevelEnd;
         }
 
         private void OnDestroy()
         {
-            InputSystem.Instance.OnDragAction -= SlowDownTime;
-            InputSystem.Instance.OnReleaseAction -= ResetTime;
+            PlayerEventController.Instance.OnAim -= SlowDownTime;
+            PlayerEventController.Instance.OnDashPerformed -= ResetTimeWhenDashPerformed;
+            GameController.Instance.OnLevelRestart -= ResetTimeOnLevelRestart;
+            GameController.Instance.OnLevelEnded -= ResetTimeOnLevelEnd;
         }
 
-        private void SlowDownTime(Vector2 _)
+        private void SlowDownTime(Vector3 _)
         {
-            Time.timeScale = timeScale;
-            Time.fixedDeltaTime = _defaultFixedDeltaTime * Time.timeScale;
+            if(_routineIsCalled)
+                return;
+            
+            postProcessingEffect.Modify();
+            StartCoroutine(TimeSlowDownRoutine());
         }
 
-        private void ResetTime(Vector2 _)
+        private void ResetTime()
         {
+            StopAllCoroutines();
+            postProcessingEffect.DoReset();
+            _routineIsCalled = false;
+
             Time.timeScale = 1.0f;
             Time.fixedDeltaTime = _defaultFixedDeltaTime;
+        }
+
+        private void ResetTimeWhenDashPerformed(Vector3 _)
+        {
+            ResetTime();
+        }
+
+        private void ResetTimeOnLevelEnd(bool _)
+        {
+            ResetTime();
+        }
+
+        private void ResetTimeOnLevelRestart()
+        {
+            ResetTime();
+        }
+
+
+        private IEnumerator TimeSlowDownRoutine()
+        {
+            _routineIsCalled = true;
+            while (Time.timeScale >= timeScale)
+            {
+                Time.timeScale = Mathf.Lerp(1.0f, timeScale, _timeElapsed / lerpDuration);
+                Time.fixedDeltaTime = _defaultFixedDeltaTime * Time.timeScale;
+
+                _timeElapsed +=  Time.deltaTime / Time.timeScale;
+                yield return null;
+            }
+
+            yield return null;
         }
     }
 }

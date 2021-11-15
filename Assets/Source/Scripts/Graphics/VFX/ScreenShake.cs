@@ -42,7 +42,7 @@ namespace Ingame.Graphics
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain =
                     Mathf.Lerp(amplitudeGain, 0.0f, timeElapsed / shakeDuration);
 
-                timeElapsed += Time.deltaTime;
+                timeElapsed += Time.deltaTime / Time.timeScale;
                 if (timeElapsed >= shakeDuration)
                     break;
 
