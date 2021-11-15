@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ingame.AI;
 using UnityEngine;
 
 namespace Ingame
@@ -23,9 +24,9 @@ namespace Ingame
         {
             void ManageReflection()
             {
-                if (other.isTrigger)
+                if (other.isTrigger && !other.TryGetComponent(out HitBox otherHitBox))
                     return;
-                
+
                 if (_bounceCount >= maxNumberOfBounces)
                 {
                     Destroy(gameObject);
@@ -39,20 +40,19 @@ namespace Ingame
                 _bounceCount++;
             }
 
-            if (other.TryGetComponent(out ActorStats actor))
+            //Checks whether hit box was hit and attached to ignore actors 
+            if (other.TryGetComponent(out HitBox hitBox) && !_ignoreHitActors.Contains(hitBox.AttachedActorStats))
             {
-                if (_ignoreHitActors.Contains(actor))
-                    return;
-                
-                if (!actor.IsInvincible)
+                //If hit box 
+                if (!hitBox.AttachedActorStats.IsInvincible)
                 {
-                    actor.TakeDamage(damage);
+                    hitBox.AttachedActorStats.TakeDamage(damage);
                     Destroy(gameObject);
                     return;
                 }
 
                 _ignoreHitActors.Clear();
-                _ignoreHitActors.Add(actor);
+                _ignoreHitActors.Add(hitBox.AttachedActorStats);
                 _bounceCount = maxNumberOfBounces;
                 Reflect(-_flyingDirection);
                 return;

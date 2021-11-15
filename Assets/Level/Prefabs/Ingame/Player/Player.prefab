@@ -780,7 +780,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7752266144791997035}
   - component: {fileID: 8070267713452710154}
-  - component: {fileID: 3399841308300444893}
   m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
@@ -816,19 +815,6 @@ CapsuleCollider:
   m_Height: 2.1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3399841308300444893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3685523293696955488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82ded95641e96854c9ca404cf9517f26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachedStatsController: {fileID: 5005888661490081304}
 --- !u!1 &5005888661490081280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,7 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b2e7a6677abcd40b304554ef19cdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPeriod: 0.016
+  spawnPeriod: 0.009
   ghostPrefab: {fileID: 8382941299903223842, guid: 000bea9a26ed048419721b42f2d7636c, type: 3}
   primaryTrail: {fileID: 3234147585065614436}
   secondaryTrails:

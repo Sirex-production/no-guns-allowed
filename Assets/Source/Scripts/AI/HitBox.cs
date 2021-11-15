@@ -1,27 +1,20 @@
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Ingame
+namespace Ingame.AI
 {
     [RequireComponent(typeof(Collider))]
-    public class HitBoxArea : MonoBehaviour
+    public class HitBox : MonoBehaviour
     {
-        [Required][SerializeField] private ActorStats attachedStatsController;
-
+        [Required][SerializeField] protected ActorStats attachedStatsController;
+        
         private float GIZMOS_SPHERE_SIZE = .3f;
         
+        public ActorStats AttachedActorStats => attachedStatsController;
+
         private void Awake()
         {
             GetComponent<Collider>().isTrigger = true;
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (!other.TryGetComponent(out HitBoxArea enemyHitBox) || enemyHitBox.IsAttachedToGivenActor(attachedStatsController))
-                return;
-
-            if (attachedStatsController.IsInvincible) 
-                enemyHitBox.TakeDamage(attachedStatsController.CurrentDamage);
         }
 
         private void OnDrawGizmos()
@@ -60,7 +53,7 @@ namespace Ingame
             return attachedStatsController == actorStatsToCheck;
         }
 
-        private void TakeDamage(float amountOfDamage)
+        public void TakeDamage(float amountOfDamage)
         {
             attachedStatsController.TakeDamage(amountOfDamage);
         }

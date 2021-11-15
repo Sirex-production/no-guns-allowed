@@ -43,16 +43,6 @@ namespace Ingame
             StartCoroutine(RegenerateChargesRoutine());
         }
 
-        private void OnCollisionEnter(Collision other)
-        {
-            if (other.transform.TryGetComponent(out ActorStats actorStats) && IsInvincible)
-            {
-                VibrationController.Vibrate(HapticTypes.RigidImpact);
-                
-                actorStats.TakeDamage(data.Damage);
-            }
-        }
-
         private void OnDestroy()
         {
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;

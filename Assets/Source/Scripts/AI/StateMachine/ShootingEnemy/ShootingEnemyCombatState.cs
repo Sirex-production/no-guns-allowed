@@ -1,5 +1,3 @@
-using Ingame.Graphics;
-
 namespace Ingame.AI
 {
     public class ShootingEnemyCombatState : State

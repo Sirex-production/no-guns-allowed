@@ -18,16 +18,6 @@ namespace Ingame.AI
             _pause = new WaitForSeconds(_aiBehaviourController.AiData.PauseBetweenShots);
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if(!_isInCombat)
-                return;
-
-            //todo replace with enemy list
-            if (other.transform.TryGetComponent(out PlayerStatsController player)) 
-                player.TakeDamage(_aiBehaviourController.AiData.MeleeDamage);
-        }
-
         private IEnumerator ShootRoutine(ActorStats actorStats)
         {
             yield return _pause;
