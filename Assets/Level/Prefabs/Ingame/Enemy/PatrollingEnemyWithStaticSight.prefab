@@ -134,6 +134,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9183205498705783138, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: detectionAreasParent
+      value: 
+      objectReference: {fileID: 911231077432111651}
+    - target: {fileID: 9183205498705783138, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: detectionAreas.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -154,6 +158,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9183205498705783164, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: patrollingPointsParent
+      value: 
+      objectReference: {fileID: 3716549079953432798}
+    - target: {fileID: 9183205498705783164, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -168,6 +176,10 @@ PrefabInstance:
     - target: {fileID: 9183205498705783165, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: useGravity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9183205498895282106, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9183205499099260349, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: m_Name

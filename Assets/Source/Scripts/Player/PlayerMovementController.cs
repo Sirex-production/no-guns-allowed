@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Ingame
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody), typeof(PlayerEventController))]
     public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField] private Aim aim;
 
-        private const float MINIMAL_DISTANCE_TO_PERFORM_DASH = 1f;
+        private const float MINIMAL_DISTANCE_TO_PERFORM_DASH = 0f;
         private const float TIME_AFTER_DASH_WILL_BE_STOPPED = .15f;
         
         private Rigidbody _rigidbody;

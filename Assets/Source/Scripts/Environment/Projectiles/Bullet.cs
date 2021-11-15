@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ingame.AI;
 using UnityEngine;
 
 namespace Ingame
@@ -39,24 +40,28 @@ namespace Ingame
                 _bounceCount++;
             }
 
-            if (other.TryGetComponent(out ActorStats actor))
+            
+            if (other.TryGetComponent(out HitBox hitBox))
             {
-                if (_ignoreHitActors.Contains(actor))
+                if (_ignoreHitActors.Contains(hitBox.AttachedActorStats))
                     return;
                 
-                if (!actor.IsInvincible)
+                if (!hitBox.AttachedActorStats.IsInvincible)
                 {
-                    actor.TakeDamage(damage);
+                    hitBox.TakeDamage(damage);
                     Destroy(gameObject);
                     return;
                 }
 
                 _ignoreHitActors.Clear();
-                _ignoreHitActors.Add(actor);
+                _ignoreHitActors.Add(hitBox.AttachedActorStats);
                 _bounceCount = maxNumberOfBounces;
                 Reflect(-_flyingDirection);
                 return;
             }
+            
+            if (other.TryGetComponent(out ActorStats actor) && _ignoreHitActors.Contains(actor))
+                return;
 
             ManageReflection();
         }

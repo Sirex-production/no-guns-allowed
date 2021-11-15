@@ -1,4 +1,4 @@
-using Ingame.Graphics;
+using UnityEngine;
 
 namespace Ingame.AI
 {
@@ -28,8 +28,6 @@ namespace Ingame.AI
         public override void HandleDeath()
         {
             currentContext.AiBehaviourController.AiCombatController.StopCombat();
-            if(currentContext.AiBehaviourController.EffectsManager != null)
-                currentContext.AiBehaviourController.EffectsManager.PlayAllEffects(EffectType.Destruction);
             currentContext.AiBehaviourController.DestroyActor();
         }
     }
