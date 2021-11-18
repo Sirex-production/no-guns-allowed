@@ -6,7 +6,6 @@ namespace Ingame.UI
     public class UiPlayerDashesController : MonoBehaviour
     {
         [SerializeField] private UiCharge[] uiCharges;
-        [SerializeField] private UiOutOfCharges uiOutOfChargesComponent;
 
         public void SetNumberOfActiveCharges(int numberOfActiveCharges)
         {
@@ -29,12 +28,6 @@ namespace Ingame.UI
         {
             foreach (var uiCharge in uiCharges)
                 uiCharge.GetComponent<Image>().enabled = true;
-        }
-
-        //TODO: try to find a way to get rid of this encapsulation layer
-        public void TriggerOutOfChargesMessage()
-        {
-            uiOutOfChargesComponent.TriggerMessage();
         }
     }
 }

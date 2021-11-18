@@ -19,6 +19,16 @@ namespace Ingame.UI
             _canvasGroupComponent.alpha = 0;
         }
 
+        private void Start()
+        {
+            PlayerEventController.Instance.OnDashCancelled += TriggerMessage;
+        }
+
+        private void OnDestroy()
+        {
+            PlayerEventController.Instance.OnDashCancelled -= TriggerMessage;
+        }
+
         private IEnumerator OutOfChargesRoutine()
         {
             _canvasGroupComponent.alpha = 1;

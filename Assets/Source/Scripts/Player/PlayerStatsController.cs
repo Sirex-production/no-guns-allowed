@@ -80,13 +80,6 @@ namespace Ingame
             }
         }
 
-        public void TriggerOutOfChargesMessage()
-        {
-            UiController.Instance.UiDashesController.TriggerOutOfChargesMessage();
-            if (Camera.main is { }) 
-                Camera.main.GetComponent<ScreenShake>().StartScreenShake();
-        }
-
         public void RegenerateDashingCharge(int numberOfChargesToRegenerate)
         {
             numberOfChargesToRegenerate = Mathf.Abs(numberOfChargesToRegenerate);

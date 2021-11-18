@@ -27,7 +27,8 @@ namespace Ingame.Graphics.VFX
         {
             PlayerEventController.Instance.OnAim += SlowDownTime;
             PlayerEventController.Instance.OnDashPerformed += ResetTimeWhenDashPerformed;
-            GameController.Instance.OnLevelRestart += ResetTimeOnLevelRestart;
+            PlayerEventController.Instance.OnDashCancelled += ResetTimeOnRestartOrDashCancelled;
+            GameController.Instance.OnLevelRestart += ResetTimeOnRestartOrDashCancelled;
             GameController.Instance.OnLevelEnded += ResetTimeOnLevelEnd;
         }
 
@@ -35,7 +36,8 @@ namespace Ingame.Graphics.VFX
         {
             PlayerEventController.Instance.OnAim -= SlowDownTime;
             PlayerEventController.Instance.OnDashPerformed -= ResetTimeWhenDashPerformed;
-            GameController.Instance.OnLevelRestart -= ResetTimeOnLevelRestart;
+            PlayerEventController.Instance.OnDashCancelled -= ResetTimeOnRestartOrDashCancelled;
+            GameController.Instance.OnLevelRestart -= ResetTimeOnRestartOrDashCancelled;
             GameController.Instance.OnLevelEnded -= ResetTimeOnLevelEnd;
         }
 
@@ -68,7 +70,7 @@ namespace Ingame.Graphics.VFX
             ResetTime();
         }
 
-        private void ResetTimeOnLevelRestart()
+        private void ResetTimeOnRestartOrDashCancelled()
         {
             ResetTime();
         }

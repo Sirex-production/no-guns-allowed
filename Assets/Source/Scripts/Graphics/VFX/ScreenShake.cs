@@ -26,6 +26,16 @@ namespace Ingame.Graphics
                 frequencyGain;
         }
 
+        private void Start()
+        {
+            PlayerEventController.Instance.OnDashCancelled += StartScreenShake;
+        }
+
+        private void OnDestroy()
+        {
+            PlayerEventController.Instance.OnDashCancelled -= StartScreenShake;
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -63,6 +73,9 @@ namespace Ingame.Graphics
 
         public void StartScreenShake()
         {
+            if (!(Camera.main is { })) 
+                Debug.LogError("MainCamera has not been found in the scene");
+
             StopAllCoroutines();
             StartCoroutine(ScreenShakeRoutine());
         }

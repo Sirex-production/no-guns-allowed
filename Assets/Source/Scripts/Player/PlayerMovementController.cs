@@ -54,20 +54,21 @@ namespace Ingame
         {
             if (aim == null || !PlayerEventController.Instance.StatsController.IsAbleToDash)
             {
-                PlayerEventController.Instance.StatsController.TriggerOutOfChargesMessage();
+                PlayerEventController.Instance.CancelDash();
                 return;
             }
             
             if(Vector3.Distance(aim.transform.position, transform.position) < MINIMAL_DISTANCE_TO_PERFORM_DASH)
                 return;
-            
-            var dashVector = aim.transform.position - transform.position;
+
+            var position = transform.position;
+            var dashVector = aim.transform.position - position;
             var dashDirection = dashVector.normalized;
             var impulseVelocityModifier = Mathf.InverseLerp(MINIMAL_DISTANCE_TO_PERFORM_DASH, PlayerEventController.Instance.Data.MaxDashDistance, dashVector.magnitude) > .3f ?
                 1 : Mathf.InverseLerp(MINIMAL_DISTANCE_TO_PERFORM_DASH, PlayerEventController.Instance.Data.MaxDashDistance, dashVector.magnitude);
             var impulseVelocity = dashDirection * (impulseVelocityModifier * PlayerEventController.Instance.Data.DashForce);
 
-            _initialDashPosition = transform.position;
+            _initialDashPosition = position;
             _currentDashLength = dashVector.magnitude;
             _isDashing = true;
             
@@ -90,14 +91,15 @@ namespace Ingame
                 _stopDashCoroutine = null;
             }
 
-            var dashingDirection = Vector3.Normalize(transform.position - _initialDashPosition);
+            var position = transform.position;
+            var dashingDirection = Vector3.Normalize(position - _initialDashPosition);
             var afterDashForceModifier = Mathf.InverseLerp(0, PlayerEventController.Instance.Data.MaxDashDistance, _currentDashLength);
             
             _rigidbody.useGravity = true;
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.AddForce(dashingDirection * (afterDashForceModifier * PlayerEventController.Instance.Data.AfterDashForce), ForceMode.Impulse);
 
-            _initialDashPosition = transform.position;
+            _initialDashPosition = position;
             _currentDashLength = 0;
             _isDashing = false;
             

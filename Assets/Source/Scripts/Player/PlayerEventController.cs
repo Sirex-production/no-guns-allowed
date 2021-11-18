@@ -20,6 +20,7 @@ namespace Ingame
         public event Action<Vector3> OnDashPerformed;
         public event Action<Vector3> OnAim;
         public event Action OnDashStop;
+        public event Action OnDashCancelled;
 
         protected override void Awake()
         {
@@ -45,6 +46,11 @@ namespace Ingame
         public void StopDash()
         {
             OnDashStop?.Invoke();
+        }
+
+        public void CancelDash()
+        {
+            OnDashCancelled?.Invoke();
         }
     }
 }
