@@ -1,5 +1,7 @@
 using Extensions;
+using NaughtyAttributes;
 using Support;
+using Support.SLS;
 using UnityEngine;
 
 namespace Ingame
@@ -10,7 +12,8 @@ namespace Ingame
         [SerializeField] private Transform aimingOrigin;
         [Space] 
         [SerializeField] private bool obstaclesPreventAiming = true;
-        [SerializeField] [Range(0, 1)] private float sensitivity = 1f;
+        [SerializeField] private bool isSaveLoadSystemIgnored = false;
+        [ShowIf(nameof(isSaveLoadSystemIgnored))][SerializeField] [Range(0, 20)] private float sensitivity = 5f;
 
         private int ignoreRaycastLayers;
         
@@ -33,12 +36,17 @@ namespace Ingame
         {
             InputSystem.Instance.OnReleaseAction += ResetLocalPosition;
             InputSystem.Instance.OnDragAction += Move;
+            SaveLoadSystem.Instance.SaveData.AimSensitivity.OnValueChanged += SetSensitivity;
+
+            if(!isSaveLoadSystemIgnored)
+                sensitivity = SaveLoadSystem.Instance.SaveData.AimSensitivity.Value;
         }
 
         private void OnDestroy()
         {
             InputSystem.Instance.OnReleaseAction -= ResetLocalPosition;
             InputSystem.Instance.OnDragAction -= Move;
+            SaveLoadSystem.Instance.SaveData.AimSensitivity.OnValueChanged -= SetSensitivity;
         }
 
         private void Update()
@@ -61,7 +69,7 @@ namespace Ingame
                 if(Physics.Linecast(aimingOrigin.transform.position, transform.position, out RaycastHit hit, ignoreRaycastLayers, QueryTriggerInteraction.Ignore))
                     transform.position = hit.point;
 
-            var nextPos = transform.localPosition + (Vector3)movingDirection * sensitivity;
+            var nextPos = transform.localPosition + (Vector3)movingDirection * sensitivity * Time.deltaTime;
 
             transform.localPosition = Vector3.ClampMagnitude(nextPos, PlayerEventController.Instance.Data.MaxDashDistance);
             
@@ -70,7 +78,12 @@ namespace Ingame
 
         private void ResetLocalPosition(Vector2 _)
         {
-            this.DoAfterNextFrame(() => { transform.localPosition = _initialLocalPosition; });
+            this.DoAfterNextFrameCoroutine(() => { transform.localPosition = _initialLocalPosition; });
+        }
+
+        private void SetSensitivity(float sensitivity)
+        {
+            this.sensitivity = sensitivity;
         }
     }
 }

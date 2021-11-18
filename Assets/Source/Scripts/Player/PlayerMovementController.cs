@@ -76,7 +76,7 @@ namespace Ingame
             _rigidbody.AddForce(impulseVelocity, ForceMode.Impulse);
 
             PlayerEventController.Instance.PerformDash(dashDirection);
-            _stopDashCoroutine = this.WaitAndDo(TIME_AFTER_DASH_WILL_BE_STOPPED, StopDash);
+            _stopDashCoroutine = this.WaitAndDoCoroutine(TIME_AFTER_DASH_WILL_BE_STOPPED, StopDash);
         }
 
         private void StopDash()

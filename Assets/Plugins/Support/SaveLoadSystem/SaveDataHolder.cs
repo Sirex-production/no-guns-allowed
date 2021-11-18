@@ -9,23 +9,23 @@ namespace Support.SLS
     [Serializable]
     public class SaveDataHolder<T>
     {
-        private T _data;
-        
-        public T Data
+        private T _value;
+        public T Value
         {
-            get => _data;
+            get => _value;
             
             set
             {
-                _data = value;
-                OnDataChanged?.Invoke(_data);
+                _value = value;
+                OnValueChanged?.Invoke(_value);
             }
         }
 
-        internal event Action<T> OnDataChanged;
+        [field: NonSerialized]
+        public event Action<T> OnValueChanged;
 
         internal SaveDataHolder() { }
 
-        internal SaveDataHolder(T data) => _data = data;
+        internal SaveDataHolder(T value) => _value = value;
     }
 }

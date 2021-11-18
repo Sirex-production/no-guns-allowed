@@ -108,7 +108,7 @@ namespace Ingame
             _currentNumberOfCharges = Mathf.Max(0, _currentNumberOfCharges - numberOfChargesToUse);
             
             UiController.Instance.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
-            this.WaitAndDo(TIME_AFTER_DASH_WHEN_PLAYER_IS_INVINCIBLE, () => _isInvincible = false);
+            this.WaitAndDoCoroutine(TIME_AFTER_DASH_WHEN_PLAYER_IS_INVINCIBLE, () => _isInvincible = false);
         }
 
         public override void TakeDamage(float amountOfDamage)

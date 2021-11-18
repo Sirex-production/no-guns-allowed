@@ -1067,7 +1067,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 5005888661820053557}
   aimingOrigin: {fileID: 5005888661490081308}
   obstaclesPreventAiming: 1
-  sensitivity: 0.05
+  sensitivity: 5
 --- !u!120 &5005888661820053557
 LineRenderer:
   m_ObjectHideFlags: 0

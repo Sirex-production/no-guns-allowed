@@ -5,7 +5,7 @@ using Support;
 using TMPro;
 using UnityEngine;
 
-public class FeedbackScreenController : MonoBehaviour
+public class UiFeedbackScreenController : MonoBehaviour
 {
     [SerializeField] private TMP_Text displayedText;
     [SerializeField] private CanvasGroup buttonsParentCanvas;
@@ -87,7 +87,7 @@ public class FeedbackScreenController : MonoBehaviour
     {
         StopAllCoroutines();
         displayedText.text = _text;
-        this.WaitAndDo(pauseBeforeButtonsWillBeShown, RevealButtons);
+        this.WaitAndDoCoroutine(pauseBeforeButtonsWillBeShown, RevealButtons);
     }
 
     private void RevealButtons()
