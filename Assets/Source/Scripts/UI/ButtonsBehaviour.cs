@@ -14,23 +14,22 @@ namespace Ingame
 
         public void OpenUrl(string urlToOpen)
         {
-            VibrationController.Vibrate(HapticTypes.Selection);
-            
             Application.OpenURL(urlToOpen);
         }
 
         public void RestartLevel()
         {
-            VibrationController.Vibrate(HapticTypes.Selection);
-            
             GameController.Instance.RestartLevel();
         }
 
         public void LoadNextLevel()
         {
-            VibrationController.Vibrate(HapticTypes.Selection);
-            
             LevelManager.Instance.LoadNextLevel();
+        }
+
+        public void ClickVibrate()
+        {
+            VibrationController.Vibrate(HapticTypes.Selection);
         }
 
         public void ChangeAimSensitivity(Slider slider)
