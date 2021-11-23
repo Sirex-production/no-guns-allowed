@@ -845,56 +845,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &1928656946185391734
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5181059376434637279}
-  - component: {fileID: 7575578788156006588}
-  m_Layer: 5
-  m_Name: BeforeLevel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5181059376434637279
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1928656946185391734}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5307905603605664824}
-  m_Father: {fileID: 2164137755450496888}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7575578788156006588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1928656946185391734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836d89c0541aa4eab372860770f609, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enterExitLevelAnimator: {fileID: 6701906919939927451}
 --- !u!1 &2164137755283210313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,7 +1094,6 @@ RectTransform:
   - {fileID: 2164137756660308161}
   - {fileID: 5243660119517608931}
   - {fileID: 2164137756238525474}
-  - {fileID: 5181059376434637279}
   m_Father: {fileID: 3522437444162760666}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1272,6 +1221,7 @@ RectTransform:
   - {fileID: 1838103191561186948}
   - {fileID: 2164137756755169056}
   - {fileID: 2164137757088158811}
+  - {fileID: 5307905603605664824}
   m_Father: {fileID: 2164137755450496888}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1297,6 +1247,7 @@ MonoBehaviour:
   winText: {fileID: 2164137756368678739}
   looseScreenParentCanvas: {fileID: 2164137756755169057}
   loseText: {fileID: 2164137756977414829}
+  uiLevelTransition: {fileID: 7722941516370564710}
 --- !u!1 &2164137756368678737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,14 +2607,14 @@ GameObject:
   - component: {fileID: 5307905603605664824}
   - component: {fileID: 2247190057461644297}
   - component: {fileID: 6701906919939927451}
-  - component: {fileID: 3525037846736728362}
+  - component: {fileID: 7722941516370564710}
   m_Layer: 5
   m_Name: EnterExitLevelEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5307905603605664824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2677,8 +2628,8 @@ RectTransform:
   m_Children:
   - {fileID: 1479510533281589085}
   - {fileID: 2715452162563895468}
-  m_Father: {fileID: 5181059376434637279}
-  m_RootOrder: 0
+  m_Father: {fileID: 2164137756238525474}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2712,7 +2663,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3525037846736728362
+--- !u!114 &7722941516370564710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2721,9 +2672,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2446400107461519352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18b75262e4e51044c9b77cdc1b4c56df, type: 3}
+  m_Script: {fileID: 11500000, guid: a2836d89c0541aa4eab372860770f609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelTransitionAnimator: {fileID: 6701906919939927451}
 --- !u!1 &2770547491132250922
 GameObject:
   m_ObjectHideFlags: 0
@@ -5100,7 +5052,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -56}
-  m_SizeDelta: {x: 512, y: 575.52686}
+  m_SizeDelta: {x: 512, y: 1024}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5958147862202006748
 CanvasRenderer:
@@ -5943,8 +5895,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 626}
-  m_SizeDelta: {x: 512, y: 575.52686}
+  m_AnchoredPosition: {x: 0, y: 1104}
+  m_SizeDelta: {x: 512, y: 1024}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1514068023598261442
 CanvasRenderer:

@@ -6,15 +6,10 @@ namespace Support
     public class GameController : MonoSingleton<GameController>
     {
         public event Action<bool> OnLevelEnded;
+        public event Action OnNextLevelLoaded;
         public event Action OnLevelRestart;
 
         private bool _isLevelEnded = false;
-
-        public void RestartLevel()
-        {
-            OnLevelRestart?.Invoke();
-            LevelManager.Instance.RestartLevel();
-        }
 
         public void EndLevel(bool isVictory)
         {
@@ -27,6 +22,16 @@ namespace Support
                 VibrationController.Vibrate(HapticTypes.Failure);
             
             OnLevelEnded?.Invoke(isVictory);
+        }
+
+        public void LoadNextLevel()
+        {
+            OnNextLevelLoaded?.Invoke();
+        }
+
+        public void RestartLevel()
+        {
+            OnLevelRestart?.Invoke();
         }
     }
 }

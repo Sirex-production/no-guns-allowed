@@ -16,6 +16,8 @@ namespace Ingame.UI
         [Space]
         [SerializeField] private CanvasGroup looseScreenParentCanvas;
         [SerializeField] private TMP_Text loseText;
+        [Space] 
+        [SerializeField] private UiLevelTransition uiLevelTransition;
 
         private const float TEXT_ANIMATING_SCALE_MODIFIER = 1.2f;
         
@@ -31,6 +33,8 @@ namespace Ingame.UI
             if(loseText != null)
                 _initialLooseTextScale = loseText.rectTransform.localScale;
             
+            if(uiLevelTransition != null)
+                uiLevelTransition.SetGameObjectActive();
             winScreenParentCanvas.SetGameObjectInactive();
             looseScreenParentCanvas.SetGameObjectInactive();
         }

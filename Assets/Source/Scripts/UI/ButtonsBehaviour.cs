@@ -24,7 +24,7 @@ namespace Ingame
 
         public void LoadNextLevel()
         {
-            LevelManager.Instance.LoadNextLevel();
+            GameController.Instance.LoadNextLevel();
         }
 
         public void ClickVibrate()
