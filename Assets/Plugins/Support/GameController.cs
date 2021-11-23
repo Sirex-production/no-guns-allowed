@@ -18,9 +18,8 @@ namespace Support
 
             _isLevelEnded = true;
             
-            if(!isVictory)
-                VibrationController.Vibrate(HapticTypes.Failure);
-            
+            VibrationController.Vibrate(!isVictory ? HapticTypes.Failure : HapticTypes.Success);
+
             OnLevelEnded?.Invoke(isVictory);
         }
 

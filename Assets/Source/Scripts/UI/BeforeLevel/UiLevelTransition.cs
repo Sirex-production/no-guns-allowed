@@ -9,7 +9,7 @@ namespace Ingame.UI
     {
         [Required] [SerializeField] private Animator levelTransitionAnimator;
 
-        private const float TIME_OFFSET_AFTER_ANIMATION = .1f;
+        private const float TIME_OFFSET_AFTER_ANIMATION = .2f;
         
         private void Start()
         {

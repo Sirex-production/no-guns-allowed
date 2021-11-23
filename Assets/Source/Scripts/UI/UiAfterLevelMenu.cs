@@ -65,10 +65,9 @@ namespace Ingame.UI
             winScreenParentCanvas.alpha = 0;
             winText.rectTransform.localScale = Vector3.zero;
             winScreenParentCanvas.SetGameObjectActive();
-
+            
             _animationSequence = DOTween.Sequence()
-                .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
-                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.Success)))
+                .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f))
                 .Append(winText.rectTransform.DOScale(_initialWinTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
                 .Append(winText.rectTransform.DOScale(_initialWinTextScale, animationDuration));
 
@@ -79,10 +78,9 @@ namespace Ingame.UI
             looseScreenParentCanvas.alpha = 0;
             loseText.rectTransform.localScale = Vector3.zero;
             looseScreenParentCanvas.SetGameObjectActive();
-
+            
             _animationSequence = DOTween.Sequence()
-                .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
-                    .OnComplete(()=>VibrationController.Vibrate(HapticTypes.Failure)))
+                .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f))
                 .Append(loseText.rectTransform.DOScale(_initialLooseTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
                 .Append(loseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration));
         }

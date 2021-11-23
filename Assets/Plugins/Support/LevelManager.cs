@@ -14,6 +14,13 @@ namespace Support
                 RestartLevel();
         }
 
+        private void Start()
+        {
+            //Loads proper level from save
+            if(SceneManager.GetActiveScene().buildIndex == 0 && SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value > 0)
+                RestartLevel();
+        }
+
         public void LoadLevel(int levelNumber)
         {
             if (levelNumber < 0)
