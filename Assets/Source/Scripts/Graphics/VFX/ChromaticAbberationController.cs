@@ -11,21 +11,27 @@ namespace Ingame.Graphics.VFX
         [SerializeField] [Range(0, 1)] private float endValue;
         [SerializeField] [Min(0)] private float lerpDuration;
 
-        private float _timeElapsed;
-
         private void Start()
         {
-            _timeElapsed = 0.0f;
+            PlayerEventController.Instance.OnSlowMotionEnter += Modify;
+            PlayerEventController.Instance.OnSlowMotionExit += DoReset;
+        }
+
+        private void OnDestroy()
+        {
+            PlayerEventController.Instance.OnSlowMotionEnter -= Modify;
+            PlayerEventController.Instance.OnSlowMotionExit -= DoReset;
         }
 
         protected override IEnumerator OnModificationRoutine()
         {
+            var timeElapsed = 0.0f;
             effectToChange.active = true;
             effectToChange.intensity.value = startValue;
-            while (_timeElapsed <= lerpDuration)
+            while (timeElapsed <= lerpDuration)
             {
-                effectToChange.intensity.value = Mathf.Lerp(startValue, endValue, _timeElapsed / lerpDuration);
-                _timeElapsed += Time.deltaTime / Time.timeScale;
+                effectToChange.intensity.value = Mathf.Lerp(startValue, endValue, timeElapsed / lerpDuration);
+                timeElapsed += Time.deltaTime / Time.timeScale;
                 yield return null;
             }
         }
@@ -33,7 +39,7 @@ namespace Ingame.Graphics.VFX
         public override void DoReset()
         {
             StopAllCoroutines();
-            _timeElapsed = 0.0f;
+
             effectToChange.active = false;
         }
     }

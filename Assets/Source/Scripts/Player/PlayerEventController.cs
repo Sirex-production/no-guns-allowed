@@ -21,6 +21,8 @@ namespace Ingame
         public event Action<Vector3> OnAim;
         public event Action OnDashStop;
         public event Action OnDashCancelled;
+        public event Action OnSlowMotionEnter;
+        public event Action OnSlowMotionExit;
 
         protected override void Awake()
         {
@@ -51,6 +53,16 @@ namespace Ingame
         public void CancelDash()
         {
             OnDashCancelled?.Invoke();
+        }
+
+        public void EnterSlowMotion()
+        {
+            OnSlowMotionEnter?.Invoke();
+        }
+
+        public void ExitSlowMotion()
+        {
+            OnSlowMotionExit?.Invoke();
         }
     }
 }
