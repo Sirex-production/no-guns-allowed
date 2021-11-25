@@ -6,18 +6,35 @@ namespace Support
 {
     public class LevelManager : MonoSingleton<LevelManager>
     {
+        
+#if !UNITY_EDITOR
+        private void Start()
+        {
+            LoadLastLevelFromSave();
+        }
+
+        private void LoadLastLevelFromSave()
+        {
+            
+            int currentLevelNumber = SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value;
+            int sceneIndexOfCurrentLevel = currentLevelNumber < SceneManager.sceneCountInBuildSettings - 1
+                ? currentLevelNumber
+                : currentLevelNumber % SceneManager.sceneCountInBuildSettings;
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            
+            if(sceneIndexOfCurrentLevel == currentSceneIndex)
+                return;
+            
+            if(currentSceneIndex == 0)
+                LoadLevel(SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value);
+        }
+#endif
+
         public void ManageLevelDependingOnWinningCondition(bool isVictory)
         {
             if (isVictory)
                 LoadNextLevel();
             else
-                RestartLevel();
-        }
-
-        private void Start()
-        {
-            //Loads proper level from save
-            if(SceneManager.GetActiveScene().buildIndex == 0 && SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value > 0)
                 RestartLevel();
         }
 

@@ -38,7 +38,8 @@ namespace Ingame
 
         private void OnCollisionEnter()
         {
-            StopDash(); 
+            if(PlayerEventController.Instance.Data.StopDashWhenCollidingWithEnvironment)
+                StopDash(); 
         }
 
         private void FixedUpdate()
