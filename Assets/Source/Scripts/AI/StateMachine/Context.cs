@@ -1,3 +1,5 @@
+using System;
+
 namespace Ingame.AI
 {
     public class Context
@@ -6,43 +8,34 @@ namespace Ingame.AI
         private State _currentState;
         
         public AiBehaviourController AiBehaviourController => _aiBehaviourController;
-        
         public State CurrentState
         {
-            get => _currentState;
-            set
-            {
-                _currentState = value;
-                _currentState.currentContext = this;
-                _currentState.OnStateEntered();
-            }
+            set => _currentState = value;
         }
 
-        public Context(AiBehaviourController aiBehaviourController, State initialState)
+        public Context(AiBehaviourController aiBehaviourController)
         {
             _aiBehaviourController = aiBehaviourController;
-
-            CurrentState = initialState;
         }
         
-        public virtual void SpotEnemy()
+        public virtual void SpotEnemy(ActorStats actorStats)
         {
-            CurrentState.HandleSpotEnemy();
+            _currentState = _currentState.HandleSpotEnemy(actorStats);
         }
 
         public virtual void TakeDamage()
         {
-            CurrentState.HandleTakeDamage();
+            _currentState = _currentState.HandleTakeDamage();
         }
 
         public virtual void EnterRest()
         {
-            CurrentState.HandleEnterRest();
+            _currentState = _currentState.HandleEnterRest();
         }
 
         public virtual void Die()
         {
-            CurrentState.HandleDeath();
+            _currentState = _currentState.HandleDeath();
         }
     }
 }

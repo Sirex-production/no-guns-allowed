@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Ingame.AI
@@ -11,11 +12,17 @@ namespace Ingame.AI
         private bool _isInCombat = false;
         
         private WaitForSeconds _pause;
+        private ActorStats[] _ignoreActorsForBullet;
 
         private void Awake()
         {
             _aiBehaviourController = GetComponent<AiBehaviourController>();
             _pause = new WaitForSeconds(_aiBehaviourController.AiData.PauseBetweenShots);
+        }
+
+        private void Start()
+        {
+            _ignoreActorsForBullet = GetAllFriendActors();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -31,7 +38,7 @@ namespace Ingame.AI
         private IEnumerator ShootRoutine(ActorStats actorStats)
         {
             yield return _pause;
-            
+
             while (_isInCombat)
             {
                 if (actorStats == null)
@@ -51,7 +58,7 @@ namespace Ingame.AI
                         if (hit.collider.transform == actorStats.transform)
                         {
                             bullet = Instantiate(_aiBehaviourController.AiData.BulletPrefab, transform.position, Quaternion.identity);
-                            bullet.Launch(actorStats.transform, _aiBehaviourController.AiActorStats);
+                            bullet.Launch(actorStats.transform, _ignoreActorsForBullet);
 
                             yield return _pause;
                             continue;
@@ -63,10 +70,21 @@ namespace Ingame.AI
                 }
                 
                 bullet = Instantiate(_aiBehaviourController.AiData.BulletPrefab, transform.position, Quaternion.identity);
-                bullet.Launch(actorStats.transform, _aiBehaviourController.AiActorStats);
+                bullet.Launch(actorStats.transform, _ignoreActorsForBullet);
                 
                 yield return _pause;
             }
+        }
+
+        private ActorStats[] GetAllFriendActors()
+        {
+            var ignoreActors = new List<ActorStats>();
+            var friends = ActorManager.Instance.GetOppositeActors(_aiBehaviourController.AiData.HostileSides.ToArray());
+            
+            ignoreActors.Add(_aiBehaviourController.AiActorStats);
+            ignoreActors.AddRange(friends);
+
+            return ignoreActors.ToArray();
         }
 
         public void Attack(ActorStats actorStats)

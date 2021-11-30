@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -6,33 +7,36 @@ namespace Ingame.AI
     [CreateAssetMenu(menuName = "Data/Ingame/Ai data", fileName = "NewAiData")]
     public class AiData : ScriptableObject
     {
-        [Foldout("Behaviour")]
+        [BoxGroup("Behaviour")]
         [SerializeField] private EnemyType enemyType;
+        [BoxGroup("Behaviour")] 
+        [SerializeField] private ActorSide actorSide = ActorSide.Enemy;
+        [BoxGroup("Behaviour"), Tooltip("Sides that given AI will treat as enemy")]
+        [SerializeField] private List<ActorSide> hostileSides;
         
-        [Foldout("Stats")]
+        [BoxGroup("Stats")]
         [SerializeField] [Min(0)] private float initialHp = 1;
         
-        [Foldout("Movement")] 
+        [BoxGroup("Movement")] 
         [SerializeField] private bool useGravity;
         
-        [Foldout("Patrol")] 
+        [BoxGroup("Patrol")] 
         [SerializeField] private bool isLooped;
-        [Foldout("Patrol")] 
+        [BoxGroup("Patrol")] 
         [SerializeField] [Min(0)] private float speed = 10f;
         
-        [Foldout("Combat"), Required()]
+        [BoxGroup("Combat"), Required]
         [SerializeField] private Bullet bulletPrefab;
-        [Foldout("Combat"), Tooltip("Controls whether AI will shoot if the opponent cannot be seen directly or not")]
+        [BoxGroup("Combat"), Tooltip("Controls whether AI will shoot if the opponent cannot be seen directly or not")]
         [SerializeField] private bool ignoreBarriers = true;
-        [Foldout("Combat")]
+        [BoxGroup("Combat")]
         [SerializeField] [Min(0)] private float meleeDamage = 5f;
-        [Foldout("Combat")]
+        [BoxGroup("Combat")]
         [SerializeField] [Min(0)] private float pauseBetweenShots = 1;
-        
-        [Foldout("Sight")]
-        [SerializeField] private bool onlyPlayerCanBeDetected = true;
 
         public EnemyType EnemyType => enemyType;
+        public ActorSide ActorSide => actorSide;
+        public List<ActorSide> HostileSides => hostileSides;
         
         public float InitialHp => initialHp;
 
@@ -45,7 +49,5 @@ namespace Ingame.AI
         public bool IgnoreBarriers => ignoreBarriers;
         public float MeleeDamage => meleeDamage;
         public float PauseBetweenShots => pauseBetweenShots;
-
-        public bool OnlyPlayerCanBeDetected => onlyPlayerCanBeDetected;
     }
 }

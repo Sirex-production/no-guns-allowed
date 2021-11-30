@@ -69,7 +69,7 @@ namespace Ingame.UI
             _animationSequence = DOTween.Sequence()
                 .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f))
                 .Append(winText.rectTransform.DOScale(_initialWinTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
-                .Append(winText.rectTransform.DOScale(_initialWinTextScale, animationDuration));
+                .Append(winText.rectTransform.DOScale(_initialWinTextScale, animationDuration / 1.5f));
 
         }
 
@@ -82,7 +82,7 @@ namespace Ingame.UI
             _animationSequence = DOTween.Sequence()
                 .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f))
                 .Append(loseText.rectTransform.DOScale(_initialLooseTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
-                .Append(loseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration));
+                .Append(loseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration / 1.5f));
         }
     }
 }

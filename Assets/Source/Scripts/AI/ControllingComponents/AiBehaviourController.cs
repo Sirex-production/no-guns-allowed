@@ -38,14 +38,15 @@ namespace Ingame.AI
             switch (_aiData.EnemyType)
             {
                 case EnemyType.ShootingEnemy:
-                    _context = new Context(this, new ShootingEnemyRestStage());
+                    _context = new Context(this);
+                    _context.CurrentState = new ShootingEnemyRestStage(_context);
                     break;
             }
         }
 
-        public void SpotEnemy()
+        public void SpotEnemy(ActorStats actorStats)
         {
-            _context.SpotEnemy();
+            _context.SpotEnemy(actorStats);
         }
 
         public void TakeDamage()

@@ -1,7 +1,6 @@
 using System.Collections;
 using Extensions;
 using Ingame.AI;
-using Ingame.Graphics;
 using Ingame.UI;
 using MoreMountains.NiceVibrations;
 using Support;
@@ -26,6 +25,7 @@ namespace Ingame
 
         public PlayerData Data => data;
 
+        public override ActorSide ActorSide => ActorSide.Player;
         public override float CurrentDamage => data.Damage;
         public override bool IsInvincible => PlayerEventController.Instance.MovementController.IsDashing || _isInvincible;
         public override float CurrentHp => _currentHp;
@@ -38,8 +38,10 @@ namespace Ingame
             _currentNumberOfCharges = data.InitialNumberOfCharges;
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
             
             StartCoroutine(RegenerateChargesRoutine());

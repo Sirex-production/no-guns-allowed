@@ -8,7 +8,8 @@ namespace Ingame.AI
     {
         private float _currentHp;
         private AiBehaviourController _aiBehaviourController;
-        
+
+        public override ActorSide ActorSide => _aiBehaviourController.AiData.ActorSide;
         public override float CurrentHp => _currentHp;
         public override float CurrentDamage => _aiBehaviourController.AiData.MeleeDamage;
         public override bool IsInvincible => false;

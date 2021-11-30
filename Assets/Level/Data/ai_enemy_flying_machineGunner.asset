@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: ai_enemy_flying_machineGunner
   m_EditorClassIdentifier: 
   enemyType: 0
+  actorSide: 0
+  hostileSides: 0100000002000000
   initialHp: 1
   useGravity: 0
   isLooped: 1
   speed: 10
-  bulletPrefab: {fileID: -9079038487790073711, guid: 7c16e710d972ab04185918f83edd3c54, type: 3}
+  bulletPrefab: {fileID: 8450046680156236779, guid: b58ff0ce35ae33940a9fa3ca0235f353, type: 3}
   ignoreBarriers: 1
   meleeDamage: 5
   pauseBetweenShots: 0.1
-  onlyPlayerCanBeDetected: 1

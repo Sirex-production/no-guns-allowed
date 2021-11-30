@@ -2,12 +2,16 @@ namespace Ingame.AI
 {
     public abstract class State
     {
-        public Context currentContext;
+        protected Context _currentContext;
 
-        public abstract void OnStateEntered();
-        public abstract void HandleSpotEnemy();
-        public abstract void HandleTakeDamage();
-        public abstract void HandleEnterRest();
-        public abstract void HandleDeath();
+        public State(Context context)
+        {
+            _currentContext = context;
+        }
+
+        public abstract State HandleSpotEnemy(ActorStats actorStats);
+        public abstract State HandleTakeDamage();
+        public abstract State HandleEnterRest();
+        public abstract State HandleDeath();
     }
 }

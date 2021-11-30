@@ -1150,7 +1150,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.000061035, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2164137755489312170
 CanvasRenderer:
@@ -1242,7 +1242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c10e8e60f98484586c3411ebe49e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDuration: 1.5
+  animationDuration: 0.8
   winScreenParentCanvas: {fileID: 2164137757088158788}
   winText: {fileID: 2164137756368678739}
   looseScreenParentCanvas: {fileID: 2164137756755169057}
@@ -1638,7 +1638,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.000061035, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2164137756826593277
 CanvasRenderer:
@@ -3423,6 +3423,7 @@ GameObject:
   - component: {fileID: 2164137756695143004}
   - component: {fileID: 788507280848122422}
   - component: {fileID: 7208505241176441825}
+  - component: {fileID: 1702114786234247595}
   m_Layer: 0
   m_Name: GameManagement
   m_TagString: Untagged
@@ -3532,6 +3533,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9ef82b9dd1cf1b4098a11c2aed2c60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1702114786234247595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522437443895571996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05606803acaecb940ac0a3f1bcde455a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3522437444162760646

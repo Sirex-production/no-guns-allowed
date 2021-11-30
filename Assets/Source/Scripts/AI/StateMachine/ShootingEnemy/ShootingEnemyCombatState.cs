@@ -1,34 +1,36 @@
-using UnityEngine;
-
 namespace Ingame.AI
 {
     public class ShootingEnemyCombatState : State
     {
-        public override void OnStateEntered()
+
+        public ShootingEnemyCombatState(ActorStats actorToAttack, Context context) : base(context)
         {
-            currentContext.AiBehaviourController.AiCombatController.Attack(PlayerEventController.Instance.StatsController);
+            _currentContext.AiBehaviourController.AiCombatController.Attack(actorToAttack);
+        }
+        
+
+        public override State HandleSpotEnemy(ActorStats actorStats)
+        {
+            return this;
         }
 
-        public override void HandleSpotEnemy()
+        public override State HandleTakeDamage()
         {
-            //todo do nothing
+            return this;
         }
 
-        public override void HandleTakeDamage()
-        {
-            //todo play effect
-        }
-
-        public override void HandleEnterRest()
+        public override State HandleEnterRest()
         {
             //todo enter sleep state
-            currentContext.CurrentState = new ShootingEnemyRestStage();
+            return new ShootingEnemyRestStage(_currentContext);
         }
 
-        public override void HandleDeath()
-        {
-            currentContext.AiBehaviourController.AiCombatController.StopCombat();
-            currentContext.AiBehaviourController.DestroyActor();
+        public override State HandleDeath()
+        {    
+            _currentContext.AiBehaviourController.AiCombatController.StopCombat();
+            _currentContext.AiBehaviourController.DestroyActor();
+
+            return this;
         }
     }
 }

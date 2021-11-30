@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ai_enemy_walking_shooter
   m_EditorClassIdentifier: 
   enemyType: 0
+  actorSide: 0
+  hostileSides: 0100000002000000
   initialHp: 1
   useGravity: 1
   isLooped: 1
@@ -21,4 +23,3 @@ MonoBehaviour:
   ignoreBarriers: 1
   meleeDamage: 5
   pauseBetweenShots: 1
-  onlyPlayerCanBeDetected: 1

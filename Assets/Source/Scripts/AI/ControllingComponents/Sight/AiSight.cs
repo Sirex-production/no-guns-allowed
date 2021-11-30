@@ -95,10 +95,8 @@ namespace Ingame.AI
             if(actorStats == _aiBehaviourController.AiActorStats)
                 return;
             
-            if (actorStats == PlayerEventController.Instance.StatsController)
-                _aiBehaviourController.SpotEnemy();
-            else if (!_aiBehaviourController.AiData.OnlyPlayerCanBeDetected)
-                _aiBehaviourController.SpotEnemy();
+            if(_aiBehaviourController.AiData.HostileSides.Contains(actorStats.ActorSide))
+                _aiBehaviourController.SpotEnemy(actorStats);
         }
     }
 }

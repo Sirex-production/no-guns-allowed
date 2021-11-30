@@ -6,36 +6,38 @@ namespace Ingame.AI
     {
         private const float CHANCE_TO_STOP_PATROLLING= 40;
         
-        public override void OnStateEntered()
+        public ShootingEnemyRestStage(Context context) : base(context)
         {
-            currentContext.AiBehaviourController.AiPatrolController.StartPatrolling();
+            _currentContext.AiBehaviourController.AiPatrolController.StartPatrolling();
         }
 
-        public override void HandleSpotEnemy()
+        public override State HandleSpotEnemy(ActorStats actorStats)
         {
             //todo play spot animation
             //if(Random.Range(0, 100) <= CHANCE_TO_STOP_PATROLLING)
             //    currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
             
-            currentContext.AiBehaviourController.EffectsManager.PlayAllEffects(EffectType.Detection);
+            _currentContext.AiBehaviourController.EffectsManager.PlayAllEffects(EffectType.Detection);
             
-            currentContext.CurrentState = new ShootingEnemyCombatState();
+            return new ShootingEnemyCombatState(actorStats, _currentContext);
         }
 
-        public override void HandleTakeDamage()
+        public override State HandleTakeDamage()
         {
-            //todo die
+            return this;
         }
 
-        public override void HandleEnterRest()
+        public override State HandleEnterRest()
         {
-            //todo do nothing
+            return this;
         }
 
-        public override void HandleDeath()
+        public override State HandleDeath()
         {
-            currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
-            currentContext.AiBehaviourController.DestroyActor();
+            _currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
+            _currentContext.AiBehaviourController.DestroyActor();
+
+            return this;
         }
     }
 }
