@@ -67,7 +67,7 @@ namespace Ingame.AI
         public void DestroyActor()
         {
             if(EffectsManager != null)
-               EffectsManager.PlayAllEffects(EffectType.Destruction);
+               EffectsManager.PlayAllEffects(EffectType.EnemyDeath);
             
             Destroy(gameObject);
         }
