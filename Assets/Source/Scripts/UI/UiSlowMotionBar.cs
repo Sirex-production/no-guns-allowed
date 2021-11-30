@@ -10,6 +10,11 @@ namespace Ingame.UI
     [RequireComponent(typeof(Slider))]
     public class UiSlowMotionBar : MonoBehaviour
     {
+        [SerializeField] private Image fillImage;
+        [SerializeField] private Color minValueColor;
+        [SerializeField] private Color maxValueColor;
+
+
         private Slider _slider;
 
         private void Start()
@@ -26,6 +31,7 @@ namespace Ingame.UI
         private void Update()
         {
             _slider.value = SlowMotionController.Instance.TimeRemaining;
+            fillImage.color = Color.Lerp(minValueColor, maxValueColor, _slider.value / _slider.maxValue);
         }
 
         private void OnDestroy()
