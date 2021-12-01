@@ -717,12 +717,12 @@ PrefabInstance:
       objectReference: {fileID: 1175223044}
     - target: {fileID: 4756849344122687861, guid: c5d9a0b52eb5cea41ad6200f5510661a, type: 3}
       propertyPath: detectionAreas.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4756849344122687861, guid: c5d9a0b52eb5cea41ad6200f5510661a, type: 3}
       propertyPath: detectionAreas.Array.data[1]
       value: 
-      objectReference: {fileID: 577991587}
+      objectReference: {fileID: 0}
     - target: {fileID: 4756849344794566057, guid: c5d9a0b52eb5cea41ad6200f5510661a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1005,14 +1005,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5005888661490081308, guid: 905aa58eb2260b244be627f809f2cb0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005888661820053559, guid: 905aa58eb2260b244be627f809f2cb0d, type: 3}
-      propertyPath: sensitivity
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005888661820053559, guid: 905aa58eb2260b244be627f809f2cb0d, type: 3}
-      propertyPath: isSaveLoadSystemIgnored
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1302,63 +1294,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546627343}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &577991585
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 577991586}
-  - component: {fileID: 577991588}
-  - component: {fileID: 577991587}
-  m_Layer: 0
-  m_Name: DetectionArea
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &577991586
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577991585}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.97, y: 12.41, z: 0}
-  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
-  m_Children: []
-  m_Father: {fileID: 1209099200}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &577991587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577991585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb76a018a26ac7146ad8be4689e9ab37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &577991588
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577991585}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 11.869927, y: 12.950747, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &595089211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,11 +2604,6 @@ Transform:
   m_Father: {fileID: 162136175}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1209099200 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4756849344122687856, guid: c5d9a0b52eb5cea41ad6200f5510661a, type: 3}
-  m_PrefabInstance: {fileID: 162136173}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1286900052
 GameObject:
   m_ObjectHideFlags: 0
@@ -4157,6 +4087,14 @@ PrefabInstance:
     - target: {fileID: 4136441483254489638, guid: 2ba63fe3fec44e5448c7b5fe222d7f92, type: 3}
       propertyPath: m_text
       value: <color=red>5</color>/9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630764541843947782, guid: 2ba63fe3fec44e5448c7b5fe222d7f92, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630764541843947782, guid: 2ba63fe3fec44e5448c7b5fe222d7f92, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5107202081486356094, guid: 2ba63fe3fec44e5448c7b5fe222d7f92, type: 3}
       propertyPath: m_AnchoredPosition.x

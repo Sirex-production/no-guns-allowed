@@ -13,7 +13,7 @@ namespace Ingame
         [Space] 
         [SerializeField] private bool obstaclesPreventAiming = true;
         [SerializeField] private bool isSaveLoadSystemIgnored = false;
-        [ShowIf(nameof(isSaveLoadSystemIgnored))][SerializeField] [Range(0, 20)] private float sensitivity = 5f;
+        [ShowIf(nameof(isSaveLoadSystemIgnored))][SerializeField] [Range(0, 10)] private float sensitivity = 5f;
 
         private int ignoreRaycastLayers;
         
@@ -69,7 +69,7 @@ namespace Ingame
                 if(Physics.Linecast(aimingOrigin.transform.position, transform.position, out RaycastHit hit, ignoreRaycastLayers, QueryTriggerInteraction.Ignore))
                     transform.position = hit.point;
 
-            var nextPos = transform.localPosition + (Vector3)movingDirection * sensitivity * Time.deltaTime;
+            var nextPos = transform.localPosition + (Vector3)movingDirection * sensitivity * Time.deltaTime / Time.timeScale;
 
             transform.localPosition = Vector3.ClampMagnitude(nextPos, PlayerEventController.Instance.Data.MaxDashDistance);
             
@@ -78,7 +78,7 @@ namespace Ingame
 
         private void ResetLocalPosition(Vector2 _)
         {
-            this.DoAfterNextFrameCoroutine(() => { transform.localPosition = _initialLocalPosition; });
+            this.DoAfterNextFrameCoroutine(() =>  transform.localPosition = _initialLocalPosition);
         }
 
         private void SetSensitivity(float sensitivity)
