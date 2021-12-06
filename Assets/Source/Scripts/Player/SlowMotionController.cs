@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Extensions;
 using Support;
 using UnityEngine;
 
@@ -54,7 +55,7 @@ namespace Ingame
             }
 
             if(_state != State.InSlowMotion)
-                Debug.LogError($"State is: {_state}, should be {State.InSlowMotion}");
+                this.SafeDebug($"State is: {_state}, should be {State.InSlowMotion}", LogType.Error);
 
             _state = State.OutOfSlowMotion;
             PlayerEventController.Instance.ExitSlowMotion();
