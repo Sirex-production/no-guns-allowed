@@ -1,10 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Ingame.AI;
 using UnityEngine;
 
 namespace Ingame.Graphics
 {
+    [RequireComponent(typeof(EffectsManager))]
     public class BreakableWall : MonoBehaviour
     {
         private EffectsManager _effectsManager;
@@ -14,9 +13,9 @@ namespace Ingame.Graphics
             _effectsManager = GetComponent<EffectsManager>();
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
-            if(_effectsManager != null)
+            if(other.TryGetComponent(out HitBox hitbox) && hitbox.AttachedActorStats is PlayerStatsController)
                 _effectsManager.PlayAllEffects(EffectType.Destruction);
             
             Destroy(gameObject);

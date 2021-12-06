@@ -97,7 +97,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!64 &316985844952152462
 MeshCollider:
@@ -210,7 +210,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!64 &1222476571066361711
 MeshCollider:
@@ -279,6 +279,15 @@ MonoBehaviour:
   effectTypes: 02000000
   isEffectDestroyedAfterSomeTime: 1
   timeAfterEffectWillBeDestroyed: 5
+  destructionForce: 100
+  _destructionParts:
+  - {fileID: 5611641574890023429}
+  - {fileID: 6134812794593786336}
+  - {fileID: 6959055623973954605}
+  - {fileID: 7752099660105240250}
+  - {fileID: 8885958538149941502}
+  - {fileID: 2878574709279117352}
+  - {fileID: 3386925937111868175}
 --- !u!1 &2890817030746503838
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +385,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!64 &7415804566025056335
 MeshCollider:
@@ -489,7 +498,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!64 &4122885824053856371
 MeshCollider:
@@ -602,7 +611,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!64 &7390983221399698979
 MeshCollider:
@@ -715,7 +724,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!64 &279270100077226085
 MeshCollider:
@@ -828,7 +837,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!64 &6242137314376635167
 MeshCollider:

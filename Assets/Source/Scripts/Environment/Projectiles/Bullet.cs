@@ -52,7 +52,6 @@ namespace Ingame
                 _bounceCount++;
             }
 
-            
             if (other.TryGetComponent(out HitBox hitBox))
             {
                 if (_ignoreHitActors.Contains(hitBox.AttachedActorStats))
