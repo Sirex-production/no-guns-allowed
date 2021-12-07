@@ -398,8 +398,9 @@ MonoBehaviour:
   effectTypes: 02000000
   isEffectDestroyedAfterSomeTime: 1
   timeAfterEffectWillBeDestroyed: 4
-  destructionForce: 10
-  _destructionParts:
+  destructionForce: 15
+  timeToSwitchLayer: 1
+  destructionParts:
   - {fileID: 3127450434527302430}
   - {fileID: 4111151209903316137}
   - {fileID: 4625876941663419754}
