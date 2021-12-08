@@ -22,12 +22,14 @@ namespace Ingame.Graphics.VFX
         {
             PlayerEventController.Instance.OnSlowMotionEnter += DecreaseTimeScale;
             PlayerEventController.Instance.OnSlowMotionExit += ResetTimeScale;
+            GameController.Instance.OnLevelRestart += ResetTimeScale;
         }
 
         private void OnDestroy()
         {
             PlayerEventController.Instance.OnSlowMotionEnter -= DecreaseTimeScale;
             PlayerEventController.Instance.OnSlowMotionExit -= ResetTimeScale;
+            GameController.Instance.OnLevelRestart -= ResetTimeScale;
         }
 
         private void DecreaseTimeScale()
