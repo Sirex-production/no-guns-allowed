@@ -19,13 +19,13 @@ namespace Ingame.UI
 
         private void Start()
         {
-            PlayerEventController.Instance.OnSlowMotionEnter += ShowBar;
-            PlayerEventController.Instance.OnSlowMotionExit += HideBar;
+            // PlayerEventController.Instance.OnSlowMotionEnter += ShowBar;
+            // PlayerEventController.Instance.OnSlowMotionExit += HideBar;
 
             _slider = GetComponent<Slider>();
             _slider.minValue = 0.0f;
             _slider.maxValue = SlowMotionController.Instance.SlowMotionDuration;
-            this.SetGameObjectInactive();
+            // this.SetGameObjectInactive();
         }
 
         private void Update()
@@ -36,8 +36,8 @@ namespace Ingame.UI
 
         private void OnDestroy()
         {
-            PlayerEventController.Instance.OnSlowMotionEnter -= ShowBar;
-            PlayerEventController.Instance.OnSlowMotionExit -= HideBar;
+            // PlayerEventController.Instance.OnSlowMotionEnter -= ShowBar;
+            // PlayerEventController.Instance.OnSlowMotionExit -= HideBar;
         }
 
         public void ShowBar()
