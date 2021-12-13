@@ -31,7 +31,8 @@ namespace Ingame.Graphics
 
     public enum EffectType
     {
-        Destruction,
-        Detection
+        EnemyDeath,
+        Detection,
+        Destruction
     }
 }
