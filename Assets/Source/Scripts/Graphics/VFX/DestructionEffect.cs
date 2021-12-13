@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using Extensions;
 using UnityEngine;
 
 namespace Ingame.Graphics
@@ -27,13 +26,14 @@ namespace Ingame.Graphics
                 destructionPart.AddForce(forceDirection * destructionForce, ForceMode.Impulse);
             }
 
-            Invoke(nameof(SwitchLayer), timeToSwitchLayer);
+            this.WaitAndDoCoroutine(timeToSwitchLayer, SwitchLayer);
         }
 
         private void SwitchLayer()
         {
+            var newLayer = LayerMask.NameToLayer("Ignore Collision With Player");
             foreach (var destructionPart in destructionParts)
-                destructionPart.gameObject.layer = 6;
+                destructionPart.gameObject.layer = newLayer;
         }
     }
 }
