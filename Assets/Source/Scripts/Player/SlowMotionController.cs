@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Support;
 using UnityEngine;
 
@@ -8,7 +9,10 @@ namespace Ingame
 {
     public class SlowMotionController : MonoSingleton<SlowMotionController>
     {
-        [SerializeField] private float slowMotionDuration;
+        [Tooltip("How much slow-motion does player have as a resource in seconds")]
+        [SerializeField] private float slowMotionPool;
+        [Tooltip("The minimum amount of slow-motion player has to restore before ")]
+        [SerializeField] private float slowMotionThreshold;
 
         private enum State
         {
@@ -18,14 +22,17 @@ namespace Ingame
         }
         private State _state;
         private float _timeRemaining;
+        private bool _outOfTime; //Is true whenever player fully consumes cooldown bar, and stays true until it restores to the threshold
 
-        public float SlowMotionDuration => slowMotionDuration;
+        public float SlowMotionPool => slowMotionPool;
         public float TimeRemaining => _timeRemaining;
+        public bool OutOfTime => _outOfTime;
 
         private void Start()
         {
+            _outOfTime = false;
             _state = State.Default;
-            _timeRemaining = slowMotionDuration;
+            _timeRemaining = slowMotionPool;
 
             PlayerEventController.Instance.OnAim += CallForSlowMotion;
             PlayerEventController.Instance.OnDashCancelled += ReturnToDefaultState;
@@ -45,35 +52,65 @@ namespace Ingame
 
         private IEnumerator TimerRoutine()
         {
-            _timeRemaining = slowMotionDuration;
-
             while (_timeRemaining >= 0.0f)
             {
                 _timeRemaining -= Time.deltaTime / Time.timeScale;
                 yield return null;
             }
+            _timeRemaining = Mathf.Clamp(_timeRemaining, 0.0f, slowMotionPool);
 
             if(_state != State.InSlowMotion)
                 Debug.LogError($"State is: {_state}, should be {State.InSlowMotion}");
 
+            _outOfTime = true;
             _state = State.OutOfSlowMotion;
+            InvokeCooldown();
             PlayerEventController.Instance.ExitSlowMotion();
         }
 
-        private void CallForSlowMotion(Vector3 _)
+        private IEnumerator CooldownRoutine()
         {
-            if (_state != State.Default) 
-                return;
+            if(_state == State.InSlowMotion)
+                Debug.LogError($"State should not be in: {_state}");
 
-            _state = State.InSlowMotion;
+            while (_timeRemaining <= slowMotionPool)
+            {
+                _timeRemaining += Time.deltaTime / Time.timeScale;
+                GetCooldownState();
 
-            InvokeTimer();
-            PlayerEventController.Instance.EnterSlowMotion();
+                yield return null;
+            }
+
+            //_outOfTime = false;
+            _timeRemaining = Mathf.Clamp(_timeRemaining, 0.0f, slowMotionPool);
         }
 
         private void InvokeTimer()
         {
             StartCoroutine(TimerRoutine());
+        }
+
+        private void InvokeCooldown()
+        {
+            StartCoroutine(CooldownRoutine());
+        }
+
+        private void GetCooldownState()
+        {
+            if (_timeRemaining >= slowMotionThreshold)
+                _outOfTime = false;
+        }
+
+        private void CallForSlowMotion(Vector3 _)
+        {
+            if (_state != State.Default || _outOfTime) 
+                return;
+
+            _state = State.InSlowMotion;
+
+            StopAllCoroutines();
+            InvokeTimer();
+            PlayerEventController.Instance.EnterSlowMotion();
         }
 
         private void ReturnToDefaultStateOnLevelEnd(bool _)
@@ -91,8 +128,9 @@ namespace Ingame
             if (_state == State.Default) 
                 return;
 
-            StopAllCoroutines();
             _state = State.Default;
+            StopAllCoroutines();
+            InvokeCooldown();
             PlayerEventController.Instance.ExitSlowMotion();
         }
     }
