@@ -10,6 +10,8 @@ namespace Ingame.Graphics
         [SerializeField] [Min(0)] private float timeToSwitchLayer;
         [SerializeField] private List<Rigidbody> destructionParts;
 
+        private float _timeToRemoveComponents = 5.0f; 
+
         public override void PlayEffect(Transform instanceTargetTransform)
         {
             transform.localScale = instanceTargetTransform.transform.lossyScale;
@@ -26,6 +28,7 @@ namespace Ingame.Graphics
                 destructionPart.AddForce(forceDirection * destructionForce, ForceMode.Impulse);
             }
 
+            this.WaitAndDoCoroutine(_timeToRemoveComponents, RemoveComponents);
             this.WaitAndDoCoroutine(timeToSwitchLayer, SwitchLayer);
         }
 
@@ -34,6 +37,17 @@ namespace Ingame.Graphics
             var newLayer = LayerMask.NameToLayer("Ignore Collision With Player");
             foreach (var destructionPart in destructionParts)
                 destructionPart.gameObject.layer = newLayer;
+        }
+
+        private void RemoveComponents()
+        {
+            foreach (var destructionPart in destructionParts)
+            {
+                var bcComponent = destructionPart.GetComponent<BoxCollider>();
+                Destroy(bcComponent);
+
+                Destroy(destructionPart);
+            }
         }
     }
 }
