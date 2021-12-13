@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Extensions;
-using MoreMountains.NiceVibrations;
 using Support;
 using TMPro;
 using UnityEngine;
@@ -10,6 +9,7 @@ namespace Ingame.UI
     public class UiAfterLevelMenu : MonoBehaviour
     {
         [SerializeField] [Min(0)] private float animationDuration = 1;
+        [SerializeField] [Min(0)] private float lettersSpawnDelay = .01f;
         [Space]
         [SerializeField] private CanvasGroup winScreenParentCanvas;
         [SerializeField] private TMP_Text winText;
@@ -21,18 +21,25 @@ namespace Ingame.UI
 
         private const float TEXT_ANIMATING_SCALE_MODIFIER = 1.2f;
         
-        private Vector3 _initialWinTextScale;
-        private Vector3 _initialLooseTextScale;
+        private string _initialWinTextContent;
+        private string _initialLooseTextContent;
 
         private Sequence _animationSequence;
 
         private void Awake()
         {
-            if(winText != null)
-                _initialWinTextScale = winText.rectTransform.localScale;
-            if(loseText != null)
-                _initialLooseTextScale = loseText.rectTransform.localScale;
-            
+            if (winText != null)
+            {
+                _initialWinTextContent = winText.text;
+                winText.SetText("");
+            }
+
+            if (loseText != null)
+            {
+                _initialLooseTextContent = loseText.text;
+                loseText.SetText("");
+            }
+
             if(uiLevelTransition != null)
                 uiLevelTransition.SetGameObjectActive();
             winScreenParentCanvas.SetGameObjectInactive();
@@ -63,26 +70,21 @@ namespace Ingame.UI
         private void ShowWinScreen()
         {
             winScreenParentCanvas.alpha = 0;
-            winText.rectTransform.localScale = Vector3.zero;
             winScreenParentCanvas.SetGameObjectActive();
-            
-            _animationSequence = DOTween.Sequence()
-                .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f))
-                .Append(winText.rectTransform.DOScale(_initialWinTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
-                .Append(winText.rectTransform.DOScale(_initialWinTextScale, animationDuration / 1.5f));
 
+            _animationSequence = DOTween.Sequence()
+                .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
+                    .OnComplete(() => this.SpawnTextCoroutine(winText, _initialWinTextContent, lettersSpawnDelay)));
         }
 
         private void ShowLooseScreen()
         {
             looseScreenParentCanvas.alpha = 0;
-            loseText.rectTransform.localScale = Vector3.zero;
             looseScreenParentCanvas.SetGameObjectActive();
-            
+
             _animationSequence = DOTween.Sequence()
-                .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f))
-                .Append(loseText.rectTransform.DOScale(_initialLooseTextScale * TEXT_ANIMATING_SCALE_MODIFIER, animationDuration / 2))
-                .Append(loseText.rectTransform.DOScale(_initialLooseTextScale, animationDuration / 1.5f));
+                .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
+                    .OnComplete(() => this.SpawnTextCoroutine(loseText, _initialLooseTextContent, lettersSpawnDelay)));
         }
     }
 }
