@@ -17297,6 +17297,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 610218428119014325, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.541504
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260236193149994325, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.26513672
+      objectReference: {fileID: 0}
+    - target: {fileID: 3586408566886157725, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.26513672
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756227504539198084, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.7011719
+      objectReference: {fileID: 0}
     - target: {fileID: 4917932376123679612, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_Name
       value: _TemplateManagementLandscape
