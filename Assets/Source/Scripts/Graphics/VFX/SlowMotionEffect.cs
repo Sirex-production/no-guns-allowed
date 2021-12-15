@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Ingame;
 using Support;
 using UnityEngine;
 
@@ -20,16 +18,22 @@ namespace Ingame.Graphics.VFX
 
         private void Start()
         {
+            GameController.Instance.OnLevelRestart += ResetTimeScale;
+            
+            if(PlayerEventController.Instance == null)
+                return;
             PlayerEventController.Instance.OnSlowMotionEnter += DecreaseTimeScale;
             PlayerEventController.Instance.OnSlowMotionExit += ResetTimeScale;
-            GameController.Instance.OnLevelRestart += ResetTimeScale;
         }
 
         private void OnDestroy()
         {
+            GameController.Instance.OnLevelRestart -= ResetTimeScale;
+            
+            if(PlayerEventController.Instance == null)
+                return;
             PlayerEventController.Instance.OnSlowMotionEnter -= DecreaseTimeScale;
             PlayerEventController.Instance.OnSlowMotionExit -= ResetTimeScale;
-            GameController.Instance.OnLevelRestart -= ResetTimeScale;
         }
 
         private void DecreaseTimeScale()

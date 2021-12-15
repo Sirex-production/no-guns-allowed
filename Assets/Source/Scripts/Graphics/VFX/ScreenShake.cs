@@ -28,11 +28,15 @@ namespace Ingame.Graphics
 
         private void Start()
         {
+            if(PlayerEventController.Instance == null)
+                return;
             PlayerEventController.Instance.OnDashCancelled += StartScreenShake;
         }
 
         private void OnDestroy()
         {
+            if(PlayerEventController.Instance == null)
+                return;
             PlayerEventController.Instance.OnDashCancelled -= StartScreenShake;
         }
 

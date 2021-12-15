@@ -61,10 +61,13 @@ namespace Extensions
             onComplete?.Invoke();
         }
         
-        private static IEnumerator SpawnTextRoutine(TMP_Text textArea, string textToDisplay, float spawnDelayTime)
+        private static IEnumerator SpawnTextRoutine(TMP_Text textArea, string textToDisplay, float spawnDelayTime, Action onComplete)
         {
-            if(String.IsNullOrEmpty(textToDisplay))
+            if (String.IsNullOrEmpty(textToDisplay))
+            {
+                onComplete?.Invoke();
                 yield break;
+            }
 
             spawnDelayTime = Mathf.Abs(spawnDelayTime);
 
@@ -97,6 +100,8 @@ namespace Extensions
                 textArea.text += letter;
                 yield return waitForDelayInSeconds;
             }
+            
+            onComplete?.Invoke();
         }
 
         /// <summary>
@@ -157,9 +162,9 @@ namespace Extensions
         /// <param name="textToDisplay">Content that text area will display</param>
         /// <param name="spawnDelayTime">Pause between appearing letters</param>
         /// <returns></returns>
-        public static Coroutine SpawnTextCoroutine(this MonoBehaviour monoBehaviour, TMP_Text textArea, string textToDisplay, float spawnDelayTime)
+        public static Coroutine SpawnTextCoroutine(this MonoBehaviour monoBehaviour, TMP_Text textArea, string textToDisplay, float spawnDelayTime, Action onComplete = null)
         {
-            return monoBehaviour.StartCoroutine(SpawnTextRoutine(textArea, textToDisplay, spawnDelayTime));
+            return monoBehaviour.StartCoroutine(SpawnTextRoutine(textArea, textToDisplay, spawnDelayTime, onComplete));
         }
     }
 }

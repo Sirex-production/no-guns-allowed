@@ -13,12 +13,16 @@ namespace Ingame.Graphics.VFX
 
         private void Start()
         {
+            if(PlayerEventController.Instance == null)
+                return;
             PlayerEventController.Instance.OnSlowMotionEnter += Modify;
             PlayerEventController.Instance.OnSlowMotionExit += DoReset;
         }
 
         private void OnDestroy()
         {
+            if(PlayerEventController.Instance == null)
+                return;
             PlayerEventController.Instance.OnSlowMotionEnter -= Modify;
             PlayerEventController.Instance.OnSlowMotionExit -= DoReset;
         }
