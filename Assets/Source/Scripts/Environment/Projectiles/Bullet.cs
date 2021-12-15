@@ -56,7 +56,7 @@ namespace Ingame
             {
                 if (_ignoreHitActors.Contains(hitBox.AttachedActorStats))
                     return;
-                
+
                 if (!hitBox.AttachedActorStats.IsInvincible)
                 {
                     hitBox.TakeDamage(damage);
@@ -98,7 +98,7 @@ namespace Ingame
         public void Launch(Transform destination, params ActorStats[] ignoreHitActors)
         {
             _ignoreHitActors = new List<ActorStats>(ignoreHitActors);
-            
+
             transform.LookAt(destination);
             _flyingDirection = Vector3.Normalize(destination.position - transform.position);
         }
@@ -106,7 +106,7 @@ namespace Ingame
         public void Launch(Vector3 direction, params ActorStats[] ignoreHitActors)
         {
             _ignoreHitActors = new List<ActorStats>(ignoreHitActors);
-            
+
             transform.rotation = Quaternion.LookRotation(direction - transform.position);
             _flyingDirection = Vector3.Normalize(direction);
         }

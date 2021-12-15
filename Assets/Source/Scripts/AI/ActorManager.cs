@@ -8,11 +8,11 @@ namespace Ingame.AI
     {
         private Dictionary<ActorSide, List<ActorStats>> _actors = new Dictionary<ActorSide, List<ActorStats>>();
 
-        public void AddEnemy(ActorStats actorStats)
+        public void AddActor(ActorStats actorStats)
         {
             if(actorStats == null)
                 return;
-            
+
             var actorSide = actorStats.ActorSide;
             if (!_actors.ContainsKey(actorSide) || _actors[actorSide] == null)
             {

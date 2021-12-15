@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Extensions;
 using UnityEngine;
 
 namespace Ingame.AI
@@ -22,7 +23,7 @@ namespace Ingame.AI
 
         private void Start()
         {
-            _ignoreActorsForBullet = GetAllFriendActors();
+            this.DoAfterNextFrameCoroutine(() => _ignoreActorsForBullet = GetAllFriendActors());
         }
 
         private void OnTriggerEnter(Collider other)

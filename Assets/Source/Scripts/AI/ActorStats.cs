@@ -7,7 +7,7 @@ namespace Ingame
     {
         protected virtual void Start()
         {
-            ActorManager.Instance.AddEnemy(this);
+            ActorManager.Instance.AddActor(this);
         }
 
         public abstract ActorSide ActorSide { get; }

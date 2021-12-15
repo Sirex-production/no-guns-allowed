@@ -63,6 +63,9 @@ namespace Ingame.AI
             {
                 yield return PAUSE;
 
+                if(actorToDetect == null || _origin == null)
+                    yield break;
+                    
                 if (Physics.Linecast(actorToDetect.transform.position, _origin.transform.position, out _, ignoreLayerMask))
                     continue;
 
