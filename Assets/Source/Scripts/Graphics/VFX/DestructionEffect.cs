@@ -14,7 +14,7 @@ namespace Ingame.Graphics
 
         public override void PlayEffect(Transform instanceTargetTransform)
         {
-            transform.localScale = instanceTargetTransform.transform.lossyScale;
+            transform.localScale = instanceTargetTransform.transform.lossyScale / 1.2f;
 
             foreach (var destructionPart in destructionParts)
             {

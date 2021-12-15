@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5015682097187449540}
   - component: {fileID: 6576926612953677910}
   - component: {fileID: 9056001373847705126}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: LowerPart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2764580241352134474}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Blood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6354620064840452794}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Blood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1191744916631488484}
   - component: {fileID: 1191744916631488482}
   - component: {fileID: 1191744916631488483}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Particle System_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4973,7 +4973,7 @@ GameObject:
   - component: {fileID: 1191744917106066678}
   - component: {fileID: 1191744917106066676}
   - component: {fileID: 1191744917106066677}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Particle System_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9797,7 +9797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1191744917888380572}
   - component: {fileID: 2721195039067608632}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: DeathEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9855,7 +9855,7 @@ GameObject:
   - component: {fileID: 7819266015162705001}
   - component: {fileID: 7578218695858282930}
   - component: {fileID: 5810748066412798347}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9936,7 +9936,7 @@ GameObject:
   - component: {fileID: 5033602246615026258}
   - component: {fileID: 6458650221355143891}
   - component: {fileID: 4468480848063442016}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Particle System_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14761,7 +14761,7 @@ GameObject:
   - component: {fileID: 9196409793678856835}
   - component: {fileID: 1479593442264856011}
   - component: {fileID: 4432928911447444188}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14842,7 +14842,7 @@ GameObject:
   - component: {fileID: 3440503936203905915}
   - component: {fileID: 3347879448415807435}
   - component: {fileID: 1139106204757685775}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Particle System_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19667,7 +19667,7 @@ GameObject:
   - component: {fileID: 4344183270038211016}
   - component: {fileID: 8916002597525312690}
   - component: {fileID: 5233399597960684545}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19748,7 +19748,7 @@ GameObject:
   - component: {fileID: 259509638207775853}
   - component: {fileID: 1921516927102361304}
   - component: {fileID: 7929646718420607669}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19829,7 +19829,7 @@ GameObject:
   - component: {fileID: 2201352316219427052}
   - component: {fileID: 615067014483894083}
   - component: {fileID: 2984542447049149094}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19910,7 +19910,7 @@ GameObject:
   - component: {fileID: 4542884880473266838}
   - component: {fileID: 7456737723470130456}
   - component: {fileID: 3956919983794027248}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19991,7 +19991,7 @@ GameObject:
   - component: {fileID: 7580306822354207902}
   - component: {fileID: 4862305642233316243}
   - component: {fileID: 1089620702791493886}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20072,7 +20072,7 @@ GameObject:
   - component: {fileID: 2131345655132012254}
   - component: {fileID: 721490170272139601}
   - component: {fileID: 1421522573607327671}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20153,7 +20153,7 @@ GameObject:
   - component: {fileID: 6523998705053619473}
   - component: {fileID: 2546569731709672304}
   - component: {fileID: 3170350612517809574}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Particle System_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24978,7 +24978,7 @@ GameObject:
   - component: {fileID: 5356399973074627620}
   - component: {fileID: 8733231806301782723}
   - component: {fileID: 6979565083420612136}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25059,7 +25059,7 @@ GameObject:
   - component: {fileID: 2703686942477271567}
   - component: {fileID: 6090244874711857452}
   - component: {fileID: 4484434183847931091}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Particle System_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29884,7 +29884,7 @@ GameObject:
   - component: {fileID: 7770665167856712184}
   - component: {fileID: 3235962846893520386}
   - component: {fileID: 6014968035403935756}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29965,7 +29965,7 @@ GameObject:
   - component: {fileID: 4635218744299920304}
   - component: {fileID: 6574738871906267831}
   - component: {fileID: 5387527902186749668}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30046,7 +30046,7 @@ GameObject:
   - component: {fileID: 7287976862633353184}
   - component: {fileID: 7463944932689057136}
   - component: {fileID: 7487464038983718904}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Particle System_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34871,7 +34871,7 @@ GameObject:
   - component: {fileID: 7287976858718605980}
   - component: {fileID: 7463944926274099752}
   - component: {fileID: 7487464033057338798}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Particle System_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39696,7 +39696,7 @@ GameObject:
   - component: {fileID: 4203039594348895317}
   - component: {fileID: 193249497089896586}
   - component: {fileID: 4929506582609431094}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39777,7 +39777,7 @@ GameObject:
   - component: {fileID: 7567437022915767330}
   - component: {fileID: 6303728984244215959}
   - component: {fileID: 2751168227250122300}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Capsule_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39858,7 +39858,7 @@ GameObject:
   - component: {fileID: 5288194666691037745}
   - component: {fileID: 2347570227738037758}
   - component: {fileID: 2932321884242606544}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: TopPart
   m_TagString: Untagged
   m_Icon: {fileID: 0}

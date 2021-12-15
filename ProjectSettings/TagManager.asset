@@ -13,10 +13,10 @@ TagManager:
   - UI
   - Ignore Collision With Player
   - Projectile
-  - 
-  - 
-  - 
-  - 
+  - Ignore Detection Cast
+  - Ignore Collision With Player But Don't Ignore Detection Cast
+  - Breakable Object
+  - Environment Effector
   - 
   - 
   - 

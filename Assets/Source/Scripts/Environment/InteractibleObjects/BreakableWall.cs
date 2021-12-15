@@ -15,10 +15,11 @@ namespace Ingame.Graphics
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out HitBox hitbox) && hitbox.AttachedActorStats is PlayerStatsController)
+            if (other.TryGetComponent(out HitBox hitbox) && hitbox.AttachedActorStats is PlayerStatsController)
+            {
                 _effectsManager.PlayAllEffects(EffectType.Destruction);
-            
-            Destroy(gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 }
