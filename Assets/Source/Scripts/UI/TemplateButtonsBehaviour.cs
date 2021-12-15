@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Ingame
 {
-    public class ButtonsBehaviour : MonoBehaviour
+    public class TemplateButtonsBehaviour : MonoBehaviour
     {
         [SerializeField] [Min(0)] private float fadeAnimationDuration = .5f;
 

@@ -38,6 +38,10 @@ namespace Ingame.UI
             optionsButtonCanvasGroup.alpha = 0;
             developersButtonCanvasGroup.alpha = 0;
             
+            startButtonCanvasGroup.SetGameObjectInactive();
+            optionsButtonCanvasGroup.SetGameObjectInactive();
+            developersButtonCanvasGroup.SetGameObjectInactive();
+            
             this.SpawnTextCoroutine(menuText, menuTextContent, letterSpawnDelayTime, () =>
             {
                 ShowButtons();
@@ -48,6 +52,10 @@ namespace Ingame.UI
 
         private void ShowButtons()
         {
+            startButtonCanvasGroup.SetGameObjectActive();
+            optionsButtonCanvasGroup.SetGameObjectActive();
+            developersButtonCanvasGroup.SetGameObjectActive();
+            
             startButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime);
             this.WaitAndDoCoroutine(pauseBetweenFadingButtons, () => optionsButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime));
             this.WaitAndDoCoroutine(pauseBetweenFadingButtons * 2, () => developersButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime));
