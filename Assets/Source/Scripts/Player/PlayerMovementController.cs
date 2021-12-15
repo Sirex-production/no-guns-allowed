@@ -77,6 +77,8 @@ namespace Ingame
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.AddForce(impulseVelocity, ForceMode.Impulse);
 
+            gameObject.layer = LayerMask.NameToLayer("Player While Dashing");
+
             PlayerEventController.Instance.PerformDash(dashDirection);
             _stopDashCoroutine = this.WaitAndDoCoroutine(TIME_AFTER_DASH_WILL_BE_STOPPED, StopDash);
         }
@@ -95,6 +97,8 @@ namespace Ingame
             var position = transform.position;
             var dashingDirection = Vector3.Normalize(position - _initialDashPosition);
             var afterDashForceModifier = Mathf.InverseLerp(0, PlayerEventController.Instance.Data.MaxDashDistance, _currentDashLength);
+
+            gameObject.layer = LayerMask.NameToLayer("Player Static");
             
             _rigidbody.useGravity = true;
             _rigidbody.velocity = Vector3.zero;

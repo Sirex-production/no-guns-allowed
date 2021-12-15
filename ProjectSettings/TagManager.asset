@@ -8,16 +8,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Player While Dashing
   - Water
   - UI
-  - Ignore Collision With Player
+  - Ignore Collision With Dashing Player
   - Projectile
   - Ignore Detection Cast
-  - Ignore Collision With Player But Don't Ignore Detection Cast
+  - Ignore Collision With Dashing Player But Don't Ignore Detection Cast
   - Breakable Object
   - Environment Effector
-  - 
+  - Player Static
   - 
   - 
   - 

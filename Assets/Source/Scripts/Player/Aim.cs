@@ -25,8 +25,9 @@ namespace Ingame
             transform.parent = aimingOrigin;
          
             ignoreRaycastLayers = LayerMask.GetMask("Ignore Raycast") | 
-                                  LayerMask.GetMask("Ignore Collision With Player") |
-                                  LayerMask.GetMask("Ignore Collision With Player But Don't Ignore Detection Cast");
+                                  LayerMask.GetMask("Ignore Collision With Dashing Player") |
+                                  LayerMask.GetMask("Ignore Collision With Dashing Player But Don't Ignore Detection Cast") |
+                                  LayerMask.GetMask("Breakable Object");
             ignoreRaycastLayers = ~ignoreRaycastLayers;
             
             if (lineRenderer != null)

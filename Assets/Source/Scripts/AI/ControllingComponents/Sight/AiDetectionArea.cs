@@ -56,7 +56,7 @@ namespace Ingame.AI
 
             var ignoreLayerMask = ~LayerMask.GetMask(
                 "Ignore Detection Cast",
-                "Ignore Collision With Player",
+                "Ignore Collision With Dashing Player",
                 "Breakable Object");
 
             while (true)

@@ -848,7 +848,7 @@ GameObject:
   - component: {fileID: 5005888661490081311}
   - component: {fileID: 1608677767131907252}
   - component: {fileID: 4985673862053330627}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1194,7 +1194,7 @@ GameObject:
   - component: {fileID: 1095342211092035635}
   - component: {fileID: 4056148030571160893}
   - component: {fileID: 3234792489350499387}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: EnvironmentEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

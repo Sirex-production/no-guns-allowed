@@ -34,7 +34,7 @@ namespace Ingame.Graphics
 
         private void SwitchLayer()
         {
-            var newLayer = LayerMask.NameToLayer("Ignore Collision With Player");
+            var newLayer = LayerMask.NameToLayer("Ignore Collision With Dashing Player");
             foreach (var destructionPart in destructionParts)
                 destructionPart.gameObject.layer = newLayer;
         }
