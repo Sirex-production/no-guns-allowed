@@ -23,6 +23,7 @@ namespace Ingame
         public event Action OnDashCancelled;
         public event Action OnSlowMotionEnter;
         public event Action OnSlowMotionExit;
+        public event Action<PlayerMovementController.SurfaceInteractionType> OnSurfaceInteraction;
 
         protected override void Awake()
         {
@@ -63,6 +64,11 @@ namespace Ingame
         public void ExitSlowMotion()
         {
             OnSlowMotionExit?.Invoke();
+        }
+
+        public void InteractWithSurface(PlayerMovementController.SurfaceInteractionType surfaceInteractionType)
+        {
+            OnSurfaceInteraction?.Invoke(surfaceInteractionType);
         }
     }
 }

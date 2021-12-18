@@ -1,3 +1,4 @@
+using System;
 using Extensions;
 using Support;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Ingame
     public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField] private Aim aim;
+
+        public enum SurfaceInteractionType {LandOnSurface, ReleaseFromSurface }
 
         private const float MINIMAL_DISTANCE_TO_PERFORM_DASH = 0f;
         private const float TIME_AFTER_DASH_WILL_BE_STOPPED = .15f;
@@ -40,6 +43,13 @@ namespace Ingame
         {
             if(PlayerEventController.Instance.Data.StopDashWhenCollidingWithEnvironment)
                 StopDash(); 
+            
+            PlayerEventController.Instance.InteractWithSurface(SurfaceInteractionType.LandOnSurface);
+        }
+
+        private void OnCollisionExit(Collision other)
+        {
+            PlayerEventController.Instance.InteractWithSurface(SurfaceInteractionType.ReleaseFromSurface);
         }
 
         private void FixedUpdate()
