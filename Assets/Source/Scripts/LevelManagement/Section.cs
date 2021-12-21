@@ -9,9 +9,15 @@ namespace Ingame
     {
         [SerializeField] private int sectionId;
 
-        private List<ISectionPart> _sectionParts = new List<ISectionPart>();
+        private List<SectionPart> _sectionParts = new List<SectionPart>();
         
         public int SectionId => sectionId;
+
+        private void Awake()
+        {
+            GetComponent<Collider>().isTrigger = true;
+        }
+
         private void Start()
         {
             LevelSectionController.Instance.AddSection(this);
@@ -19,10 +25,10 @@ namespace Ingame
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out ISectionPart sectionPart))
+            if (other.TryGetComponent(out SectionPart sectionPart))
             {
                 _sectionParts.Add(sectionPart);
-                sectionPart.OnSectionAdded();
+                sectionPart.OnSectionAdded(sectionId);
             }
 
             if (other.TryGetComponent(out PlayerEventController player))
@@ -34,23 +40,31 @@ namespace Ingame
             LevelSectionController.Instance.EnterSection(sectionId);
         }
 
-        public void OnPlayerSectionEnter()
+        public void OnSectionEnter()
         {
             foreach (var section in _sectionParts) 
                 section.OnPlayerSectionEnter();
         }
         
-        public void OnPlayerSectionExit()
+        public void OnSectionExit()
         {
             foreach (var section in _sectionParts) 
                 section.OnPlayerSectionExit();
         }
 
-        public void OnLevelOverviewManaged(bool isEntered)
+        public void OnLevelOverviewEnter()
         {
             foreach (var section in _sectionParts)
             {
-                section.OnLevelOverviewManaged(isEntered);
+                section.OnLevelOverviewEnter();
+            }
+        }
+        
+        public void OnLevelOverviewExit()
+        {
+            foreach (var section in _sectionParts)
+            {
+                section.OnLevelOverviewExit();
             }
         }
     }

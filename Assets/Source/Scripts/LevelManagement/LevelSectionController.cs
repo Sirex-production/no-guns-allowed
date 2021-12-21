@@ -10,7 +10,8 @@ namespace Ingame
         
         public event Action<int> OnSectionEntered;
         public event Action<int> OnSectionExit;
-        public event Action<bool, int> OnLevelOverviewManaged;
+        public event Action<int> OnLevelOverviewEnter;
+        public event Action<int> OnLevelOverviewExit;
 
         public int CurrentSection { get; private set; }
 
@@ -25,22 +26,29 @@ namespace Ingame
         public void EnterSection(int sectionNumber)
         {
             CurrentSection = sectionNumber;
-            _sections[sectionNumber].OnPlayerSectionEnter();
+            _sections[sectionNumber].OnSectionEnter();
             OnSectionEntered?.Invoke(sectionNumber);
         }
         
         public void ExitSection(int sectionNumber)
         {
             CurrentSection = sectionNumber;
-            _sections[sectionNumber].OnPlayerSectionExit();
+            _sections[sectionNumber].OnSectionExit();
             OnSectionExit?.Invoke(sectionNumber);
         }
 
         /// <param name="isEntered">Identifies weather level overview was entered or not</param>
-        public void ManageLevelOverview(bool isEntered, int currentSection)
+        public void EnterLevelOverview(int enterSectionId)
         {
-            _sections[currentSection].OnLevelOverviewManaged(isEntered);
-            OnLevelOverviewManaged?.Invoke(isEntered, currentSection);
+            _sections[enterSectionId].OnLevelOverviewEnter();
+            OnLevelOverviewEnter?.Invoke(enterSectionId);
         }
+
+        public void ExitLevelOverview(int exitSectionId)
+        {
+            _sections[exitSectionId].OnLevelOverviewExit();
+            OnLevelOverviewExit?.Invoke(exitSectionId);
+        }
+
     }
 }

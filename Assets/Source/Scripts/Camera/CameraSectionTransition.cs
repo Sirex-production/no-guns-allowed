@@ -14,13 +14,15 @@ namespace Ingame
         private void Start()
         {
             LevelSectionController.Instance.OnSectionEntered += TransitToCameraWithIndex;
-            LevelSectionController.Instance.OnLevelOverviewManaged += OnLevelOverviewManaged;
+            LevelSectionController.Instance.OnLevelOverviewEnter += OnLevelOverviewEnter;
+            LevelSectionController.Instance.OnLevelOverviewExit += OnLevelOverviewExit;
         }
 
         private void OnDestroy()
         {
             LevelSectionController.Instance.OnSectionEntered -= TransitToCameraWithIndex;
-            LevelSectionController.Instance.OnLevelOverviewManaged -= OnLevelOverviewManaged;
+            LevelSectionController.Instance.OnLevelOverviewEnter -= OnLevelOverviewEnter;
+            LevelSectionController.Instance.OnLevelOverviewExit -= OnLevelOverviewExit;
         }
 
         private void OnDrawGizmos()
@@ -51,12 +53,14 @@ namespace Ingame
             levelTransitionCameras[cameraSectionIndex].Priority = 10;
         }
 
-        private void OnLevelOverviewManaged(bool isEntered, int currentSection)
+        private void OnLevelOverviewEnter(int _)
         {
-            if (isEntered)
-                TransitToLevelOverview();
-            else
-                TransitToCameraWithIndex(currentSection);
+            TransitToLevelOverview();
+        }
+
+        private void OnLevelOverviewExit(int exitSectionId)
+        {
+            TransitToCameraWithIndex(exitSectionId);
         }
 
         private void TransitToLevelOverview()
