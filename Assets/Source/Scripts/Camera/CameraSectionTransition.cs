@@ -7,24 +7,24 @@ namespace Ingame
     public class CameraSectionTransition : MonoBehaviour
     {
         [Required] [SerializeField] private CinemachineVirtualCamera levelOverviewCamera;
-        [Required] [SerializeField] private CinemachineVirtualCamera[] levelTransitionCameras;
+        [SerializeField] private CinemachineVirtualCamera[] levelTransitionCameras;
 
         private const float GIZMOS_SPHERE_RADIUS = .5f;
 
         private void Start()
         {
-            LevelSectionController.Instance.OnSectionEntered += TransitToCameraWithIndex;
+            LevelSectionController.Instance.OnSectionEnter += TransitToCameraWithIndex;
             LevelSectionController.Instance.OnLevelOverviewEnter += OnLevelOverviewEnter;
             LevelSectionController.Instance.OnLevelOverviewExit += OnLevelOverviewExit;
         }
 
         private void OnDestroy()
         {
-            LevelSectionController.Instance.OnSectionEntered -= TransitToCameraWithIndex;
+            LevelSectionController.Instance.OnSectionEnter -= TransitToCameraWithIndex;
             LevelSectionController.Instance.OnLevelOverviewEnter -= OnLevelOverviewEnter;
             LevelSectionController.Instance.OnLevelOverviewExit -= OnLevelOverviewExit;
         }
-
+ 
         private void OnDrawGizmos()
         {
             Gizmos.color = new Color(0.24f, 0f, 0.55f);
@@ -53,14 +53,14 @@ namespace Ingame
             levelTransitionCameras[cameraSectionIndex].Priority = 10;
         }
 
-        private void OnLevelOverviewEnter(int _)
+        private void OnLevelOverviewEnter()
         {
             TransitToLevelOverview();
         }
 
-        private void OnLevelOverviewExit(int exitSectionId)
+        private void OnLevelOverviewExit()
         {
-            TransitToCameraWithIndex(exitSectionId);
+            TransitToCameraWithIndex(LevelSectionController.Instance.CurrentSection);
         }
 
         private void TransitToLevelOverview()

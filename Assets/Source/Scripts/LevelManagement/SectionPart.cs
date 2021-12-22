@@ -1,4 +1,3 @@
-using Extensions;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -7,16 +6,18 @@ namespace Ingame
     public abstract class SectionPart : MonoBehaviour
     {
         [ReadOnly] [SerializeField] private int boundedSectionId = -1;
-        
-        public virtual void OnSectionAdded(int sectionId)
+
+        protected virtual void Start()
         {
-            boundedSectionId = sectionId;
-            this.SafeDebug(sectionId);
+            LevelSectionController.Instance.OnSectionEnter += OnSectionEnter;
+            LevelSectionController.Instance.OnSectionExit += OnSectionExit;
+            LevelSectionController.Instance.OnLevelOverviewEnter += OnLevelOverviewEnter;
+            LevelSectionController.Instance.OnLevelOverviewExit += OnLevelOverviewExit;
         }
-        
-        public abstract void OnPlayerSectionEnter();
-        public abstract void OnPlayerSectionExit();
-        public abstract void OnLevelOverviewEnter();
-        public abstract void OnLevelOverviewExit();
+
+        protected abstract void OnSectionEnter(int sectionId);
+        protected abstract void OnSectionExit(int sectionId);
+        protected abstract void OnLevelOverviewEnter();
+        protected abstract void OnLevelOverviewExit();
     }
 }

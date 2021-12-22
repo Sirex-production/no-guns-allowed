@@ -2,22 +2,22 @@ namespace Ingame
 {
     public class EnemySectionPart : SectionPart
     {
-        public override void OnPlayerSectionEnter()
+        protected override void OnSectionEnter(int sectionId)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void OnPlayerSectionExit()
+        protected override void OnSectionExit(int sectionId)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void OnLevelOverviewEnter()
+        protected override void OnLevelOverviewEnter()
         {
             throw new System.NotImplementedException();
         }
 
-        public override void OnLevelOverviewExit()
+        protected override void OnLevelOverviewExit()
         {
             throw new System.NotImplementedException();
         }
