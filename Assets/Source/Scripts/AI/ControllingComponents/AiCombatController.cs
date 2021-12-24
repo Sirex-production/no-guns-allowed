@@ -33,7 +33,7 @@ namespace Ingame.AI
 
             //todo replace with enemy list
             if (other.TryGetComponent(out HitBox enemy) && enemy.AttachedActorStats is PlayerStatsController) 
-                enemy.TakeDamage(_aiBehaviourController.AiData.MeleeDamage);
+                enemy.TakeDamage(_aiBehaviourController.AiData.MeleeDamage, DamageType.Melee);
         }
 
         private IEnumerator ShootRoutine(ActorStats actorStats)

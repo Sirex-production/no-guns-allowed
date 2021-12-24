@@ -48,9 +48,9 @@ namespace Ingame.AI
                 Gizmos.DrawWireMesh(meshCollider.sharedMesh);
         }
         
-        public void TakeDamage(float amountOfDamage)
+        public void TakeDamage(float amountOfDamage, DamageType damageType)
         {
-            attachedStatsController.TakeDamage(amountOfDamage);
+            attachedStatsController.TakeDamage(amountOfDamage, damageType);
         }
     }
 }

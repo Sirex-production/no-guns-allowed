@@ -1,11 +1,10 @@
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Ingame
 {
     public abstract class SectionPart : MonoBehaviour
     {
-        [ReadOnly] [SerializeField] private int boundedSectionId = -1;
+        // [ReadOnly] [SerializeField] private int boundedSectionId = -1;
 
         protected virtual void Start()
         {

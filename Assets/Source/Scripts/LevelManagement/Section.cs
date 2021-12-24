@@ -10,7 +10,7 @@ namespace Ingame
         {
             if (other.TryGetComponent(out PlayerEventController player))
             {
-                LevelSectionController.Instance.EnterSection(sectionNumber);
+                LevelSectionController.Instance.EnterLevelOverview(sectionNumber);
             }
         }
     }

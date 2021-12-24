@@ -59,7 +59,7 @@ namespace Ingame
 
                 if (!hitBox.AttachedActorStats.IsInvincible)
                 {
-                    hitBox.TakeDamage(damage);
+                    hitBox.TakeDamage(damage, DamageType.Projectile);
                     Destroy(gameObject);
                     return;
                 }

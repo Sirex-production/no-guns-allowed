@@ -20,7 +20,7 @@ namespace Ingame.AI
             _currentHp = _aiBehaviourController.AiData.InitialHp;
         }
         
-        public override void TakeDamage(float amountOfDamage)
+        public override void TakeDamage(float amountOfDamage, DamageType damageType)
         {
             if(IsInvincible || _currentHp < 1)
                 return;

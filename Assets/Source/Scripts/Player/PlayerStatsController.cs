@@ -51,7 +51,7 @@ namespace Ingame
         {
             if (other.transform.TryGetComponent(out HitBox actorStats) && IsInvincible)
             {
-                actorStats.TakeDamage(data.Damage);
+                actorStats.TakeDamage(data.Damage, DamageType.Melee);
                 VibrationController.Vibrate(HapticTypes.RigidImpact);
             }
         }
@@ -106,9 +106,9 @@ namespace Ingame
             this.WaitAndDoCoroutine(TIME_AFTER_DASH_WHEN_PLAYER_IS_INVINCIBLE, () => _isInvincible = false);
         }
 
-        public override void TakeDamage(float amountOfDamage)
+        public override void TakeDamage(float amountOfDamage, DamageType damageType)
         {
-            if(IsInvincible)
+            if(IsInvincible && damageType != DamageType.Obstacle)
                 return;
             
             amountOfDamage = Mathf.Abs(amountOfDamage);
