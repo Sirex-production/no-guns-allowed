@@ -1,5 +1,8 @@
 using Ingame.UI;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Ingame
 {
@@ -30,6 +33,24 @@ namespace Ingame
             UiController.Instance.HideInteractableButton();
         }
 
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            Handles.Label(transform.position, "Invokable button", GUI.skin.button);
+            
+            if(invokableObjects == null || invokableObjects.Length < 1)
+                return;
+            
+            foreach (var invokableObject in invokableObjects)
+            {
+                if(invokableObject == null)
+                    continue;
+                
+                Handles.color = Color.gray;
+                Handles.DrawAAPolyLine(transform.position, invokableObject.transform.position);
+            }
+        }
+#endif
         private void ActivateInvokableObjects()
         {
             if(invokableObjects == null || invokableObjects.Length < 1)
