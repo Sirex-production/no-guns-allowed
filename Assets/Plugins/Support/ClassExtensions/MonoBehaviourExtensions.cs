@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Extensions
 {
-   /// <summary>
+    /// <summary>
     /// Class that holds all extension methods for MonoBehaviour class 
     /// </summary>
     public static class MonoBehaviourExtensions
@@ -44,9 +44,8 @@ namespace Extensions
             if(action == null)
                 yield break;
             
-            speed = Mathf.Min(Mathf.Abs(b - a), Mathf.Abs(speed));
             speed = b < a ? -speed : speed;
-            
+
             float currentValue = a;
 
             while (Math.Abs(currentValue - b) > .001f)
