@@ -1,3 +1,4 @@
+using Extensions;
 using Ingame.UI;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -10,14 +11,17 @@ namespace Ingame
     public class InvokableButton : MonoBehaviour
     {
         [SerializeField] private Invokable[] invokableObjects;
+        [SerializeField] private bool deactivatePanelAfterInteraction = false;
         [Tooltip("Text that will be displayed in log when player approaches the button")]
         [SerializeField] private string logApproachText;
         [Tooltip("Text that will be displayed in log when player interacts with the button")]
         [SerializeField] private string logInteractionText;
 
+        private bool _isWorking = true;
+        
         private void OnTriggerEnter(Collider other)
         {
-            if(!other.TryGetComponent(out PlayerEventController _))
+            if(!other.TryGetComponent(out PlayerEventController _) || !_isWorking)
                 return;
             
             UiController.Instance.ShowInteractableButton(ActivateInvokableObjects);
@@ -26,7 +30,7 @@ namespace Ingame
 
         private void OnTriggerExit(Collider other)
         {
-            if(!other.TryGetComponent(out PlayerEventController _))
+            if(!other.TryGetComponent(out PlayerEventController _) || !_isWorking)
                 return;
             
             UiController.Instance.DisplayLogMessage("...", LogDisplayType.DisplayAndKeep);
@@ -65,6 +69,9 @@ namespace Ingame
                 
                 invokableObject.Invoke();
             }
+
+            if (deactivatePanelAfterInteraction)
+                _isWorking = false;
         }
     }
 }
