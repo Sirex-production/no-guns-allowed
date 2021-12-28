@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using Support;
 using UnityEngine;
 
@@ -6,15 +7,24 @@ namespace Ingame
 {
     public class SectionsManager : MonoSingleton<SectionsManager>
     {
-        [SerializeField] private int sectionNumber = -1;
-
-        private int _currentSection = -1;
+        [SerializeField] private int initialStartSection = 0;
+        
+        [ReadOnly][SerializeField] private int _currentSection = 0;
+        private bool _isInLevelOverview = false;
         
         public event Action<int> OnSectionEnter;
         public event Action OnLevelOverviewEnter;
         public event Action<int> OnLevelOverviewExit;
 
         public int CurrentSection => _currentSection;
+        public bool IsInLevelOverview => _isInLevelOverview;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            
+            _currentSection = initialStartSection;
+        }
 
         public void EnterSection(int sectionId)
         {
@@ -25,11 +35,13 @@ namespace Ingame
 
         public void EnterLevelOverview()
         {
+            _isInLevelOverview = true;
             OnLevelOverviewEnter?.Invoke();
         }
 
-        public void ExitSectionOverview()
+        public void ExitLevelOverview()
         {
+            _isInLevelOverview = false;
             OnLevelOverviewExit?.Invoke(_currentSection);
         }
     }

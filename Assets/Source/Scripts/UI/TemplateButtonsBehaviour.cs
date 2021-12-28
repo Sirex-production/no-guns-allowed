@@ -11,7 +11,7 @@ namespace Ingame
     public class TemplateButtonsBehaviour : MonoBehaviour
     {
         [SerializeField] [Min(0)] private float fadeAnimationDuration = .5f;
-
+        
         public void OpenUrl(string urlToOpen)
         {
             Application.OpenURL(urlToOpen);
@@ -53,6 +53,19 @@ namespace Ingame
             parentCanvasGroup.SetGameObjectActive();
             parentCanvasGroup.DOFade(1, fadeAnimationDuration)
                 .OnComplete(() => Time.timeScale = 0.0001f);
+        }
+
+        public void TransitBetweenLevelOverviews()
+        {
+            var sectionManager = SectionsManager.Instance;
+            
+            if(sectionManager == null)
+                return;
+            
+            if(sectionManager.IsInLevelOverview)
+                sectionManager.ExitLevelOverview();
+            else
+                sectionManager.EnterLevelOverview();
         }
     }
 }
