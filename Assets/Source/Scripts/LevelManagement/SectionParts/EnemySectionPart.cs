@@ -1,25 +1,47 @@
+using Extensions;
+
 namespace Ingame
 {
     public class EnemySectionPart : SectionPart
     {
-        protected override void OnSectionEnter(int sectionId)
+        private bool _isWorking = true;
+        
+        private void TurnOffChildren()
         {
-            throw new System.NotImplementedException();
+            for(var i = 0; i < transform.childCount; i++)
+                transform.GetChild(i).SetGameObjectInactive();
+
+            _isWorking = false;
         }
 
-        protected override void OnSectionExit(int sectionId)
+        private void TurnOnChildren()
         {
-            throw new System.NotImplementedException();
+            for(var i = 0; i < transform.childCount; i++)
+                transform.GetChild(i).SetGameObjectActive();
+
+            _isWorking = true;
+        }  
+
+        protected override void OnSectionEnter(int sectionId)
+        {
+            // if(boundedSectionId != sectionId)
+            //     TurnOffChildren();
+            // else
+            //     TurnOnChildren();
         }
 
         protected override void OnLevelOverviewEnter()
         {
-            throw new System.NotImplementedException();
+            // if(_isWorking)
+            //     return;
+            //
+            // TurnOnChildren();
         }
 
-        protected override void OnLevelOverviewExit()
+        protected override void OnLevelOverviewExit(int currentSectionId)
         {
-            throw new System.NotImplementedException();
+            // if(boundedSectionId != currentSectionId && _isWorking)
+            //     TurnOffChildren();
         }
     }
 }
