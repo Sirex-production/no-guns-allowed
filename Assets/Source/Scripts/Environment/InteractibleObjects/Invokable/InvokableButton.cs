@@ -1,4 +1,3 @@
-using Extensions;
 using Ingame.UI;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -45,13 +44,23 @@ namespace Ingame
             if(invokableObjects == null || invokableObjects.Length < 1)
                 return;
             
+            var currentObjectPos = transform.position;
+            
             foreach (var invokableObject in invokableObjects)
             {
                 if(invokableObject == null)
                     continue;
-                
-                Handles.color = Color.gray;
-                Handles.DrawAAPolyLine(transform.position, invokableObject.transform.position);
+
+                var invokableObjectPos = invokableObject.transform.position;
+                var halfHeight = currentObjectPos.y - invokableObjectPos.y;
+                var tangentOffset = Vector3.up * halfHeight;
+
+                Handles.DrawBezier(currentObjectPos, 
+                    invokableObjectPos,
+                    currentObjectPos - tangentOffset,
+                    invokableObjectPos + tangentOffset,
+                    Color.gray,
+                    EditorGUIUtility.whiteTexture, 1);
             }
         }
 #endif
