@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Extensions;
 using Ingame.AI;
@@ -11,7 +12,7 @@ namespace Ingame
     {
         [SerializeField] private float damage = 1;
         [SerializeField] private float timeToSwitchLayer = 3;
-        [SerializeField] private float timeToRemoveComponents = 5;
+        [SerializeField] private float componentRemovalPollFrequency = 1;
 
         private BoxCollider[] _children;
 
@@ -19,7 +20,6 @@ namespace Ingame
         {
             _children = transform.GetComponentsInChildren<BoxCollider>();
             
-            this.WaitAndDoCoroutine(timeToRemoveComponents, RemoveComponents);
             this.WaitAndDoCoroutine(timeToSwitchLayer, SwitchLayer);
         }
 
@@ -29,8 +29,27 @@ namespace Ingame
                 hitbox.AttachedActorStats == PlayerEventController.Instance.StatsController) 
                 return;
 
-            if (!hitbox.AttachedActorStats.IsInvincible)
-                hitbox.TakeDamage(damage);
+            if (hitbox.AttachedActorStats.IsInvincible) 
+                return;
+
+            StartCoroutine(ComponentRemovalCoroutine());
+            hitbox.TakeDamage(damage);
+        }
+
+        private IEnumerator ComponentRemovalCoroutine()
+        {
+            var rigidBodyComponent = GetComponent<Rigidbody>();
+            while (true)
+            {
+                if (!(rigidBodyComponent.velocity.sqrMagnitude < 0.01f))
+                {
+                    yield return new WaitForSeconds(componentRemovalPollFrequency);
+                    continue;
+                }
+
+                RemoveComponents();
+                break;
+            }
         }
 
         private void SwitchLayer()
@@ -42,14 +61,14 @@ namespace Ingame
 
         private void RemoveComponents()
         {
-            //Destroy(gameObject.GetComponent<Rigidbody>());
+            Destroy(gameObject.GetComponent<Rigidbody>());
 
-            //foreach (var child in _children)
-            //{
-            //    child.TryGetComponent(out BoxCollider boxColliderComponent);
-            //    Destroy(boxColliderComponent);
-            //}
-            
+            foreach (var child in _children)
+            {
+                child.TryGetComponent(out BoxCollider boxColliderComponent);
+                Destroy(boxColliderComponent);
+            }
+
             Destroy(this);
         }
     }
