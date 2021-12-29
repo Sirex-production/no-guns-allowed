@@ -6390,7 +6390,7 @@ GameObject:
   - component: {fileID: 2298193479034005654}
   - component: {fileID: 8654282718634580388}
   m_Layer: 5
-  m_Name: LooseText
+  m_Name: LoseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7807,7 +7807,7 @@ GameObject:
   - component: {fileID: 334661084842864468}
   - component: {fileID: 3712379542418795300}
   m_Layer: 5
-  m_Name: LooseScreen
+  m_Name: LoseScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10150,7 +10150,7 @@ GameObject:
   - component: {fileID: 5944705434935323531}
   - component: {fileID: 473774083944822146}
   m_Layer: 5
-  m_Name: SensetivitySlider
+  m_Name: SensitivitySlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
