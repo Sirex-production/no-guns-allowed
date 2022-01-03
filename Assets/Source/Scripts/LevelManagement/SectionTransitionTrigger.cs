@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,9 +9,9 @@ namespace Ingame
     [RequireComponent(typeof(Collider))]
     public class SectionTransitionTrigger : MonoBehaviour
     {
-        [SerializeField] private int boundedSection = -1; 
-        
-        private void OnTriggerEnter(Collider other)
+        [SerializeField] private int boundedSection = -1;
+
+        private void OnTriggerExit(Collider other)
         {
             if(SectionsManager.Instance.CurrentSection == boundedSection)
                 return;

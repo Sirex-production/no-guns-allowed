@@ -14,7 +14,6 @@ namespace Ingame.Graphics
         private Vector3 _cameraPosition;
         private Quaternion _cameraRotation;
 
-
         private void Awake()
         {
             var transform1 = this.transform;

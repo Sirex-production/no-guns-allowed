@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeImage: {fileID: 4294741667960698674}
-  animationSpeed: 5
+  animationSpeed: 40
 --- !u!1 &933982975733411959
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeImage: {fileID: 323563910836772606}
-  animationSpeed: 5
+  animationSpeed: 40
 --- !u!1 &982933906349642597
 GameObject:
   m_ObjectHideFlags: 0
@@ -6244,7 +6244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeImage: {fileID: 8243992978808747938}
-  animationSpeed: 5
+  animationSpeed: 40
 --- !u!1 &5659950388836660807
 GameObject:
   m_ObjectHideFlags: 0
@@ -8454,7 +8454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeImage: {fileID: 5322443504911933504}
-  animationSpeed: 5
+  animationSpeed: 40
 --- !u!1 &7853932882866220575
 GameObject:
   m_ObjectHideFlags: 0
@@ -10330,4 +10330,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeImage: {fileID: 3127283272891310639}
-  animationSpeed: 5
+  animationSpeed: 40
