@@ -14,7 +14,7 @@ namespace Ingame.AI
         private IPatrolable _aiPatrolController;
         private ICombatable _aiCombatController;
         private ActorStats _aiActorStats;
-        private EffectsManager _effectsManager;
+        private EffectsFactory _effectsFactory;
         private Context _context;
 
         public AiData AiData => _aiData;
@@ -22,7 +22,7 @@ namespace Ingame.AI
         public IPatrolable AiPatrolController => _aiPatrolController;
         public ICombatable AiCombatController => _aiCombatController;
         public ActorStats AiActorStats => _aiActorStats;
-        public EffectsManager EffectsManager => _effectsManager;
+        public EffectsFactory EffectsFactory => _effectsFactory;
         
         private void Awake()
         {
@@ -30,7 +30,7 @@ namespace Ingame.AI
             _aiPatrolController = GetComponent<IPatrolable>();
             _aiCombatController = GetComponent<ICombatable>();
             _aiActorStats = GetComponent<ActorStats>();
-            _effectsManager = GetComponent<EffectsManager>();
+            _effectsFactory = GetComponent<EffectsFactory>();
         }
 
         private void Start()
@@ -66,8 +66,8 @@ namespace Ingame.AI
 
         public void DestroyActor()
         {
-            if(EffectsManager != null)
-               EffectsManager.PlayAllEffects(EffectType.EnemyDeath);
+            if(EffectsFactory != null)
+               EffectsFactory.PlayAllEffects(EffectType.EnemyDeath);
             
             Destroy(gameObject);
         }

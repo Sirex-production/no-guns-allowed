@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ingame.Graphics
 {
-    public class EffectsManager : MonoBehaviour
+    public class EffectsFactory : MonoBehaviour
     {
         [Space]
         [SerializeField] private List<EffectEntity> effectEntities;

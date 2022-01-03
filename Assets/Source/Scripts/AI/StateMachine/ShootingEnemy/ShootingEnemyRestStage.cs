@@ -17,7 +17,7 @@ namespace Ingame.AI
             //if(Random.Range(0, 100) <= CHANCE_TO_STOP_PATROLLING)
             //    currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
             
-            _currentContext.AiBehaviourController.EffectsManager.PlayAllEffects(EffectType.Detection);
+            _currentContext.AiBehaviourController.EffectsFactory.PlayAllEffects(EffectType.Detection);
             
             return new ShootingEnemyCombatState(actorStats, _currentContext);
         }

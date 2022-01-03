@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace Ingame.Graphics
 {
-    [RequireComponent(typeof(EffectsManager))]
+    [RequireComponent(typeof(EffectsFactory))]
     public class BreakableWall : MonoBehaviour
     {
-        private EffectsManager _effectsManager;
+        private EffectsFactory _effectsFactory;
 
         private void Awake()
         {
-            _effectsManager = GetComponent<EffectsManager>();
+            _effectsFactory = GetComponent<EffectsFactory>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -21,7 +21,7 @@ namespace Ingame.Graphics
             {
                 if (PlayerEventController.Instance.StatsController.IsInvincible)
                 {
-                    _effectsManager.PlayAllEffects(EffectType.Destruction);
+                    _effectsFactory.PlayAllEffects(EffectType.Destruction);
                     Destroy(gameObject);
                     
                     return;
@@ -46,7 +46,7 @@ namespace Ingame.Graphics
 
         private void OnDashPerformed(Vector3 _)
         {
-            _effectsManager.PlayAllEffects(EffectType.Destruction);
+            _effectsFactory.PlayAllEffects(EffectType.Destruction);
             Destroy(gameObject);
         }
     }
