@@ -5232,9 +5232,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeReference: {fileID: 8047907313413388493}
-  startValue: 0.1
-  endValue: 0.7
-  lerpDuration: 0.5
+  startValue: 0
+  endValue: 0.55
+  lerpDuration: 0.25
 --- !u!1 &4917932376123679612
 GameObject:
   m_ObjectHideFlags: 0

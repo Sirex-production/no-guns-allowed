@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 namespace Ingame.Graphics.VFX
 {
-    public class ChromaticAbberationController : IVolumeComponentController<ChromaticAberration>
+    public class VignetteController : IVolumeComponentController<Vignette>
     {
         [SerializeField] [Range(0, 1)] private float startValue;
         [SerializeField] [Range(0, 1)] private float endValue;
@@ -34,6 +34,12 @@ namespace Ingame.Graphics.VFX
             effectToChange.intensity.value = startValue;
             while (timeElapsed <= lerpDuration)
             {
+                var playerPosition = PlayerEventController.Instance.transform.position;
+                var playerPositionOnScreen = Camera.main.WorldToScreenPoint(playerPosition);
+                var x = playerPositionOnScreen.x / Camera.main.pixelWidth;
+                var y = playerPositionOnScreen.y / Camera.main.pixelHeight;
+                effectToChange.center.value = new Vector2(x, y);
+
                 effectToChange.intensity.value = Mathf.Lerp(startValue, endValue, timeElapsed / lerpDuration);
                 timeElapsed += Time.deltaTime / Time.timeScale;
                 yield return null;
