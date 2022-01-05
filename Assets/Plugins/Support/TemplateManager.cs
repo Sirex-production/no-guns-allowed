@@ -15,7 +15,6 @@ namespace Support
             get
             {
                 var secondsPassedFromStart =  Time.frameCount - _frameCountStart;
-                print("passed " + secondsPassedFromStart);
                 return (float)_framesPerSecondSum / secondsPassedFromStart;
             }
         }

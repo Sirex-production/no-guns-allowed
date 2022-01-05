@@ -3610,6 +3610,7 @@ GameObject:
   - component: {fileID: 3021399359968157615}
   - component: {fileID: 1470587458323756816}
   - component: {fileID: 3786376878030084646}
+  - component: {fileID: 4160692489741235069}
   m_Layer: 0
   m_Name: GameManagement
   m_TagString: Untagged
@@ -3746,6 +3747,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialStartSection: 0
   _currentSection: -1
+--- !u!114 &4160692489741235069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3712192280834514026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2440f3f12bcabb145a4b7a912699ea81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWorking: 1
+  isAnalyticsSentFromEditor: 0
 --- !u!1 &3715199305238617027
 GameObject:
   m_ObjectHideFlags: 0
@@ -6081,12 +6096,12 @@ MonoBehaviour:
     EXECUTOR STATUS:
     <color=#dad45e>SURVIVED</color>;
 
-    ENEMIES KILLED: <color=#dad45e>10</color>;
+    ENEMIES KILLED: <color=#dad45e>_ENEMY.KILLED_</color>;
 
     TIME:
-    <color=#dad45e>01:31</color>;
+    <color=#dad45e>_LEVEL.TIME_</color>;
 
-    LEVEL NUMBER: <color=#dad45e>3</color>;'
+    LEVEL NUMBER: <color=#dad45e>_LEVEL.NUMBER_</color>;'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -6450,12 +6465,15 @@ MonoBehaviour:
     EXECUTOR STATUS:
     <color=#d04648>DEAD</color>;
 
-    ENEMIES KILLED: <color=#d04648>10</color>;
+    DIED FROM:<color=#d04648>_PLAYER.DEATH.TYPE_</color>;
 
-    TIME:
-    <color=#d04648>01:31</color>;
+    ENEMIES
+    KILLED: <color=#d04648>_ENEMY.KILLED_</color>;
 
-    LEVEL NUMBER: <color=#d04648>3</color>;'
+    TIME: <color=#d04648>_LEVEL.TIME_</color>;
+
+    LEVEL
+    NUMBER: <color=#d04648>_LEVEL.NUMBER_</color>;'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -8181,7 +8199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -79.69998, y: -1.5000038}
+  m_AnchoredPosition: {x: -79.69998, y: -1.5000076}
   m_SizeDelta: {x: 82, y: 82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4190931760232525814
@@ -8625,7 +8643,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.80014, y: -1.5000038}
+  m_AnchoredPosition: {x: 26.80014, y: -1.5000076}
   m_SizeDelta: {x: 82, y: 82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1059377511472345426
@@ -9260,7 +9278,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.8791808}
-  m_AnchoredPosition: {x: 0.4296875, y: -0.51174927}
+  m_AnchoredPosition: {x: 0.4296875, y: -0.51171875}
   m_SizeDelta: {x: -0.86011124, y: -0.20605469}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8466032469618489088

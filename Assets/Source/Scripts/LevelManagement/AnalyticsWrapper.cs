@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
+using Support;
 using Support.SLS;
 using UnityEngine;
 using UnityEngine.Analytics;
 
-namespace Support
+namespace Ingame
 {
     public class AnalyticsWrapper : MonoSingleton<AnalyticsWrapper>
     {
@@ -12,19 +13,34 @@ namespace Support
         [ShowIf("isWorking")]
         [SerializeField] private bool isAnalyticsSentFromEditor = false;
 
+        private LevelStats _levelStats = new LevelStats();
+
+        public LevelStats LevelStats => _levelStats;
+        
         protected override void Awake()
         {
+            base.Awake();
+            
             Analytics.enabled = isWorking;
         }
 
         private void Start()
         {
+            _levelStats.StartLevel();
+            
             GameController.Instance.OnLevelEnded += OnLevelEnded;
+            GameController.Instance.OnLevelRestart += OnLevelRestart;
         }
 
         private void OnDestroy()
         {
             GameController.Instance.OnLevelEnded -= OnLevelEnded;
+            GameController.Instance.OnLevelRestart -= OnLevelRestart;
+        }
+
+        private void OnLevelRestart()
+        {
+            _levelStats.StartLevel();
         }
 
         private void OnLevelEnded(bool isVictory)

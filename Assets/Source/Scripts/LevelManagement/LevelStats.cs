@@ -2,22 +2,22 @@ using UnityEngine;
 
 namespace Ingame
 {
-    public class LevelStats : MonoBehaviour
+    public class LevelStats
     {
         private DamageType _deathDamageType = DamageType.None;
         private uint _enemiesKilled = 0;
         private float _timeWhenLevelStarts = 0;
+        private float _timePassedFromTheBeginningOfTheLevel = 0;
 
-        public float TimePassedFromTheBeginningOfTheLevel => Time.time - _timeWhenLevelStarts;
-
-        public (DamageType deathDamageType, uint enemiesKilled, float TimePassedFromTheBeginingOfTheLevel) StatsPack
-            => (_deathDamageType, _enemiesKilled, TimePassedFromTheBeginningOfTheLevel);
+        public (DamageType deathDamageType, uint enemiesKilled, float timePassedFromTheBeginingOfTheLevel) StatsPack
+            => (_deathDamageType, _enemiesKilled, Time.time - _timeWhenLevelStarts);
 
         public void StartLevel()
         {
-            _timeWhenLevelStarts = Time.time;
-            _enemiesKilled = 0;
             _deathDamageType = DamageType.None;
+            _enemiesKilled = 0;
+            _timeWhenLevelStarts = Time.time;
+            _timePassedFromTheBeginningOfTheLevel = 0;
         }
 
         public void AddKilledEnemyToStats()

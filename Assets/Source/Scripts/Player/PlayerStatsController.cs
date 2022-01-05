@@ -66,8 +66,11 @@ namespace Ingame
             UseCharges(CHARGES_USED_TO_PERFORM_DASH);
         }
         
-        private void Die()
+        private void Die(DamageType damageType)
         {
+            if(AnalyticsWrapper.Instance != null)
+                AnalyticsWrapper.Instance.LevelStats.AddPlayerDeathToStats(damageType);
+            
             GameController.Instance.EndLevel(false);
             Destroy(gameObject);
         }
@@ -116,7 +119,7 @@ namespace Ingame
             _currentHp -= amountOfDamage;
             
             if(_currentHp < 0)
-                Die();
+                Die(damageType);
         }
 
         public override void Heal(float amountOfHp)

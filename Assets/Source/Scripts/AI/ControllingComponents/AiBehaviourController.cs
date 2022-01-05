@@ -61,6 +61,8 @@ namespace Ingame.AI
 
         public void Die()
         {
+            ActorManager.Instance.RemoveActor(_aiActorStats);
+            AnalyticsWrapper.Instance.LevelStats.AddKilledEnemyToStats();
             _context.Die();
         }
 

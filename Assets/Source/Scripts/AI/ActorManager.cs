@@ -24,6 +24,18 @@ namespace Ingame.AI
                 _actors[actorSide].Add(actorStats);
         }
 
+        public void RemoveActor(ActorStats actorStats)
+        {
+            if(actorStats == null)
+                return;
+
+            var actorSide = actorStats.ActorSide;
+            if (!_actors.ContainsKey(actorSide) || _actors[actorSide] == null)
+                return;
+
+            _actors[actorSide].Remove(actorStats);
+        }
+
         public ActorStats[] GetActorsOfTypes(params ActorSide[] actorSides)
         {
             if (actorSides == null)
