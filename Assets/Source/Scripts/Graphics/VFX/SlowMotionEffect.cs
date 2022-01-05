@@ -22,8 +22,8 @@ namespace Ingame.Graphics.VFX
             
             if(PlayerEventController.Instance == null)
                 return;
-            PlayerEventController.Instance.OnSlowMotionEnter += DecreaseTimeScale;
-            PlayerEventController.Instance.OnSlowMotionExit += ResetTimeScale;
+            EffectsManager.Instance.OnSlowMotionEnter += DecreaseTimeScale;
+            EffectsManager.Instance.OnSlowMotionExit += ResetTimeScale;
         }
 
         private void OnDestroy()
@@ -32,8 +32,8 @@ namespace Ingame.Graphics.VFX
             
             if(PlayerEventController.Instance == null)
                 return;
-            PlayerEventController.Instance.OnSlowMotionEnter -= DecreaseTimeScale;
-            PlayerEventController.Instance.OnSlowMotionExit -= ResetTimeScale;
+            EffectsManager.Instance.OnSlowMotionEnter -= DecreaseTimeScale;
+            EffectsManager.Instance.OnSlowMotionExit -= ResetTimeScale;
         }
 
         private void DecreaseTimeScale()

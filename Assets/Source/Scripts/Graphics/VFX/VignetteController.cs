@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -15,29 +14,36 @@ namespace Ingame.Graphics.VFX
         {
             if(PlayerEventController.Instance == null)
                 return;
-            PlayerEventController.Instance.OnSlowMotionEnter += Modify;
-            PlayerEventController.Instance.OnSlowMotionExit += DoReset;
+            EffectsManager.Instance.OnSlowMotionEnter += Modify;
+            EffectsManager.Instance.OnSlowMotionExit += DoReset;
         }
 
         private void OnDestroy()
         {
             if(PlayerEventController.Instance == null)
                 return;
-            PlayerEventController.Instance.OnSlowMotionEnter -= Modify;
-            PlayerEventController.Instance.OnSlowMotionExit -= DoReset;
+            EffectsManager.Instance.OnSlowMotionEnter -= Modify;
+            EffectsManager.Instance.OnSlowMotionExit -= DoReset;
         }
 
         protected override IEnumerator OnModificationRoutine()
         {
+            if (Camera.main is null)
+            {
+                Debug.Log("Camera.main is null");
+                yield break;
+            }
+
+            var mainCamera = Camera.main;
             var timeElapsed = 0.0f;
             effectToChange.active = true;
             effectToChange.intensity.value = startValue;
             while (timeElapsed <= lerpDuration)
             {
                 var playerPosition = PlayerEventController.Instance.transform.position;
-                var playerPositionOnScreen = Camera.main.WorldToScreenPoint(playerPosition);
-                var x = playerPositionOnScreen.x / Camera.main.pixelWidth;
-                var y = playerPositionOnScreen.y / Camera.main.pixelHeight;
+                var playerPositionOnScreen = mainCamera.WorldToScreenPoint(playerPosition);
+                var x = playerPositionOnScreen.x / mainCamera.pixelWidth;
+                var y = playerPositionOnScreen.y / mainCamera.pixelHeight;
                 effectToChange.center.value = new Vector2(x, y);
 
                 effectToChange.intensity.value = Mathf.Lerp(startValue, endValue, timeElapsed / lerpDuration);

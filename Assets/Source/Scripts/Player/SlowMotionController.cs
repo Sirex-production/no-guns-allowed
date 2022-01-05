@@ -1,5 +1,6 @@
 using System.Collections;
 using Extensions;
+using Ingame.Graphics;
 using Support;
 using UnityEngine;
 
@@ -63,7 +64,7 @@ namespace Ingame
             _outOfTime = true;
             _state = State.OutOfSlowMotion;
             InvokeCooldown();
-            PlayerEventController.Instance.ExitSlowMotion();
+            EffectsManager.Instance.ExitSlowMotion();
         }
 
         private IEnumerator CooldownRoutine()
@@ -108,7 +109,7 @@ namespace Ingame
 
             StopAllCoroutines();
             InvokeTimer();
-            PlayerEventController.Instance.EnterSlowMotion();
+            EffectsManager.Instance.EnterSlowMotion();
         }
 
         private void ReturnToDefaultStateOnLevelEnd(bool _)
@@ -129,7 +130,7 @@ namespace Ingame
             _state = State.Default;
             StopAllCoroutines();
             InvokeCooldown();
-            PlayerEventController.Instance.ExitSlowMotion();
+            EffectsManager.Instance.ExitSlowMotion();
         }
     }
 }

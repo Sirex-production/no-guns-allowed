@@ -1,5 +1,4 @@
 using System;
-using Ingame.UI;
 using MoreMountains.NiceVibrations;
 using Support;
 using UnityEngine;
@@ -21,8 +20,6 @@ namespace Ingame
         public event Action<Vector3> OnAim;
         public event Action OnDashStop;
         public event Action OnDashCancelled;
-        public event Action OnSlowMotionEnter;
-        public event Action OnSlowMotionExit;
         public event Action<PlayerMovementController.SurfaceInteractionType> OnSurfaceInteraction;
 
         protected override void Awake()
@@ -54,16 +51,6 @@ namespace Ingame
         public void CancelDash()
         {
             OnDashCancelled?.Invoke();
-        }
-
-        public void EnterSlowMotion()
-        {
-            OnSlowMotionEnter?.Invoke();
-        }
-
-        public void ExitSlowMotion()
-        {
-            OnSlowMotionExit?.Invoke();
         }
 
         public void InteractWithSurface(PlayerMovementController.SurfaceInteractionType surfaceInteractionType)
