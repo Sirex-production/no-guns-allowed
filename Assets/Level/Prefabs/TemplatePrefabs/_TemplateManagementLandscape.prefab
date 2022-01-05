@@ -6042,9 +6042,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.112, y: 0.45280093}
-  m_AnchorMax: {x: 0.5276875, y: 0.892}
-  m_AnchoredPosition: {x: -1.5341797, y: -1}
-  m_SizeDelta: {x: -3.0683975, y: 0}
+  m_AnchorMax: {x: 0.6504792, y: 0.889799}
+  m_AnchoredPosition: {x: 0.039978027, y: 0}
+  m_SizeDelta: {x: 0.08999634, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4772884976777713523
 CanvasRenderer:
@@ -6076,7 +6076,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'LOADING STATS...
 
-    MISION STATUS: MISION FAILED;
+    MISION STATUS: MISION COMPLETE;
 
     EXECUTOR STATUS:
     <color=#dad45e>SURVIVED</color>;
@@ -6410,10 +6410,10 @@ RectTransform:
   m_Father: {fileID: 334661084842864468}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.112, y: 0.45280093}
-  m_AnchorMax: {x: 0.5276875, y: 0.892}
-  m_AnchoredPosition: {x: -1.5341797, y: -1}
-  m_SizeDelta: {x: -3.0683975, y: 0}
+  m_AnchorMin: {x: 0.112, y: 0.4506032}
+  m_AnchorMax: {x: 0.6504792, y: 0.892}
+  m_AnchoredPosition: {x: 0.16442871, y: 0}
+  m_SizeDelta: {x: 0.32898, y: -2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2298193479034005654
 CanvasRenderer:
