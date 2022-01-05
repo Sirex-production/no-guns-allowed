@@ -1,4 +1,5 @@
 using System.Collections;
+using Extensions;
 using Support;
 using UnityEngine;
 
@@ -57,7 +58,7 @@ namespace Ingame
             _timeRemaining = Mathf.Clamp(_timeRemaining, 0.0f, slowMotionPool);
 
             if(_state != State.InSlowMotion)
-                Debug.LogError($"State is: {_state}, should be {State.InSlowMotion}");
+                this.SafeDebug($"State is: {_state}, should be {State.InSlowMotion}", LogType.Error);
 
             _outOfTime = true;
             _state = State.OutOfSlowMotion;
