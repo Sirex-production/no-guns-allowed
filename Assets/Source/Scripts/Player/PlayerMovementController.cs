@@ -18,6 +18,7 @@ namespace Ingame
         private Rigidbody _rigidbody;
         private Vector3 _initialDashPosition;
         private float _currentDashLength;
+        private bool _isFrozen;
         private bool _isDashing;
 
         private Coroutine _stopDashCoroutine;
@@ -72,6 +73,13 @@ namespace Ingame
             if(Vector3.Distance(aim.transform.position, transform.position) < MINIMAL_DISTANCE_TO_PERFORM_DASH)
                 return;
 
+            if (_isFrozen)
+            {
+                // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags (Unity documentation says it's an intended way to use this enum)
+                _rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+                _isFrozen = false;
+            }
+
             var position = transform.position;
             var dashVector = aim.transform.position - position;
             var dashDirection = dashVector.normalized;
@@ -119,6 +127,12 @@ namespace Ingame
             _isDashing = false;
             
             PlayerEventController.Instance.StopDash();
+        }
+
+        public void FreezePlayer()
+        {
+            _isFrozen = true;
+            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 }
