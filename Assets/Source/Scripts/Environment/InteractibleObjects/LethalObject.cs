@@ -33,7 +33,7 @@ namespace Ingame
                 return;
 
             StartCoroutine(ComponentRemovalCoroutine());
-            hitbox.TakeDamage(damage);
+            hitbox.TakeDamage(damage, DamageType.Obstacle);
         }
 
         private IEnumerator ComponentRemovalCoroutine()
