@@ -21,6 +21,7 @@ namespace Ingame
         private float _currentHp;
         private bool _isAlive = true;
         private bool _isInvincible = false;
+        private int _chargeRegenerationTimeModifier;
         private int _currentNumberOfCharges;
 
         public PlayerData Data => data;
@@ -31,11 +32,13 @@ namespace Ingame
         public override float CurrentHp => _currentHp;
         public int CurrentNumberOfCharges => _currentNumberOfCharges;
         public bool IsAbleToDash => _isAlive && _currentNumberOfCharges > 0 || !Data.AreChargesUsed;
-        
-        
+        public int ChargeRegenerationTimeModifier { get => _chargeRegenerationTimeModifier; set => _chargeRegenerationTimeModifier = value; }
+
+
         private void Awake()
         {
             _currentNumberOfCharges = data.InitialNumberOfCharges;
+            _chargeRegenerationTimeModifier = 1;
         }
 
         protected override void Start()
@@ -79,7 +82,7 @@ namespace Ingame
         {
             while (_isAlive)
             {
-                yield return new WaitForSeconds(data.ChargeRegenerationTime);       
+                yield return new WaitForSeconds(data.ChargeRegenerationTime / _chargeRegenerationTimeModifier);       
                 
                 RegenerateDashingCharge(NUMBER_OF_REGENERATED_CHARGES_PER_TICK);
             }
