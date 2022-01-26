@@ -1,6 +1,7 @@
 using Ingame.Graphics;
 using NaughtyAttributes;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.AI
 {
@@ -10,6 +11,8 @@ namespace Ingame.AI
         [Required]
         [SerializeField] private AiData _aiData;
 
+        [Inject] private AnalyticsWrapper _analyticsWrapper;
+        
         private IMovable _aiMovementController;
         private IPatrolable _aiPatrolController;
         private ICombatable _aiCombatController;
@@ -62,7 +65,7 @@ namespace Ingame.AI
         public void Die()
         {
             ActorManager.Instance.RemoveActor(_aiActorStats);
-            AnalyticsWrapper.Instance.LevelStats.AddKilledEnemyToStats();
+            _analyticsWrapper.LevelStats.AddKilledEnemyToStats();
             _context.Die();
         }
 

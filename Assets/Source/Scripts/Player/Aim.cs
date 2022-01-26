@@ -3,6 +3,7 @@ using NaughtyAttributes;
 using Support;
 using Support.SLS;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
@@ -13,10 +14,12 @@ namespace Ingame
         [Space] 
         [SerializeField] private bool obstaclesPreventAiming = true;
         [SerializeField] private bool isSaveLoadSystemIgnored = false;
-        [ShowIf(nameof(isSaveLoadSystemIgnored))][SerializeField] [Range(0, 10)] private float sensitivity = 5f;
+        [ShowIf(nameof(isSaveLoadSystemIgnored))]
+        [SerializeField] [Range(0, 10)] private float sensitivity = 5f;
 
-        private int ignoreRaycastLayers;
+        [Inject] private SaveLoadSystem _saveLoadSystem;
         
+        private int ignoreRaycastLayers;
         private Vector3 _initialLocalPosition;
 
         private void Awake()
@@ -38,17 +41,17 @@ namespace Ingame
         {
             InputSystem.Instance.OnReleaseAction += ResetLocalPosition;
             InputSystem.Instance.OnDragAction += Move;
-            SaveLoadSystem.Instance.SaveData.AimSensitivity.OnValueChanged += SetSensitivity;
+            _saveLoadSystem.SaveData.AimSensitivity.OnValueChanged += SetSensitivity;
 
             if(!isSaveLoadSystemIgnored)
-                sensitivity = SaveLoadSystem.Instance.SaveData.AimSensitivity.Value;
+                sensitivity = _saveLoadSystem.SaveData.AimSensitivity.Value;
         }
 
         private void OnDestroy()
         {
             InputSystem.Instance.OnReleaseAction -= ResetLocalPosition;
             InputSystem.Instance.OnDragAction -= Move;
-            SaveLoadSystem.Instance.SaveData.AimSensitivity.OnValueChanged -= SetSensitivity;
+            _saveLoadSystem.SaveData.AimSensitivity.OnValueChanged -= SetSensitivity;
         }
 
         private void Update()

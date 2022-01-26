@@ -2,6 +2,7 @@ using Extensions;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.UI
 {
@@ -12,7 +13,8 @@ namespace Ingame.UI
         [SerializeField] [Min(0)] private float letterSpawnDelayTime = .01f;
         [Tooltip("Pause after Log will be cleared if temporary log was sent")]
         [SerializeField] [Min(0)] private float pauseAfterTmpLogWillBeCleared = 2f;
-
+        [Inject] private UiController _uiController;
+        
         private string _initialLogContent;
 
         private void Awake()
@@ -22,7 +24,7 @@ namespace Ingame.UI
 
         private void Start()
         {
-            UiController.Instance.OnLogMessageDisplayed += SetLogContent;
+            _uiController.OnLogMessageDisplayed += SetLogContent;
             
             if(PlayerEventController.Instance == null)
                 return;
@@ -32,7 +34,7 @@ namespace Ingame.UI
 
         private void OnDestroy()
         {
-            UiController.Instance.OnLogMessageDisplayed -= SetLogContent;
+            _uiController.OnLogMessageDisplayed -= SetLogContent;
             
             if(PlayerEventController.Instance == null)
                 return;

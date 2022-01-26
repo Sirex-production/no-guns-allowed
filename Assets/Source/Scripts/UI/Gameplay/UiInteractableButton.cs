@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Ingame.UI
 {
@@ -17,21 +18,23 @@ namespace Ingame.UI
         [Required] [SerializeField] private Image interactableButtonImageBackground;
         [BoxGroup("References")]
         [Required][SerializeField] private TMP_Text interactableButtonText;
-        
         [BoxGroup("Animation options")] 
         [SerializeField] [Min(0)] private float animationSpeed = 1;
+
+        [Inject] private UiController _uiController;
+        
 
         private void Start()
         {
             interactableButton.SetGameObjectInactive();
-            UiController.Instance.OnInteractableButtonShown += ShowInteractableButton;
-            UiController.Instance.OnInteractableButtonHidden += HideInteractableButton;
+            _uiController.OnInteractableButtonShown += ShowInteractableButton;
+            _uiController.OnInteractableButtonHidden += HideInteractableButton;
         }
 
         private void OnDestroy()
         {
-            UiController.Instance.OnInteractableButtonShown -= ShowInteractableButton;
-            UiController.Instance.OnInteractableButtonHidden -= HideInteractableButton;
+            _uiController.OnInteractableButtonShown -= ShowInteractableButton;
+            _uiController.OnInteractableButtonHidden -= HideInteractableButton;
         }
 
         private void ShowInteractableButton(Action onButtonPressed)

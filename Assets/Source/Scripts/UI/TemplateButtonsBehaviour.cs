@@ -5,12 +5,18 @@ using Support;
 using Support.SLS;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Ingame
 {
     public class TemplateButtonsBehaviour : MonoBehaviour
     {
         [SerializeField] [Min(0)] private float fadeAnimationDuration = .5f;
+        [Inject] 
+        private GameController _gameController;
+        [Inject]
+        private SaveLoadSystem _saveLoadSystem;
+        
         
         public void OpenUrl(string urlToOpen)
         {
@@ -19,12 +25,12 @@ namespace Ingame
 
         public void RestartLevel()
         {
-            GameController.Instance.RestartLevel();
+            _gameController.RestartLevel();
         }
 
         public void LoadNextLevel()
         {
-            GameController.Instance.LoadNextLevel();
+            _gameController.LoadNextLevel();
         }
 
         public void ClickVibrate()
@@ -34,7 +40,7 @@ namespace Ingame
 
         public void ChangeAimSensitivity(Slider slider)
         {
-            SaveLoadSystem.Instance.SaveData.AimSensitivity.Value = slider.value;
+            _saveLoadSystem.SaveData.AimSensitivity.Value = slider.value;
         }
 
         public void ClosePauseMenu(CanvasGroup parentCanvasGroup)
@@ -45,7 +51,7 @@ namespace Ingame
             parentCanvasGroup.DOFade(0, fadeAnimationDuration)
                 .OnComplete(parentCanvasGroup.SetGameObjectInactive);
 
-            SaveLoadSystem.Instance.PerformSave();
+            _saveLoadSystem.PerformSave();
         }
 
         public void OpenPauseMenu(CanvasGroup parentCanvasGroup)

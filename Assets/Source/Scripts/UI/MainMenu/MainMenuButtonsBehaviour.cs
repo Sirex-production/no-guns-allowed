@@ -2,13 +2,15 @@ using DG.Tweening;
 using Extensions;
 using Support.SLS;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.UI
 {
     public class MainMenuButtonsBehaviour : MonoBehaviour
     {
         [SerializeField] [Min(0)] private float fadeAnimationTime = .2f;
-
+        [Inject] private SaveLoadSystem _saveLoadSystem;
+        
         public void ShowMenu(CanvasGroup settingsMenuCanvas)
         {
             settingsMenuCanvas.SetGameObjectActive();
@@ -24,7 +26,7 @@ namespace Ingame.UI
         
         public void SaveData()
         {
-            SaveLoadSystem.Instance.PerformSave();
+            _saveLoadSystem.PerformSave();
         }
 
         public void PlayDevelopersAnimation(UiDevelopers developersMenu)

@@ -4,6 +4,7 @@ using Support;
 using Support.SLS;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.UI
 {
@@ -19,6 +20,11 @@ namespace Ingame.UI
         [SerializeField] private TMP_Text loseText;
         [Space] 
         [SerializeField] private UiLevelTransition uiLevelTransition;
+
+        [Inject] private GameController _gameController;
+        [Inject] private AnalyticsWrapper _analyticsWrapper;
+        [Inject] private SaveLoadSystem _saveLoadSystem;
+        
         
         private string _initialWinTextContent;
         private string _initialLooseTextContent;
@@ -47,12 +53,12 @@ namespace Ingame.UI
 
         private void Start()
         {
-            GameController.Instance.OnLevelEnded += PlayAfterLevelMenuAnimation;
+            _gameController.OnLevelEnded += PlayAfterLevelMenuAnimation;
         }
 
         private void OnDestroy()
         {
-            GameController.Instance.OnLevelEnded -= PlayAfterLevelMenuAnimation;
+            _gameController.OnLevelEnded -= PlayAfterLevelMenuAnimation;
             
             if(_animationSequence != null)
                 _animationSequence.Kill();
@@ -90,16 +96,16 @@ namespace Ingame.UI
 
         private string GetGeneratedEndScreenText(string initialText)
         {
-            if (string.IsNullOrEmpty(initialText) || AnalyticsWrapper.Instance == null)
+            if (string.IsNullOrEmpty(initialText) || _analyticsWrapper == null)
                 return initialText; 
             
-            var levelStatsPack = AnalyticsWrapper.Instance.LevelStats.StatsPack;
+            var levelStatsPack = _analyticsWrapper.LevelStats.StatsPack;
 
             initialText = initialText
                 .Replace("_PLAYER.DEATH.TYPE_", $"{levelStatsPack.deathDamageType}")
                 .Replace("_ENEMY.KILLED_", $"{levelStatsPack.enemiesKilled}")
                 .Replace("_LEVEL.TIME_", $"{levelStatsPack.timePassedFromTheBeginingOfTheLevel}")
-                .Replace("_LEVEL.NUMBER_", $"{SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value}");
+                .Replace("_LEVEL.NUMBER_", $"{_saveLoadSystem.SaveData.CurrentLevelNumber.Value}");
 
             return initialText;
         }

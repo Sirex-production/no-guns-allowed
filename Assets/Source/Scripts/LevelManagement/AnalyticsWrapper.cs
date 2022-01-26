@@ -4,23 +4,29 @@ using Support;
 using Support.SLS;
 using UnityEngine;
 using UnityEngine.Analytics;
+using Zenject;
 
 namespace Ingame
 {
-    public class AnalyticsWrapper : MonoSingleton<AnalyticsWrapper>
+    public class AnalyticsWrapper : MonoBehaviour
     {
         [SerializeField] private bool isWorking = true;
         [ShowIf("isWorking")]
         [SerializeField] private bool isAnalyticsSentFromEditor = false;
+        
+        [Inject]
+        private GameController _gameController;
+        [Inject] 
+        private SaveLoadSystem _saveLoadSystem;
+        [Inject]
+        private TemplateManager _templateManager;
 
         private LevelStats _levelStats = new LevelStats();
 
         public LevelStats LevelStats => _levelStats;
         
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
-            
             Analytics.enabled = isWorking;
         }
 
@@ -28,14 +34,14 @@ namespace Ingame
         {
             _levelStats.StartLevel();
             
-            GameController.Instance.OnLevelEnded += OnLevelEnded;
-            GameController.Instance.OnLevelRestart += OnLevelRestart;
+            _gameController.OnLevelEnded += OnLevelEnded;
+            _gameController.OnLevelRestart += OnLevelRestart;
         }
 
         private void OnDestroy()
         {
-            GameController.Instance.OnLevelEnded -= OnLevelEnded;
-            GameController.Instance.OnLevelRestart -= OnLevelRestart;
+            _gameController.OnLevelEnded -= OnLevelEnded;
+            _gameController.OnLevelRestart -= OnLevelRestart;
         }
 
         private void OnLevelRestart()
@@ -45,10 +51,10 @@ namespace Ingame
 
         private void OnLevelEnded(bool isVictory)
         {
-            int levelNumber = SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value;
+            int levelNumber = _saveLoadSystem.SaveData.CurrentLevelNumber.Value;
             
             SendLevelEnd(isVictory, levelNumber);
-            SendAverageLevelFps(TemplateManager.Instance.AverageFPS, levelNumber);
+            SendAverageLevelFps(_templateManager.AverageFPS, levelNumber);
         }
         
         private void SendLevelEnd(bool isVictory, int levelNumber)

@@ -5,6 +5,7 @@ using Ingame.UI;
 using MoreMountains.NiceVibrations;
 using Support;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
@@ -13,6 +14,10 @@ namespace Ingame
     {
         [SerializeField] private PlayerData data;
 
+        [Inject] private GameController _gameController;
+        [Inject] private AnalyticsWrapper _analyticsWrapper;
+        [Inject] private UiController _uiController;
+        
         private const int NUMBER_OF_REGENERATED_CHARGES_PER_TICK = 1;
         private const int CHARGES_USED_TO_PERFORM_DASH = 1;
 
@@ -68,10 +73,10 @@ namespace Ingame
         
         private void Die(DamageType damageType)
         {
-            if(AnalyticsWrapper.Instance != null)
-                AnalyticsWrapper.Instance.LevelStats.AddPlayerDeathToStats(damageType);
+            if(_analyticsWrapper != null)
+                _analyticsWrapper.LevelStats.AddPlayerDeathToStats(damageType);
             
-            GameController.Instance.EndLevel(false);
+            _gameController.EndLevel(false);
             Destroy(gameObject);
         }
 
@@ -92,7 +97,7 @@ namespace Ingame
             _currentNumberOfCharges += numberOfChargesToRegenerate;
             _currentNumberOfCharges = Mathf.Min(_currentNumberOfCharges, data.InitialNumberOfCharges);
             
-            UiController.Instance.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
+            _uiController.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
         }
 
         public void UseCharges(int numberOfChargesToUse)
@@ -105,7 +110,7 @@ namespace Ingame
             numberOfChargesToUse = Mathf.Abs(numberOfChargesToUse);
             _currentNumberOfCharges = Mathf.Max(0, _currentNumberOfCharges - numberOfChargesToUse);
             
-            UiController.Instance.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
+            _uiController.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
             this.WaitAndDoCoroutine(TIME_AFTER_DASH_WHEN_PLAYER_IS_INVINCIBLE, () => _isInvincible = false);
         }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Support
 {
-    public class TemplateManager : MonoSingleton<TemplateManager>
+    public class TemplateManager : MonoBehaviour
     {
         [SerializeField] private int targetFpsOnCurrentScene = 60;
         [SerializeField] private VibrationMode vibrationMode = VibrationMode.Universal;

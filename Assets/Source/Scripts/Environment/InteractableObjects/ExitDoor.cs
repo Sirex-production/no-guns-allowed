@@ -1,11 +1,14 @@
 using Support;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
     [RequireComponent(typeof(Collider))]
     public class ExitDoor : MonoBehaviour
     {
+        [Inject] private GameController _gameController;
+        
         private void Awake()
         {
             GetComponent<Collider>().isTrigger = true;
@@ -18,7 +21,7 @@ namespace Ingame
                 if(player.TryGetComponent(out Rigidbody playerRigidBody))
                     playerRigidBody.velocity = Vector3.zero;
 
-                GameController.Instance.EndLevel(true);
+                _gameController.EndLevel(true);
             }
         }
     }

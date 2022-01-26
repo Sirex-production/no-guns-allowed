@@ -2,6 +2,7 @@ using Extensions;
 using NaughtyAttributes;
 using Support;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.UI
 {
@@ -9,34 +10,37 @@ namespace Ingame.UI
     {
         [Required] [SerializeField] private Animator levelTransitionAnimator;
 
-        private const float TIME_OFFSET_AFTER_ANIMATION = .2f;
+        [Inject] private GameController _gameController;
+        [Inject] private LevelManager _levelManager;
         
+        private const float TIME_OFFSET_AFTER_ANIMATION = .2f;
+
         private void Start()
         {
-            GameController.Instance.OnNextLevelLoaded += OnNextLevelLoad;
-            GameController.Instance.OnLevelRestart += OnLevelRestart;
+            _gameController.OnNextLevelLoaded += OnNextLevelLoad;
+            _gameController.OnLevelRestart += OnLevelRestart;
             
             PlayOpenAnimation();
         }
 
         private void OnDestroy()
         {
-            GameController.Instance.OnNextLevelLoaded -= OnNextLevelLoad;
-            GameController.Instance.OnLevelRestart -= OnLevelRestart;
+           _gameController.OnNextLevelLoaded -= OnNextLevelLoad;
+           _gameController.OnLevelRestart -= OnLevelRestart;
         }
         
         private void OnNextLevelLoad()
         {
             PlayCloseAnimation();
             var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
-            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => LevelManager.Instance.LoadNextLevel());
+            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => _levelManager.LoadNextLevel());
         }
 
         private void OnLevelRestart()
         {
             PlayCloseAnimation();
             var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
-            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => LevelManager.Instance.RestartLevel());
+            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => _levelManager.RestartLevel());
         }
 
         private void PlayOpenAnimation()

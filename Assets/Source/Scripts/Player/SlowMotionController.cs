@@ -3,6 +3,7 @@ using Extensions;
 using Ingame.Graphics;
 using Support;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
@@ -13,6 +14,8 @@ namespace Ingame
         [Tooltip("The minimum amount of slow-motion player has to restore before ")]
         [SerializeField] private float slowMotionThreshold;
 
+        [Inject] private GameController _gameController;
+        
         private enum State
         {
             Default, //No slow-motion, No aiming
@@ -36,8 +39,8 @@ namespace Ingame
             PlayerEventController.Instance.OnAim += CallForSlowMotion;
             PlayerEventController.Instance.OnDashCancelled += ReturnToDefaultState;
             PlayerEventController.Instance.OnDashPerformed += ReturnToDefaultStateOnDashPerformed;
-            GameController.Instance.OnLevelRestart += ReturnToDefaultState;
-            GameController.Instance.OnLevelEnded += ReturnToDefaultStateOnLevelEnd;
+            _gameController.OnLevelRestart += ReturnToDefaultState;
+            _gameController.OnLevelEnded += ReturnToDefaultStateOnLevelEnd;
         }
 
         private void OnDestroy()
@@ -45,8 +48,8 @@ namespace Ingame
             PlayerEventController.Instance.OnAim -= CallForSlowMotion;
             PlayerEventController.Instance.OnDashCancelled -= ReturnToDefaultState;
             PlayerEventController.Instance.OnDashPerformed -= ReturnToDefaultStateOnDashPerformed;
-            GameController.Instance.OnLevelRestart -= ReturnToDefaultState;
-            GameController.Instance.OnLevelEnded -= ReturnToDefaultStateOnLevelEnd;
+            _gameController.OnLevelRestart -= ReturnToDefaultState;
+            _gameController.OnLevelEnded -= ReturnToDefaultStateOnLevelEnd;
         }
 
         private IEnumerator TimerRoutine()

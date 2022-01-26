@@ -1,11 +1,10 @@
 using System;
 using NaughtyAttributes;
-using Support;
 using UnityEngine;
 
 namespace Ingame.UI
 {
-    public class UiController : MonoSingleton<UiController>
+    public class UiController : MonoBehaviour
     {
         [Required] [SerializeField] private UiPlayerDashesController uiDashesController;
 

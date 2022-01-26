@@ -1,9 +1,10 @@
 using System;
 using MoreMountains.NiceVibrations;
+using UnityEngine;
 
 namespace Support
 {
-    public class GameController : MonoSingleton<GameController>
+    public class GameController : MonoBehaviour
     {
         public event Action<bool> OnLevelEnded;
         public event Action OnNextLevelLoaded;

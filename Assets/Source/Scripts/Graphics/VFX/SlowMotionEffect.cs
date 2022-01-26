@@ -1,6 +1,7 @@
 using System.Collections;
 using Support;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.Graphics.VFX
 {
@@ -9,6 +10,8 @@ namespace Ingame.Graphics.VFX
         [SerializeField] [Range(0.0f, 1.0f)] private float timeScale;
         [SerializeField] [Min(0)] private float lerpDuration;
 
+        [Inject] private GameController _gameController;
+        
         private float _defaultFixedDeltaTime;
 
         private void Awake()
@@ -18,7 +21,7 @@ namespace Ingame.Graphics.VFX
 
         private void Start()
         {
-            GameController.Instance.OnLevelRestart += ResetTimeScale;
+            _gameController.OnLevelRestart += ResetTimeScale;
             
             if(PlayerEventController.Instance == null)
                 return;
@@ -28,7 +31,7 @@ namespace Ingame.Graphics.VFX
 
         private void OnDestroy()
         {
-            GameController.Instance.OnLevelRestart -= ResetTimeScale;
+            _gameController.OnLevelRestart -= ResetTimeScale;
             
             if(PlayerEventController.Instance == null)
                 return;

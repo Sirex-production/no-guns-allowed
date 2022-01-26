@@ -3,6 +3,7 @@ using System.Collections;
 using MoreMountains.NiceVibrations;
 using Support;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.UI
 {
@@ -11,6 +12,8 @@ namespace Ingame.UI
         [SerializeField] private float animationSpeed;
         [SerializeField] private float messageDuration;
 
+        [Inject] private UiController _uiController;
+        
         private CanvasGroup _canvasGroupComponent;
 
         private void Awake()
@@ -32,7 +35,7 @@ namespace Ingame.UI
         private IEnumerator OutOfChargesRoutine()
         {
             _canvasGroupComponent.alpha = 1;
-            UiController.Instance.UiDashesController.HideCharges();
+            _uiController.UiDashesController.HideCharges();
 
             var timeElapsed = 0.0f;
             var deltaDirection = -1;
@@ -52,7 +55,7 @@ namespace Ingame.UI
                 yield return null;
             }
 
-            UiController.Instance.UiDashesController.ShowCharges();
+            _uiController.UiDashesController.ShowCharges();
             _canvasGroupComponent.alpha = 0;
         }
 

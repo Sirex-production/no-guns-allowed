@@ -1,5 +1,6 @@
 using Ingame.UI;
 using UnityEngine;
+using Zenject;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -16,6 +17,8 @@ namespace Ingame
         [Tooltip("Text that will be displayed in log when player interacts with the button")]
         [SerializeField] private string logInteractionText;
 
+        [Inject] private UiController _uiController;
+
         private bool _isWorking = true;
         
         private void OnTriggerEnter(Collider other)
@@ -23,8 +26,8 @@ namespace Ingame
             if(!other.TryGetComponent(out PlayerEventController _) || !_isWorking)
                 return;
             
-            UiController.Instance.ShowInteractableButton(ActivateInvokableObjects);
-            UiController.Instance.DisplayLogMessage(logApproachText, LogDisplayType.DisplayAndKeep);
+            _uiController.ShowInteractableButton(ActivateInvokableObjects);
+            _uiController.DisplayLogMessage(logApproachText, LogDisplayType.DisplayAndKeep);
         }
 
         private void OnTriggerExit(Collider other)
@@ -32,8 +35,8 @@ namespace Ingame
             if(!other.TryGetComponent(out PlayerEventController _) || !_isWorking)
                 return;
             
-            UiController.Instance.DisplayLogMessage("...", LogDisplayType.DisplayAndKeep);
-            UiController.Instance.HideInteractableButton();
+            _uiController.DisplayLogMessage("...", LogDisplayType.DisplayAndKeep);
+            _uiController.HideInteractableButton();
         }
 
 #if UNITY_EDITOR
@@ -69,7 +72,7 @@ namespace Ingame
             if(invokableObjects == null || invokableObjects.Length < 1)
                 return;
             
-            UiController.Instance.DisplayLogMessage(logInteractionText, LogDisplayType.DisplayAndClear);
+            _uiController.DisplayLogMessage(logInteractionText, LogDisplayType.DisplayAndClear);
             
             foreach (var invokableObject in invokableObjects)
             {
