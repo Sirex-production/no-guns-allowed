@@ -5520,6 +5520,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753881603}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &754736272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6691913785897602606, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+  m_PrefabInstance: {fileID: 9090654336668902411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b43e277f5637f428dcabb068ffd494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &769774345
 GameObject:
   m_ObjectHideFlags: 3
@@ -19303,6 +19314,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.5000114
       objectReference: {fileID: 0}
+    - target: {fileID: 1364312702051740933, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: effectsManager
+      value: 
+      objectReference: {fileID: 754736272}
     - target: {fileID: 3528819967999525208, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -35.99994
@@ -19363,6 +19378,10 @@ PrefabInstance:
       propertyPath: volumeReference
       value: 
       objectReference: {fileID: 480749670}
+    - target: {fileID: 7596239444455690363, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: timeoutBeforeStart
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 7649552362491798977, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_RootOrder
       value: 3

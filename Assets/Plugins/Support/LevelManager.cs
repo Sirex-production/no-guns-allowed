@@ -20,7 +20,7 @@ namespace Support
         private void LoadLastLevelFromSave()
         {
             
-            int currentLevelNumber = SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value;
+            int currentLevelNumber = _saveLoadSystem.SaveData.CurrentLevelNumber.Value;
             int sceneIndexOfCurrentLevel = currentLevelNumber < SceneManager.sceneCountInBuildSettings - 1
                 ? currentLevelNumber
                 : currentLevelNumber % SceneManager.sceneCountInBuildSettings;
@@ -30,7 +30,7 @@ namespace Support
                 return;
             
             if(currentSceneIndex == 0)
-                LoadLevel(SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value);
+                LoadLevel(_saveLoadSystem.SaveData.CurrentLevelNumber.Value);
         }
 #endif
 
