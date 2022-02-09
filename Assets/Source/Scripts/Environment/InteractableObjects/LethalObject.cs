@@ -63,11 +63,11 @@ namespace Ingame
         {
             Destroy(gameObject.GetComponent<Rigidbody>());
 
-            foreach (var child in _children)
-            {
-                child.TryGetComponent(out BoxCollider boxColliderComponent);
-                Destroy(boxColliderComponent);
-            }
+            //foreach (var child in _children)
+            //{
+            //    child.TryGetComponent(out BoxCollider boxColliderComponent);
+            //    Destroy(boxColliderComponent);
+            //}
 
             Destroy(this);
         }
