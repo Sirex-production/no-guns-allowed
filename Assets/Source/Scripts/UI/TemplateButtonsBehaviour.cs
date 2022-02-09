@@ -40,25 +40,25 @@ namespace Ingame
 
         public void ChangeAimSensitivity(Slider slider)
         {
-            _saveLoadSystem.SaveData.AimSensitivity.Value = slider.value;
+            if(_saveLoadSystem != null)
+                _saveLoadSystem.SaveData.AimSensitivity.Value = slider.value;
         }
 
         public void ClosePauseMenu(CanvasGroup parentCanvasGroup)
         {
             Time.timeScale = 1f;
-            
             parentCanvasGroup.SetGameObjectActive();
-            parentCanvasGroup.DOFade(0, fadeAnimationDuration)
-                .OnComplete(parentCanvasGroup.SetGameObjectInactive);
+            parentCanvasGroup.transform.DOScaleY(0, fadeAnimationDuration).OnComplete(parentCanvasGroup.SetGameObjectInactive);
 
             _saveLoadSystem.PerformSave();
         }
 
         public void OpenPauseMenu(CanvasGroup parentCanvasGroup)
         {
+
             parentCanvasGroup.SetGameObjectActive();
-            parentCanvasGroup.DOFade(1, fadeAnimationDuration)
-                .OnComplete(() => Time.timeScale = 0.0001f);
+            parentCanvasGroup.transform.localScale = new Vector3(1, 0, 1);
+            parentCanvasGroup.transform.DOScaleY(1, fadeAnimationDuration).OnComplete(() => Time.timeScale = 0.0001f);
         }
 
         public void TransitBetweenLevelOverviews()

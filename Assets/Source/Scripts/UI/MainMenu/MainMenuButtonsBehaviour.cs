@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Extensions;
+using Support;
 using Support.SLS;
 using UnityEngine;
 using Zenject;
@@ -10,6 +11,7 @@ namespace Ingame.UI
     {
         [SerializeField] [Min(0)] private float fadeAnimationTime = .2f;
         [Inject] private SaveLoadSystem _saveLoadSystem;
+        [Inject] private GameController _gameController;
         
         public void ShowMenu(CanvasGroup settingsMenuCanvas)
         {
@@ -33,6 +35,11 @@ namespace Ingame.UI
         {
             developersMenu.HideContent();
             this.WaitAndDoCoroutine(fadeAnimationTime, developersMenu.PlayAppearanceAnimation);
+        }
+
+        public void LoadLevel()
+        { 
+            _gameController.LoadNextLevel();
         }
     }
 }

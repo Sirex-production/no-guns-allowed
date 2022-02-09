@@ -3,6 +3,7 @@ using System.Collections;
 using Extensions;
 using Ingame;
 using Ingame.AI;
+using Support;
 using UnityEngine;
 
 public class RechargingStation : MonoBehaviour
@@ -69,10 +70,10 @@ public class RechargingStation : MonoBehaviour
 
     private IEnumerator CooldownRoutine()
     {
-        Debug.Log("A coroutine has started");
+        this.SafeDebug("A coroutine has started");
 
         if(_state != State.OnCooldown)
-            Debug.LogError($"A logical error in the FSM: the state should not be {_state} when entering cooldown");
+            this.SafeDebug($"A logical error in the FSM: the state should not be {_state} when entering cooldown", LogType.Error);
 
         yield return new WaitForSeconds(cooldown);
         SwitchState(State.Inactive);
