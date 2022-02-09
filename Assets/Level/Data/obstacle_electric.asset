@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e356fdb3e8aa1eac8b63e2e806012080, type: 3}
-  m_Name: Obstacle
+  m_Name: obstacle_electric
   m_EditorClassIdentifier: 
-  friendlySides: 0000000003000000
+  friendlySides: 
   damage: 9999

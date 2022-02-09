@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using Ingame.AI;
 using NaughtyAttributes;
@@ -26,6 +28,15 @@ namespace Ingame
             }
         }
 
+        private IEnumerator ColliderRemovalRoutine()
+        {
+            yield return new WaitForSeconds(duration + 0.05f);
+
+            var doorCollider = GetComponent<BoxCollider>();
+            Destroy(doorCollider);
+        }
+
+
         private void OpenDoor()
         {
             var directionVector = Vector3.Normalize(PlayerEventController.Instance.transform.position - transform.position);
@@ -35,6 +46,7 @@ namespace Ingame
             var tweenEndValue = new Vector3(rotationAngle * direction, 0, 0);
 
             transform.DORotate(tweenEndValue, duration, RotateMode.LocalAxisAdd);
+            StartCoroutine(ColliderRemovalRoutine());
         }
     }
 }

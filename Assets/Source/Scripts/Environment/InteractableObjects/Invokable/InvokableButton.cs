@@ -7,6 +7,8 @@ using UnityEditor;
 
 namespace Ingame
 {
+    //TODO: review the possibility of renaming class
+    //it's confusing that both monoBehaviour and invokable classes have the same "Invokable" prefix
     [RequireComponent(typeof(Collider))]
     public class InvokableButton : MonoBehaviour
     {
