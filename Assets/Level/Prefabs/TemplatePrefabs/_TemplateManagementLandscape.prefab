@@ -480,7 +480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowMotionEffect: {fileID: 6129073016788587063}
   poolManager: {fileID: 3021399359968157615}
-  effectsManager: {fileID: 6129073016788587063}
+  effectsManager: {fileID: 0}
 --- !u!1 &788479583896810871
 GameObject:
   m_ObjectHideFlags: 0
@@ -5354,6 +5354,7 @@ MonoBehaviour:
   startValue: 0
   endValue: 0.5
   lerpDuration: 0.25
+  timeoutBeforeStart: 0.3
 --- !u!1 &4917932376123679612
 GameObject:
   m_ObjectHideFlags: 0
@@ -6060,7 +6061,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: sensetivity
+  m_text: sensitivity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}

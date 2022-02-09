@@ -1,5 +1,3 @@
-using System;
-using Extensions;
 using Ingame.AI;
 using UnityEngine;
 
@@ -8,6 +6,8 @@ namespace Ingame.Graphics
     [RequireComponent(typeof(EffectsFactory))]
     public class BreakableWall : MonoBehaviour
     {
+        private const float MIN_COS_OF_ANGLE_TO_BREAK_THE_WALL = .85f;
+        
         private EffectsFactory _effectsFactory;
 
         private void Awake()
@@ -44,8 +44,16 @@ namespace Ingame.Graphics
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
         }
 
-        private void OnDashPerformed(Vector3 _)
+        private void OnDashPerformed(Vector3 dashDirection)
         {
+            
+            var directionToTheWall = Vector3.Normalize(transform.position - PlayerEventController.Instance.transform.position);
+            var dotProductBetweenDashAndWallDirection = Vector3.Dot(directionToTheWall, dashDirection);
+
+
+            if (dotProductBetweenDashAndWallDirection < MIN_COS_OF_ANGLE_TO_BREAK_THE_WALL)
+                return;
+
             _effectsFactory.PlayAllEffects(EffectType.Destruction);
             Destroy(gameObject);
         }
