@@ -8,6 +8,7 @@ namespace Support
     {
         public event Action<bool> OnLevelEnded;
         public event Action OnNextLevelLoaded;
+        public event Action<int> OnLevelLoaded;
         public event Action OnLevelRestart;
 
         private bool _isLevelEnded = false;
@@ -32,6 +33,11 @@ namespace Support
         public void RestartLevel()
         {
             OnLevelRestart?.Invoke();
+        }
+
+        public void LoadLevel(int levelNumber)
+        {
+            OnLevelLoaded?.Invoke(levelNumber);
         }
     }
 }

@@ -13,7 +13,8 @@ namespace Ingame.UI
         [BoxGroup("References")] [SerializeField] private CanvasGroup characterSectionCanvasGroup;
         [BoxGroup("References")] [SerializeField] private TMP_Text characterOutputText;
         [Space]
-        [BoxGroup("References")] [SerializeField] private CanvasGroup startButtonCanvasGroup;
+        [BoxGroup("References")] [SerializeField] private CanvasGroup continueButtonCanvasGroup;
+        [BoxGroup("References")] [SerializeField] private CanvasGroup missionsButtonCanvasGroup;
         [BoxGroup("References")] [SerializeField] private CanvasGroup optionsButtonCanvasGroup;
         [BoxGroup("References")] [SerializeField] private CanvasGroup developersButtonCanvasGroup;
         
@@ -34,11 +35,13 @@ namespace Ingame.UI
 
             menuText.SetText("");
             characterSectionCanvasGroup.alpha = 0;
-            startButtonCanvasGroup.alpha = 0;
+            continueButtonCanvasGroup.alpha = 0;
+            missionsButtonCanvasGroup.alpha = 0;
             optionsButtonCanvasGroup.alpha = 0;
             developersButtonCanvasGroup.alpha = 0;
             
-            startButtonCanvasGroup.SetGameObjectInactive();
+            continueButtonCanvasGroup.SetGameObjectInactive();
+            missionsButtonCanvasGroup.SetGameObjectInactive();
             optionsButtonCanvasGroup.SetGameObjectInactive();
             developersButtonCanvasGroup.SetGameObjectInactive();
             
@@ -52,13 +55,15 @@ namespace Ingame.UI
 
         private void ShowButtons()
         {
-            startButtonCanvasGroup.SetGameObjectActive();
+            continueButtonCanvasGroup.SetGameObjectActive();
+            missionsButtonCanvasGroup.SetGameObjectActive();
             optionsButtonCanvasGroup.SetGameObjectActive();
             developersButtonCanvasGroup.SetGameObjectActive();
             
-            startButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime);
-            this.WaitAndDoCoroutine(pauseBetweenFadingButtons, () => optionsButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime));
-            this.WaitAndDoCoroutine(pauseBetweenFadingButtons * 2, () => developersButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime));
+            continueButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime);
+            this.WaitAndDoCoroutine(pauseBetweenFadingButtons, () => missionsButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime));
+            this.WaitAndDoCoroutine(pauseBetweenFadingButtons * 2, () => optionsButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime));
+            this.WaitAndDoCoroutine(pauseBetweenFadingButtons * 3, () => developersButtonCanvasGroup.DOFade(1, buttonFadeAnimationTime));
         }
 
         private void ShowCharacterText()

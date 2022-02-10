@@ -37,9 +37,14 @@ namespace Ingame.UI
             this.WaitAndDoCoroutine(fadeAnimationTime, developersMenu.PlayAppearanceAnimation);
         }
 
-        public void LoadLevel()
+        public void LoadNextLevel()
         { 
             _gameController.LoadNextLevel();
+        }
+
+        public void LoadLevel(int levelNumber)
+        {
+            _gameController.LoadLevel(levelNumber);
         }
     }
 }

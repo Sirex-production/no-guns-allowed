@@ -11,29 +11,6 @@ namespace Support
         [Inject] 
         private SaveLoadSystem _saveLoadSystem;
         
-#if !UNITY_EDITOR
-        private void Start()
-        {
-            LoadLastLevelFromSave();
-        }
-
-        private void LoadLastLevelFromSave()
-        {
-            
-            int currentLevelNumber = _saveLoadSystem.SaveData.CurrentLevelNumber.Value;
-            int sceneIndexOfCurrentLevel = currentLevelNumber < SceneManager.sceneCountInBuildSettings - 1
-                ? currentLevelNumber
-                : currentLevelNumber % SceneManager.sceneCountInBuildSettings;
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            
-            if(sceneIndexOfCurrentLevel == currentSceneIndex)
-                return;
-            
-            if(currentSceneIndex == 0)
-                LoadLevel(_saveLoadSystem.SaveData.CurrentLevelNumber.Value);
-        }
-#endif
-
         public void ManageLevelDependingOnWinningCondition(bool isVictory)
         {
             if (isVictory)
@@ -67,6 +44,21 @@ namespace Support
             _saveLoadSystem.PerformSave();
             
             LoadLevel(_saveLoadSystem.SaveData.CurrentLevelNumber.Value);
+        }
+        
+        public void LoadLastLevelFromSave()
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int currentLevelNumber = _saveLoadSystem.SaveData.CurrentLevelNumber.Value;
+            int sceneIndexOfCurrentLevel = currentLevelNumber < SceneManager.sceneCountInBuildSettings - 1
+                ? currentLevelNumber
+                : currentLevelNumber % SceneManager.sceneCountInBuildSettings;
+
+            if(sceneIndexOfCurrentLevel == currentSceneIndex)
+                return;
+            
+            if(currentSceneIndex == 0)
+                LoadLevel(_saveLoadSystem.SaveData.CurrentLevelNumber.Value);
         }
     }
 }
