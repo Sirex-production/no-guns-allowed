@@ -1,28 +1,40 @@
+using System;
+using System.Linq;
 using Cinemachine;
+using Extensions;
 using NaughtyAttributes;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
-    public class CameraSectionTransition : MonoBehaviour
+    public class CameraSectionTransiter : MonoBehaviour
     {
-        [Required] [SerializeField] private CinemachineVirtualCamera levelOverviewCamera;
+        [Required]
+        [SerializeField] private CinemachineVirtualCamera levelOverviewCamera;
         [SerializeField] private CinemachineVirtualCamera[] levelTransitionCameras;
 
         private const float GIZMOS_SPHERE_RADIUS = .5f;
 
+        [Inject]
+        private SectionsManager _sectionsManager;
+
+        public event Action<CinemachineVirtualCamera> OnVirtualCameraChanged;
+
         private void Start()
         {
-            SectionsManager.Instance.OnSectionEnter += TransitToCameraWithIndex;
-            SectionsManager.Instance.OnLevelOverviewEnter += OnLevelOverviewEnter;
-            SectionsManager.Instance.OnLevelOverviewExit += OnLevelOverviewExit;
+            _sectionsManager.OnSectionEnter += TransitToCameraWithIndex;
+            _sectionsManager.OnLevelOverviewEnter += OnLevelOverviewEnter;
+            _sectionsManager.OnLevelOverviewExit += OnLevelOverviewExit;
+
+            this.DoAfterNextFrameCoroutine(() => ChangeVirtualCamera(levelTransitionCameras.First(cam => cam != null)));
         }
 
         private void OnDestroy()
         {
-            SectionsManager.Instance.OnSectionEnter -= TransitToCameraWithIndex;
-            SectionsManager.Instance.OnLevelOverviewEnter -= OnLevelOverviewEnter;
-            SectionsManager.Instance.OnLevelOverviewExit -= OnLevelOverviewExit;
+            _sectionsManager.OnSectionEnter -= TransitToCameraWithIndex;
+            _sectionsManager.OnLevelOverviewEnter -= OnLevelOverviewEnter;
+            _sectionsManager.OnLevelOverviewExit -= OnLevelOverviewExit;
         }
  
         private void OnDrawGizmos()
@@ -49,26 +61,20 @@ namespace Ingame
             if(cameraSectionIndex < 0 || cameraSectionIndex >= levelTransitionCameras.Length || levelTransitionCameras == null || levelTransitionCameras.Length < 1)
                 return;
 
-            ResetPrioritiesToZero();
-            levelTransitionCameras[cameraSectionIndex].Priority = 10;
+
+            ChangeVirtualCamera(levelTransitionCameras[cameraSectionIndex]);
         }
 
         private void OnLevelOverviewEnter()
         {
-            TransitToLevelOverview();
+            ChangeVirtualCamera(levelOverviewCamera);
         }
 
         private void OnLevelOverviewExit(int currentSectionId)
         {
             TransitToCameraWithIndex(currentSectionId);
         }
-
-        private void TransitToLevelOverview()
-        {
-            ResetPrioritiesToZero();
-            levelOverviewCamera.Priority = 10;
-        }
-
+        
         private void ResetPrioritiesToZero()
         {
             if(levelOverviewCamera != null)
@@ -84,6 +90,13 @@ namespace Ingame
 
                 levelCamera.Priority = 0;
             }
+        }
+
+        private void ChangeVirtualCamera(CinemachineVirtualCamera actualVirtualCamera)
+        {
+            ResetPrioritiesToZero();
+            actualVirtualCamera.Priority = 10;
+            OnVirtualCameraChanged?.Invoke(actualVirtualCamera);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,14 +11,17 @@ namespace Ingame
     public class SectionTransitionTrigger : MonoBehaviour
     {
         [SerializeField] private int boundedSection = -1;
+        
+        [Inject]
+        private SectionsManager _sectionsManager;
 
         private void OnTriggerExit(Collider other)
         {
-            if(SectionsManager.Instance.CurrentSection == boundedSection)
+            if(_sectionsManager.CurrentSection == boundedSection)
                 return;
             
             if (other.TryGetComponent(out PlayerEventController player))
-                SectionsManager.Instance.EnterSection(boundedSection);
+                _sectionsManager.EnterSection(boundedSection);
         }
 
 #if UNITY_EDITOR

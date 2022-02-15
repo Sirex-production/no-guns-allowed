@@ -16,7 +16,8 @@ namespace Ingame
         private GameController _gameController;
         [Inject]
         private SaveLoadSystem _saveLoadSystem;
-        
+        [Inject]
+        private SectionsManager _sectionsManager;
         
         public void OpenUrl(string urlToOpen)
         {
@@ -63,15 +64,10 @@ namespace Ingame
 
         public void TransitBetweenLevelOverviews()
         {
-            var sectionManager = SectionsManager.Instance;
-            
-            if(sectionManager == null)
-                return;
-            
-            if(sectionManager.IsInLevelOverview)
-                sectionManager.ExitLevelOverview();
+            if(_sectionsManager.IsInLevelOverview)
+                _sectionsManager.ExitLevelOverview();
             else
-                sectionManager.EnterLevelOverview();
+                _sectionsManager.EnterLevelOverview();
         }
     }
 }

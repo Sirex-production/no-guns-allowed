@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -8,19 +9,22 @@ namespace Ingame
     public abstract class SectionPart : MonoBehaviour
     {
         [SerializeField] protected int boundedSectionId = -1;
+
+        [Inject] 
+        private SectionsManager _sectionsManager;
         
         protected virtual void Start()
         {
-            SectionsManager.Instance.OnSectionEnter += OnSectionEnter;
-            SectionsManager.Instance.OnLevelOverviewEnter += OnLevelOverviewEnter;
-            SectionsManager.Instance.OnLevelOverviewExit += OnLevelOverviewExit;
+            _sectionsManager.OnSectionEnter += OnSectionEnter;
+            _sectionsManager.OnLevelOverviewEnter += OnLevelOverviewEnter;
+            _sectionsManager.OnLevelOverviewExit += OnLevelOverviewExit;
         }
 
         protected virtual void OnDestroy()
         {
-            SectionsManager.Instance.OnSectionEnter -= OnSectionEnter;
-            SectionsManager.Instance.OnLevelOverviewEnter -= OnLevelOverviewEnter;
-            SectionsManager.Instance.OnLevelOverviewExit -= OnLevelOverviewExit;
+            _sectionsManager.OnSectionEnter -= OnSectionEnter;
+            _sectionsManager.OnLevelOverviewEnter -= OnLevelOverviewEnter;
+            _sectionsManager.OnLevelOverviewExit -= OnLevelOverviewExit;
         }
 
 #if UNITY_EDITOR

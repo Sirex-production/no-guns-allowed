@@ -4,39 +4,43 @@ using UnityEngine;
 
 namespace Ingame.Graphics
 {
+    [RequireComponent(typeof(CameraSectionTransiter))]
     public class ScreenShake : MonoBehaviour
     {
-        [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
         [SerializeField] [Min(0.0f)] private float amplitudeGain;
         [SerializeField] [Min(0.0f)] private float frequencyGain;
         [SerializeField] [Min(0.0f)] private float shakeDuration;
-
+        
+        private CameraSectionTransiter _cameraSectionTransiter;
+        private CinemachineVirtualCamera _currentVirtualCamera;
         private Vector3 _cameraPosition;
         private Quaternion _cameraRotation;
 
         private void Awake()
         {
+            _cameraSectionTransiter = GetComponent<CameraSectionTransiter>();
+            
             var transform1 = this.transform;
             var position = transform1.position;
             var rotation = transform1.rotation;
             _cameraPosition = new Vector3(position.x, position.y, position.z);
             _cameraRotation = new Quaternion(rotation.x, rotation.y, rotation.z, rotation.w);
-            cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain =
-                frequencyGain;
         }
 
         private void Start()
         {
-            if(PlayerEventController.Instance == null)
-                return;
-            PlayerEventController.Instance.OnDashCancelled += StartScreenShake;
+            if(PlayerEventController.Instance != null)
+                PlayerEventController.Instance.OnDashCancelled += StartScreenShake;
+
+            _cameraSectionTransiter.OnVirtualCameraChanged += OnVirtualCameraChanged;
         }
 
         private void OnDestroy()
         {
-            if(PlayerEventController.Instance == null)
-                return;
-            PlayerEventController.Instance.OnDashCancelled -= StartScreenShake;
+            if(PlayerEventController.Instance != null)
+                PlayerEventController.Instance.OnDashCancelled -= StartScreenShake;
+            
+            _cameraSectionTransiter.OnVirtualCameraChanged -= OnVirtualCameraChanged;
         }
 
         private void Update()
@@ -45,11 +49,19 @@ namespace Ingame.Graphics
                 StartScreenShake();
         }
 
+        private void OnVirtualCameraChanged(CinemachineVirtualCamera virtualCamera)
+        {
+            _currentVirtualCamera = virtualCamera;
+            
+            _currentVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain =
+                frequencyGain;
+        }
+
         private IEnumerator ScreenShakeRoutine()
         {
             var timeElapsed = 0.0f;
             var cinemachineBasicMultiChannelPerlin =
-                cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+                _currentVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             while (true)
             {
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain =
@@ -74,7 +86,7 @@ namespace Ingame.Graphics
             transform1.rotation = _cameraRotation;
         }
 
-        public void StartScreenShake()
+        private void StartScreenShake()
         {
             if (!(Camera.main is { })) 
                 Debug.LogError("MainCamera has not been found in the scene");

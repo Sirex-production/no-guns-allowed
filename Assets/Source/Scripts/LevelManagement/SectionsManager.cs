@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Ingame
 {
-    public class SectionsManager : MonoSingleton<SectionsManager>
+    public class SectionsManager : MonoBehaviour
     {
         [SerializeField] private int initialStartSection = 0;
         
@@ -19,10 +19,8 @@ namespace Ingame
         public int CurrentSection => _currentSection;
         public bool IsInLevelOverview => _isInLevelOverview;
 
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
-            
             _currentSection = initialStartSection;
         }
 
