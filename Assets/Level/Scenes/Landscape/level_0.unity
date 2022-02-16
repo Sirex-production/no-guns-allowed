@@ -27417,7 +27417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1303336225342285866, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.9999924
+      value: -3.9999962
       objectReference: {fileID: 0}
     - target: {fileID: 1364312702051740933, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: effectsManager
