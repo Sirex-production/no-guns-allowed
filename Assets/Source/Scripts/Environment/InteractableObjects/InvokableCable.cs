@@ -9,8 +9,11 @@ namespace Ingame
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent(out HitBox hitbox) ||
-                hitbox.AttachedActorStats != PlayerEventController.Instance.StatsController) 
+            if (!other.TryGetComponent(out HitBox hitbox)) 
+                return;
+
+            if(!hitbox.AttachedActorStats.TryGetComponent(out PlayerEventController controller) ||
+               !controller.MovementController.IsDashing)
                 return;
 
             ReleaseObject();
