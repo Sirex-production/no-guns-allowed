@@ -1,4 +1,3 @@
-using System.Collections;
 using DG.Tweening;
 using Extensions;
 using Support;
@@ -9,21 +8,17 @@ public class UiFeedbackScreenController : MonoBehaviour
 {
     [SerializeField] private TMP_Text displayedText;
     [SerializeField] private CanvasGroup buttonsParentCanvas;
-    [SerializeField] [Min(0)] private float spawnDelayTime = 1.1f;
     [SerializeField] [Min(0)] private float letterSpawnPeriod = .05f;
     [SerializeField] [Min(0)] private float fadeAnimationSpeed = 1f;
     [SerializeField] [Min(0)] private float pauseBeforeButtonsWillBeShown = .5f;
 
-    private char[] _letters;
+    private bool _isSkipped = false;
     private string _text;
     private Tween _buttonFadeTween;
-    private WaitForSeconds _waitSpawnDelayTime;
 
     private void Awake()
     {
-        _letters = displayedText.text.ToCharArray();
         _text = displayedText.text;
-        _waitSpawnDelayTime = new WaitForSeconds(letterSpawnPeriod);
     }
 
     private void Start()
@@ -45,46 +40,18 @@ public class UiFeedbackScreenController : MonoBehaviour
         HideButtons();
     }
 
-    private IEnumerator SpawnTextRoutine()
-    {
-        displayedText.text = "";
-        yield return new WaitForSeconds(spawnDelayTime);
-
-        bool isTag = false;
-        var tag = "";
-        
-        foreach (var letter in _letters)
-        {
-            if (letter == '<')
-                isTag = true;
-            else if (letter == '>')
-            {
-                isTag = false;
-                displayedText.text += tag;
-                tag = "";
-            }
-
-            if (isTag)
-            {
-                tag += letter;
-                continue;
-            }
-            
-            displayedText.text += letter;
-            yield return _waitSpawnDelayTime;
-        }
-
-        RevealButtons();
-    }
-
     private void SpawnText()
     {
         StopAllCoroutines();
-        StartCoroutine(SpawnTextRoutine());
+        this.SpawnTextCoroutine(displayedText, _text, letterSpawnPeriod, RevealButtons);
     }
 
     private void SkipTextRevealEffect(Vector2 _)
     {
+        if(_isSkipped)
+            return;
+        _isSkipped = true;
+        
         StopAllCoroutines();
         displayedText.text = _text;
         this.WaitAndDoCoroutine(pauseBeforeButtonsWillBeShown, RevealButtons);

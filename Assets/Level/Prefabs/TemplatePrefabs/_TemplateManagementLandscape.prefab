@@ -108,7 +108,7 @@ RectTransform:
   - {fileID: 3756227504539198084}
   - {fileID: 3544575918834487824}
   m_Father: {fileID: 5750599160113356649}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -141,7 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayedText: {fileID: 1824635317591646667}
   buttonsParentCanvas: {fileID: 3856348029062897158}
-  spawnDelayTime: 1.1
   letterSpawnPeriod: 0.01
   fadeAnimationSpeed: 1
   pauseBeforeButtonsWillBeShown: 0.5
@@ -1024,8 +1023,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.997, y: 0}
-  m_SizeDelta: {x: 331.4783, y: 58.4402}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 334.3309, y: 58.4402}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1995640230204783455
 CanvasRenderer:
@@ -1082,7 +1081,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.65
+  m_fontSize: 39
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2687,7 +2686,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: https://forms.gle/FTSm4xyTSr1sqdTi9
+          m_StringArgument: https://forms.gle/mKfY3V3MX6VCWPL26
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &2693035358076376874
@@ -3631,8 +3630,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.997, y: 0}
-  m_SizeDelta: {x: 331.4783, y: 58.4402}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 390.0569, y: 44.9221}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4158099437423459940
 CanvasRenderer:
@@ -3689,13 +3688,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.55
+  m_fontSize: 39.8
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
   m_fontSizeMax: 32767
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3939,7 +3938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19215687, g: 0.1882353, b: 0.25490198, a: 1}
+  m_Color: {r: 0.050980393, g: 0.050980393, b: 0.050980393, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6746,7 +6745,7 @@ RectTransform:
   - {fileID: 3260236193149994325}
   - {fileID: 3586408566886157725}
   m_Father: {fileID: 5750599160113356649}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7520,8 +7519,8 @@ RectTransform:
   m_Children:
   - {fileID: 334661084842864468}
   - {fileID: 2358386092023197365}
-  - {fileID: 7399937642588944271}
   - {fileID: 1251136187408535690}
+  - {fileID: 7399937642588944271}
   m_Father: {fileID: 7685924280552080533}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7743,14 +7742,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.65971565, g: 1, b: 0.654902, a: 1}
+  m_Color: {r: 0.10980389, g: 0.8352941, b: 0.22328974, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 047e5b9cff91a964989e042366a73ef1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 615fe97bb0ae1dd4283f3f1078d63431, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7813,7 +7812,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: https://forms.gle/FTSm4xyTSr1sqdTi9
+          m_StringArgument: https://forms.gle/mKfY3V3MX6VCWPL26
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6741857446096658789}
@@ -9840,14 +9839,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6556604, b: 0.6556604, a: 1}
+  m_Color: {r: 0.8352941, g: 0.10980392, b: 0.28627452, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 047e5b9cff91a964989e042366a73ef1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 615fe97bb0ae1dd4283f3f1078d63431, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
