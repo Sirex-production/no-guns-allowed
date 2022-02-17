@@ -46,5 +46,10 @@ namespace Ingame.UI
         {
             _gameController.LoadLevel(levelNumber);
         }
+
+        public void LoadLastLevelFromSave()
+        {
+            _gameController.LoadLastLevelFromSave();
+        }
     }
 }

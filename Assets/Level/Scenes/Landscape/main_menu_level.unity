@@ -699,7 +699,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1760081550}
         m_TargetAssemblyTypeName: Ingame.UI.MainMenuButtonsBehaviour, Assembly-CSharp
-        m_MethodName: LoadNextLevel
+        m_MethodName: LoadLastLevelFromSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3491,7 +3491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.37928593}
   m_AnchorMax: {x: 1, y: 0.37928593}
-  m_AnchoredPosition: {x: -1.8968506, y: -0.19997406}
+  m_AnchoredPosition: {x: -1.8968506, y: -0.19998169}
   m_SizeDelta: {x: 20.31604, y: 79.93973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &980994535
@@ -5892,7 +5892,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.6497141}
   m_AnchorMax: {x: 1, y: 0.6497141}
-  m_AnchoredPosition: {x: -1.8968506, y: -2.0999985}
+  m_AnchoredPosition: {x: -1.8968506, y: -2.100006}
   m_SizeDelta: {x: 22.31604, y: 79.884186}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1492614910

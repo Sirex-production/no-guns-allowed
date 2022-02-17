@@ -8,7 +8,7 @@ namespace Support.SLS
     [Serializable]
     public class SaveData
     {
-        public const int DEFAULT_CURRENT_LEVEL = 0;
+        public const int DEFAULT_CURRENT_LEVEL = 1;
         public const float DEFAULT_AIM_SENSITIVITY = 5;
         
         public SaveDataHolder<int> CurrentLevelNumber { get; } = new SaveDataHolder<int>(DEFAULT_CURRENT_LEVEL);

@@ -20,9 +20,11 @@ namespace Ingame.UI
             _gameController.OnNextLevelLoaded += OnNextLevelLoad;
             _gameController.OnLevelLoaded += OnLevelLoaded;
             _gameController.OnLevelRestart += OnLevelRestart;
+            _gameController.OnLastLevelFromStaveLoaded += OnLastLevelFromSaveLoaded;
             
             PlayOpenAnimation();
         }
+        
 
         private void OnDestroy()
         {
@@ -50,6 +52,13 @@ namespace Ingame.UI
             PlayCloseAnimation();
             var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
             this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => _levelManager.RestartLevel());
+        }
+        
+        private void OnLastLevelFromSaveLoaded()
+        {
+            PlayCloseAnimation();
+            var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
+            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => _levelManager.LoadLastLevelFromSave());
         }
 
         private void PlayOpenAnimation()

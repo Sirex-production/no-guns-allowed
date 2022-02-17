@@ -33,6 +33,12 @@ namespace Ingame
         {
             _gameController.LoadNextLevel();
         }
+        
+        public void LoadMainMenu()
+        {
+            Time.timeScale = 1;
+            _gameController.LoadLevel(0);
+        }
 
         public void ClickVibrate()
         {
