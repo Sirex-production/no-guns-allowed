@@ -131,7 +131,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: PP 1.3.2
+  bundleVersion: PP 1.4
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -150,14 +150,14 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.sirexproduction.nogunsallowed
+    Android: com.Sirexproduction.NoGunsAllowed
     Standalone: com.Sirexproduction.NoGunsAllowed
   buildNumber:
     Standalone: 0
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 6
+  AndroidBundleVersionCode: 8
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 30
   AndroidPreferredInstallLocation: 0
@@ -266,7 +266,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: c5008cda5ee15a4489ad4498190754d6, type: 3}
+      m_Icon: {fileID: 2800000, guid: 968856f0c2a35e24ead8aa0042d3d415, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
