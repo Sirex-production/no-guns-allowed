@@ -6,30 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Level/Scenes/PlayableLevels/Tutorials/tutorial_dashing.unity
-    guid: 0d51d1cc7328a81428d443aedc3858e8
+    path: Assets/Level/Scenes/Landscape/main_menu_level.unity
+    guid: cd3767745c475174489d76431b383c8e
   - enabled: 1
-    path: Assets/Level/Scenes/PlayableLevels/Tutorials/tutorial_killing.unity
-    guid: 9e29cf3a87dc0824492502cb3d874205
-  - enabled: 1
-    path: Assets/Level/Scenes/PlayableLevels/level_1.unity
-    guid: 1ebb0509ba2b5394095cd265c65497b2
-  - enabled: 1
-    path: Assets/Level/Scenes/PlayableLevels/level_2.unity
-    guid: 26066ad5b2948ba48a168a84622fa5f2
-  - enabled: 1
-    path: Assets/Level/Scenes/PlayableLevels/level_3.unity
-    guid: 7edd7b2c2e6f9e143870c63b549a9b36
-  - enabled: 1
-    path: Assets/Level/Scenes/PlayableLevels/level_4.unity
-    guid: acb1bdca496478b46ad0f93b8ce5d36d
-  - enabled: 1
-    path: Assets/Level/Scenes/PlayableLevels/level_5.unity
-    guid: 3bc9fb0a83777da459a9f9142c8c16e6
-  - enabled: 1
-    path: Assets/Level/Scenes/PlayableLevels/level_6.unity
-    guid: 6434945b6239f634d8a103fb825b2c74
-  - enabled: 1
-    path: Assets/Level/Scenes/PlayableLevels/level_7.unity
-    guid: 67d67c1f41e492b4eb6c7dc07da3600b
+    path: Assets/Level/Scenes/Landscape/level_0.unity
+    guid: dba27b8134004c747add7bdf276ced82
   m_configObjects: {}

@@ -16,7 +16,7 @@ MonoBehaviour:
   actorSide: 0
   hostileSides: 0100000002000000
   initialHp: 1
-  useGravity: 0
+  useGravity: 1
   isLooped: 1
   speed: 10
   bulletPrefab: {fileID: 8450046680156236779, guid: b58ff0ce35ae33940a9fa3ca0235f353, type: 3}

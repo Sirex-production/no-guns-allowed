@@ -5,6 +5,7 @@ using Ingame.UI;
 using MoreMountains.NiceVibrations;
 using Support;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
@@ -13,6 +14,10 @@ namespace Ingame
     {
         [SerializeField] private PlayerData data;
 
+        [Inject] private GameController _gameController;
+        [Inject] private AnalyticsWrapper _analyticsWrapper;
+        [Inject] private UiController _uiController;
+        
         private const int NUMBER_OF_REGENERATED_CHARGES_PER_TICK = 1;
         private const int CHARGES_USED_TO_PERFORM_DASH = 1;
 
@@ -21,6 +26,7 @@ namespace Ingame
         private float _currentHp;
         private bool _isAlive = true;
         private bool _isInvincible = false;
+        private int _chargeRegenerationTimeModifier;
         private int _currentNumberOfCharges;
 
         public PlayerData Data => data;
@@ -31,11 +37,13 @@ namespace Ingame
         public override float CurrentHp => _currentHp;
         public int CurrentNumberOfCharges => _currentNumberOfCharges;
         public bool IsAbleToDash => _isAlive && _currentNumberOfCharges > 0 || !Data.AreChargesUsed;
-        
-        
+        public int ChargeRegenerationTimeModifier { get => _chargeRegenerationTimeModifier; set => _chargeRegenerationTimeModifier = value; }
+
+
         private void Awake()
         {
             _currentNumberOfCharges = data.InitialNumberOfCharges;
+            _chargeRegenerationTimeModifier = 1;
         }
 
         protected override void Start()
@@ -51,7 +59,7 @@ namespace Ingame
         {
             if (other.transform.TryGetComponent(out HitBox actorStats) && IsInvincible)
             {
-                actorStats.TakeDamage(data.Damage);
+                actorStats.TakeDamage(data.Damage, DamageType.Melee);
                 VibrationController.Vibrate(HapticTypes.RigidImpact);
             }
         }
@@ -66,9 +74,12 @@ namespace Ingame
             UseCharges(CHARGES_USED_TO_PERFORM_DASH);
         }
         
-        private void Die()
+        private void Die(DamageType damageType)
         {
-            GameController.Instance.EndLevel(false);
+            if(_analyticsWrapper != null)
+                _analyticsWrapper.LevelStats.AddPlayerDeathToStats(damageType);
+            
+            _gameController.EndLevel(false);
             Destroy(gameObject);
         }
 
@@ -76,7 +87,7 @@ namespace Ingame
         {
             while (_isAlive)
             {
-                yield return new WaitForSeconds(data.ChargeRegenerationTime);       
+                yield return new WaitForSeconds(data.ChargeRegenerationTime / _chargeRegenerationTimeModifier);       
                 
                 RegenerateDashingCharge(NUMBER_OF_REGENERATED_CHARGES_PER_TICK);
             }
@@ -89,7 +100,7 @@ namespace Ingame
             _currentNumberOfCharges += numberOfChargesToRegenerate;
             _currentNumberOfCharges = Mathf.Min(_currentNumberOfCharges, data.InitialNumberOfCharges);
             
-            UiController.Instance.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
+            _uiController.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
         }
 
         public void UseCharges(int numberOfChargesToUse)
@@ -102,13 +113,13 @@ namespace Ingame
             numberOfChargesToUse = Mathf.Abs(numberOfChargesToUse);
             _currentNumberOfCharges = Mathf.Max(0, _currentNumberOfCharges - numberOfChargesToUse);
             
-            UiController.Instance.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
+            _uiController.UiDashesController.SetNumberOfActiveCharges(_currentNumberOfCharges);
             this.WaitAndDoCoroutine(TIME_AFTER_DASH_WHEN_PLAYER_IS_INVINCIBLE, () => _isInvincible = false);
         }
 
-        public override void TakeDamage(float amountOfDamage)
+        public override void TakeDamage(float amountOfDamage, DamageType damageType)
         {
-            if(IsInvincible)
+            if(IsInvincible && damageType != DamageType.Obstacle)
                 return;
             
             amountOfDamage = Mathf.Abs(amountOfDamage);
@@ -116,7 +127,7 @@ namespace Ingame
             _currentHp -= amountOfDamage;
             
             if(_currentHp < 0)
-                Die();
+                Die(damageType);
         }
 
         public override void Heal(float amountOfHp)

@@ -18,6 +18,11 @@ namespace Ingame.AI
         private int _currentPatrolPointIndex = -1;
         private bool _isPatrolling = false;
 
+        private void OnEnable()
+        {
+            MoveToNextPoint();
+        }
+
         private void Awake()
         {
             _aiBehaviourController = GetComponent<AiBehaviourController>();

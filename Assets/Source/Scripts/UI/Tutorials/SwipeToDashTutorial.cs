@@ -3,6 +3,7 @@ using Extensions;
 using Support;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Ingame.UI
 {
@@ -14,7 +15,9 @@ namespace Ingame.UI
         [SerializeField] private float animationDuration = 1f;
         [SerializeField] private float fingerScaleOffset = 2f;
         [SerializeField] private float fingerDistanceOffset = 30f;
-
+        [Inject] private GameController _gameController;
+        
+        
         private Vector3 _initialFingerScale;
         private Vector2 _initialFingerPosition;
         private Sequence _animationSequence;
@@ -28,15 +31,15 @@ namespace Ingame.UI
         private void Start()
         {
             PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
-            GameController.Instance.OnLevelEnded += OnLevelEnd;
-            GameController.Instance.OnLevelRestart += OnLevelRestart;
+            _gameController.OnLevelEnded += OnLevelEnd;
+            _gameController.OnLevelRestart += OnLevelRestart;
         }
 
         private void OnDestroy()
         {
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
-            GameController.Instance.OnLevelEnded -= OnLevelEnd;
-            GameController.Instance.OnLevelRestart -= OnLevelRestart;
+            _gameController.OnLevelEnded -= OnLevelEnd;
+            _gameController.OnLevelRestart -= OnLevelRestart;
         }
 
         private void OnLevelEnd(bool _)

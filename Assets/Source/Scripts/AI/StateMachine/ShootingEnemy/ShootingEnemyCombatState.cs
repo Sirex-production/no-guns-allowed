@@ -2,13 +2,11 @@ namespace Ingame.AI
 {
     public class ShootingEnemyCombatState : State
     {
-
         public ShootingEnemyCombatState(ActorStats actorToAttack, Context context) : base(context)
         {
             _currentContext.AiBehaviourController.AiCombatController.Attack(actorToAttack);
         }
         
-
         public override State HandleSpotEnemy(ActorStats actorStats)
         {
             return this;

@@ -1,13 +1,16 @@
 using System;
 using MoreMountains.NiceVibrations;
+using UnityEngine;
 
 namespace Support
 {
-    public class GameController : MonoSingleton<GameController>
+    public class GameController : MonoBehaviour
     {
         public event Action<bool> OnLevelEnded;
         public event Action OnNextLevelLoaded;
+        public event Action<int> OnLevelLoaded;
         public event Action OnLevelRestart;
+        public event Action OnLastLevelFromStaveLoaded;
 
         private bool _isLevelEnded = false;
 
@@ -31,6 +34,16 @@ namespace Support
         public void RestartLevel()
         {
             OnLevelRestart?.Invoke();
+        }
+
+        public void LoadLevel(int levelNumber)
+        {
+            OnLevelLoaded?.Invoke(levelNumber);
+        }
+
+        public void LoadLastLevelFromSave()
+        {
+            OnLastLevelFromStaveLoaded?.Invoke();
         }
     }
 }

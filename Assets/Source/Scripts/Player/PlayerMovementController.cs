@@ -1,3 +1,4 @@
+using System;
 using Extensions;
 using Support;
 using UnityEngine;
@@ -9,12 +10,15 @@ namespace Ingame
     {
         [SerializeField] private Aim aim;
 
+        public enum SurfaceInteractionType {LandOnSurface, ReleaseFromSurface }
+
         private const float MINIMAL_DISTANCE_TO_PERFORM_DASH = 0f;
         private const float TIME_AFTER_DASH_WILL_BE_STOPPED = .15f;
         
         private Rigidbody _rigidbody;
         private Vector3 _initialDashPosition;
         private float _currentDashLength;
+        private bool _isFrozen;
         private bool _isDashing;
 
         private Coroutine _stopDashCoroutine;
@@ -40,6 +44,13 @@ namespace Ingame
         {
             if(PlayerEventController.Instance.Data.StopDashWhenCollidingWithEnvironment)
                 StopDash(); 
+            
+            PlayerEventController.Instance.InteractWithSurface(SurfaceInteractionType.LandOnSurface);
+        }
+
+        private void OnCollisionExit(Collision other)
+        {
+            PlayerEventController.Instance.InteractWithSurface(SurfaceInteractionType.ReleaseFromSurface);
         }
 
         private void FixedUpdate()
@@ -62,6 +73,13 @@ namespace Ingame
             if(Vector3.Distance(aim.transform.position, transform.position) < MINIMAL_DISTANCE_TO_PERFORM_DASH)
                 return;
 
+            if (_isFrozen)
+            {
+                // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags (Unity documentation says it's an intended way to use this enum)
+                _rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+                _isFrozen = false;
+            }
+
             var position = transform.position;
             var dashVector = aim.transform.position - position;
             var dashDirection = dashVector.normalized;
@@ -76,6 +94,8 @@ namespace Ingame
             _rigidbody.useGravity = false;
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.AddForce(impulseVelocity, ForceMode.Impulse);
+
+            gameObject.layer = LayerMask.NameToLayer("Player While Dashing");
 
             PlayerEventController.Instance.PerformDash(dashDirection);
             _stopDashCoroutine = this.WaitAndDoCoroutine(TIME_AFTER_DASH_WILL_BE_STOPPED, StopDash);
@@ -95,6 +115,8 @@ namespace Ingame
             var position = transform.position;
             var dashingDirection = Vector3.Normalize(position - _initialDashPosition);
             var afterDashForceModifier = Mathf.InverseLerp(0, PlayerEventController.Instance.Data.MaxDashDistance, _currentDashLength);
+
+            gameObject.layer = LayerMask.NameToLayer("Player Static");
             
             _rigidbody.useGravity = true;
             _rigidbody.velocity = Vector3.zero;
@@ -105,6 +127,12 @@ namespace Ingame
             _isDashing = false;
             
             PlayerEventController.Instance.StopDash();
+        }
+
+        public void FreezePlayer()
+        {
+            _isFrozen = true;
+            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 }

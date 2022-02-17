@@ -3,6 +3,7 @@ using Extensions;
 using Support;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Ingame.UI
 {
@@ -16,6 +17,8 @@ namespace Ingame.UI
         [SerializeField] [Min(0)] private float animationDuration = 1;
         [SerializeField] [Min(0)] private float dashAnimationDuration = .1f;
         [SerializeField] [Min(0)] private float bloodImageScaleMultiplier = 1.2f;
+
+        [Inject] private GameController _gameController;
         
         private Vector3 _initialBloodImageScale;
         private Sequence _animationSequence;
@@ -28,15 +31,15 @@ namespace Ingame.UI
         private void Start()
         {
             PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
-            GameController.Instance.OnLevelEnded += OnLevelEnd;
-            GameController.Instance.OnLevelRestart += OnLevelRestart;
+            _gameController.OnLevelEnded += OnLevelEnd;
+            _gameController.OnLevelRestart += OnLevelRestart;
         }
 
         private void OnDestroy()
         {
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
-            GameController.Instance.OnLevelEnded -= OnLevelEnd;
-            GameController.Instance.OnLevelRestart -= OnLevelRestart;
+            _gameController.OnLevelEnded -= OnLevelEnd;
+            _gameController.OnLevelRestart -= OnLevelRestart;
         }
 
         private void OnLevelRestart()

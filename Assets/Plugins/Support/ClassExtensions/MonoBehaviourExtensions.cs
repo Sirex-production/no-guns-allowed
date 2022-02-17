@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 namespace Extensions
 {
-   /// <summary>
+    /// <summary>
     /// Class that holds all extension methods for MonoBehaviour class 
     /// </summary>
     public static class MonoBehaviourExtensions
@@ -43,9 +44,8 @@ namespace Extensions
             if(action == null)
                 yield break;
             
-            speed = Mathf.Min(Mathf.Abs(b - a), Mathf.Abs(speed));
             speed = b < a ? -speed : speed;
-            
+
             float currentValue = a;
 
             while (Math.Abs(currentValue - b) > .001f)
@@ -57,6 +57,49 @@ namespace Extensions
             }
             
             action(b);
+            onComplete?.Invoke();
+        }
+        
+        private static IEnumerator SpawnTextRoutine(TMP_Text textArea, string textToDisplay, float spawnDelayTime, Action onComplete)
+        {
+            if (String.IsNullOrEmpty(textToDisplay))
+            {
+                onComplete?.Invoke();
+                yield break;
+            }
+
+            spawnDelayTime = Mathf.Abs(spawnDelayTime);
+
+            var letters = textToDisplay.ToCharArray();
+            var waitForDelayInSeconds = new WaitForSeconds(spawnDelayTime);
+            textArea.text = "";
+
+            yield return waitForDelayInSeconds;
+
+            bool isTag = false;
+            var tag = "";
+            
+            foreach (var letter in letters)
+            {
+                if (letter == '<')
+                    isTag = true;
+                else if (letter == '>')
+                {
+                    isTag = false;
+                    textArea.text += tag;
+                    tag = "";
+                }
+
+                if (isTag)
+                {
+                    tag += letter;
+                    continue;
+                }
+            
+                textArea.text += letter;
+                yield return waitForDelayInSeconds;
+            }
+            
             onComplete?.Invoke();
         }
 
@@ -108,6 +151,19 @@ namespace Extensions
         public static Coroutine LerpCoroutine(this MonoBehaviour monoBehaviour, float speed, float a, float b, Action<float> action, Action onComplete = null)
         {
             return monoBehaviour.StartCoroutine(LerpRoutine(speed, a, b, action, onComplete));
+        }
+        
+        /// <summary>
+        /// Display content in certain text area with writing effect
+        /// </summary>
+        /// <param name="monoBehaviour"></param>
+        /// <param name="textArea">Area where content will be displayed</param>
+        /// <param name="textToDisplay">Content that text area will display</param>
+        /// <param name="spawnDelayTime">Pause between appearing letters</param>
+        /// <returns></returns>
+        public static Coroutine SpawnTextCoroutine(this MonoBehaviour monoBehaviour, TMP_Text textArea, string textToDisplay, float spawnDelayTime, Action onComplete = null)
+        {
+            return monoBehaviour.StartCoroutine(SpawnTextRoutine(textArea, textToDisplay, spawnDelayTime, onComplete));
         }
     }
 }

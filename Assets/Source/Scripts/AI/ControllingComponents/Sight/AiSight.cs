@@ -69,8 +69,9 @@ namespace Ingame.AI
             {
                 if(detectionArea == null)
                     return;
-                
-                var detectionAreaPosition = detectionArea.transform.position;
+
+                var detectionAreaCollider = detectionArea.GetComponent<Collider>();
+                var detectionAreaPosition = detectionAreaCollider.bounds.center;
                 
                 Gizmos.DrawLine(transform.position, detectionAreaPosition);
                 Gizmos.DrawSphere(detectionAreaPosition, GIZMOS_SPHERE_RADIUS);

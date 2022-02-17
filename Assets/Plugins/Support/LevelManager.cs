@@ -1,35 +1,16 @@
 using System;
 using Support.SLS;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Support
 {
-    public class LevelManager : MonoSingleton<LevelManager>
+    public class LevelManager : MonoBehaviour
     {
+        [Inject] 
+        private SaveLoadSystem _saveLoadSystem;
         
-#if !UNITY_EDITOR
-        private void Start()
-        {
-            LoadLastLevelFromSave();
-        }
-
-        private void LoadLastLevelFromSave()
-        {
-            
-            int currentLevelNumber = SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value;
-            int sceneIndexOfCurrentLevel = currentLevelNumber < SceneManager.sceneCountInBuildSettings - 1
-                ? currentLevelNumber
-                : currentLevelNumber % SceneManager.sceneCountInBuildSettings;
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            
-            if(sceneIndexOfCurrentLevel == currentSceneIndex)
-                return;
-            
-            if(currentSceneIndex == 0)
-                LoadLevel(SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value);
-        }
-#endif
-
         public void ManageLevelDependingOnWinningCondition(bool isVictory)
         {
             if (isVictory)
@@ -53,16 +34,31 @@ namespace Support
         /// <summary>Restarts last level that was saved in progress(SaveLoadSystem)</summary>
         public void RestartLevel()
         {
-            LoadLevel(SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value);
+            LoadLevel(_saveLoadSystem.SaveData.CurrentLevelNumber.Value);
         }
         
         /// <summary>Loads next level and modifies progress in SaveLoadSystem</summary>
         public void LoadNextLevel()
         {
-            SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value++;
-            SaveLoadSystem.Instance.PerformSave();
+            _saveLoadSystem.SaveData.CurrentLevelNumber.Value++;
+            _saveLoadSystem.PerformSave();
             
-            LoadLevel(SaveLoadSystem.Instance.SaveData.CurrentLevelNumber.Value);
+            LoadLevel(_saveLoadSystem.SaveData.CurrentLevelNumber.Value);
+        }
+        
+        public void LoadLastLevelFromSave()
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int currentLevelNumber = _saveLoadSystem.SaveData.CurrentLevelNumber.Value;
+            int sceneIndexOfCurrentLevel = currentLevelNumber < SceneManager.sceneCountInBuildSettings - 1
+                ? currentLevelNumber
+                : currentLevelNumber % SceneManager.sceneCountInBuildSettings;
+
+            if(sceneIndexOfCurrentLevel == currentSceneIndex)
+                return;
+            
+            if(currentSceneIndex == 0)
+                LoadLevel(_saveLoadSystem.SaveData.CurrentLevelNumber.Value);
         }
     }
 }

@@ -1,6 +1,7 @@
 using Ingame.Graphics;
 using NaughtyAttributes;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.AI
 {
@@ -10,11 +11,13 @@ namespace Ingame.AI
         [Required]
         [SerializeField] private AiData _aiData;
 
+        [Inject] private AnalyticsWrapper _analyticsWrapper;
+        
         private IMovable _aiMovementController;
         private IPatrolable _aiPatrolController;
         private ICombatable _aiCombatController;
         private ActorStats _aiActorStats;
-        private EffectsManager _effectsManager;
+        private EffectsFactory _effectsFactory;
         private Context _context;
 
         public AiData AiData => _aiData;
@@ -22,7 +25,7 @@ namespace Ingame.AI
         public IPatrolable AiPatrolController => _aiPatrolController;
         public ICombatable AiCombatController => _aiCombatController;
         public ActorStats AiActorStats => _aiActorStats;
-        public EffectsManager EffectsManager => _effectsManager;
+        public EffectsFactory EffectsFactory => _effectsFactory;
         
         private void Awake()
         {
@@ -30,7 +33,7 @@ namespace Ingame.AI
             _aiPatrolController = GetComponent<IPatrolable>();
             _aiCombatController = GetComponent<ICombatable>();
             _aiActorStats = GetComponent<ActorStats>();
-            _effectsManager = GetComponent<EffectsManager>();
+            _effectsFactory = GetComponent<EffectsFactory>();
         }
 
         private void Start()
@@ -61,13 +64,15 @@ namespace Ingame.AI
 
         public void Die()
         {
+            ActorManager.Instance.RemoveActor(_aiActorStats);
+            _analyticsWrapper.LevelStats.AddKilledEnemyToStats();
             _context.Die();
         }
 
         public void DestroyActor()
         {
-            if(EffectsManager != null)
-               EffectsManager.PlayAllEffects(EffectType.Destruction);
+            if(EffectsFactory != null)
+               EffectsFactory.PlayAllEffects(EffectType.EnemyDeath);
             
             Destroy(gameObject);
         }

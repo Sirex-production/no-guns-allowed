@@ -8,11 +8,11 @@ namespace Ingame.AI
     {
         private Dictionary<ActorSide, List<ActorStats>> _actors = new Dictionary<ActorSide, List<ActorStats>>();
 
-        public void AddEnemy(ActorStats actorStats)
+        public void AddActor(ActorStats actorStats)
         {
             if(actorStats == null)
                 return;
-            
+
             var actorSide = actorStats.ActorSide;
             if (!_actors.ContainsKey(actorSide) || _actors[actorSide] == null)
             {
@@ -22,6 +22,18 @@ namespace Ingame.AI
             
             if(!_actors[actorSide].Contains(actorStats))
                 _actors[actorSide].Add(actorStats);
+        }
+
+        public void RemoveActor(ActorStats actorStats)
+        {
+            if(actorStats == null)
+                return;
+
+            var actorSide = actorStats.ActorSide;
+            if (!_actors.ContainsKey(actorSide) || _actors[actorSide] == null)
+                return;
+
+            _actors[actorSide].Remove(actorStats);
         }
 
         public ActorStats[] GetActorsOfTypes(params ActorSide[] actorSides)

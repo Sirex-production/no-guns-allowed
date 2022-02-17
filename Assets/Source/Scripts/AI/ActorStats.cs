@@ -7,14 +7,14 @@ namespace Ingame
     {
         protected virtual void Start()
         {
-            ActorManager.Instance.AddEnemy(this);
+            ActorManager.Instance.AddActor(this);
         }
 
         public abstract ActorSide ActorSide { get; }
         public abstract float CurrentHp { get; }
         public abstract float CurrentDamage { get; }
         public abstract bool IsInvincible { get; }
-        public abstract void TakeDamage(float amountOfDamage);
+        public abstract void TakeDamage(float amountOfDamage, DamageType damageType);
         public abstract void Heal(float amountOfHp);
     }
 
