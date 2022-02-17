@@ -70,8 +70,6 @@ public class RechargingStation : MonoBehaviour
 
     private IEnumerator CooldownRoutine()
     {
-        this.SafeDebug("A coroutine has started");
-
         if(_state != State.OnCooldown)
             this.SafeDebug($"A logical error in the FSM: the state should not be {_state} when entering cooldown", LogType.Error);
 

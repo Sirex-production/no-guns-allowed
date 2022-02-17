@@ -9,23 +9,41 @@ namespace Ingame.UI
 {
     public class MainMenuButtonsBehaviour : MonoBehaviour
     {
-        [SerializeField] [Min(0)] private float fadeAnimationTime = .2f;
+        [SerializeField] [Min(0)] private float animationDuration = .15f;
         [Inject] private SaveLoadSystem _saveLoadSystem;
         [Inject] private GameController _gameController;
         
         public void ShowMenu(CanvasGroup settingsMenuCanvas)
         {
+            //Squeeze animation
+            // var initialScale = settingsMenuCanvas.transform.localScale;
+            // settingsMenuCanvas.SetGameObjectActive();
+            // settingsMenuCanvas.transform.localScale = new Vector3(initialScale.x, 0, initialScale.z);
+            // settingsMenuCanvas.transform.DOScaleY(initialScale.y, animationDuration);
+
+            //Fade animation
             settingsMenuCanvas.SetGameObjectActive();
             settingsMenuCanvas.alpha = 0;
-            settingsMenuCanvas.DOFade(1, fadeAnimationTime);
+            settingsMenuCanvas.DOFade(1, animationDuration);
         }
 
         public void HideMenu(CanvasGroup settingsMenuCanvas)
         {
-            settingsMenuCanvas.DOFade(0, fadeAnimationTime)
+            //Squeeze animation
+            // var initialScale = settingsMenuCanvas.transform.localScale;
+            // Time.timeScale = 1f;
+            // settingsMenuCanvas.SetGameObjectActive();
+            // settingsMenuCanvas.transform.DOScaleY(0, animationDuration).OnComplete(()=>
+            // {
+            //     settingsMenuCanvas.SetGameObjectInactive();
+            //     settingsMenuCanvas.transform.localScale = initialScale;
+            // });
+         
+            //Fade animation
+            settingsMenuCanvas.DOFade(0, animationDuration)
                 .OnComplete(settingsMenuCanvas.SetGameObjectInactive);
         }
-        
+
         public void SaveData()
         {
             _saveLoadSystem.PerformSave();
@@ -34,7 +52,7 @@ namespace Ingame.UI
         public void PlayDevelopersAnimation(UiDevelopers developersMenu)
         {
             developersMenu.HideContent();
-            this.WaitAndDoCoroutine(fadeAnimationTime, developersMenu.PlayAppearanceAnimation);
+            this.WaitAndDoCoroutine(animationDuration, developersMenu.PlayAppearanceAnimation);
         }
 
         public void LoadNextLevel()
