@@ -11,6 +11,7 @@ namespace Ingame.Graphics.VFX
         [SerializeField] [Min(0)] private float lerpDuration;
 
         [Inject] private GameController _gameController;
+        [Inject] private EffectsManager _effectsManager;
         
         private float _defaultFixedDeltaTime;
 
@@ -25,8 +26,8 @@ namespace Ingame.Graphics.VFX
             
             if(PlayerEventController.Instance == null)
                 return;
-            EffectsManager.Instance.OnSlowMotionEnter += DecreaseTimeScale;
-            EffectsManager.Instance.OnSlowMotionExit += ResetTimeScale;
+            _effectsManager.OnSlowMotionEnter += DecreaseTimeScale;
+            _effectsManager.OnSlowMotionExit += ResetTimeScale;
         }
 
         private void OnDestroy()
@@ -35,8 +36,8 @@ namespace Ingame.Graphics.VFX
             
             if(PlayerEventController.Instance == null)
                 return;
-            EffectsManager.Instance.OnSlowMotionEnter -= DecreaseTimeScale;
-            EffectsManager.Instance.OnSlowMotionExit -= ResetTimeScale;
+            _effectsManager.OnSlowMotionEnter -= DecreaseTimeScale;
+            _effectsManager.OnSlowMotionExit -= ResetTimeScale;
         }
 
         private void DecreaseTimeScale()

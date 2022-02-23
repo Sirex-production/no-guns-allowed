@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Extensions;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.AI
 {
@@ -9,6 +10,8 @@ namespace Ingame.AI
     [DisallowMultipleComponent]
     public class AiCombatController : MonoBehaviour, ICombatable
     {
+        [Inject] private ActorManager _actorManager;
+        
         private AiBehaviourController _aiBehaviourController;
         private bool _isInCombat = false;
         
@@ -80,7 +83,7 @@ namespace Ingame.AI
         private ActorStats[] GetAllFriendActors()
         {
             var ignoreActors = new List<ActorStats>();
-            var friends = ActorManager.Instance.GetOppositeActors(_aiBehaviourController.AiData.HostileSides.ToArray());
+            var friends = _actorManager.GetOppositeActors(_aiBehaviourController.AiData.HostileSides.ToArray());
             
             ignoreActors.Add(_aiBehaviourController.AiActorStats);
             ignoreActors.AddRange(friends);

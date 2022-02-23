@@ -19,6 +19,7 @@ namespace Ingame.UI
         [SerializeField] [Min(0)] private float bloodImageScaleMultiplier = 1.2f;
 
         [Inject] private GameController _gameController;
+        [Inject] private TutorialsManager _tutorialsManager;
         
         private Vector3 _initialBloodImageScale;
         private Sequence _animationSequence;
@@ -69,7 +70,7 @@ namespace Ingame.UI
             if(_animationSequence != null)
                 _animationSequence.Kill();
 
-            parentCanvas.DOFade(0, animationDuration).OnComplete(() => TutorialsManager.Instance.ActivateNext());
+            parentCanvas.DOFade(0, animationDuration).OnComplete(() => _tutorialsManager.ActivateNext());
         }
 
         public override void Activate()

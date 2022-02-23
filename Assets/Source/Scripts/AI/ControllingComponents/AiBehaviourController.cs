@@ -12,6 +12,7 @@ namespace Ingame.AI
         [SerializeField] private AiData _aiData;
 
         [Inject] private AnalyticsWrapper _analyticsWrapper;
+        [Inject] private ActorManager _actorManager;
         
         private IMovable _aiMovementController;
         private IPatrolable _aiPatrolController;
@@ -64,7 +65,7 @@ namespace Ingame.AI
 
         public void Die()
         {
-            ActorManager.Instance.RemoveActor(_aiActorStats);
+            _actorManager.RemoveActor(_aiActorStats);
             _analyticsWrapper.LevelStats.AddKilledEnemyToStats();
             _context.Die();
         }

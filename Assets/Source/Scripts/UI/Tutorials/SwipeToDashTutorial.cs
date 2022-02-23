@@ -15,8 +15,9 @@ namespace Ingame.UI
         [SerializeField] private float animationDuration = 1f;
         [SerializeField] private float fingerScaleOffset = 2f;
         [SerializeField] private float fingerDistanceOffset = 30f;
-        [Inject] private GameController _gameController;
         
+        [Inject] private GameController _gameController;
+        [Inject] private TutorialsManager _tiTutorialsManager;
         
         private Vector3 _initialFingerScale;
         private Vector2 _initialFingerPosition;
@@ -69,7 +70,7 @@ namespace Ingame.UI
             if(_animationSequence != null)
                 _animationSequence.Kill();
             if (parentCanvasGroup != null)
-                parentCanvasGroup.DOFade(0, animationDuration).OnComplete(() => TutorialsManager.Instance.ActivateNext());
+                parentCanvasGroup.DOFade(0, animationDuration).OnComplete(() => _tiTutorialsManager.ActivateNext());
         }
 
         public override void Activate()

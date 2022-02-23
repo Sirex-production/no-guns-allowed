@@ -18,6 +18,7 @@ namespace Ingame
         [SerializeField] [Range(0, 10)] private float sensitivity = 5f;
 
         [Inject] private SaveLoadSystem _saveLoadSystem;
+        [Inject] private InputSystem _inputSystem;
         
         private int ignoreRaycastLayers;
         private Vector3 _initialLocalPosition;
@@ -39,8 +40,8 @@ namespace Ingame
 
         private void Start()
         {
-            InputSystem.Instance.OnReleaseAction += ResetLocalPosition;
-            InputSystem.Instance.OnDragAction += Move;
+            _inputSystem.OnReleaseAction += ResetLocalPosition;
+            _inputSystem.OnDragAction += Move;
             _saveLoadSystem.SaveData.AimSensitivity.OnValueChanged += SetSensitivity;
 
             if(!isSaveLoadSystemIgnored)
@@ -49,8 +50,8 @@ namespace Ingame
 
         private void OnDestroy()
         {
-            InputSystem.Instance.OnReleaseAction -= ResetLocalPosition;
-            InputSystem.Instance.OnDragAction -= Move;
+            _inputSystem.OnReleaseAction -= ResetLocalPosition;
+            _inputSystem.OnDragAction -= Move;
             _saveLoadSystem.SaveData.AimSensitivity.OnValueChanged -= SetSensitivity;
         }
 

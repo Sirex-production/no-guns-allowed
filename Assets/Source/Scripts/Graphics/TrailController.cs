@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Support;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.Graphics
 {
@@ -13,6 +14,8 @@ namespace Ingame.Graphics
         [SerializeField] private TrailRenderer primaryTrail;
         [SerializeField] private List<TrailRenderer> secondaryTrails;
 
+        [Inject] private PoolManager _poolManager;
+        
         // Start is called before the first frame update
         private void Start()
         {
@@ -20,7 +23,7 @@ namespace Ingame.Graphics
             foreach (var trail in secondaryTrails)
                 trail.emitting = true;
 
-            PoolManager.Instance.CreatePool(ghostPrefab, 7);
+            _poolManager.CreatePool(ghostPrefab, 7);
             
             PlayerEventController.Instance.OnDashPerformed += StartSpawningGhosts;
             PlayerEventController.Instance.OnDashStop += StopSpawningGhosts;
@@ -56,7 +59,7 @@ namespace Ingame.Graphics
             SwitchActiveTrails(true);
             while (true)
             {
-                PoolManager.Instance.ReuseObject(ghostPrefab, this.transform.position);
+                _poolManager.ReuseObject(ghostPrefab, this.transform.position);
 
                 yield return new WaitForSeconds(spawnPeriod);
             }

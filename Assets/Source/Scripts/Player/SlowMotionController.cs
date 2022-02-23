@@ -15,6 +15,7 @@ namespace Ingame
         [SerializeField] private float slowMotionThreshold;
 
         [Inject] private GameController _gameController;
+        [Inject] private EffectsManager _effectsManager;
         
         private enum State
         {
@@ -67,7 +68,7 @@ namespace Ingame
             _outOfTime = true;
             _state = State.OutOfSlowMotion;
             InvokeCooldown();
-            EffectsManager.Instance.ExitSlowMotion();
+            _effectsManager.ExitSlowMotion();
         }
 
         private IEnumerator CooldownRoutine()
@@ -112,7 +113,7 @@ namespace Ingame
 
             StopAllCoroutines();
             InvokeTimer();
-            EffectsManager.Instance.EnterSlowMotion();
+            _effectsManager.EnterSlowMotion();
         }
 
         private void ReturnToDefaultStateOnLevelEnd(bool _)
@@ -133,7 +134,7 @@ namespace Ingame
             _state = State.Default;
             StopAllCoroutines();
             InvokeCooldown();
-            EffectsManager.Instance.ExitSlowMotion();
+            _effectsManager.ExitSlowMotion();
         }
     }
 }

@@ -21,6 +21,10 @@ namespace Ingame.DI
         [SerializeField] private UiController uiController;
         [Required]
         [SerializeField] private AnalyticsWrapper analyticsWrapper;
+        [Required]
+        [SerializeField] private TutorialsManager tutorialsManager;
+        [Required]
+        [SerializeField] private InputSystem inputSystem;
 
         public override void InstallBindings()
         {
@@ -46,6 +50,14 @@ namespace Ingame.DI
             
             Container.Bind<AnalyticsWrapper>()
                 .FromInstance(analyticsWrapper)
+                .AsSingle();
+
+            Container.Bind<TutorialsManager>()
+                .FromInstance(tutorialsManager)
+                .AsSingle();
+
+            Container.Bind<InputSystem>()
+                .FromInstance(inputSystem)
                 .AsSingle();
         }
     }

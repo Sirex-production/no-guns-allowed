@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using Support;
+using UnityEngine;
 
 namespace Ingame.AI
 {
-    public class ActorManager : MonoSingleton<ActorManager>
+    public class ActorManager : MonoBehaviour
     {
         private Dictionary<ActorSide, List<ActorStats>> _actors = new Dictionary<ActorSide, List<ActorStats>>();
 

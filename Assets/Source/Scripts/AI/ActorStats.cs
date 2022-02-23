@@ -1,13 +1,16 @@
 using Ingame.AI;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
     public abstract class ActorStats : MonoBehaviour
     {
+        [Inject] private ActorManager _actorManager;
+        
         protected virtual void Start()
         {
-            ActorManager.Instance.AddActor(this);
+            _actorManager.AddActor(this);
         }
 
         public abstract ActorSide ActorSide { get; }

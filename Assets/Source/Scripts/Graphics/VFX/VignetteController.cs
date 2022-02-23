@@ -2,6 +2,7 @@ using System.Collections;
 using Extensions;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Zenject;
 
 namespace Ingame.Graphics.VFX
 {
@@ -12,21 +13,24 @@ namespace Ingame.Graphics.VFX
         [SerializeField] [Min(0)] private float lerpDuration;
         [SerializeField] [Min(0)] private float timeoutBeforeStart = .3f;
 
+        [Inject] private EffectsManager _effectsManager;
 
         private void Start()
         {
             if(PlayerEventController.Instance == null)
                 return;
-            EffectsManager.Instance.OnSlowMotionEnter += OnSlowMotionEnter;
-            EffectsManager.Instance.OnSlowMotionExit += DoReset;
+            
+            _effectsManager.OnSlowMotionEnter += OnSlowMotionEnter;
+            _effectsManager.OnSlowMotionExit += DoReset;
         }
 
         private void OnDestroy()
         {
             if(PlayerEventController.Instance == null)
                 return;
-            EffectsManager.Instance.OnSlowMotionEnter -= OnSlowMotionEnter;
-            EffectsManager.Instance.OnSlowMotionExit -= DoReset;
+            
+            _effectsManager.OnSlowMotionEnter -= OnSlowMotionEnter;
+            _effectsManager.OnSlowMotionExit -= DoReset;
         }
 
         protected override IEnumerator OnModificationRoutine()

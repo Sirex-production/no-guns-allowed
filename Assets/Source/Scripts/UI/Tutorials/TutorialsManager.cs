@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Ingame.UI
 {
-    public class TutorialsManager : MonoSingleton<TutorialsManager>
+    public class TutorialsManager : MonoBehaviour
     {
         [SerializeField] private List<MonoTutorial> tutorials;
 

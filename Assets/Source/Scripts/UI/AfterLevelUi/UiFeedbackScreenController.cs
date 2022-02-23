@@ -3,6 +3,7 @@ using Extensions;
 using Support;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class UiFeedbackScreenController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class UiFeedbackScreenController : MonoBehaviour
     [SerializeField] [Min(0)] private float fadeAnimationSpeed = 1f;
     [SerializeField] [Min(0)] private float pauseBeforeButtonsWillBeShown = .5f;
 
+    [Inject] private InputSystem _inputSystem;
+    
     private bool _isSkipped = false;
     private string _text;
     private Tween _buttonFadeTween;
@@ -23,12 +26,12 @@ public class UiFeedbackScreenController : MonoBehaviour
 
     private void Start()
     {
-        InputSystem.Instance.OnTouchAction += SkipTextRevealEffect;
+        _inputSystem.OnTouchAction += SkipTextRevealEffect;
     }
 
     private void OnDestroy()
     {
-        InputSystem.Instance.OnTouchAction -= SkipTextRevealEffect;
+        _inputSystem.OnTouchAction -= SkipTextRevealEffect;
         
         if(_buttonFadeTween != null)
             _buttonFadeTween.Kill();

@@ -2,6 +2,7 @@ using System;
 using Extensions;
 using Support;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
@@ -14,6 +15,8 @@ namespace Ingame
 
         private const float MINIMAL_DISTANCE_TO_PERFORM_DASH = 0f;
         private const float TIME_AFTER_DASH_WILL_BE_STOPPED = .15f;
+
+        [Inject] private InputSystem _inputSystem;
         
         private Rigidbody _rigidbody;
         private Vector3 _initialDashPosition;
@@ -32,12 +35,12 @@ namespace Ingame
 
         private void Start()
         {
-            InputSystem.Instance.OnReleaseAction += Dash;
+            _inputSystem.OnReleaseAction += Dash;
         }
 
         private void OnDestroy()
         {
-            InputSystem.Instance.OnReleaseAction -= Dash;
+            _inputSystem.OnReleaseAction -= Dash;
         }
 
         private void OnCollisionEnter()

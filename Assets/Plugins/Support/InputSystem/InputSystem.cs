@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Support
 {
-	public class InputSystem : MonoSingleton<InputSystem>, IPointerDownHandler, IPointerUpHandler, IDragHandler
+	public class InputSystem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
 		[SerializeField] private float minimumDeltaSwipe = 2f;
 		
