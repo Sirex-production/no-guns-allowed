@@ -1,27 +1,13 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Extensions;
 using Ingame.AI;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Ingame
 {
     public class LethalObject : MonoBehaviour
     {
-        [SerializeField] private float damage = 1;
-        [SerializeField] private float timeToSwitchLayer = 3;
-        [SerializeField] private float componentRemovalPollFrequency = 1;
-
-        private BoxCollider[] _children;
-
-        private void Awake()
-        {
-            _children = transform.GetComponentsInChildren<BoxCollider>();
-            
-            this.WaitAndDoCoroutine(timeToSwitchLayer, SwitchLayer);
-        }
+        private const float DAMAGE = 1;
+        private const float COMPONENT_REMOVAL_POLL_FREQUENCY = 0.25f;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -33,7 +19,7 @@ namespace Ingame
                 return;
 
             StartCoroutine(ComponentRemovalCoroutine());
-            hitbox.TakeDamage(damage, DamageType.Obstacle);
+            hitbox.TakeDamage(DAMAGE, DamageType.Obstacle);
         }
 
         private IEnumerator ComponentRemovalCoroutine()
@@ -43,7 +29,7 @@ namespace Ingame
             {
                 if (!(rigidBodyComponent.velocity.sqrMagnitude < 0.01f))
                 {
-                    yield return new WaitForSeconds(componentRemovalPollFrequency);
+                    yield return new WaitForSeconds(COMPONENT_REMOVAL_POLL_FREQUENCY);
                     continue;
                 }
 
@@ -52,22 +38,9 @@ namespace Ingame
             }
         }
 
-        private void SwitchLayer()
-        {
-            var newLayer = LayerMask.NameToLayer("Ignore Collision With Dashing Player");
-            foreach (var child in _children)
-                child.gameObject.layer = newLayer;
-        }
-
         private void RemoveComponents()
         {
             Destroy(gameObject.GetComponent<Rigidbody>());
-
-            //foreach (var child in _children)
-            //{
-            //    child.TryGetComponent(out BoxCollider boxColliderComponent);
-            //    Destroy(boxColliderComponent);
-            //}
 
             Destroy(this);
         }
