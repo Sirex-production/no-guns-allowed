@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Ingame
 {
-    public class InvokableCable : Invokable
+    public class MonoInvokableCable : MonoInvokable
     {
         [SerializeField] private Rigidbody bodyToRelease;
 

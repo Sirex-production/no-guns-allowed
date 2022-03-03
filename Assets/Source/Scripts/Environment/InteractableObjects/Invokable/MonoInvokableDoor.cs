@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Ingame
 {
-    public class InvokableDoor : Invokable
+    public class MonoInvokableDoor : MonoInvokable
     {
         [SerializeField] [Min(0)] [MaxValue(90)] private float rotationAngle;
         [SerializeField] [Min(0)]                private float duration;

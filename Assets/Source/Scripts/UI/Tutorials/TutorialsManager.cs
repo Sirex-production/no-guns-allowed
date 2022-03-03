@@ -14,7 +14,6 @@ namespace Ingame.UI
         private void Start()
         {
             TurnOffTutorials();
-            ActivateNext();
         }
 
         private void TurnOffTutorials()
