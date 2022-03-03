@@ -45,5 +45,15 @@ namespace Ingame.UI
             
             _currentTutorialIndex++;
         }
+
+        public void CompleteCurrentTutorial()
+        {
+            var tutorial = tutorials[_currentTutorialIndex];
+            
+            if(tutorial == null)
+                return;
+            
+            tutorial.Complete();
+        }
     }
 }

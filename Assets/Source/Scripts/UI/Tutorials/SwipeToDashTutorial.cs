@@ -28,7 +28,7 @@ namespace Ingame.UI
         [SerializeField] private string completeLogMessage;
         [Space]
         [BoxGroup("Tutorial properties")]
-        [SerializeField] private bool activateNextTutorialWhenCurrentIsComplete = true;
+        [SerializeField] private bool activateNextTutorial = true;
         
         [Inject] private GameController _gameController;
         [Inject] private TutorialsManager _tutorialsManager;
@@ -80,7 +80,7 @@ namespace Ingame.UI
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
         }
 
-        private void Complete()
+        public override void Complete()
         {
             _uiController.DisplayLogMessage(completeLogMessage, LogDisplayType.DisplayAndKeep);
 
@@ -89,7 +89,7 @@ namespace Ingame.UI
             if (parentCanvasGroup != null)
                 parentCanvasGroup.DOFade(0, animationDuration).OnComplete(() =>
                 {
-                    if(activateNextTutorialWhenCurrentIsComplete)
+                    if(activateNextTutorial)
                         _tutorialsManager.ActivateNext();
                 });
         }

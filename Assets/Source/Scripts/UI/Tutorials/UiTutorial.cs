@@ -35,6 +35,8 @@ namespace Ingame.UI
         [SerializeField] private string completeLogMessage;
         [BoxGroup("Game properties")]
         [SerializeField] private bool deactivateInputSystemOnActivate = false;
+        [BoxGroup("Game properties")]
+        [SerializeField] private bool activateNextTutorial = true;
         
         [Inject] private TutorialsManager _tutorialsManager;
         [Inject] private InputSystem _inputSystem;
@@ -66,7 +68,7 @@ namespace Ingame.UI
                 _uiController.DisplayLogMessage(activateLogMessage, LogDisplayType.DisplayAndKeep);
         }
         
-        private void Complete()
+        public override void Complete()
         {
             EnableButtons();
             TurnOffFocusImages(true);
@@ -79,7 +81,9 @@ namespace Ingame.UI
 
             this.WaitAndDoCoroutine(delayBeforeNextTutorial, () =>
             {
-                _tutorialsManager.ActivateNext();
+                if(activateNextTutorial)
+                    _tutorialsManager.ActivateNext();
+                
                 this.SetGameObjectInactive();
             });
         }

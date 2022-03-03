@@ -12,6 +12,9 @@ namespace Ingame
         
         private void OnTriggerEnter(Collider other)
         {
+            if(!other.TryGetComponent(out PlayerEventController _))
+                return;
+            
             _tutorialsManager.ActivateNext();
             Destroy(this);
         }

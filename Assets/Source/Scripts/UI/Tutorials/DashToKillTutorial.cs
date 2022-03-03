@@ -65,7 +65,7 @@ namespace Ingame.UI
             Complete();
         }
 
-        private void Complete()
+        public override void Complete()
         {
             if(_animationSequence != null)
                 _animationSequence.Kill();

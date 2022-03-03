@@ -550,7 +550,7 @@ MonoBehaviour:
   fingerDistanceOffset: 70
   activateLogMessage: now try to move
   completeLogMessage: try to use terminal
-  activateNextTutorialWhenCurrentIsComplete: 0
+  activateNextTutorial: 0
 --- !u!1 &796664010592436943
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,6 +3519,7 @@ MonoBehaviour:
   activateLogMessage: now lets move back
   completeLogMessage: nice
   deactivateInputSystemOnActivate: 1
+  activateNextTutorial: 1
 --- !u!1 &3094088292214884468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4412,6 +4413,7 @@ MonoBehaviour:
   activateLogMessage: take a look on the map
   completeLogMessage: good job
   deactivateInputSystemOnActivate: 1
+  activateNextTutorial: 1
 --- !u!1 &3890931520535156308
 GameObject:
   m_ObjectHideFlags: 0
@@ -10854,6 +10856,7 @@ MonoBehaviour:
   activateLogMessage: 
   completeLogMessage: 
   deactivateInputSystemOnActivate: 0
+  activateNextTutorial: 0
 --- !u!1 &8917878976285088225
 GameObject:
   m_ObjectHideFlags: 0
