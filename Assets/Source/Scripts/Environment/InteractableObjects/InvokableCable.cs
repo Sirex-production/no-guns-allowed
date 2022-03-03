@@ -9,15 +9,28 @@ namespace Ingame
 
         private void OnTriggerEnter(Collider other)
         {
+            if(CheckConditionsToPass(other))
+                ReleaseObject();
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if(CheckConditionsToPass(other))
+                ReleaseObject();
+        }
+
+        private bool CheckConditionsToPass(Component other)
+        {
             if (!other.TryGetComponent(out HitBox hitbox)) 
-                return;
+                return false;
 
             if(!hitbox.AttachedActorStats.TryGetComponent(out PlayerEventController controller) ||
                !controller.MovementController.IsDashing)
-                return;
+                return false;
 
-            ReleaseObject();
+            return true;
         }
+
         public override void Invoke()
         {
             ReleaseObject();
