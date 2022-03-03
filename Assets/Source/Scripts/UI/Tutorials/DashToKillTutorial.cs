@@ -82,7 +82,7 @@ namespace Ingame.UI
             _animationSequence = DOTween.Sequence()
                 .Append(playerImage.DOFade(1, animationDuration)) //Shows player
                 .Append(enemyImage.DOFade(1, animationDuration)) //Shows enemy
-                .Append(playerImage.rectTransform.DOMove(enemyImage.rectTransform.position, dashAnimationDuration)) //Dashes player to enemy
+                .Append(playerImage.rectTransform.DOLocalMove(enemyImage.rectTransform.localPosition, dashAnimationDuration)) //Dashes player to enemy
                 .Append(enemyImage.DOFade(0, 0)) //Hides enemy
                 .Append(bloodImage.DOFade(1, animationDuration)) //Shows blood
                 .Append(bloodImage.rectTransform.DOScale(_initialBloodImageScale * bloodImageScaleMultiplier, animationDuration)) //Shows blood animation

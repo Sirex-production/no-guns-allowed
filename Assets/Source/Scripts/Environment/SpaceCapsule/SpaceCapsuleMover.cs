@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
@@ -10,7 +11,8 @@ namespace Ingame
         [SerializeField] private Transform destinationTransform;
         [SerializeField] [Min(0)] private float animationDuration;
         [Space]
-        [SerializeField] private MonoInvokable[] invokeAfterArrivalList;
+        [SerializeField] private List<MonoInvokable> invokeOnStartList;
+        [SerializeField] private List<MonoInvokable> invokeAfterArrivalList;
 
         private const float GIZMOS_SPHERE_RADIUS = .2f;
         
@@ -26,18 +28,19 @@ namespace Ingame
 
         private void Start()
         {
+            ActivateInvokables(invokeOnStartList);
             PlayFlyAnimation();
         }
 
         private void PlayFlyAnimation()
         {
             transform.DOMove(destinationTransform.position, animationDuration)
-                .OnComplete(ActivateAfterArrival);
+                .OnComplete(() => ActivateInvokables(invokeAfterArrivalList));
         }
 
-        private void ActivateAfterArrival()
+        private void ActivateInvokables(IEnumerable<IInvokable> invokables)
         {
-            foreach (var invokable in invokeAfterArrivalList)
+            foreach (var invokable in invokables)
             {
                 if(invokable == null)
                     continue;

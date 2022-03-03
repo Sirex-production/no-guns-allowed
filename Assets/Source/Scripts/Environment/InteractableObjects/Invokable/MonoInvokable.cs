@@ -2,8 +2,14 @@ using UnityEngine;
 
 namespace Ingame
 {
-    public abstract class MonoInvokable : MonoBehaviour
+    public abstract class MonoInvokable : MonoBehaviour, IInvokable
     {
-        public abstract void Invoke();
+        [SerializeField] private bool destroyAfterInvoke = false;
+
+        public virtual void Invoke()
+        {
+            if(destroyAfterInvoke)
+                Destroy(this);
+        }
     }
 }

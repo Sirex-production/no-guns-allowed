@@ -10,6 +10,8 @@ namespace Ingame
         public override void Invoke()
         {
             _tutorialsManager.ActivateNext();
+            
+            base.Invoke();
         }
     }
 }
