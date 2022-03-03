@@ -459,6 +459,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 18.66
       objectReference: {fileID: 0}
+    - target: {fileID: 7226707244464316636, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6061989
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226707244464316636, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.30383
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226707244464316636, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0003
+      objectReference: {fileID: 0}
     - target: {fileID: 7226707245053424004, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: m_LocalScale.x
       value: 12.095711
@@ -5013,7 +5025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5696068494863162972, guid: 92d6ebddf903a4c4b96e887e6d5c1d1e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 19.421864
+      value: 28.489931
       objectReference: {fileID: 0}
     - target: {fileID: 5696068494863162972, guid: 92d6ebddf903a4c4b96e887e6d5c1d1e, type: 3}
       propertyPath: m_LocalScale.y
@@ -5021,11 +5033,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5696068494863162972, guid: 92d6ebddf903a4c4b96e887e6d5c1d1e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.571716
+      value: 16.0373
       objectReference: {fileID: 0}
     - target: {fileID: 5696068494863162972, guid: 92d6ebddf903a4c4b96e887e6d5c1d1e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -29.646622
+      value: -29.6466
       objectReference: {fileID: 0}
     - target: {fileID: 5696068494863162972, guid: 92d6ebddf903a4c4b96e887e6d5c1d1e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9651,7 +9663,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9183205498705783142, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
   m_PrefabInstance: {fileID: 159302914}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1982991969
+--- !u!114 &1982991981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9666,7 +9678,7 @@ MonoBehaviour:
   destroyAfterInvoke: 1
   activateNext: 0
   completeCurrent: 1
---- !u!114 &1982991970
+--- !u!114 &1982991982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10606,6 +10618,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: focusImageTargetAlpha
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8319468891104170453, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_fontSize
       value: 58.2
@@ -10621,6 +10637,14 @@ PrefabInstance:
     - target: {fileID: 8373003881317634107, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475957455920160255, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: activateLogMessage
+      value: open the door with terminal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475957455920160255, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: completeLogMessage
+      value: proceed forward
       objectReference: {fileID: 0}
     - target: {fileID: 8555914990237534154, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.x

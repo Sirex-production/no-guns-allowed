@@ -1423,6 +1423,8 @@ MonoBehaviour:
   animationDuration: 0.3
   dashAnimationDuration: 0.3
   bloodImageScaleMultiplier: 1.2
+  activateLogMessage: enemy detected
+  completeLogMessage: he is <color=red>KIA</color>
 --- !u!1 &1873911333068387865
 GameObject:
   m_ObjectHideFlags: 0
@@ -5726,10 +5728,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 51.45
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
