@@ -1,14 +1,11 @@
-using System;
-using System.Collections;
 using DG.Tweening;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Ingame
 {
     public class MonoInvokableDoor : MonoInvokable
     {
-        [SerializeField] [Min(0)] [MaxValue(90)] private float rotationAngle;
+        [SerializeField] [Range(-180, 180)] private float rotationAngle;
         [SerializeField] [Min(0)]                private float duration;
         [SerializeField]                         private bool  isClockwise;
 
