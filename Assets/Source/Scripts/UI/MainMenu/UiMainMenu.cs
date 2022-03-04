@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using Extensions;
 using NaughtyAttributes;
