@@ -46,38 +46,28 @@ public class RechargingStation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent(out HitBox hitbox) ||
-            hitbox.AttachedActorStats != _playerEventController.StatsController ||
-            _state != State.Inactive)
+        if (CheckSwitchConditions(other, State.Inactive))
             return;
 
         SwitchState(State.Active);
-        _playerEventController.StatsController.ChargeRegenerationTimeModifier = regenerationSpeedMultiplier;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.TryGetComponent(out HitBox hitbox) ||
-            hitbox.AttachedActorStats != _playerEventController.StatsController ||
-            _state != State.Active) 
+        if (CheckSwitchConditions(other, State.Active)) 
             return;
 
         SwitchState(State.OnCooldown);
-        StartCoroutine(CooldownRoutine());
-        _playerEventController.StatsController.ChargeRegenerationTimeModifier = 1;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.TryGetComponent(out HitBox hitbox) ||
-            hitbox.AttachedActorStats != _playerEventController.StatsController ||
-            _state != State.Inactive) 
+        if (CheckSwitchConditions(other, State.Inactive)) 
             return;
 
         SwitchState(State.Active);
-        _playerEventController.StatsController.ChargeRegenerationTimeModifier = regenerationSpeedMultiplier;
-        
     }
+
     private IEnumerator CooldownRoutine()
     {
         if(_state != State.OnCooldown)
@@ -85,6 +75,15 @@ public class RechargingStation : MonoBehaviour
 
         yield return new WaitForSeconds(cooldown);
         SwitchState(State.Inactive);
+    }
+
+    private bool CheckSwitchConditions(Collider other, State expectedState)
+    {
+        var otherIsNotThePlayer = other is null || 
+                               !other.TryGetComponent(out HitBox hitbox) ||
+                               hitbox.AttachedActorStats != _playerEventController.StatsController;
+        
+        return otherIsNotThePlayer || _state != expectedState;
     }
 
     private void SwitchState(State state)
@@ -111,6 +110,7 @@ public class RechargingStation : MonoBehaviour
             case State.Active:
                 activeMesh.SetGameObjectActive();
                 _uiController.DisplayLogMessage(logMessageWhenEntered, LogDisplayType.DisplayAndClear);
+                _playerEventController.StatsController.ChargeRegenerationTimeModifier = regenerationSpeedMultiplier;
                 break;
             
             case State.Inactive:
@@ -119,6 +119,8 @@ public class RechargingStation : MonoBehaviour
             
             case State.OnCooldown:
                 cooldownMesh.SetGameObjectActive();
+                StartCoroutine(CooldownRoutine());
+                _playerEventController.StatsController.ChargeRegenerationTimeModifier = 1;
                 break;
         }
     }
