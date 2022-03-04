@@ -14,7 +14,6 @@ namespace Ingame.UI
         private void Start()
         {
             TurnOffTutorials();
-            ActivateNext();
         }
 
         private void TurnOffTutorials()
@@ -45,6 +44,16 @@ namespace Ingame.UI
             tutorial.Activate();
             
             _currentTutorialIndex++;
+        }
+
+        public void CompleteCurrentTutorial()
+        {
+            var tutorial = tutorials[_currentTutorialIndex];
+            
+            if(tutorial == null)
+                return;
+            
+            tutorial.Complete();
         }
     }
 }

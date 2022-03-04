@@ -12,7 +12,7 @@ namespace Ingame
     [RequireComponent(typeof(Collider))]
     public class InvokableButton : MonoBehaviour
     {
-        [SerializeField] private Invokable[] invokableObjects;
+        [SerializeField] private MonoInvokable[] invokableObjects;
         [SerializeField] private bool deactivatePanelAfterInteraction = false;
         [Tooltip("Text that will be displayed in log when player approaches the button")]
         [SerializeField] private string logApproachText;

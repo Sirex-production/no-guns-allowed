@@ -62,7 +62,7 @@ MonoBehaviour:
   - {fileID: 0}
   deactivatePanelAfterInteraction: 0
   logApproachText: Open the door
-  logInteractionText: Door was oopened
+  logInteractionText: Door was opened
 --- !u!1 &1626721491646713449
 GameObject:
   m_ObjectHideFlags: 0

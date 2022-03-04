@@ -1,8 +1,10 @@
 using DG.Tweening;
 using Extensions;
 using NaughtyAttributes;
+using Support;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.UI
 {
@@ -26,15 +28,59 @@ namespace Ingame.UI
         [BoxGroup("Animation settings")] [SerializeField] [Min(0)] private float buttonFadeAnimationTime = .5f;
         [BoxGroup("Animation settings")] [SerializeField] [Min(0)] private float pauseBetweenFadingButtons = .5f;
 
+        [Inject] private InputSystem _inputSystem;
+        
+        private string _initialMenuTextContent;
+        private string _initialCharacterTextContent;
+
+        private void Awake()
+        {
+            _initialMenuTextContent = menuText.text;
+            _initialCharacterTextContent = characterOutputText.text;
+        }
+
         private void Start()
         {
             PlayAppearanceAnimation();
+            _inputSystem.OnTouchAction += OnTouch;
+        }
+
+        private void OnDestroy()
+        {
+            _inputSystem.OnTouchAction -= OnTouch;
+        }
+
+        private void OnTouch(Vector2 _)
+        {
+            SkipAppearanceAnimation();
+        }
+
+        private void SkipAppearanceAnimation()
+        {
+            StopAllCoroutines();
+            
+            menuText.SetText(_initialMenuTextContent);
+            characterOutputText.SetText(_initialCharacterTextContent);
+            
+            characterSectionCanvasGroup.SetGameObjectActive();
+            continueButtonCanvasGroup.SetGameObjectActive();
+            missionsButtonCanvasGroup.SetGameObjectActive();
+            optionsButtonCanvasGroup.SetGameObjectActive();
+            developersButtonCanvasGroup.SetGameObjectActive();
+            feedbackButtonCanvasGroup.SetGameObjectActive();
+            discordButtonCanvasGroup.SetGameObjectActive();
+
+            characterSectionCanvasGroup.alpha = 1;
+            continueButtonCanvasGroup.alpha = 1;
+            missionsButtonCanvasGroup.alpha = 1;
+            optionsButtonCanvasGroup.alpha = 1;
+            developersButtonCanvasGroup.alpha = 1;
+            feedbackButtonCanvasGroup.alpha = 1;
+            discordButtonCanvasGroup.alpha = 1;
         }
 
         private void PlayAppearanceAnimation()
         {
-            var menuTextContent = menuText.text;
-
             menuText.SetText("");
             characterSectionCanvasGroup.alpha = 0;
             continueButtonCanvasGroup.alpha = 0;
@@ -43,7 +89,7 @@ namespace Ingame.UI
             developersButtonCanvasGroup.alpha = 0;
             feedbackButtonCanvasGroup.alpha = 0;
             discordButtonCanvasGroup.alpha = 0;
-            
+
             continueButtonCanvasGroup.SetGameObjectInactive();
             missionsButtonCanvasGroup.SetGameObjectInactive();
             optionsButtonCanvasGroup.SetGameObjectInactive();
@@ -51,13 +97,13 @@ namespace Ingame.UI
             feedbackButtonCanvasGroup.SetGameObjectInactive();
             discordButtonCanvasGroup.SetGameObjectInactive();
             
-            this.SpawnTextCoroutine(menuText, menuTextContent, letterSpawnDelayTime, () =>
+            this.SpawnTextCoroutine(menuText, _initialMenuTextContent, letterSpawnDelayTime, () =>
             {
                 ShowButtons();
                 ShowCharacterText();
             });
         }
-        
+
 
         private void ShowButtons()
         {
@@ -81,6 +127,8 @@ namespace Ingame.UI
 
         private void ShowCharacterText()
         {
+            characterSectionCanvasGroup.SetGameObjectActive();
+            
             var characterTextContent = characterOutputText.text;
             characterOutputText.SetText("");
             
