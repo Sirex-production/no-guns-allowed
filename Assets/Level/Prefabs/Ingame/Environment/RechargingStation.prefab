@@ -356,6 +356,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   regenerationSpeedMultiplier: 5
   cooldown: 2.5
+  logMessageWhenEntered: recharging...
+  logMessageWhenRecharged: baterry is full
   activeMesh: {fileID: 5696068493111501459}
   inactiveMesh: {fileID: 5696068494579820475}
   cooldownMesh: {fileID: 5696068494805210982}

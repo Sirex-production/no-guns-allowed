@@ -1,10 +1,10 @@
-using System;
 using System.Collections;
 using Extensions;
 using Ingame;
 using Ingame.AI;
-using Support;
+using Ingame.UI;
 using UnityEngine;
+using Zenject;
 
 public class RechargingStation : MonoBehaviour
 {
@@ -14,15 +14,20 @@ public class RechargingStation : MonoBehaviour
         Active,
         Inactive
     }
-
+    
+    [Header("Station options")]
     [SerializeField] private int regenerationSpeedMultiplier;
     [SerializeField] private float cooldown;
-
+    [Header("Ui properties")] 
+    [SerializeField] private string logMessageWhenEntered;
     [Header("State Meshes")] 
     [SerializeField] private MeshRenderer activeMesh;
     [SerializeField] private MeshRenderer inactiveMesh;
     [SerializeField] private MeshRenderer cooldownMesh;
+    
+    [Inject] private UiController _uiController;
 
+    private PlayerEventController _playerEventController;
     private State _state;
 
     private void Awake()
@@ -34,40 +39,45 @@ public class RechargingStation : MonoBehaviour
         cooldownMesh.SetGameObjectInactive();
     }
 
+    private void Start()
+    {
+        _playerEventController = PlayerEventController.Instance;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent(out HitBox hitbox) ||
-            hitbox.AttachedActorStats != PlayerEventController.Instance.StatsController ||
+            hitbox.AttachedActorStats != _playerEventController.StatsController ||
             _state != State.Inactive)
             return;
 
         SwitchState(State.Active);
-        PlayerEventController.Instance.StatsController.ChargeRegenerationTimeModifier = regenerationSpeedMultiplier;
+        _playerEventController.StatsController.ChargeRegenerationTimeModifier = regenerationSpeedMultiplier;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.TryGetComponent(out HitBox hitbox) ||
-            hitbox.AttachedActorStats != PlayerEventController.Instance.StatsController ||
+            hitbox.AttachedActorStats != _playerEventController.StatsController ||
             _state != State.Active) 
             return;
 
         SwitchState(State.OnCooldown);
         StartCoroutine(CooldownRoutine());
-        PlayerEventController.Instance.StatsController.ChargeRegenerationTimeModifier = 1;
+        _playerEventController.StatsController.ChargeRegenerationTimeModifier = 1;
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (!other.TryGetComponent(out HitBox hitbox) ||
-            hitbox.AttachedActorStats != PlayerEventController.Instance.StatsController ||
+            hitbox.AttachedActorStats != _playerEventController.StatsController ||
             _state != State.Inactive) 
             return;
 
         SwitchState(State.Active);
-        PlayerEventController.Instance.StatsController.ChargeRegenerationTimeModifier = regenerationSpeedMultiplier;
+        _playerEventController.StatsController.ChargeRegenerationTimeModifier = regenerationSpeedMultiplier;
+        
     }
-
     private IEnumerator CooldownRoutine()
     {
         if(_state != State.OnCooldown)
@@ -100,6 +110,7 @@ public class RechargingStation : MonoBehaviour
         {
             case State.Active:
                 activeMesh.SetGameObjectActive();
+                _uiController.DisplayLogMessage(logMessageWhenEntered, LogDisplayType.DisplayAndClear);
                 break;
             
             case State.Inactive:

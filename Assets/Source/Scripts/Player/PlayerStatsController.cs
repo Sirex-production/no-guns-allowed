@@ -38,6 +38,7 @@ namespace Ingame
         public int CurrentNumberOfCharges => _currentNumberOfCharges;
         public bool IsAbleToDash => _isAlive && _currentNumberOfCharges > 0 || !Data.AreChargesUsed;
         public int ChargeRegenerationTimeModifier { get => _chargeRegenerationTimeModifier; set => _chargeRegenerationTimeModifier = value; }
+        public bool IsFullyCharged => _currentNumberOfCharges >= data.InitialNumberOfCharges;
 
 
         private void Awake()

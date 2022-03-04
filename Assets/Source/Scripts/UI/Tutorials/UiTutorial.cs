@@ -161,6 +161,8 @@ namespace Ingame.UI
                 _animationSequence.Kill();
                 _animationSequence = null;
             }
+
+            targetButton.interactable = true;
             
             _animationSequence = DOTween.Sequence()
                 .Append(_targetButtonImage.DOColor(blinkingColor, blinkingAnimationDuration / 2))
