@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: chargingStation_cooldown
-  m_Shader: {fileID: -6465566751694194690, guid: 0d4c141c4ef8b8f45a734f8cbd1652da, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 60ae42cbbd7fdd4409702558d1a245a2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_dd3a6ca63b104488b55aae059260deea:
+        m_Texture: {fileID: 2800000, guid: 4cabca432f9256e419a481f7ee630efe, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -34,6 +38,7 @@ Material:
     m_Floats:
     - Vector1_6cf638bbc27540de880a198a4b81f608: -0.11
     - Vector1_cb036b1a842f480b8199c7c96f09cff6: 0.18
+    - Vector1_f2d4f749751c4b08a880e8d643c322af: 0.05
     - Vector1_ff4722688802464aad994b74da269b29: 0.4
     m_Colors:
     - Color_bc9485cc55fa4bf9b6118c646c923477: {r: 2, g: 0.15686275, b: 0, a: 0}
