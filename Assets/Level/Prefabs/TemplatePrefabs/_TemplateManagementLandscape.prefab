@@ -4109,6 +4109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 711562566569824102}
+  - component: {fileID: 7965855587309957319}
   - component: {fileID: 5625191924266471972}
   - component: {fileID: 1276339782937408042}
   - component: {fileID: 7307027780803863607}
@@ -4120,6 +4121,7 @@ GameObject:
   - component: {fileID: 6691913785897602606}
   - component: {fileID: 1470587458323756816}
   - component: {fileID: 3786376878030084646}
+  - component: {fileID: 2032866723712453036}
   m_Layer: 0
   m_Name: GameManagement
   m_TagString: Untagged
@@ -4141,6 +4143,102 @@ Transform:
   m_Father: {fileID: 7649552362491798977}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &7965855587309957319
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3712192280834514026}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &5625191924266471972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4204,6 +4302,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDashesController: {fileID: 7628812272792672188}
+  uiVibrationOptionToggles:
+  - {fileID: 790279649183777575}
 --- !u!114 &4160692489741235069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4282,6 +4382,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialStartSection: 0
   _currentSection: -1
+--- !u!114 &2032866723712453036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3712192280834514026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d6f5ce1c965d64c9caf02778e61fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundsData: {fileID: 11400000, guid: 25a85cfd990ae1d4eb1d465c68a7e683, type: 2}
 --- !u!1 &3715199305238617027
 GameObject:
   m_ObjectHideFlags: 0
@@ -8845,6 +8958,7 @@ MonoBehaviour:
   analyticsWrapper: {fileID: 4160692489741235069}
   tutorialsManager: {fileID: 3166584358924357195}
   inputSystem: {fileID: 6908834343615251490}
+  audioManager: {fileID: 2032866723712453036}
 --- !u!1 &7358723069436586359
 GameObject:
   m_ObjectHideFlags: 0
@@ -11063,7 +11177,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6741857446096658789}
+        m_TargetAssemblyTypeName: Ingame.TemplateButtonsBehaviour, Assembly-CSharp
+        m_MethodName: ChangeVibrationDueToToggle
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 790279649183777575}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &9095290637587459939
 GameObject:

@@ -1,4 +1,7 @@
+using Extensions;
+using Support.SLS;
 using UnityEngine;
+using Zenject;
 
 namespace Support
 {
@@ -7,6 +10,8 @@ namespace Support
         [SerializeField] private int targetFpsOnCurrentScene = 60;
         [SerializeField] private VibrationMode vibrationMode = VibrationMode.Universal;
 
+        [Inject] private SaveLoadSystem _saveLoadSystem;
+        
         private double _framesPerSecondSum = 0;
         private float _frameCountStart;
         
@@ -22,9 +27,9 @@ namespace Support
         private void Start()
         {
             Application.targetFrameRate = targetFpsOnCurrentScene;
-            VibrationController.SetMode(vibrationMode);
-
             _frameCountStart = Time.frameCount;
+
+            this.DoAfterNextFrameCoroutine(InitializeSystems);
         }
 
         private void Update()
@@ -33,6 +38,16 @@ namespace Support
 
             if(Input.GetKeyDown(KeyCode.Space))
                 print(AverageFPS);
+        }
+
+        private void InitializeSystems()
+        {
+            var saveData = _saveLoadSystem.SaveData;
+            
+            if(saveData.IsVibrationEnabled.Value)
+                VibrationController.SetMode(vibrationMode);
+            else
+                VibrationController.SetMode(VibrationMode.Disabled);
         }
     }
 }

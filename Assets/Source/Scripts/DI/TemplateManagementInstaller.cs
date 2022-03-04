@@ -2,6 +2,7 @@ using Ingame.UI;
 using NaughtyAttributes;
 using Support;
 using Support.SLS;
+using Support.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -25,6 +26,8 @@ namespace Ingame.DI
         [SerializeField] private TutorialsManager tutorialsManager;
         [Required]
         [SerializeField] private InputSystem inputSystem;
+        [Required]
+        [SerializeField] private AudioManager audioManager;
 
         public override void InstallBindings()
         {
@@ -58,6 +61,10 @@ namespace Ingame.DI
 
             Container.Bind<InputSystem>()
                 .FromInstance(inputSystem)
+                .AsSingle();
+
+            Container.Bind<AudioManager>()
+                .FromInstance(audioManager)
                 .AsSingle();
         }
     }

@@ -3,6 +3,7 @@ using Extensions;
 using MoreMountains.NiceVibrations;
 using Support;
 using Support.SLS;
+using Support.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -12,13 +13,12 @@ namespace Ingame
     public class TemplateButtonsBehaviour : MonoBehaviour
     {
         [SerializeField] [Min(0)] private float fadeAnimationDuration = .5f;
-        [Inject] 
-        private GameController _gameController;
-        [Inject]
-        private SaveLoadSystem _saveLoadSystem;
-        [Inject]
-        private SectionsManager _sectionsManager;
         
+        [Inject] private GameController _gameController;
+        [Inject] private SaveLoadSystem _saveLoadSystem;
+        [Inject] private SectionsManager _sectionsManager;
+        [Inject] private AudioManager _audioManager;
+
         public void OpenUrl(string urlToOpen)
         {
             Application.OpenURL(urlToOpen);
@@ -45,6 +45,16 @@ namespace Ingame
             VibrationController.Vibrate(HapticTypes.Selection);
         }
 
+        public void PlayTerminalBeep()
+        {
+            _audioManager.PlaySound("ui_beep");
+        }
+
+        public void ChangeVibrationDueToToggle(Toggle toggle)
+        {
+            _saveLoadSystem.SaveData.IsVibrationEnabled.Value = toggle.isOn;
+        }
+        
         public void ChangeAimSensitivity(Slider slider)
         {
             if(_saveLoadSystem != null)
