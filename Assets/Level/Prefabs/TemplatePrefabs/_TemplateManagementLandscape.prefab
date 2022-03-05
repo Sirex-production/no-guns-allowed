@@ -411,8 +411,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6741857446096658789}
-        m_TargetAssemblyTypeName: Ingame.ButtonsBehaviour, Assembly-CSharp
-        m_MethodName: RestartLevel
+        m_TargetAssemblyTypeName: Ingame.TemplateButtonsBehaviour, Assembly-CSharp
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4536,7 +4536,7 @@ MonoBehaviour:
   - {fileID: 3669747235830171070}
   focusImages:
   - {fileID: 4000882625156698313}
-  blinkingColor: {r: 0, g: 1, b: 0.1644926, a: 1}
+  blinkingColor: {r: 0, g: 1, b: 0.16470589, a: 1}
   blinkingAnimationDuration: 1
   focusImageFadeTime: 0.3
   focusImageTargetAlpha: 0.7
@@ -9287,7 +9287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8352941, g: 0.10980392, b: 0.28627452, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9325,11 +9325,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8352941, g: 0.10980392, b: 0.28627452, a: 1}
-    m_HighlightedColor: {r: 0, g: 0.8156863, b: 0.32156864, a: 1}
-    m_PressedColor: {r: 0, g: 0.8156863, b: 0.32156864, a: 1}
-    m_SelectedColor: {r: 0.8352941, g: 0.10980392, b: 0.28627452, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -9731,7 +9731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8352941, g: 0.10980392, b: 0.28627452, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9769,11 +9769,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8352941, g: 0.10980392, b: 0.28627452, a: 1}
-    m_HighlightedColor: {r: 0, g: 0.8156863, b: 0.32156864, a: 1}
-    m_PressedColor: {r: 0, g: 0.8156863, b: 0.32156864, a: 1}
-    m_SelectedColor: {r: 0.8352941, g: 0.10980392, b: 0.28627452, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -11267,7 +11267,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0, g: 0.8156863, b: 0.32156864, a: 1}
     m_PressedColor: {r: 0, g: 0.8156863, b: 0.32156864, a: 1}
     m_SelectedColor: {r: 0.8352941, g: 0.10980392, b: 0.28627452, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.8352941, g: 0.10980392, b: 0.28627452, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:

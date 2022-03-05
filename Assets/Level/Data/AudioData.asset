@@ -15,8 +15,8 @@ MonoBehaviour:
   uiVfxClips:
     m_keys: 0200000001000000
     m_values:
-    - {fileID: 8300000, guid: bcb33c9ff6725bd47981d6d5cf954e87, type: 3}
-    - {fileID: 8300000, guid: 34c9a8460db5f7344b0811684cfbc546, type: 3}
+    - {fileID: 8300000, guid: 8087f4dc790dfbd4ab68b4bbb7b40523, type: 3}
+    - {fileID: 8300000, guid: c20006d4b1cd8ce4bb7eb85972e8afbf, type: 3}
   musicClips:
     m_keys: 
     m_values: []

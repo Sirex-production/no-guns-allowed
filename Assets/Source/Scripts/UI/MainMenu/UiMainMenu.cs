@@ -31,6 +31,8 @@ namespace Ingame.UI
 
         [Inject] private InputSystem _inputSystem;
         [Inject] private AudioManager _audioManager;
+
+        private const float INITIAL_SOUND_DELAY = .3f;
         
         private string _initialMenuTextContent;
         private string _initialCharacterTextContent;
@@ -100,7 +102,7 @@ namespace Ingame.UI
             feedbackButtonCanvasGroup.SetGameObjectInactive();
             discordButtonCanvasGroup.SetGameObjectInactive();
             
-            this.WaitAndDoCoroutine(.3f, ()=>_audioManager.PlayUiSfx(UiSfxName.LettersBeep1, true));
+            this.WaitAndDoCoroutine(INITIAL_SOUND_DELAY, ()=>_audioManager.PlayUiSfx(UiSfxName.LettersBeep1, true));
             this.SpawnTextCoroutine(menuText, _initialMenuTextContent, letterSpawnDelayTime, () =>
             {
                 _audioManager.StopUiSfx();
