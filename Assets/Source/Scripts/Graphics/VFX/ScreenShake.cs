@@ -1,6 +1,7 @@
 using System.Collections;
 using Cinemachine;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.Graphics
 {
@@ -10,6 +11,8 @@ namespace Ingame.Graphics
         [SerializeField] [Min(0.0f)] private float amplitudeGain;
         [SerializeField] [Min(0.0f)] private float frequencyGain;
         [SerializeField] [Min(0.0f)] private float shakeDuration;
+
+        [Inject] private EffectsManager _effectsManager;
         
         private CameraSectionTransiter _cameraSectionTransiter;
         private CinemachineVirtualCamera _currentVirtualCamera;
@@ -20,9 +23,9 @@ namespace Ingame.Graphics
         {
             _cameraSectionTransiter = GetComponent<CameraSectionTransiter>();
             
-            var transform1 = this.transform;
-            var position = transform1.position;
-            var rotation = transform1.rotation;
+            var transformCopy = transform;
+            var position = transformCopy.position;
+            var rotation = transformCopy.rotation;
             _cameraPosition = new Vector3(position.x, position.y, position.z);
             _cameraRotation = new Quaternion(rotation.x, rotation.y, rotation.z, rotation.w);
         }
@@ -33,6 +36,7 @@ namespace Ingame.Graphics
                 PlayerEventController.Instance.OnDashCancelled += StartScreenShake;
 
             _cameraSectionTransiter.OnVirtualCameraChanged += OnVirtualCameraChanged;
+            _effectsManager.OnEnemyKillEffectPlayed += StartScreenShake;
         }
 
         private void OnDestroy()
@@ -41,6 +45,7 @@ namespace Ingame.Graphics
                 PlayerEventController.Instance.OnDashCancelled -= StartScreenShake;
             
             _cameraSectionTransiter.OnVirtualCameraChanged -= OnVirtualCameraChanged;
+            _effectsManager.OnEnemyKillEffectPlayed -= StartScreenShake;
         }
 
         private void Update()

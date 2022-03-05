@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Ingame.Graphics.VFX
 {
-    public class VignetteController : IVolumeComponentController<Vignette>
+    public class VignetteController : VolumeComponentController<Vignette>
     {
         [SerializeField] [Range(0, 1)] private float startValue;
         [SerializeField] [Range(0, 1)] private float endValue;

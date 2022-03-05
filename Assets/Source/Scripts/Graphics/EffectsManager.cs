@@ -8,6 +8,7 @@ namespace Ingame.Graphics
     {
         public event Action OnSlowMotionEnter;
         public event Action OnSlowMotionExit;
+        public event Action OnEnemyKillEffectPlayed;
 
         public void EnterSlowMotion()
         {
@@ -17,6 +18,11 @@ namespace Ingame.Graphics
         public void ExitSlowMotion()
         {
             OnSlowMotionExit?.Invoke();
+        }
+
+        public void PlayKillEnemyEffects()
+        {
+            OnEnemyKillEffectPlayed?.Invoke();
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 
 namespace Ingame.Graphics.VFX
 {
-    public abstract class IVolumeComponentController<T> : MonoBehaviour where T : VolumeComponent
+    public abstract class VolumeComponentController<T> : MonoBehaviour where T : VolumeComponent
     {
         [SerializeField] protected Volume volumeReference;
         protected T effectToChange;

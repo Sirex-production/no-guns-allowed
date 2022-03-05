@@ -1,6 +1,7 @@
 using System.Collections;
 using Extensions;
 using Ingame.Graphics;
+using NaughtyAttributes;
 using Support;
 using UnityEngine;
 using Zenject;
@@ -9,11 +10,16 @@ namespace Ingame
 {
     public class SlowMotionController : MonoSingleton<SlowMotionController>
     {
-        [Tooltip("How much slow-motion does player have as a resource in seconds")]
+        [BoxGroup("Player stats"), Tooltip("How much slow-motion does player have as a resource in seconds")]
         [SerializeField] private float slowMotionPool;
-        [Tooltip("The minimum amount of slow-motion player has to restore before ")]
+        [BoxGroup("Player stats"), Tooltip("The minimum amount of slow-motion player has to restore before ")]
         [SerializeField] private float slowMotionThreshold;
-
+        [Space]
+        [BoxGroup("Killing effect")]
+        [SerializeField] private float killingEffectSlowMotionDuration = .01f;
+        [BoxGroup("Killing effect")]
+        [SerializeField] private float timeScaleDuringKillingEffectSlowMotion = .01f;
+        
         [Inject] private GameController _gameController;
         [Inject] private EffectsManager _effectsManager;
         
@@ -42,6 +48,7 @@ namespace Ingame
             PlayerEventController.Instance.OnDashPerformed += ReturnToDefaultStateOnDashPerformed;
             _gameController.OnLevelRestart += ReturnToDefaultState;
             _gameController.OnLevelEnded += ReturnToDefaultStateOnLevelEnd;
+            _effectsManager.OnEnemyKillEffectPlayed += PlayKillingSlowMoEffect;
         }
 
         private void OnDestroy()
@@ -51,6 +58,7 @@ namespace Ingame
             PlayerEventController.Instance.OnDashPerformed -= ReturnToDefaultStateOnDashPerformed;
             _gameController.OnLevelRestart -= ReturnToDefaultState;
             _gameController.OnLevelEnded -= ReturnToDefaultStateOnLevelEnd;
+            _effectsManager.OnEnemyKillEffectPlayed -= PlayKillingSlowMoEffect;
         }
 
         private IEnumerator TimerRoutine()
@@ -135,6 +143,12 @@ namespace Ingame
             StopAllCoroutines();
             InvokeCooldown();
             _effectsManager.ExitSlowMotion();
+        }
+
+        private void PlayKillingSlowMoEffect()
+        {
+            Time.timeScale = timeScaleDuringKillingEffectSlowMotion;
+            this.WaitAndDoCoroutine(killingEffectSlowMotionDuration, () => Time.timeScale = 1);
         }
     }
 }
