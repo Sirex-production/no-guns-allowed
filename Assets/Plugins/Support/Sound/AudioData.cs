@@ -5,12 +5,12 @@ namespace Support.Sound
     [CreateAssetMenu(menuName = "Data/Support/AudioData", fileName = "NewAudioData")]
     public class AudioData : ScriptableObject
     {
-        [SerializeField] private SerializableDictionary<UiVfxName, AudioClip> uiVfxClips;
+        [SerializeField] private SerializableDictionary<UiSfxName, AudioClip> uiVfxClips;
         [SerializeField] private SerializableDictionary<MusicName, AudioClip> musicClips;
         
-        public AudioClip GetUiFvx(UiVfxName uiVfxName)
+        public AudioClip GetUiFvx(UiSfxName uiSfxName)
         {
-            return uiVfxClips[uiVfxName];
+            return uiVfxClips[uiSfxName];
         }
         
         public AudioClip GetMusic(MusicName musicName)

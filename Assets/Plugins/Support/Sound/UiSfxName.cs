@@ -1,8 +1,9 @@
 ﻿namespace Support.Sound
 {
-    public enum UiVfxName
+    public enum UiSfxName
     {
         None,
+        LettersBeep1,
         Beep1
     }
 }

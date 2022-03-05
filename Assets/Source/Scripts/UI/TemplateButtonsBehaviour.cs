@@ -47,7 +47,7 @@ namespace Ingame
 
         public void PlayTerminalBeep()
         {
-            _audioManager.PlayUiVfx(UiVfxName.Beep1);
+            _audioManager.PlayUiSfx(UiSfxName.Beep1);
         }
 
         public void ChangeVibrationDueToToggle(Toggle toggle)

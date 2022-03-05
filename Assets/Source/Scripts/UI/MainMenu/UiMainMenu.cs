@@ -2,6 +2,7 @@ using DG.Tweening;
 using Extensions;
 using NaughtyAttributes;
 using Support;
+using Support.Sound;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -29,6 +30,7 @@ namespace Ingame.UI
         [BoxGroup("Animation settings")] [SerializeField] [Min(0)] private float pauseBetweenFadingButtons = .5f;
 
         [Inject] private InputSystem _inputSystem;
+        [Inject] private AudioManager _audioManager;
         
         private string _initialMenuTextContent;
         private string _initialCharacterTextContent;
@@ -58,6 +60,7 @@ namespace Ingame.UI
         private void SkipAppearanceAnimation()
         {
             StopAllCoroutines();
+            _audioManager.StopUiSfx();
             
             menuText.SetText(_initialMenuTextContent);
             characterOutputText.SetText(_initialCharacterTextContent);
@@ -97,13 +100,14 @@ namespace Ingame.UI
             feedbackButtonCanvasGroup.SetGameObjectInactive();
             discordButtonCanvasGroup.SetGameObjectInactive();
             
+            this.WaitAndDoCoroutine(.3f, ()=>_audioManager.PlayUiSfx(UiSfxName.LettersBeep1, true));
             this.SpawnTextCoroutine(menuText, _initialMenuTextContent, letterSpawnDelayTime, () =>
             {
+                _audioManager.StopUiSfx();
                 ShowButtons();
                 ShowCharacterText();
             });
         }
-
 
         private void ShowButtons()
         {
@@ -133,7 +137,11 @@ namespace Ingame.UI
             characterOutputText.SetText("");
             
             characterSectionCanvasGroup.DOFade(1, characterSectionFadeAnimationTime)
-                .OnComplete(() => this.SpawnTextCoroutine(characterOutputText, characterTextContent, letterSpawnDelayTime));
+                .OnComplete(() =>
+                {
+                    _audioManager.PlayUiSfx(UiSfxName.LettersBeep1, true);
+                    this.SpawnTextCoroutine(characterOutputText, characterTextContent, letterSpawnDelayTime, () => _audioManager.StopUiSfx());
+                });
         }
     }
 }

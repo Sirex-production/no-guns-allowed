@@ -1,44 +1,49 @@
 using NaughtyAttributes;
 using UnityEngine;
 
-
 namespace Support.Sound
 {
     public class AudioManager : MonoBehaviour
     {
         [BoxGroup("References"), Required]
-        [SerializeField] private AudioSource uiVfxAudioSource;
+        [SerializeField] private AudioSource uiSfxAudioSource;
         [BoxGroup("References"), Required]
         [SerializeField] private AudioSource musicAudioSource;
         [Space]
         [BoxGroup("Data"), Required] 
         [SerializeField] private AudioData audioData;
 
-        private UiVfxName _lastUsedUiVfxName = UiVfxName.None;
+        private UiSfxName _lastUsedUiSfxName = UiSfxName.None;
         private MusicName _lastUsedMusicName = MusicName.None;
 
         private void Awake()
         {
-            uiVfxAudioSource = gameObject.AddComponent<AudioSource>();
+            uiSfxAudioSource = gameObject.AddComponent<AudioSource>();
             musicAudioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        public void PlayUiVfx(UiVfxName uiVfxName)
+        public void PlayUiSfx(UiSfxName uiSfxName, bool isLooped = false)
         {
-            if(uiVfxName == UiVfxName.None)
+            if(uiSfxName == UiSfxName.None)
                 return;
 
-            if (uiVfxName == _lastUsedUiVfxName)
+            if (uiSfxName == _lastUsedUiSfxName)
             {
-                uiVfxAudioSource.Play();
+                uiSfxAudioSource.Play();
                 return;
             }
             
-            var uiAudioClip = audioData.GetUiFvx(uiVfxName);
+            var uiAudioClip = audioData.GetUiFvx(uiSfxName);
 
-            _lastUsedUiVfxName = uiVfxName;
-            uiVfxAudioSource.clip = uiAudioClip;
-            uiVfxAudioSource.Play();
+            _lastUsedUiSfxName = uiSfxName;
+            uiSfxAudioSource.clip = uiAudioClip;
+            uiSfxAudioSource.loop = isLooped;
+            uiSfxAudioSource.Play();
+        }
+
+        public void StopUiSfx()
+        {
+            uiSfxAudioSource.Stop();
         }
 
         public void PlayMusic(MusicName musicName)
@@ -57,6 +62,11 @@ namespace Support.Sound
             _lastUsedMusicName = musicName;
             musicAudioSource.clip = musicAudioClip;
             musicAudioSource.Play();
+        }
+
+        public void StopMusic()
+        {
+            musicAudioSource.Stop();
         }
     }
 }

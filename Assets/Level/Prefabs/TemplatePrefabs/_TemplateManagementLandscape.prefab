@@ -5328,7 +5328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.02026377, y: 0.19969681}
   m_AnchorMax: {x: 0.16216336, y: 0.81230325}
-  m_AnchoredPosition: {x: -0.099853516, y: 0.05999756}
+  m_AnchoredPosition: {x: -0.09985387, y: 0.05999756}
   m_SizeDelta: {x: -0.1729002, y: -0.7179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2376399244305891028
@@ -7352,7 +7352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d6f5ce1c965d64c9caf02778e61fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiVfxAudioSource: {fileID: 6911802648751516479}
+  uiSfxAudioSource: {fileID: 6911802648751516479}
   musicAudioSource: {fileID: 1736213635039924691}
   audioData: {fileID: 11400000, guid: 25a85cfd990ae1d4eb1d465c68a7e683, type: 2}
 --- !u!1 &6298687802509465862
