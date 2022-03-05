@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Extensions;
 using UnityEngine;
 
 namespace Ingame
@@ -6,8 +7,9 @@ namespace Ingame
     public class MonoInvokableDoor : MonoInvokable
     {
         [SerializeField] [Range(-180, 180)] private float rotationAngle;
-        [SerializeField] [Min(0)]                private float duration;
-        [SerializeField]                         private bool  isClockwise;
+        [SerializeField] [Min(0)] private float duration;
+        [SerializeField] [Min(0)] private float delayBeforeRotation = 0;
+        [SerializeField] private bool  isClockwise;
 
         private bool _isOpened;
         private Vector3 _initialLocalRotation;
@@ -21,7 +23,7 @@ namespace Ingame
 
         public override void Invoke()
         {
-            OpenDoor();
+            this.WaitAndDoCoroutine(delayBeforeRotation, OpenDoor);
         }
 
 
