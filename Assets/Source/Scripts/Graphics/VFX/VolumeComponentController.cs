@@ -16,7 +16,7 @@ namespace Ingame.Graphics.VFX
 
         protected abstract IEnumerator OnModificationRoutine();
 
-        public abstract void DoReset();
+        public abstract void Reset();
 
         public void Modify()
         {

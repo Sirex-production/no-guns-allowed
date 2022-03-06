@@ -1,6 +1,7 @@
 using System.Collections;
 using Extensions;
 using Ingame.AI;
+using Ingame.Graphics;
 using Ingame.UI;
 using MoreMountains.NiceVibrations;
 using Support;
@@ -13,10 +14,10 @@ namespace Ingame
     public class PlayerStatsController : ActorStats
     {
         [SerializeField] private PlayerData data;
-
-        [Inject] private GameController _gameController;
+        
         [Inject] private AnalyticsWrapper _analyticsWrapper;
         [Inject] private UiController _uiController;
+        [Inject] private EffectsManager _effectsManager;
         
         private const int NUMBER_OF_REGENERATED_CHARGES_PER_TICK = 1;
         private const int CHARGES_USED_TO_PERFORM_DASH = 1;
@@ -80,7 +81,7 @@ namespace Ingame
             if(_analyticsWrapper != null)
                 _analyticsWrapper.LevelStats.AddPlayerDeathToStats(damageType);
             
-            _gameController.EndLevel(false);
+            _effectsManager.PlayPlayerDeathEffect();
             Destroy(gameObject);
         }
 

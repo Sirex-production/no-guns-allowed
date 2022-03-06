@@ -18,7 +18,11 @@ namespace Ingame
         [BoxGroup("Killing effect")]
         [SerializeField] private float killingEffectSlowMotionDuration = .01f;
         [BoxGroup("Killing effect")]
-        [SerializeField] private float timeScaleDuringKillingEffectSlowMotion = .01f;
+        [SerializeField] private float timeScaleDuringKillingEffect = .05f;
+        [BoxGroup("Player death effect")]
+        [SerializeField] private float playerDeathSlowMotionEffectDuration = .01f;
+        [BoxGroup("Player death effect")]
+        [SerializeField] private float timeScaleDuringPlayerDeathEffect = .05f;
         
         [Inject] private GameController _gameController;
         [Inject] private EffectsManager _effectsManager;
@@ -49,6 +53,7 @@ namespace Ingame
             _gameController.OnLevelRestart += ReturnToDefaultState;
             _gameController.OnLevelEnded += ReturnToDefaultStateOnLevelEnd;
             _effectsManager.OnEnemyKillEffectPlayed += PlayKillingSlowMoEffect;
+            _effectsManager.OnPlayerDeathEffectPlayed += PlayPlayerDeathSlowMotionEffect;
         }
 
         private void OnDestroy()
@@ -59,6 +64,7 @@ namespace Ingame
             _gameController.OnLevelRestart -= ReturnToDefaultState;
             _gameController.OnLevelEnded -= ReturnToDefaultStateOnLevelEnd;
             _effectsManager.OnEnemyKillEffectPlayed -= PlayKillingSlowMoEffect;
+            _effectsManager.OnPlayerDeathEffectPlayed -= PlayPlayerDeathSlowMotionEffect;
         }
 
         private IEnumerator TimerRoutine()
@@ -147,8 +153,14 @@ namespace Ingame
 
         private void PlayKillingSlowMoEffect()
         {
-            Time.timeScale = timeScaleDuringKillingEffectSlowMotion;
+            Time.timeScale = timeScaleDuringKillingEffect;
             this.WaitAndDoCoroutine(killingEffectSlowMotionDuration, () => Time.timeScale = 1);
+        }
+
+        private void PlayPlayerDeathSlowMotionEffect()
+        {
+            Time.timeScale = timeScaleDuringPlayerDeathEffect;
+            this.WaitAndDoCoroutine(playerDeathSlowMotionEffectDuration, () => Time.timeScale = 1);
         }
     }
 }

@@ -74,23 +74,24 @@ namespace Ingame.UI
 
         private void ShowWinScreen()
         {
-            winScreenParentCanvas.alpha = 0;
+            winScreenParentCanvas.transform.localScale = new Vector3(1, 0, 1);
             winScreenParentCanvas.SetGameObjectActive();
             var winTextContent = GetGeneratedEndScreenText(_initialWinTextContent);
 
             _animationSequence = DOTween.Sequence()
-                .Append(winScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
+                .Append(winScreenParentCanvas.transform.DOScaleY(1, animationDuration)
                     .OnComplete(() => this.SpawnTextCoroutine(winText, winTextContent, lettersSpawnDelay)));
         }
 
         private void ShowLooseScreen()
         {
-            looseScreenParentCanvas.alpha = 0;
+
+            looseScreenParentCanvas.transform.localScale = new Vector3(1, 0, 1);
             looseScreenParentCanvas.SetGameObjectActive();
             var looseTextContent = GetGeneratedEndScreenText(_initialLooseTextContent);
-
+            
             _animationSequence = DOTween.Sequence()
-                .Append(looseScreenParentCanvas.DOFade(1, animationDuration / 1.5f)
+                .Append(looseScreenParentCanvas.transform.DOScaleY(1, animationDuration)
                     .OnComplete(() => this.SpawnTextCoroutine(loseText, looseTextContent, lettersSpawnDelay)));
         }
 

@@ -947,7 +947,6 @@ GameObject:
   - component: {fileID: 5005888661490081309}
   - component: {fileID: 5005888661490081311}
   - component: {fileID: 1608677767131907252}
-  - component: {fileID: 4985673862053330627}
   m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
@@ -1124,22 +1123,6 @@ MonoBehaviour:
   - {fileID: 3234147585437216115}
   - {fileID: 3234147583632256172}
   - {fileID: 3234147583581790429}
---- !u!114 &4985673862053330627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5005888661490081280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea393297613d704b8c76e37c4f84a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slowMotionPool: 3
-  slowMotionThreshold: 2
-  killingEffectSlowMotionDuration: 0.01
-  timeScaleDuringKillingEffectSlowMotion: 0.05
 --- !u!1 &5005888661820053556
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ namespace Ingame.Graphics.VFX
                 return;
             
             _effectsManager.OnSlowMotionEnter += OnSlowMotionEnter;
-            _effectsManager.OnSlowMotionExit += DoReset;
+            _effectsManager.OnSlowMotionExit += Reset;
         }
 
         private void OnDestroy()
@@ -30,7 +30,7 @@ namespace Ingame.Graphics.VFX
                 return;
             
             _effectsManager.OnSlowMotionEnter -= OnSlowMotionEnter;
-            _effectsManager.OnSlowMotionExit -= DoReset;
+            _effectsManager.OnSlowMotionExit -= Reset;
         }
 
         protected override IEnumerator OnModificationRoutine()
@@ -47,6 +47,9 @@ namespace Ingame.Graphics.VFX
             effectToChange.intensity.value = startValue;
             while (timeElapsed <= lerpDuration)
             {
+                if (PlayerEventController.Instance == null)
+                    yield break;
+                
                 var playerPosition = PlayerEventController.Instance.transform.position;
                 var playerPositionOnScreen = mainCamera.WorldToScreenPoint(playerPosition);
                 var x = playerPositionOnScreen.x / mainCamera.pixelWidth;
@@ -64,7 +67,7 @@ namespace Ingame.Graphics.VFX
             this.WaitAndDoCoroutine(timeoutBeforeStart, Modify);
         }
 
-        public override void DoReset()
+        public override void Reset()
         {
             StopAllCoroutines();
 

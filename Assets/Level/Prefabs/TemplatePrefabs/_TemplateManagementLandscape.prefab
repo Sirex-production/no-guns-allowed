@@ -4247,6 +4247,7 @@ GameObject:
   - component: {fileID: 6691913785897602606}
   - component: {fileID: 1470587458323756816}
   - component: {fileID: 3786376878030084646}
+  - component: {fileID: 8324003887911532145}
   m_Layer: 0
   m_Name: GameManagement
   m_TagString: Untagged
@@ -4385,6 +4386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b43e277f5637f428dcabb068ffd494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDeathEffectDuration: 0.5
 --- !u!114 &1470587458323756816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4411,6 +4413,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialStartSection: 0
   _currentSection: -1
+--- !u!114 &8324003887911532145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3712192280834514026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea393297613d704b8c76e37c4f84a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowMotionPool: 3
+  slowMotionThreshold: 2
+  killingEffectSlowMotionDuration: 0.01
+  timeScaleDuringKillingEffect: 0.05
+  playerDeathSlowMotionEffectDuration: 0.05
+  timeScaleDuringPlayerDeathEffect: 0.05
 --- !u!1 &3715199305238617027
 GameObject:
   m_ObjectHideFlags: 0
@@ -6038,6 +6058,7 @@ GameObject:
   - component: {fileID: 8047907313413388493}
   - component: {fileID: 7596239444455690363}
   - component: {fileID: 3120299277225518616}
+  - component: {fileID: 1597338799686102586}
   m_Layer: 0
   m_Name: PostProcessing
   m_TagString: Untagged
@@ -6106,6 +6127,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeReference: {fileID: 8047907313413388493}
+  effectDuration: 0.05
+--- !u!114 &1597338799686102586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894825326265235575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00699697e5fce7a43afa62511c67ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeReference: {fileID: 8047907313413388493}
+  lerpSpeed: 5
 --- !u!1 &4917932376123679612
 GameObject:
   m_ObjectHideFlags: 0
@@ -8118,7 +8154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c10e8e60f98484586c3411ebe49e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDuration: 0.8
+  animationDuration: 0.2
   lettersSpawnDelay: 0.01
   winScreenParentCanvas: {fileID: 6761409025602481778}
   winText: {fileID: 1544414350940551593}

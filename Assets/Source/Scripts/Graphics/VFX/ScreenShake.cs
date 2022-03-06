@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Ingame.Graphics
 {
-    [RequireComponent(typeof(CameraSectionTransiter))]
+    [RequireComponent(typeof(CameraTransiter))]
     public class ScreenShake : MonoBehaviour
     {
         [SerializeField] [Min(0.0f)] private float amplitudeGain;
@@ -14,14 +14,14 @@ namespace Ingame.Graphics
 
         [Inject] private EffectsManager _effectsManager;
         
-        private CameraSectionTransiter _cameraSectionTransiter;
+        private CameraTransiter _cameraTransiter;
         private CinemachineVirtualCamera _currentVirtualCamera;
         private Vector3 _cameraPosition;
         private Quaternion _cameraRotation;
 
         private void Awake()
         {
-            _cameraSectionTransiter = GetComponent<CameraSectionTransiter>();
+            _cameraTransiter = GetComponent<CameraTransiter>();
             
             var transformCopy = transform;
             var position = transformCopy.position;
@@ -35,8 +35,9 @@ namespace Ingame.Graphics
             if(PlayerEventController.Instance != null)
                 PlayerEventController.Instance.OnDashCancelled += StartScreenShake;
 
-            _cameraSectionTransiter.OnVirtualCameraChanged += OnVirtualCameraChanged;
+            _cameraTransiter.OnVirtualCameraChanged += OnVirtualCameraChanged;
             _effectsManager.OnEnemyKillEffectPlayed += StartScreenShake;
+            _effectsManager.OnPlayerDeathEffectPlayed += StartScreenShake;
         }
 
         private void OnDestroy()
@@ -44,14 +45,9 @@ namespace Ingame.Graphics
             if(PlayerEventController.Instance != null)
                 PlayerEventController.Instance.OnDashCancelled -= StartScreenShake;
             
-            _cameraSectionTransiter.OnVirtualCameraChanged -= OnVirtualCameraChanged;
+            _cameraTransiter.OnVirtualCameraChanged -= OnVirtualCameraChanged;
             _effectsManager.OnEnemyKillEffectPlayed -= StartScreenShake;
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-                StartScreenShake();
+            _effectsManager.OnPlayerDeathEffectPlayed -= StartScreenShake;
         }
 
         private void OnVirtualCameraChanged(CinemachineVirtualCamera virtualCamera)

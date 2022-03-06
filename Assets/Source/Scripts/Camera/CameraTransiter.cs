@@ -2,22 +2,25 @@ using System;
 using System.Linq;
 using Cinemachine;
 using Extensions;
+using Ingame.Graphics;
 using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 
 namespace Ingame
 {
-    public class CameraSectionTransiter : MonoBehaviour
+    public class CameraTransiter : MonoBehaviour
     {
+        [Required]
+        [SerializeField] private CinemachineVirtualCamera playerFocusCamera;
         [Required]
         [SerializeField] private CinemachineVirtualCamera levelOverviewCamera;
         [SerializeField] private CinemachineVirtualCamera[] levelTransitionCameras;
 
         private const float GIZMOS_SPHERE_RADIUS = .5f;
 
-        [Inject]
-        private SectionsManager _sectionsManager;
+        [Inject] private SectionsManager _sectionsManager;
+        [Inject] private EffectsManager _effectsManager;
 
         public event Action<CinemachineVirtualCamera> OnVirtualCameraChanged;
 
@@ -26,6 +29,7 @@ namespace Ingame
             _sectionsManager.OnSectionEnter += TransitToCameraWithIndex;
             _sectionsManager.OnLevelOverviewEnter += OnLevelOverviewEnter;
             _sectionsManager.OnLevelOverviewExit += OnLevelOverviewExit;
+            _effectsManager.OnPlayerDeathEffectPlayed += FocusOnPlayer;
 
             this.DoAfterNextFrameCoroutine(() => ChangeVirtualCamera(levelTransitionCameras.First(cam => cam != null)));
         }
@@ -35,6 +39,7 @@ namespace Ingame
             _sectionsManager.OnSectionEnter -= TransitToCameraWithIndex;
             _sectionsManager.OnLevelOverviewEnter -= OnLevelOverviewEnter;
             _sectionsManager.OnLevelOverviewExit -= OnLevelOverviewExit;
+            _effectsManager.OnPlayerDeathEffectPlayed -= FocusOnPlayer;
         }
  
         private void OnDrawGizmos()
@@ -74,11 +79,16 @@ namespace Ingame
         {
             TransitToCameraWithIndex(currentSectionId);
         }
-        
+
+        private void FocusOnPlayer()
+        {
+            ChangeVirtualCamera(playerFocusCamera);
+        }
+
         private void ResetPrioritiesToZero()
         {
-            if(levelOverviewCamera != null)
-                levelOverviewCamera.Priority = 0;
+            levelOverviewCamera.Priority = 0;
+            playerFocusCamera.Priority = 0;
             
             if(levelTransitionCameras == null)
                 return;
