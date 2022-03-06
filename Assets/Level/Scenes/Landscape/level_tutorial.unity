@@ -499,6 +499,10 @@ PrefabInstance:
       propertyPath: duration
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7226707245053424005, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: shakeEnvironment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7226707245615650024, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: m_Name
       value: PanelPack
@@ -2458,9 +2462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a81dc3d463d8b498aebb0337d9e87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitudeGain: 4
   frequencyGain: 2
-  shakeDuration: 0.5
+  playerRelativeAmplitudeGain: 4
+  playerRelativeShakeDuration: 0.5
+  environmentRelativeAmplitudeGain: 1
 --- !u!114 &417128943
 MonoBehaviour:
   m_ObjectHideFlags: 0
