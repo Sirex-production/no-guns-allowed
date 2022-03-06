@@ -8,8 +8,10 @@ namespace Ingame.Graphics
     [RequireComponent(typeof(CameraTransiter))]
     public class ScreenShake : MonoBehaviour
     {
-        [SerializeField] [Min(0.0f)] private float amplitudeGain;
         [SerializeField] [Min(0.0f)] private float frequencyGain;
+
+        [Header("On Dash Cancelled")]
+        [SerializeField] [Min(0.0f)] private float amplitudeGain;
         [SerializeField] [Min(0.0f)] private float shakeDuration;
 
         [Inject] private EffectsManager _effectsManager;
@@ -33,32 +35,24 @@ namespace Ingame.Graphics
         private void Start()
         {
             if(PlayerEventController.Instance != null)
-                PlayerEventController.Instance.OnDashCancelled += StartScreenShake;
+                PlayerEventController.Instance.OnDashCancelled += OnDashCancelled;
 
             _cameraTransiter.OnVirtualCameraChanged += OnVirtualCameraChanged;
-            _effectsManager.OnEnemyKillEffectPlayed += StartScreenShake;
-            _effectsManager.OnPlayerDeathEffectPlayed += StartScreenShake;
+            _effectsManager.OnEnemyKillEffectPlayed += OnEnemyKillEffectPlayed;
+            _effectsManager.OnPlayerDeathEffectPlayed += OnPlayerDeathEffectPlayed;
         }
 
         private void OnDestroy()
         {
             if(PlayerEventController.Instance != null)
-                PlayerEventController.Instance.OnDashCancelled -= StartScreenShake;
+                PlayerEventController.Instance.OnDashCancelled -= OnDashCancelled;
             
             _cameraTransiter.OnVirtualCameraChanged -= OnVirtualCameraChanged;
-            _effectsManager.OnEnemyKillEffectPlayed -= StartScreenShake;
-            _effectsManager.OnPlayerDeathEffectPlayed -= StartScreenShake;
+            _effectsManager.OnEnemyKillEffectPlayed -= OnEnemyKillEffectPlayed;
+            _effectsManager.OnPlayerDeathEffectPlayed -= OnPlayerDeathEffectPlayed;
         }
 
-        private void OnVirtualCameraChanged(CinemachineVirtualCamera virtualCamera)
-        {
-            _currentVirtualCamera = virtualCamera;
-            
-            _currentVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain =
-                frequencyGain;
-        }
-
-        private IEnumerator ScreenShakeRoutine()
+        private IEnumerator ScreenShakeRoutine(float amplitude, float duration)
         {
             var timeElapsed = 0.0f;
             var cinemachineBasicMultiChannelPerlin =
@@ -66,10 +60,10 @@ namespace Ingame.Graphics
             while (true)
             {
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain =
-                    Mathf.Lerp(amplitudeGain, 0.0f, timeElapsed / shakeDuration);
+                    Mathf.Lerp(amplitude, 0.0f, timeElapsed / duration);
 
                 timeElapsed += Time.deltaTime / Time.timeScale;
-                if (timeElapsed >= shakeDuration)
+                if (timeElapsed >= duration)
                     break;
 
                 yield return new WaitForEndOfFrame();
@@ -80,20 +74,43 @@ namespace Ingame.Graphics
             yield return null;
         }
 
-        private void ResetCameraTransform()
+        private void OnDashCancelled()
         {
-            var transform1 = transform;
-            transform1.position = _cameraPosition;
-            transform1.rotation = _cameraRotation;
+            StartScreenShake(amplitudeGain, shakeDuration);
         }
 
-        private void StartScreenShake()
+        private void OnEnemyKillEffectPlayed()
+        {
+            StartScreenShake(amplitudeGain, shakeDuration);
+        }
+
+        private void OnPlayerDeathEffectPlayed()
+        {
+            StartScreenShake(amplitudeGain, shakeDuration);
+        }
+
+        private void StartScreenShake(float amplitude, float duration)
         {
             if (!(Camera.main is { })) 
                 Debug.LogError("MainCamera has not been found in the scene");
 
             StopAllCoroutines();
-            StartCoroutine(ScreenShakeRoutine());
+            StartCoroutine(ScreenShakeRoutine(amplitude, duration));
+        }
+
+        private void OnVirtualCameraChanged(CinemachineVirtualCamera virtualCamera)
+        {
+            _currentVirtualCamera = virtualCamera;
+            
+            _currentVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain =
+                frequencyGain;
+        }
+
+        private void ResetCameraTransform()
+        {
+            var transform1 = transform;
+            transform1.position = _cameraPosition;
+            transform1.rotation = _cameraRotation;
         }
     }
 }
