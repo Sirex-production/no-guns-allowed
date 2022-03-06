@@ -66,6 +66,15 @@ namespace Ingame
             }
         }
         
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.transform.TryGetComponent(out HitBox actorStats) && IsInvincible)
+            {
+                actorStats.TakeDamage(data.Damage, DamageType.Melee);
+                VibrationController.Vibrate(HapticTypes.RigidImpact);
+            }
+        }
+        
         private void OnDestroy()
         {
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
