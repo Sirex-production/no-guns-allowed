@@ -1,5 +1,6 @@
 using System.Collections;
 using Cinemachine;
+using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 
@@ -8,11 +9,15 @@ namespace Ingame.Graphics
     [RequireComponent(typeof(CameraTransiter))]
     public class ScreenShake : MonoBehaviour
     {
-        [SerializeField] [Min(0.0f)] private float frequencyGain;
+        [SerializeField] [Min(0)] private float frequencyGain;
 
-        [Header("On Dash Cancelled")]
-        [SerializeField] [Min(0.0f)] private float amplitudeGain;
-        [SerializeField] [Min(0.0f)] private float shakeDuration;
+        [BoxGroup("Player relative")]
+        [SerializeField] [Min(0)] private float playerRelativeAmplitudeGain;
+        [BoxGroup("Player relative")]
+        [SerializeField] [Min(0)] private float playerRelativeShakeDuration;
+        [Space]
+        [BoxGroup("Environment relative")]
+        [SerializeField] [Min(0)] private float environmentRelativeAmplitudeGain;
 
         [Inject] private EffectsManager _effectsManager;
         
@@ -40,6 +45,7 @@ namespace Ingame.Graphics
             _cameraTransiter.OnVirtualCameraChanged += OnVirtualCameraChanged;
             _effectsManager.OnEnemyKillEffectPlayed += OnEnemyKillEffectPlayed;
             _effectsManager.OnPlayerDeathEffectPlayed += OnPlayerDeathEffectPlayed;
+            _effectsManager.OnEnvironmentShake += OnEnvironmentShake;
         }
 
         private void OnDestroy()
@@ -50,6 +56,7 @@ namespace Ingame.Graphics
             _cameraTransiter.OnVirtualCameraChanged -= OnVirtualCameraChanged;
             _effectsManager.OnEnemyKillEffectPlayed -= OnEnemyKillEffectPlayed;
             _effectsManager.OnPlayerDeathEffectPlayed -= OnPlayerDeathEffectPlayed;
+            _effectsManager.OnEnvironmentShake -= OnEnvironmentShake;
         }
 
         private IEnumerator ScreenShakeRoutine(float amplitude, float duration)
@@ -76,17 +83,22 @@ namespace Ingame.Graphics
 
         private void OnDashCancelled()
         {
-            StartScreenShake(amplitudeGain, shakeDuration);
+            StartScreenShake(playerRelativeAmplitudeGain, playerRelativeShakeDuration);
         }
 
         private void OnEnemyKillEffectPlayed()
         {
-            StartScreenShake(amplitudeGain, shakeDuration);
+            StartScreenShake(playerRelativeAmplitudeGain, playerRelativeShakeDuration);
         }
 
         private void OnPlayerDeathEffectPlayed()
         {
-            StartScreenShake(amplitudeGain, shakeDuration);
+            StartScreenShake(playerRelativeAmplitudeGain, playerRelativeShakeDuration);
+        }
+
+        private void OnEnvironmentShake(float duration)
+        {
+            StartScreenShake(environmentRelativeAmplitudeGain, duration);
         }
 
         private void StartScreenShake(float amplitude, float duration)

@@ -6,7 +6,7 @@ namespace Ingame.Graphics
     [RequireComponent(typeof(EffectsFactory))]
     public class BreakableWall : MonoBehaviour
     {
-        private const float MIN_COS_OF_ANGLE_TO_BREAK_THE_WALL = .85f;
+        private const float MIN_COS_OF_ANGLE_TO_BREAK_THE_WALL = .75f;
         
         private EffectsFactory _effectsFactory;
 

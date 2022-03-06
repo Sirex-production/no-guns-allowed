@@ -15,6 +15,7 @@ namespace Ingame.Graphics
         public event Action OnEnemyKillEffectPlayed;
         public event Action OnPlayerDeathEffectPlayed;
         public event Action OnPlayerDeathEffectStopped;
+        public event Action<float> OnEnvironmentShake;
 
         [Inject] private GameController _gameController;
         
@@ -43,6 +44,13 @@ namespace Ingame.Graphics
         {
             OnPlayerDeathEffectStopped?.Invoke();
             _gameController.EndLevel(false);
+        }
+
+        public void ShakeEnvironment(float duration)
+        {
+            duration = Math.Max(0, duration);
+            
+            OnEnvironmentShake?.Invoke(duration);
         }
     }
 }
