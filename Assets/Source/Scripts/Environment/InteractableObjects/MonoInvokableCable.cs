@@ -39,7 +39,6 @@ namespace Ingame
         private void ReleaseObject()
         {
             bodyToRelease.isKinematic = false;
-            bodyToRelease.gameObject.AddComponent<LethalObject>();
             Destroy(this.gameObject);
         }
     }
