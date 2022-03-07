@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using Ingame.AI;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -21,7 +19,7 @@ namespace Ingame
             if(_hasBeenInvoked)
                 return;
 
-            if (other.TryGetComponent(out HitBox hitbox) && hitbox.AttachedActorStats == PlayerEventController.Instance.StatsController)
+            if (other.TryGetComponent(out Collider outCollider) && outCollider.CompareTag("EnvironmentalHitBox"))
             {
                 _hasBeenInvoked = true;
                 OpenDoor();

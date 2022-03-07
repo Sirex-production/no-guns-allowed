@@ -17,7 +17,7 @@ namespace Ingame.Graphics
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out HitBox hitbox) && hitbox.AttachedActorStats == PlayerEventController.Instance.StatsController)
+            if (other.TryGetComponent(out Collider outCollider) && outCollider.CompareTag("EnvironmentalHitBox"))
             {
                 if (PlayerEventController.Instance.StatsController.IsInvincible)
                 {
