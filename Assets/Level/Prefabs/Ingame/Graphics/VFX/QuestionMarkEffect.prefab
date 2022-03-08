@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1191744917888380572}
   - component: {fileID: 3760931237950195207}
   m_Layer: 6
-  m_Name: DetectionEffect
+  m_Name: QuestionMarkEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72ea84fcf37b604b837354183b62676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectTypes: 01000000
+  effectTypes: 03000000
   isEffectDestroyedAfterSomeTime: 1
   timeAfterEffectWillBeDestroyed: 1
   detectionImage: {fileID: 650848508850766949}
-  blinkColor: {r: 1, g: 0.041948624, b: 0, a: 1}
+  blinkColor: {r: 0, g: 0.7169812, b: 0.11476132, a: 1}
   amountOfBlinks: -1
   blinkingTime: 0.3
   alwaysLookAtCamera: 1
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 2290021312293138814}
   - component: {fileID: 650848508850766949}
   m_Layer: 5
-  m_Name: WarningIconImage
+  m_Name: QuestionIconImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,14 +110,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7735849, g: 0.65401703, b: 0.21529014, a: 1}
+  m_Color: {r: 0.2783019, g: 0.30829132, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c61c20b3aac74fd458ed7ff44ab1b887, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36f2b64073dc70445b916f6a00c6868e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

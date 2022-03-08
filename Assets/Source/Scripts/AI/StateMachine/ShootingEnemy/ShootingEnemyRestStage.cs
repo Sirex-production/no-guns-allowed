@@ -4,19 +4,16 @@ namespace Ingame.AI
 {
     public class ShootingEnemyRestStage : State
     {
-        private const float CHANCE_TO_STOP_PATROLLING = 40;
         
         public ShootingEnemyRestStage(Context context) : base(context)
         {
             _currentContext.AiBehaviourController.AiPatrolController.StartPatrolling();
+            _currentContext.AiBehaviourController.EffectsFactory.PlayAllEffects(EffectType.EnemyConfuse);
         }
 
         public override State HandleSpotEnemy(ActorStats actorStats)
         {
-            //todo play spot animation
-            //if(Random.Range(0, 100) <= CHANCE_TO_STOP_PATROLLING)
-            //    currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
-            
+            _currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
             _currentContext.AiBehaviourController.EffectsFactory.PlayAllEffects(EffectType.Detection);
             
             return new ShootingEnemyCombatState(actorStats, _currentContext);

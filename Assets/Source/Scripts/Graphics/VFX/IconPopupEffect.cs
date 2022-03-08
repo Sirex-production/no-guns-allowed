@@ -1,27 +1,43 @@
 using DG.Tweening;
+using Extensions;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Ingame.Graphics
 {
-    public class DetectionEffect : Effect
+    public class IconPopupEffect : Effect
     {
         [Required][SerializeField] private Image detectionImage;
         [SerializeField] private Color blinkColor = Color.red;
         [Foldout("Animation settings")] [SerializeField] [Min(-1)] private int amountOfBlinks = -1;
         [Foldout("Animation settings")] [SerializeField] [Min(0)] private float blinkingTime = .3f;
-        
+        [Space] 
+        [SerializeField] private bool alwaysLookAtCamera = true;
+
         private Sequence _imageAnimationSequence;
 
-        private void Start()
+        protected override void Start()
         {
-            if(Camera.main != null)
+            var mainCamera = Camera.main;
+
+            if(mainCamera == null)
                 return;
             
             var canvas = detectionImage.canvas;
             canvas.worldCamera = Camera.main;
-            canvas.transform.LookAt(Camera.main.transform);
+            canvas.transform.LookAt(mainCamera.transform);
+
+            if (alwaysLookAtCamera)
+            {
+                if (Camera.main != null)
+                {
+                    var mainCameraTransform = Camera.main.transform;
+                    this.RepeatCoroutine(0, () => transform.LookAt(mainCameraTransform));
+                }
+            }
+
+            base.Start();
         }
 
         public override void PlayEffect(Transform instanceTargetTransform)

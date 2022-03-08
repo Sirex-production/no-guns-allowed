@@ -96,6 +96,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 929857552433038974, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 929857552433038974, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 929857552433038974, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 1153622866706627059, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.0000019073486
@@ -128,6 +140,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -89.994
       objectReference: {fileID: 0}
+    - target: {fileID: 9183205498705783136, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: effectEntities.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9183205498705783136, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: effectEntities.Array.data[2].effectPrefab
+      value: 
+      objectReference: {fileID: 3760931237950195207, guid: a8a5f384d202ebf4ebd0d10164bc4f8f, type: 3}
+    - target: {fileID: 9183205498705783136, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: effectEntities.Array.data[2].effectTransform
+      value: 
+      objectReference: {fileID: 2537061792569301017}
     - target: {fileID: 9183205498705783138, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: detectionAreasParent
       value: 
@@ -225,6 +249,11 @@ PrefabInstance:
 --- !u!4 &5810695174229785561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9183205499099260350, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+  m_PrefabInstance: {fileID: 3446081399549025895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2537061792569301017 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 929857552433038974, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
   m_PrefabInstance: {fileID: 3446081399549025895}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5810695173358907869 stripped

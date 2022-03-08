@@ -32,6 +32,8 @@ namespace Ingame.AI
         [BoxGroup("Combat"), Tooltip("Controls whether AI will shoot if the opponent cannot be seen directly or not")]
         [SerializeField] private bool ignoreBarriers = true;
         [BoxGroup("Combat")]
+        [SerializeField] [Min(0)] private float enterRestStateTime = 2f;
+        [BoxGroup("Combat")]
         [SerializeField] [Min(0)] private float meleeDamage = 5f;
         [BoxGroup("Combat")]
         [SerializeField] [Min(0)] private float pauseBetweenShots = 1;
@@ -50,6 +52,7 @@ namespace Ingame.AI
 
         public Bullet BulletPrefab => bulletPrefab;
         public bool IgnoreBarriers => ignoreBarriers;
+        public float EnterRestStateTime => enterRestStateTime;
         public float MeleeDamage => meleeDamage;
         public float PauseBetweenShots => pauseBetweenShots;
     }
