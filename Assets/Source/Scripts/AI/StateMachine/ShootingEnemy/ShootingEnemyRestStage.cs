@@ -4,7 +4,7 @@ namespace Ingame.AI
 {
     public class ShootingEnemyRestStage : State
     {
-        private const float CHANCE_TO_STOP_PATROLLING= 40;
+        private const float CHANCE_TO_STOP_PATROLLING = 40;
         
         public ShootingEnemyRestStage(Context context) : base(context)
         {

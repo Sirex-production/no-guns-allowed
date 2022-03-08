@@ -24,6 +24,8 @@ namespace Ingame.AI
         [SerializeField] private bool isLooped;
         [BoxGroup("Patrol")] 
         [SerializeField] [Min(0)] private float speed = 10f;
+        [BoxGroup("Patrol")]
+        [SerializeField] [Min(0)] private float rotationSpeed = 5f;
         
         [BoxGroup("Combat"), Required]
         [SerializeField] private Bullet bulletPrefab;
@@ -44,6 +46,7 @@ namespace Ingame.AI
 
         public bool IsLooped => isLooped;
         public float Speed => speed;
+        public float RotationSpeed => rotationSpeed;
 
         public Bullet BulletPrefab => bulletPrefab;
         public bool IgnoreBarriers => ignoreBarriers;
