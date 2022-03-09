@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb76a018a26ac7146ad8be4689e9ab37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreWallsDuringDetection: 1
 --- !u!1 &6463342186732552626
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +154,10 @@ PrefabInstance:
       propertyPath: _detectionAreas.Array.data[0]
       value: 
       objectReference: {fileID: 3312261450913765484}
+    - target: {fileID: 9183205498705783161, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9183205498705783164, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: isLooped
       value: 1
@@ -179,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9183205498895282106, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9183205499099260349, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: m_Name

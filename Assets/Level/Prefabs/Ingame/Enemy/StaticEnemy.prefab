@@ -140,6 +140,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -89.994
       objectReference: {fileID: 0}
+    - target: {fileID: 4559798395783969304, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.04075445
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559798395783969304, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.043314524
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559798395783969304, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559798395783969304, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559798395783969304, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0004082322
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559798395783969304, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559798395783969304, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.047
+      objectReference: {fileID: 0}
     - target: {fileID: 9183205498705783136, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: effectEntities.Array.size
       value: 3
@@ -183,6 +211,10 @@ PrefabInstance:
     - target: {fileID: 9183205498705783143, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 9183205498705783161, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9183205498705783164, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: patrollingPointsParent

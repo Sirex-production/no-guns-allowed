@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb76a018a26ac7146ad8be4689e9ab37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreWallsDuringDetection: 1
 --- !u!1 &1608751707690391804
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +95,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 929857552433038974, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1153622866706627059, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -101,6 +106,18 @@ PrefabInstance:
     - target: {fileID: 1153622866706627059, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405747079435736281, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796626935234545766, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559798395783969304, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9183205498705783138, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: detectionAreas.Array.size
@@ -118,6 +135,10 @@ PrefabInstance:
       propertyPath: _detectionAreas.Array.data[0]
       value: 
       objectReference: {fileID: 5822046462017276197}
+    - target: {fileID: 9183205498705783161, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9183205498705783164, guid: 79c47b6936a518e4fa45f01464b509c7, type: 3}
       propertyPath: isLooped
       value: 1
