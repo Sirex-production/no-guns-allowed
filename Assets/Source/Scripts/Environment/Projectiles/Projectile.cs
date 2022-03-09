@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Ingame
 {
-    public interface Projectile
+    public abstract class Projectile : MonoBehaviour
     {
-        public void Launch(Transform destination, params ActorStats[] ignoreHitActors);
-        public void Launch(Vector3 direction, params ActorStats[] ignoreHitActors);
+        public abstract void Launch(Transform destination, params ActorStats[] ignoreHitActors);
+        public abstract void Launch(Vector3 direction, params ActorStats[] ignoreHitActors);
     }
 }

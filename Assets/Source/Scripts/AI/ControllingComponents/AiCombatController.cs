@@ -55,7 +55,7 @@ namespace Ingame.AI
                     continue;
                 }
 
-                Bullet bullet;
+                Projectile bullet;
                 
                 if (!_aiBehaviourController.AiData.IgnoreBarriers)
                 {
@@ -65,7 +65,7 @@ namespace Ingame.AI
                     {
                         if (hit.collider.transform == actorStats.transform)
                         {
-                            bullet = Instantiate(_aiBehaviourController.AiData.BulletPrefab, transform.position, Quaternion.identity);
+                            bullet = Instantiate(_aiBehaviourController.AiData.ProjectilePrefab, transform.position, Quaternion.identity);
                             bullet.Launch(actorStats.transform, _ignoreActorsForBullet);
 
                             _timePassedFromEnemyLoss = 0;
@@ -86,7 +86,7 @@ namespace Ingame.AI
                     continue;
                 }
                 
-                bullet = Instantiate(_aiBehaviourController.AiData.BulletPrefab, transform.position, Quaternion.identity);
+                bullet = Instantiate(_aiBehaviourController.AiData.ProjectilePrefab, transform.position, Quaternion.identity);
                 bullet.Launch(actorStats.transform, _ignoreActorsForBullet);
                 
                 yield return _pause;

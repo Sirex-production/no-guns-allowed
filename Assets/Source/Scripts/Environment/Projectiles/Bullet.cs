@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 namespace Ingame
 {
     [RequireComponent(typeof(Collider))]
-    public class Bullet : MonoBehaviour, Projectile
+    public class Bullet : Projectile
     {
         [SerializeField] [Min(0)] private int maxNumberOfBounces = 0;
         [SerializeField] [Min(0)] private float speed = 1;
@@ -81,10 +81,8 @@ namespace Ingame
         {
             OnReflect?.Invoke(reflectionType);
 
-            if (reflectionType == ReflectionType.Player)
-            {
+            if (reflectionType == ReflectionType.Player) 
                 _currentSpeed = speedAfterPlayerReflection;
-            }
 
             if (direction.magnitude == 0)
                 direction = new Vector3(Random.Range(.1f, 1), Random.Range(.1f, 1), 0);
@@ -95,7 +93,7 @@ namespace Ingame
             transform.rotation = Quaternion.LookRotation(direction);
         }
 
-        public void Launch(Transform destination, params ActorStats[] ignoreHitActors)
+        public override void Launch(Transform destination, params ActorStats[] ignoreHitActors)
         {
             _ignoreHitActors = new List<ActorStats>(ignoreHitActors);
 
@@ -103,7 +101,7 @@ namespace Ingame
             _flyingDirection = Vector3.Normalize(destination.position - transform.position);
         }
 
-        public void Launch(Vector3 direction, params ActorStats[] ignoreHitActors)
+        public override void Launch(Vector3 direction, params ActorStats[] ignoreHitActors)
         {
             _ignoreHitActors = new List<ActorStats>(ignoreHitActors);
 

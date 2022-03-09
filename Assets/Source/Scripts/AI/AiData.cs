@@ -28,7 +28,7 @@ namespace Ingame.AI
         [SerializeField] [Min(0)] private float rotationSpeed = 5f;
         
         [BoxGroup("Combat"), Required]
-        [SerializeField] private Bullet bulletPrefab;
+        [SerializeField] private Projectile projectilePrefab;
         [BoxGroup("Combat"), Tooltip("Controls whether AI will shoot if the opponent cannot be seen directly or not")]
         [SerializeField] private bool ignoreBarriers = true;
         [BoxGroup("Combat")]
@@ -50,7 +50,7 @@ namespace Ingame.AI
         public float Speed => speed;
         public float RotationSpeed => rotationSpeed;
 
-        public Bullet BulletPrefab => bulletPrefab;
+        public Projectile ProjectilePrefab => projectilePrefab;
         public bool IgnoreBarriers => ignoreBarriers;
         public float EnterRestStateTime => enterRestStateTime;
         public float MeleeDamage => meleeDamage;
