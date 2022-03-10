@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using Extensions;
 using UnityEngine;
 
 namespace Ingame.Graphics
@@ -13,17 +13,10 @@ namespace Ingame.Graphics
 
         public List<EffectType> EffectTypes => effectTypes; 
 
-        private void Start()
+        protected virtual void Start()
         {
-            if(isEffectDestroyedAfterSomeTime)
-                StartCoroutine(DestroyEffectRoutine());
-        }
-
-        protected virtual IEnumerator DestroyEffectRoutine()
-        {
-            yield return new WaitForSeconds(timeAfterEffectWillBeDestroyed);
-            
-            Destroy(gameObject);
+            if (isEffectDestroyedAfterSomeTime)
+                this.WaitAndDoCoroutine(timeAfterEffectWillBeDestroyed, () => Destroy(gameObject));
         }
 
         public abstract void PlayEffect(Transform instanceTargetTransform);
@@ -33,6 +26,7 @@ namespace Ingame.Graphics
     {
         EnemyDeath,
         Detection,
-        Destruction
+        Destruction,
+        EnemyConfuse
     }
 }

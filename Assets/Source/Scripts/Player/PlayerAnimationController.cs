@@ -1,4 +1,3 @@
-using System;
 using Extensions;
 using NaughtyAttributes;
 using UnityEngine;
@@ -56,8 +55,8 @@ namespace Ingame
                 return;
 
             var playerLocalScale = playerAnimator.transform.localScale;
-            playerLocalScale.x = Mathf.Abs(playerLocalScale.x) * Mathf.Sign(lookDirection.x);
-
+            playerLocalScale.z = Mathf.Abs(playerLocalScale.z) * Mathf.Sign(lookDirection.x);
+            
             playerAnimator.transform.localScale = playerLocalScale;
         }
 

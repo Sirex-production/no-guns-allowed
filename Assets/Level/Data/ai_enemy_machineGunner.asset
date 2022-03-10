@@ -19,7 +19,9 @@ MonoBehaviour:
   useGravity: 1
   isLooped: 1
   speed: 10
-  bulletPrefab: {fileID: 8450046680156236779, guid: b58ff0ce35ae33940a9fa3ca0235f353, type: 3}
+  rotationSpeed: 5
+  projectilePrefab: {fileID: 8450046680156236779, guid: b58ff0ce35ae33940a9fa3ca0235f353, type: 3}
   ignoreBarriers: 1
+  enterRestStateTime: 2
   meleeDamage: 5
   pauseBetweenShots: 0.1

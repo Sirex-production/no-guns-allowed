@@ -20,7 +20,7 @@ namespace Ingame.Graphics
             
             foreach (var effectEntity in effectEntities)
             {
-                if(effectEntity == null)
+                if(effectEntity == null || effectEntity.effectTransform == null)
                     continue;
                 
                 Gizmos.DrawCube(effectEntity.effectTransform.position, Vector3.one * GIZMOS_CUBE_SIZE);

@@ -24,11 +24,15 @@ namespace Ingame.AI
         [SerializeField] private bool isLooped;
         [BoxGroup("Patrol")] 
         [SerializeField] [Min(0)] private float speed = 10f;
+        [BoxGroup("Patrol")]
+        [SerializeField] [Min(0)] private float rotationSpeed = 5f;
         
         [BoxGroup("Combat"), Required]
-        [SerializeField] private Bullet bulletPrefab;
+        [SerializeField] private Projectile projectilePrefab;
         [BoxGroup("Combat"), Tooltip("Controls whether AI will shoot if the opponent cannot be seen directly or not")]
         [SerializeField] private bool ignoreBarriers = true;
+        [BoxGroup("Combat")]
+        [SerializeField] [Min(0)] private float enterRestStateTime = 2f;
         [BoxGroup("Combat")]
         [SerializeField] [Min(0)] private float meleeDamage = 5f;
         [BoxGroup("Combat")]
@@ -44,9 +48,11 @@ namespace Ingame.AI
 
         public bool IsLooped => isLooped;
         public float Speed => speed;
+        public float RotationSpeed => rotationSpeed;
 
-        public Bullet BulletPrefab => bulletPrefab;
+        public Projectile ProjectilePrefab => projectilePrefab;
         public bool IgnoreBarriers => ignoreBarriers;
+        public float EnterRestStateTime => enterRestStateTime;
         public float MeleeDamage => meleeDamage;
         public float PauseBetweenShots => pauseBetweenShots;
     }

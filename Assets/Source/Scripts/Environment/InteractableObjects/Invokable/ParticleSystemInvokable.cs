@@ -4,7 +4,6 @@ namespace Ingame
 {
     public class ParticleSystemInvokable : MonoInvokable
     {
-        [SerializeField] private bool isActivatedOnInvoke = true;
         [SerializeField] private ParticleSystem[] particleSystems;
 
         public override void Invoke()
