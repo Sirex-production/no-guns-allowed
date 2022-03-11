@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3234147583378859817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.482, y: 1.708, z: 0}
+  m_LocalPosition: {x: -0.269, y: 1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3234147585387494737}
@@ -253,7 +253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3234147583581790419}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.249, y: -0.787, z: 0}
+  m_LocalPosition: {x: -0.118, y: -0.912, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3234147585387494737}
@@ -400,7 +400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3234147583632256162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.369, y: -0.259, z: 0}
+  m_LocalPosition: {x: -0.169, y: -0.447, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3234147585387494737}
@@ -547,7 +547,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3234147585065614426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.159, y: 0.439, z: 0}
+  m_LocalPosition: {x: -0.121, y: 0.258, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3234147585387494737}
@@ -729,7 +729,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3234147585437216113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.43, y: 1.201, z: 0}
+  m_LocalPosition: {x: -0.255, y: 0.688, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3234147585387494737}
@@ -912,10 +912,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5610856
-  m_Height: 2.6307955
+  m_Radius: 0.560695
+  m_Height: 2.2869973
   m_Direction: 1
-  m_Center: {x: 0, y: 0.3037302, z: 0}
+  m_Center: {x: 0, y: 0.10682734, z: 0}
 --- !u!114 &3519842822267870647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,7 +967,7 @@ GameObject:
   - component: {fileID: 5005888661490081311}
   - component: {fileID: 1608677767131907252}
   m_Layer: 12
-  m_Name: Player
+  m_Name: PlayerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1070,9 +1070,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.50708693
-  m_Height: 2.5535626
+  m_Height: 2.234898
   m_Direction: 1
-  m_Center: {x: 0, y: -0.26120043, z: 0}
+  m_Center: {x: 0, y: -0.40089655, z: 0}
 --- !u!114 &5005888661490081305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1333,10 +1333,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.41748667
-  m_Height: 2.252961
+  m_Radius: 0.35459304
+  m_Height: 2.10919
   m_Direction: 1
-  m_Center: {x: 0, y: -0.3278683, z: 0}
+  m_Center: {x: 0, y: -0.3997539, z: 0}
 --- !u!54 &3234792489350499387
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1395,8 +1395,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3544277, y: 1.9004533, z: 0.3}
-  m_Center: {x: 0, y: 0.30174202, z: 0}
+  m_Size: {x: 0.29152963, y: 1.6753232, z: 0.3}
+  m_Center: {x: 0, y: 0.17047326, z: 0}
 --- !u!1001 &3618141289443110895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1517,15 +1517,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac43569608bf26e4086d89fb48bfd170, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac43569608bf26e4086d89fb48bfd170, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac43569608bf26e4086d89fb48bfd170, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac43569608bf26e4086d89fb48bfd170, type: 3}
       propertyPath: m_LocalPosition.x
