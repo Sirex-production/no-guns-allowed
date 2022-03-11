@@ -41,7 +41,7 @@ namespace Ingame
             var directionNormalized = directionVector.x;
 
             var direction = (int)(directionNormalized / Mathf.Abs(directionNormalized));
-            var tweenEndValue = new Vector3(rotationAngle * direction, 0, 0);
+            var tweenEndValue = new Vector3(0, rotationAngle * direction, 0);
 
             transform.DORotate(tweenEndValue, duration, RotateMode.LocalAxisAdd);
             StartCoroutine(ColliderRemovalRoutine());
