@@ -30,7 +30,7 @@ namespace Ingame
             if (hitbox.AttachedActorStats.IsInvincible) 
                 return;
 
-            hitbox.TakeDamage(DAMAGE, DamageType.Obstacle);
+            hitbox.TakeDamage(DAMAGE, DamageType.Environment);
         }
 
         private void OnCollisionEnter(Collision other)

@@ -131,7 +131,7 @@ namespace Ingame
         public override void TakeDamage(float amountOfDamage, DamageType damageType)
         {
             if(IsInvincible)
-                if(damageType != DamageType.Obstacle && damageType != DamageType.Explosion)
+                if(damageType != DamageType.Environment && damageType != DamageType.Explosion)
                     return;
             
             amountOfDamage = Mathf.Abs(amountOfDamage);

@@ -17,7 +17,7 @@ namespace Ingame
                 if(obstacleData.FriendlySides.Contains(hitBox.AttachedActorStats.ActorSide))
                     return;
                 
-                hitBox.TakeDamage(obstacleData.Damage, DamageType.Obstacle);
+                hitBox.TakeDamage(obstacleData.Damage, DamageType.Environment);
             }
         }
     }
