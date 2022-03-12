@@ -8,6 +8,7 @@ namespace Ingame.AI
         public ShootingEnemyRestStage(Context context) : base(context)
         {
             _currentContext.AiBehaviourController.AiPatrolController.StartPatrolling();
+            _currentContext.AiBehaviourController.AiCombatController.StopCombat();
             _currentContext.AiBehaviourController.EffectsFactory.PlayAllEffects(EffectType.EnemyConfuse);
         }
 

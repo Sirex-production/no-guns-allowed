@@ -19,6 +19,7 @@ namespace Ingame.AI
         private IPatrolable _aiPatrolController;
         private ICombatable _aiCombatController;
         private ActorStats _aiActorStats;
+        private ShootingEnemyAnimator _shootingEnemyAnimator;
         private EffectsFactory _effectsFactory;
         private Context _context;
 
@@ -27,6 +28,7 @@ namespace Ingame.AI
         public IPatrolable AiPatrolController => _aiPatrolController;
         public ICombatable AiCombatController => _aiCombatController;
         public ActorStats AiActorStats => _aiActorStats;
+        public ShootingEnemyAnimator ShootingEnemyAnimator => _shootingEnemyAnimator;
         public EffectsFactory EffectsFactory => _effectsFactory;
         
         private void Awake()
@@ -35,6 +37,7 @@ namespace Ingame.AI
             _aiPatrolController = GetComponent<IPatrolable>();
             _aiCombatController = GetComponent<ICombatable>();
             _aiActorStats = GetComponent<ActorStats>();
+            _shootingEnemyAnimator = GetComponent<ShootingEnemyAnimator>();
             _effectsFactory = GetComponent<EffectsFactory>();
         }
 

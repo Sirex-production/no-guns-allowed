@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Extensions;
 using UnityEngine;
 
 namespace Ingame.AI
@@ -128,6 +127,9 @@ namespace Ingame.AI
                 StopCoroutine(_gravityCoroutine);
             
             _followCoroutine = StartCoroutine(FollowRoutine(transformToFollow, speed, onEnd));
+            
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetWalking(true);
         }
 
         public void MoveTo(Vector3 destination, float speed, Action onEnd = null)
@@ -142,6 +144,9 @@ namespace Ingame.AI
                 StopCoroutine(_gravityCoroutine);
             
             _moveCoroutine = StartCoroutine(MoveToRoutine(destination, speed, onEnd));
+            
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetWalking(true);
         }
 
         public void Rotate(Quaternion rotation, float speed, Action onEnd = null)
@@ -150,11 +155,17 @@ namespace Ingame.AI
                 StopCoroutine(_rotateCoroutine);
 
             _rotateCoroutine = StartCoroutine(RotateRoutine(rotation, speed, onEnd));
+            
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetWalking(false);
         }
 
         public void StopMotion()
         {
             StopAllCoroutines();
+            
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetWalking(false);
         }
     }
 }

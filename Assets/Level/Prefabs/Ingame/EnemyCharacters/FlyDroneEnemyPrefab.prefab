@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb76a018a26ac7146ad8be4689e9ab37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreWallsDuringDetection: 1
+  ignoreWallsDuringDetection: 0
 --- !u!1 &7067759207622743860
 GameObject:
   m_ObjectHideFlags: 0

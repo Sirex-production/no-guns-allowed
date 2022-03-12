@@ -73,7 +73,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650971051999643678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.230001, y: -0.0000019073486, z: 0}
+  m_LocalPosition: {x: -2.2300014, y: -0.0000019073486, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9183205498895282106}
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb76a018a26ac7146ad8be4689e9ab37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreWallsDuringDetection: 1
+  ignoreWallsDuringDetection: 0
 --- !u!1 &7067759207622743860
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7924007742941347648}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.4699988, y: 0, z: 0}
+  m_LocalPosition: {x: 2.4699993, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9183205498895282106}
@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 9183205498705783136}
   - component: {fileID: 9183205498705783164}
   - component: {fileID: 9183205498705783138}
+  - component: {fileID: 6812944488860982625}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -481,6 +482,19 @@ MonoBehaviour:
   detectionAreasParent: {fileID: 3240330455716644125}
   detectionAreas:
   - {fileID: 2559303522226488750}
+--- !u!114 &6812944488860982625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183205498705783142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ece774ea70ddcf46bc818ecd79e30fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1583849992449505485}
 --- !u!1 &9183205498895282105
 GameObject:
   m_ObjectHideFlags: 0

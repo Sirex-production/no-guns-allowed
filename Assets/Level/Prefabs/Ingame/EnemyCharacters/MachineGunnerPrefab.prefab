@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb76a018a26ac7146ad8be4689e9ab37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreWallsDuringDetection: 1
+  ignoreWallsDuringDetection: 0
 --- !u!95 &5882506137779477789
 Animator:
   serializedVersion: 3

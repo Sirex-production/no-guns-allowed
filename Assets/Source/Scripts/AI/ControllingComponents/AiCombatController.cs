@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Extensions;
 using UnityEngine;
 using Zenject;
@@ -43,6 +44,15 @@ namespace Ingame.AI
 
         private IEnumerator ShootRoutine(ActorStats actorStats)
         {
+            void RotateTowardsEnemy()
+            {
+                var targetRotation = Quaternion.LookRotation(actorStats.transform.position - transform.position);
+                targetRotation.eulerAngles = Vector3.up * targetRotation.eulerAngles.y;
+                _aiBehaviourController.AiMovementController.Rotate(targetRotation, _aiBehaviourController.AiData.RotationSpeed * 2);
+            }
+
+            RotateTowardsEnemy();
+
             yield return _pause;
 
             var raycastMask = ~LayerMask.GetMask("Ignore Raycast", "Projectile", "Breakable Object");
@@ -65,8 +75,12 @@ namespace Ingame.AI
                     {
                         if (hit.collider.transform == actorStats.transform)
                         {
+                            RotateTowardsEnemy();
                             bullet = Instantiate(_aiBehaviourController.AiData.ProjectilePrefab, transform.position, Quaternion.identity);
                             bullet.Launch(actorStats.transform, _ignoreActorsForBullet);
+                            
+                            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                                _aiBehaviourController.ShootingEnemyAnimator.Shoot();
 
                             _timePassedFromEnemyLoss = 0;
                             yield return _pause;
@@ -86,8 +100,12 @@ namespace Ingame.AI
                     continue;
                 }
                 
+                RotateTowardsEnemy();
                 bullet = Instantiate(_aiBehaviourController.AiData.ProjectilePrefab, transform.position, Quaternion.identity);
                 bullet.Launch(actorStats.transform, _ignoreActorsForBullet);
+                
+                if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                    _aiBehaviourController.ShootingEnemyAnimator.Shoot();
                 
                 yield return _pause;
             }
@@ -107,6 +125,8 @@ namespace Ingame.AI
         public void Attack(ActorStats actorStats)
         {
             _isInCombat = true;
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetCombat(_isInCombat);
 
             StartCoroutine(ShootRoutine(actorStats));
         }
@@ -114,6 +134,9 @@ namespace Ingame.AI
         public void StopCombat()
         {
             _isInCombat = false;
+            
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetCombat(_isInCombat);
         }
     }
 }
