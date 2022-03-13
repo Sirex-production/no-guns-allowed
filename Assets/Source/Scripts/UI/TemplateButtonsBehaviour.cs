@@ -52,8 +52,11 @@ namespace Ingame
 
         public void ChangeVibrationDueToToggle(Toggle toggle)
         {
-            if(_saveLoadSystem != null)
+            if (_saveLoadSystem != null)
+            {
                 _saveLoadSystem.SaveData.IsVibrationEnabled.Value = toggle.isOn;
+                VibrationController.SetMode(toggle.isOn ? VibrationMode.Auto : VibrationMode.Disabled);
+            }
         }
         
         public void ChangeAimSensitivity(Slider slider)
