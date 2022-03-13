@@ -47,9 +47,13 @@ namespace Ingame
             _state = State.Default;
             _timeRemaining = slowMotionPool;
 
-            PlayerEventController.Instance.OnAim += CallForSlowMotion;
-            PlayerEventController.Instance.OnDashCancelled += ReturnToDefaultState;
-            PlayerEventController.Instance.OnDashPerformed += ReturnToDefaultStateOnDashPerformed;
+            if (PlayerEventController.Instance != null)
+            {
+                PlayerEventController.Instance.OnAim += CallForSlowMotion;
+                PlayerEventController.Instance.OnDashCancelled += ReturnToDefaultState;
+                PlayerEventController.Instance.OnDashPerformed += ReturnToDefaultStateOnDashPerformed;
+            }
+
             _gameController.OnLevelRestart += ReturnToDefaultState;
             _gameController.OnLevelEnded += ReturnToDefaultStateOnLevelEnd;
             _effectsManager.OnEnemyKillEffectPlayed += PlayKillingSlowMoEffect;
@@ -58,9 +62,13 @@ namespace Ingame
 
         private void OnDestroy()
         {
-            PlayerEventController.Instance.OnAim -= CallForSlowMotion;
-            PlayerEventController.Instance.OnDashCancelled -= ReturnToDefaultState;
-            PlayerEventController.Instance.OnDashPerformed -= ReturnToDefaultStateOnDashPerformed;
+            if (PlayerEventController.Instance != null)
+            {
+                PlayerEventController.Instance.OnAim -= CallForSlowMotion;
+                PlayerEventController.Instance.OnDashCancelled -= ReturnToDefaultState;
+                PlayerEventController.Instance.OnDashPerformed -= ReturnToDefaultStateOnDashPerformed;
+            }
+
             _gameController.OnLevelRestart -= ReturnToDefaultState;
             _gameController.OnLevelEnded -= ReturnToDefaultStateOnLevelEnd;
             _effectsManager.OnEnemyKillEffectPlayed -= PlayKillingSlowMoEffect;
