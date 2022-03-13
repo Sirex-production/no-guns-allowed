@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace Ingame.Graphics
 {
-    public class BloodSprayEffect : Effect
+    public class EnemyDeathEffect : Effect
     {
         [Space]
         [SerializeField] [Min(0)] private float bodyPartsForce = 5f; 
         [Space]
-        [SerializeField] private ParticleSystem[] bloodParticles;
+        [SerializeField] private ParticleSystem[] particles;
         [SerializeField] private Rigidbody[] bodyParts;
 
         private void Awake()
         {
-            if(bloodParticles == null || bloodParticles.Length < 1)
+            if(particles == null || particles.Length < 1)
                 return;
 
-            foreach (var bloodParticle in bloodParticles)
+            foreach (var bloodParticle in particles)
             {
                 if(bloodParticle == null)
                     continue;
@@ -28,8 +28,8 @@ namespace Ingame.Graphics
 
         public override void PlayEffect(Transform instanceTargetTransform)
         {
-            if (bloodParticles != null && bloodParticles.Length > 0)
-                foreach (var bloodParticle in bloodParticles)
+            if (particles != null && particles.Length > 0)
+                foreach (var bloodParticle in particles)
                 {
                     if (bloodParticle == null)
                         continue;
