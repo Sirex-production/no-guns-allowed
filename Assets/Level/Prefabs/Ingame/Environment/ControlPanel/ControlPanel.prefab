@@ -78,7 +78,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rendererReferences:
   - {fileID: 2806711046384036629}
-  emissionMapColor: {r: 3.482202, g: 2.8130732, b: 0, a: 0}
+  properties:
+  - name: _EmissionColor
+    type: 2
+    intValue: 2
+    floatValue: 4
+    color: {r: 3.482202, g: 2.3396976, b: 0, a: 0}
 --- !u!1001 &3545148137305814929
 PrefabInstance:
   m_ObjectHideFlags: 0
