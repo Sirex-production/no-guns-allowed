@@ -56,7 +56,7 @@ namespace Ingame
 
             _gameController.OnLevelRestart += ReturnToDefaultState;
             _gameController.OnLevelEnded += ReturnToDefaultStateOnLevelEnd;
-            _effectsManager.OnEnemyKillEffectPlayed += PlayKillingSlowMoEffect;
+            _effectsManager.OnEnemyKillEffectPlayed += OnEnemyKillEffectPlayed;
             _effectsManager.OnPlayerDeathEffectPlayed += PlayPlayerDeathSlowMotionEffect;
         }
 
@@ -71,8 +71,13 @@ namespace Ingame
 
             _gameController.OnLevelRestart -= ReturnToDefaultState;
             _gameController.OnLevelEnded -= ReturnToDefaultStateOnLevelEnd;
-            _effectsManager.OnEnemyKillEffectPlayed -= PlayKillingSlowMoEffect;
+            _effectsManager.OnEnemyKillEffectPlayed -= OnEnemyKillEffectPlayed;
             _effectsManager.OnPlayerDeathEffectPlayed -= PlayPlayerDeathSlowMotionEffect;
+        }
+
+        private void OnEnemyKillEffectPlayed(DamageType _)
+        {
+            PlayKillingSlowMoEffect();
         }
 
         private IEnumerator TimerRoutine()

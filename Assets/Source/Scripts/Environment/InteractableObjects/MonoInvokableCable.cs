@@ -1,5 +1,7 @@
 using Ingame.AI;
+using Ingame.Graphics;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
@@ -7,16 +9,24 @@ namespace Ingame
     {
         [SerializeField] private Rigidbody bodyToRelease;
 
+        [Inject] private EffectsManager _effectsManager;
+        
         private void OnTriggerEnter(Collider other)
         {
-            if(CheckConditionsToPass(other))
-                ReleaseObject();
+            if (!CheckConditionsToPass(other))
+                return;
+            
+            ReleaseObject();
+            _effectsManager.PlayPlayerAttackEffect();
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if(CheckConditionsToPass(other))
-                ReleaseObject();
+            if(!CheckConditionsToPass(other))
+                return;
+                
+            ReleaseObject();
+            _effectsManager.PlayPlayerAttackEffect();
         }
 
         private bool CheckConditionsToPass(Component other)

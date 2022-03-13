@@ -23,22 +23,22 @@ namespace Ingame
         private void Start()
         {
             PlayerEventController.Instance.OnDashPerformed += RotateSwordStrikeEffectTowardsDashDirection;
-            _effectsManager.OnEnemyKillEffectPlayed += PlaySwordStrikeEffect;
+            _effectsManager.OnPlayerAttackEffectPlayed += PlaySwordStrikeEffect;
         }
 
         private void OnDestroy()
         {
             PlayerEventController.Instance.OnDashPerformed -= RotateSwordStrikeEffectTowardsDashDirection;
-            _effectsManager.OnEnemyKillEffectPlayed -= PlaySwordStrikeEffect;
+            _effectsManager.OnPlayerAttackEffectPlayed -= PlaySwordStrikeEffect;
         }
 
         private void PlaySwordStrikeEffect()
         {
             swordStrikeAnimator.SetGameObjectActive();
             swordStrikeAnimator.SetTrigger("Strike");
+            this.DoAfterNextFrameCoroutine(() => swordStrikeAnimator.ResetTrigger("Strike"));
             this.WaitAndDoCoroutine(swordStrikeEffectDuration, () =>
             {
-                swordStrikeAnimator.ResetTrigger("Strike");
                 swordStrikeAnimator.SetGameObjectInactive();
             });
         }

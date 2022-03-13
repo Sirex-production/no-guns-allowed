@@ -67,9 +67,10 @@ namespace Ingame.AI
             _context.EnterRest();
         }
 
-        public void Die()
+        public void Die(DamageType damageType)
         {
-            _effectsManager.PlayKillEnemyEffects();
+            _effectsManager.PlayKillEnemyEffects(damageType);
+            
             _actorManager.RemoveActor(_aiActorStats);
             _analyticsWrapper.LevelStats.AddKilledEnemyToStats();
             _context.Die();

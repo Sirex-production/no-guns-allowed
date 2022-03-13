@@ -12,10 +12,11 @@ namespace Ingame.Graphics
             
         public event Action OnSlowMotionEnter;
         public event Action OnSlowMotionExit;
-        public event Action OnEnemyKillEffectPlayed;
+        public event Action<DamageType> OnEnemyKillEffectPlayed;
         public event Action OnPlayerDeathEffectPlayed;
         public event Action OnPlayerDeathEffectStopped;
         public event Action<float> OnEnvironmentShake;
+        public event Action OnPlayerAttackEffectPlayed;
 
         [Inject] private GameController _gameController;
         
@@ -29,9 +30,9 @@ namespace Ingame.Graphics
             OnSlowMotionExit?.Invoke();
         }
 
-        public void PlayKillEnemyEffects()
+        public void PlayKillEnemyEffects(DamageType damageType)
         {
-            OnEnemyKillEffectPlayed?.Invoke();
+            OnEnemyKillEffectPlayed?.Invoke(damageType);
         }
 
         public void PlayPlayerDeathEffect()
@@ -51,6 +52,11 @@ namespace Ingame.Graphics
             duration = Math.Max(0, duration);
             
             OnEnvironmentShake?.Invoke(duration);
+        }
+
+        public void PlayPlayerAttackEffect()
+        {
+            OnPlayerAttackEffectPlayed?.Invoke();
         }
     }
 }

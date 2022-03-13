@@ -4,5 +4,6 @@ public enum DamageType
     Melee,
     Environment,
     Projectile,
-    Explosion
+    Explosion,
+    PlayerMelee
 }

@@ -61,8 +61,9 @@ namespace Ingame
         {
             if (other.transform.TryGetComponent(out HitBox actorStats) && IsInvincible)
             {
-                actorStats.TakeDamage(data.Damage, DamageType.Melee);
+                actorStats.TakeDamage(data.Damage, DamageType.PlayerMelee);
                 VibrationController.Vibrate(HapticTypes.RigidImpact);
+                _effectsManager.PlayPlayerAttackEffect();
             }
         }
         
@@ -70,8 +71,9 @@ namespace Ingame
         {
             if (other.transform.TryGetComponent(out HitBox actorStats) && IsInvincible)
             {
-                actorStats.TakeDamage(data.Damage, DamageType.Melee);
+                actorStats.TakeDamage(data.Damage, DamageType.PlayerMelee);
                 VibrationController.Vibrate(HapticTypes.RigidImpact);
+                _effectsManager.PlayPlayerAttackEffect();
             }
         }
         

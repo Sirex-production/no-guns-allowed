@@ -86,7 +86,7 @@ namespace Ingame.Graphics
             StartScreenShake(playerRelativeAmplitudeGain, playerRelativeShakeDuration);
         }
 
-        private void OnEnemyKillEffectPlayed()
+        private void OnEnemyKillEffectPlayed(DamageType _)
         {
             StartScreenShake(playerRelativeAmplitudeGain, playerRelativeShakeDuration);
         }

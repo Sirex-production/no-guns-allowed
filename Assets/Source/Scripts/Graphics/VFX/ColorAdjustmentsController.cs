@@ -13,12 +13,17 @@ namespace Ingame.Graphics.VFX
 
         private void Start()
         {
-            _effectsManager.OnEnemyKillEffectPlayed += Modify; 
+            _effectsManager.OnEnemyKillEffectPlayed += OnEnemyKillEffectPlayed; 
         }
 
         private void OnDestroy()
         {
-            _effectsManager.OnEnemyKillEffectPlayed -= Modify; 
+            _effectsManager.OnEnemyKillEffectPlayed -= OnEnemyKillEffectPlayed; 
+        }
+
+        private void OnEnemyKillEffectPlayed(DamageType _)
+        {
+            Modify();
         }
 
         protected override IEnumerator OnModificationRoutine()
