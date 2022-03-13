@@ -25,7 +25,6 @@ public class RechargingStation : MonoBehaviour
 
     [Header("Visual options")] 
     [SerializeField] private float transitionTime;
-    [SerializeField] [Range(0f, 5f)] private float fresnelPower;
     [SerializeField] [ColorUsage(false, true)] private Color activeColor;
     [SerializeField] [ColorUsage(false, true)] private Color inactiveColor;
     [SerializeField] [ColorUsage(false, true)] private Color cooldownColor;
@@ -36,7 +35,6 @@ public class RechargingStation : MonoBehaviour
     [Inject] private UiController _uiController;
 
     private static readonly int EMISSION_COLOR = Shader.PropertyToID("_EmissionColor");
-    private static readonly int FRESNEL_POWER = Shader.PropertyToID("_FresnelPower");
 
     private PlayerEventController _playerEventController;
     private Renderer _renderer;
@@ -54,7 +52,6 @@ public class RechargingStation : MonoBehaviour
     {
         _renderer.GetPropertyBlock(_propertyBlock);
         _propertyBlock.SetColor(EMISSION_COLOR, inactiveColor);
-        _propertyBlock.SetFloat(FRESNEL_POWER, fresnelPower);
         _renderer.SetPropertyBlock(_propertyBlock);
 
         _playerEventController = PlayerEventController.Instance;
