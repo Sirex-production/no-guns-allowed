@@ -1,11 +1,14 @@
 using Ingame.AI;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.Graphics
 {
     [RequireComponent(typeof(EffectsFactory))]
     public class BreakableWall : MonoBehaviour
     {
+        [Inject] private EffectsManager _effectsManager;
+        
         private const float MIN_COS_OF_ANGLE_TO_BREAK_THE_WALL = .75f;
         
         private EffectsFactory _effectsFactory;
@@ -22,6 +25,7 @@ namespace Ingame.Graphics
                 if (PlayerEventController.Instance.StatsController.IsInvincible)
                 {
                     _effectsFactory.PlayAllEffects(EffectType.Destruction);
+                    _effectsManager.PlayPlayerAttackEffect();
                     Destroy(gameObject);
                     
                     return;
@@ -55,6 +59,7 @@ namespace Ingame.Graphics
                 return;
 
             _effectsFactory.PlayAllEffects(EffectType.Destruction);
+            _effectsManager.PlayPlayerAttackEffect();
             Destroy(gameObject);
         }
     }
