@@ -17,10 +17,6 @@ namespace Ingame.UI
         [Space]
         [BoxGroup("Animation options")]
         [SerializeField] private float animationDuration = 1f;
-        [BoxGroup("Animation options")]
-        [SerializeField] private float fingerScaleOffset = 2f;
-        [BoxGroup("Animation options")]
-        [SerializeField] private float fingerDistanceOffset = 30f;
         [Space]
         [BoxGroup("Game properties"), Tooltip("Message that will be displayed to the LOG window when tutorial is activated")]
         [SerializeField] private string activateLogMessage;
@@ -99,13 +95,6 @@ namespace Ingame.UI
             _uiController.DisplayLogMessage(activateLogMessage, LogDisplayType.DisplayAndKeep);
             
             parentCanvasGroup.alpha = 1;
-            _animationSequence = DOTween.Sequence()
-                .Append(fingerImage.rectTransform.DOScale(_initialFingerScale * fingerScaleOffset, animationDuration))
-                .Append(fingerImage.rectTransform.DOScale(_initialFingerScale, animationDuration))
-                .Append(fingerImage.rectTransform.DOLocalMoveX(_initialFingerPosition.x + fingerDistanceOffset, animationDuration))
-                .Append(fingerImage.rectTransform.DOLocalMoveX(_initialFingerPosition.x - fingerDistanceOffset, animationDuration))
-                .Append(fingerImage.rectTransform.DOLocalMoveX(_initialFingerPosition.x, animationDuration))
-                .SetLoops(-1);
         }
     }
 }
