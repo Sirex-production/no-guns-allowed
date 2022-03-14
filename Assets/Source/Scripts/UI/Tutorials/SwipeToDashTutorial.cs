@@ -30,16 +30,6 @@ namespace Ingame.UI
         [Inject] private TutorialsManager _tutorialsManager;
         [Inject] private UiController _uiController;
         
-        private Vector3 _initialFingerScale;
-        private Vector2 _initialFingerPosition;
-        private Sequence _animationSequence;
-
-        private void Awake()
-        {
-            _initialFingerScale = fingerImage.rectTransform.localScale;
-            _initialFingerPosition = fingerImage.rectTransform.localPosition;
-        }
-
         private void Start()
         {
             PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
@@ -56,17 +46,11 @@ namespace Ingame.UI
 
         private void OnLevelEnd(bool _)
         {
-            if(_animationSequence != null)
-                _animationSequence.Kill();
-            
             this.SetGameObjectInactive();
         }
 
         private void OnLevelRestart()
         {
-            if(_animationSequence != null)
-                _animationSequence.Kill();
-            
             this.SetGameObjectInactive();
         }
 
@@ -79,9 +63,7 @@ namespace Ingame.UI
         public override void Complete()
         {
             _uiController.DisplayLogMessage(completeLogMessage, LogDisplayType.DisplayAndKeep);
-
-            if(_animationSequence != null)
-                _animationSequence.Kill();
+            
             if (parentCanvasGroup != null)
                 parentCanvasGroup.DOFade(0, animationDuration).OnComplete(() =>
                 {

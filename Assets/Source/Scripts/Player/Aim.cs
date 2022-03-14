@@ -19,12 +19,15 @@ namespace Ingame
 
         [Inject] private SaveLoadSystem _saveLoadSystem;
         [Inject] private InputSystem _inputSystem;
-        
+
+        private SpriteRenderer _spriteRenderer;
         private int ignoreRaycastLayers;
         private Vector3 _initialLocalPosition;
 
         private void Awake()
         {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer.enabled = false;
             _initialLocalPosition = transform.localPosition;
             transform.parent = aimingOrigin;
          
@@ -40,7 +43,7 @@ namespace Ingame
 
         private void Start()
         {
-            _inputSystem.OnReleaseAction += ResetLocalPosition;
+            _inputSystem.OnReleaseAction += OnReleaseAction;
             _inputSystem.OnDragAction += Move;
             _saveLoadSystem.SaveData.AimSensitivity.OnValueChanged += SetSensitivity;
 
@@ -50,14 +53,20 @@ namespace Ingame
 
         private void OnDestroy()
         {
-            _inputSystem.OnReleaseAction -= ResetLocalPosition;
+            _inputSystem.OnReleaseAction -= OnReleaseAction;
             _inputSystem.OnDragAction -= Move;
             _saveLoadSystem.SaveData.AimSensitivity.OnValueChanged -= SetSensitivity;
         }
-
+        
         private void Update()
         {
             DrawAimingLine();
+        }
+
+        private void OnReleaseAction(Vector2 _)
+        {
+            ResetLocalPosition();
+            _spriteRenderer.enabled = false;
         }
 
         private void DrawAimingLine()
@@ -78,11 +87,12 @@ namespace Ingame
             var nextPos = transform.localPosition + (Vector3)movingDirection * sensitivity * Time.deltaTime / Time.timeScale;
 
             transform.localPosition = Vector3.ClampMagnitude(nextPos, PlayerEventController.Instance.Data.MaxDashDistance);
+            _spriteRenderer.enabled = true;
             
             PlayerEventController.Instance.Aim(transform.position);
         }
-
-        private void ResetLocalPosition(Vector2 _)
+        
+        private void ResetLocalPosition()
         {
             this.DoAfterNextFrameCoroutine(() =>  transform.localPosition = _initialLocalPosition);
         }
