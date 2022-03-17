@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using Extensions;
+using Ingame.Graphics;
 using NaughtyAttributes;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame
 {
@@ -13,6 +16,8 @@ namespace Ingame
         [Space]
         [SerializeField] private List<MonoInvokable> invokeOnStartList;
         [SerializeField] private List<MonoInvokable> invokeAfterArrivalList;
+
+        [Inject] private EffectsManager _effectsManager;
 
         private const float GIZMOS_SPHERE_RADIUS = .2f;
         
@@ -29,11 +34,12 @@ namespace Ingame
         private void Start()
         {
             ActivateInvokables(invokeOnStartList);
-            PlayFlyAnimation();
+            this.DoAfterNextFrameCoroutine(PlayFlyAnimation);
         }
 
         private void PlayFlyAnimation()
         {
+            _effectsManager.ShakeEnvironment(animationDuration * 1.3f);
             transform.DOMove(destinationTransform.position, animationDuration)
                 .OnComplete(() => ActivateInvokables(invokeAfterArrivalList));
         }

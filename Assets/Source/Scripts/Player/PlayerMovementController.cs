@@ -46,8 +46,11 @@ namespace Ingame
         private void OnCollisionEnter()
         {
             if(PlayerEventController.Instance.Data.StopDashWhenCollidingWithEnvironment)
-                StopDash(); 
-            
+                StopDash();
+        }
+
+        private void OnCollisionStay(Collision other)
+        {
             PlayerEventController.Instance.InteractWithSurface(SurfaceInteractionType.LandOnSurface);
         }
 
