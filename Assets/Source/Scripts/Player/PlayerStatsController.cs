@@ -29,7 +29,8 @@ namespace Ingame
         private bool _isInvincible = false;
         private int _chargeRegenerationTimeModifier;
         private int _currentNumberOfCharges;
-
+        private EffectsFactory _effectsFactory;
+        
         public PlayerData Data => data;
 
         public override ActorSide ActorSide => ActorSide.Player;
@@ -44,6 +45,8 @@ namespace Ingame
 
         private void Awake()
         {
+            _effectsFactory = GetComponent<EffectsFactory>();
+            
             _currentNumberOfCharges = data.InitialNumberOfCharges;
             _chargeRegenerationTimeModifier = 1;
         }
@@ -93,6 +96,8 @@ namespace Ingame
                 _analyticsWrapper.LevelStats.AddPlayerDeathToStats(damageType);
             
             _effectsManager.PlayPlayerDeathEffect();
+            _effectsFactory.PlayAllEffects(EffectType.PlayerDeath);
+            
             Destroy(gameObject);
         }
 

@@ -27,6 +27,7 @@ namespace Ingame.Graphics
         EnemyDeath,
         Detection,
         Destruction,
-        EnemyConfuse
+        EnemyConfuse,
+        PlayerDeath
     }
 }
