@@ -1,4 +1,3 @@
-using System;
 using Extensions;
 using Support;
 using UnityEngine;
@@ -17,7 +16,8 @@ namespace Ingame
         private const float TIME_AFTER_DASH_WILL_BE_STOPPED = .15f;
 
         [Inject] private InputSystem _inputSystem;
-        
+
+        private PlayerEventController _playerEventController;
         private Rigidbody _rigidbody;
         private Vector3 _initialDashPosition;
         private float _currentDashLength;
@@ -35,6 +35,7 @@ namespace Ingame
 
         private void Start()
         {
+            _playerEventController = PlayerEventController.Instance;
             _inputSystem.OnReleaseAction += Dash;
         }
 
@@ -45,18 +46,18 @@ namespace Ingame
 
         private void OnCollisionEnter()
         {
-            if(PlayerEventController.Instance.Data.StopDashWhenCollidingWithEnvironment)
+            if(_playerEventController.Data.StopDashWhenCollidingWithEnvironment)
                 StopDash();
         }
 
         private void OnCollisionStay(Collision other)
         {
-            PlayerEventController.Instance.InteractWithSurface(SurfaceInteractionType.LandOnSurface);
+            _playerEventController.InteractWithSurface(SurfaceInteractionType.LandOnSurface);
         }
 
         private void OnCollisionExit(Collision other)
         {
-            PlayerEventController.Instance.InteractWithSurface(SurfaceInteractionType.ReleaseFromSurface);
+            _playerEventController.InteractWithSurface(SurfaceInteractionType.ReleaseFromSurface);
         }
 
         private void FixedUpdate()
@@ -70,9 +71,9 @@ namespace Ingame
 
         private void Dash(Vector2 _)
         {
-            if (aim == null || !PlayerEventController.Instance.StatsController.IsAbleToDash)
+            if (aim == null || !_playerEventController.StatsController.IsAbleToDash)
             {
-                PlayerEventController.Instance.CancelDash();
+                _playerEventController.CancelDash();
                 return;
             }
             
@@ -84,14 +85,15 @@ namespace Ingame
                 // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags (Unity documentation says it's an intended way to use this enum)
                 _rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
                 _isFrozen = false;
+                _playerEventController.ChangeFrozen(_isFrozen);
             }
 
             var position = transform.position;
             var dashVector = aim.transform.position - position;
             var dashDirection = dashVector.normalized;
-            var impulseVelocityModifier = Mathf.InverseLerp(MINIMAL_DISTANCE_TO_PERFORM_DASH, PlayerEventController.Instance.Data.MaxDashDistance, dashVector.magnitude) > .3f ?
-                1 : Mathf.InverseLerp(MINIMAL_DISTANCE_TO_PERFORM_DASH, PlayerEventController.Instance.Data.MaxDashDistance, dashVector.magnitude);
-            var impulseVelocity = dashDirection * (impulseVelocityModifier * PlayerEventController.Instance.Data.DashForce);
+            var impulseVelocityModifier = Mathf.InverseLerp(MINIMAL_DISTANCE_TO_PERFORM_DASH, _playerEventController.Data.MaxDashDistance, dashVector.magnitude) > .3f ?
+                1 : Mathf.InverseLerp(MINIMAL_DISTANCE_TO_PERFORM_DASH, _playerEventController.Data.MaxDashDistance, dashVector.magnitude);
+            var impulseVelocity = dashDirection * (impulseVelocityModifier * _playerEventController.Data.DashForce);
 
             _initialDashPosition = position;
             _currentDashLength = dashVector.magnitude;
@@ -103,7 +105,7 @@ namespace Ingame
 
             gameObject.layer = LayerMask.NameToLayer("Player While Dashing");
 
-            PlayerEventController.Instance.PerformDash(dashDirection);
+            _playerEventController.PerformDash(dashDirection);
             _stopDashCoroutine = this.WaitAndDoCoroutine(TIME_AFTER_DASH_WILL_BE_STOPPED, StopDash);
         }
 
@@ -120,25 +122,27 @@ namespace Ingame
 
             var position = transform.position;
             var dashingDirection = Vector3.Normalize(position - _initialDashPosition);
-            var afterDashForceModifier = Mathf.InverseLerp(0, PlayerEventController.Instance.Data.MaxDashDistance, _currentDashLength);
+            var afterDashForceModifier = Mathf.InverseLerp(0, _playerEventController.Data.MaxDashDistance, _currentDashLength);
 
             gameObject.layer = LayerMask.NameToLayer("Player Static");
             
             _rigidbody.useGravity = true;
             _rigidbody.velocity = Vector3.zero;
-            _rigidbody.AddForce(dashingDirection * (afterDashForceModifier * PlayerEventController.Instance.Data.AfterDashForce), ForceMode.Impulse);
+            _rigidbody.AddForce(dashingDirection * (afterDashForceModifier * _playerEventController.Data.AfterDashForce), ForceMode.Impulse);
 
             _initialDashPosition = position;
             _currentDashLength = 0;
             _isDashing = false;
             
-            PlayerEventController.Instance.StopDash();
+            _playerEventController.StopDash();
         }
 
         public void FreezePlayer()
         {
             _isFrozen = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            
+            _playerEventController.ChangeFrozen(_isFrozen);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Ingame
             PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
             PlayerEventController.Instance.OnSurfaceInteraction += OnSurfaceInteraction;
             PlayerEventController.Instance.OnDashPerformed += ChangeLookDirection;
+            PlayerEventController.Instance.OnFrozenChanged += SetFrozen;
         }
 
         private void OnDestroy()
@@ -23,6 +24,7 @@ namespace Ingame
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
             PlayerEventController.Instance.OnSurfaceInteraction -= OnSurfaceInteraction;
             PlayerEventController.Instance.OnDashPerformed -= ChangeLookDirection;
+            PlayerEventController.Instance.OnFrozenChanged -= SetFrozen;
         }
 
         private void OnAim(Vector3 aimPos)
@@ -74,6 +76,11 @@ namespace Ingame
         private void SetIsFalling(bool isFalling)
         {
             playerAnimator.SetBool("IsFalling", isFalling);
+        }
+
+        private void SetFrozen(bool isFrozen)
+        {
+            playerAnimator.SetBool("IsFrozen", isFrozen);
         }
     }
 }
