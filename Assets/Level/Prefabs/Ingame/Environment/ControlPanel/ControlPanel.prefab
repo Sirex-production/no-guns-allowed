@@ -62,9 +62,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invokableObjects:
   - {fileID: 65873403094815938}
+  mesh: {fileID: 2806711046384036629}
   deactivatePanelAfterInteraction: 0
   logApproachText: Open the door
   logInteractionText: Door was opened
+  activeColor: {r: 0, g: 1, b: 0.80870605, a: 0}
 --- !u!114 &6023137605351743358
 MonoBehaviour:
   m_ObjectHideFlags: 0
