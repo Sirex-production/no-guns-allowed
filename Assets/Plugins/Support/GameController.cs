@@ -11,6 +11,7 @@ namespace Support
         public event Action<int> OnLevelLoaded;
         public event Action OnLevelRestart;
         public event Action OnLastLevelFromStaveLoaded;
+        public event Action OnGameplayStarted;
 
         private bool _isLevelEnded = false;
 
@@ -44,6 +45,11 @@ namespace Support
         public void LoadLastLevelFromSave()
         {
             OnLastLevelFromStaveLoaded?.Invoke();
+        }
+
+        public void StartGameplay()
+        {
+            OnGameplayStarted?.Invoke();
         }
     }
 }

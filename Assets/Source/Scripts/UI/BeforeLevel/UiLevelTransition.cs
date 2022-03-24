@@ -24,15 +24,15 @@ namespace Ingame.UI
             
             PlayOpenAnimation();
         }
-        
+
 
         private void OnDestroy()
         {
-           _gameController.OnNextLevelLoaded -= OnNextLevelLoad;
-           _gameController.OnLevelLoaded -= OnLevelLoaded;
-           _gameController.OnLevelRestart -= OnLevelRestart;
+            _gameController.OnNextLevelLoaded -= OnNextLevelLoad;
+            _gameController.OnLevelLoaded -= OnLevelLoaded;
+            _gameController.OnLevelRestart -= OnLevelRestart;
         }
-        
+
         private void OnNextLevelLoad()
         {
             PlayCloseAnimation();

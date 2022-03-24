@@ -86,7 +86,7 @@ namespace Extensions
                 else if (letter == '>')
                 {
                     isTag = false;
-                    textArea.text += tag;
+                    textArea.SetText(textArea.text + tag);
                     tag = "";
                 }
 
@@ -96,9 +96,33 @@ namespace Extensions
                     continue;
                 }
             
-                textArea.text += letter;
+                textArea.SetText(textArea.text + letter);
                 
                 onLetterSpawned?.Invoke();
+                yield return waitForDelayInSeconds;
+            }
+            
+            onComplete?.Invoke();
+        }
+
+        private static IEnumerator DeleteTextLetterByLetterRoutine(TMP_Text textArea, float spawnDelayTime, Action onComplete)
+        {
+            if (String.IsNullOrEmpty(textArea.text))
+            {
+                onComplete?.Invoke();
+                yield break;
+            }
+
+            spawnDelayTime = Mathf.Abs(spawnDelayTime);
+            
+            var waitForDelayInSeconds = new WaitForSeconds(spawnDelayTime);
+
+            yield return waitForDelayInSeconds;
+
+            while (textArea.text.Length > 0)
+            {
+                textArea.SetText(textArea.text.Remove(textArea.text.Length - 1, 1));
+
                 yield return waitForDelayInSeconds;
             }
             
@@ -154,7 +178,7 @@ namespace Extensions
         {
             return monoBehaviour.StartCoroutine(LerpRoutine(speed, a, b, action, onComplete));
         }
-        
+
         /// <summary>
         /// Display content in certain text area with writing effect
         /// </summary>
@@ -162,10 +186,25 @@ namespace Extensions
         /// <param name="textArea">Area where content will be displayed</param>
         /// <param name="textToDisplay">Content that text area will display</param>
         /// <param name="spawnDelayTime">Pause between appearing letters</param>
+        /// <param name="onComplete">Action that will be invoked when deletion will be completed</param>
+        /// <param name="onLetterSpawned">Action that is invoked when letter is spawned</param>
         /// <returns></returns>
         public static Coroutine SpawnTextCoroutine(this MonoBehaviour monoBehaviour, TMP_Text textArea, string textToDisplay, float spawnDelayTime, Action onComplete = null,  Action onLetterSpawned = null)
         {
             return monoBehaviour.StartCoroutine(SpawnTextRoutine(textArea, textToDisplay, spawnDelayTime, onComplete, onLetterSpawned));
+        }
+
+        /// <summary>
+        /// Deletes letter by letter from given text area
+        /// </summary>
+        /// <param name="monoBehaviour"></param>
+        /// <param name="textArea">Area from which content will be deleted</param>
+        /// <param name="delayBeforeRemovingLetters">Pause between deleting letters</param>
+        /// <param name="onComplete">Action that will be invoked when deletion will be completed</param>
+        /// <returns></returns>
+        public static Coroutine DeleteTextLetterByLetterCoroutine(this MonoBehaviour monoBehaviour, TMP_Text textArea, float delayBeforeRemovingLetters, Action onComplete = null)
+        {
+            return monoBehaviour.StartCoroutine(DeleteTextLetterByLetterRoutine(textArea, delayBeforeRemovingLetters, onComplete));
         }
     }
 }

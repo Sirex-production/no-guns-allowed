@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Extensions;
 using Ingame.Graphics;
 using NaughtyAttributes;
+using Support;
 using UnityEngine;
 using Zenject;
 
@@ -17,6 +19,7 @@ namespace Ingame
         [SerializeField] private List<MonoInvokable> invokeOnStartList;
         [SerializeField] private List<MonoInvokable> invokeAfterArrivalList;
 
+        [Inject] private GameController _gameController;
         [Inject] private EffectsManager _effectsManager;
 
         private const float GIZMOS_SPHERE_RADIUS = .2f;
@@ -33,8 +36,18 @@ namespace Ingame
 
         private void Start()
         {
+            _gameController.OnGameplayStarted += OnGameplayStarted;
+        }
+
+        private void OnDestroy()
+        {
+            _gameController.OnGameplayStarted -= OnGameplayStarted;
+        }
+
+        private void OnGameplayStarted()
+        {
             ActivateInvokables(invokeOnStartList);
-            this.DoAfterNextFrameCoroutine(PlayFlyAnimation);
+            PlayFlyAnimation();
         }
 
         private void PlayFlyAnimation()

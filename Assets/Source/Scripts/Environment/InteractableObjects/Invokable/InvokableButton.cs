@@ -1,5 +1,3 @@
-using System;
-using Borodar.RainbowCore.RList.Editor;
 using Ingame.UI;
 using UnityEngine;
 using Zenject;
