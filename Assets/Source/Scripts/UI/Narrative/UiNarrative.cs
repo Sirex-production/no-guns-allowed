@@ -54,7 +54,7 @@ namespace Ingame.UI
             subtitlesBackgroundImage.DOFade(0, 0);
         }
 
-        private IEnumerator PlayDialogRoutine(DialogData dialogData)
+        private IEnumerator PlayDialogRoutine(DialogData dialogData, Action onComplete)
         {
             var dialogPhrasesPairs = dialogData.Dialog;
             
@@ -73,6 +73,7 @@ namespace Ingame.UI
                 yield return pause;
             }
             
+            onComplete?.Invoke();
             PrintSubtitlesText(" ");
             subtitlesBackgroundImage.DOFade(0, displayAnimationDuration / 2);
         }
@@ -137,7 +138,7 @@ namespace Ingame.UI
             _modifySubHeaderCoroutine = this.DeleteTextLetterByLetterCoroutine(subHeaderText, subHeaderTextSpawnSpeed);
         }
 
-        public void PlayDialog(DialogData dialogData)
+        public void PlayDialog(DialogData dialogData, Action onComplete = null)
         {
             if (dialogData == null)
                 return;
@@ -146,7 +147,7 @@ namespace Ingame.UI
                 StopCoroutine(_dialogCoroutine);
 
             subtitlesBackgroundImage.DOFade(_initialSubtitlesBackgroundAlpha, displayAnimationDuration / 2)
-                .OnComplete(() => _dialogCoroutine = StartCoroutine(PlayDialogRoutine(dialogData)));
+                .OnComplete(() => _dialogCoroutine = StartCoroutine(PlayDialogRoutine(dialogData, onComplete)));
         }
     }
 }

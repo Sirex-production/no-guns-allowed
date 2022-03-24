@@ -1,4 +1,3 @@
-using System;
 using Extensions;
 using Ingame.UI;
 using NaughtyAttributes;
@@ -14,7 +13,7 @@ public class IntroCutScene : MonoBehaviour
     [SerializeField] private string headerText;
     [BoxGroup("Narrative settings")] 
     [SerializeField] private string subheaderText;
-    
+
     [Inject] private GameController _gameController;
     [Inject] private UiNarrative _uiNarrative;
 
@@ -32,22 +31,32 @@ public class IntroCutScene : MonoBehaviour
     {
         this.SetGameObjectInactive();
     }
-
+    
     private void StartCutScene()
     {
         _gameController.StartCutScene();
-        
-        //todo remove hardcode
-        this.WaitAndDoCoroutine(1f, () => _uiNarrative.ShowNarrativeSection());
-        this.WaitAndDoCoroutine(2f, () => _uiNarrative.PrintHeaderText(headerText));
-        this.WaitAndDoCoroutine(3f, () => _uiNarrative.PrintSubHeaderText(subheaderText));
-        this.WaitAndDoCoroutine(6f,
-            () =>
-            {
-                _uiNarrative.HideHeaderText();
-                _uiNarrative.HideSubHeaderText();
-                _uiNarrative.PlayDialog(dialogData);
-            });
+    }
+    
+    private void ShowHeader()
+    {
+        _uiNarrative.ShowNarrativeSection();
+        _uiNarrative.PrintHeaderText(headerText);
+    }
+
+    private void ShowSubHeader()
+    {
+        _uiNarrative.PrintSubHeaderText(subheaderText);
+    }
+
+    private void HideHeaderAndSubHeader()
+    {
+        _uiNarrative.HideHeaderText();
+        _uiNarrative.HideSubHeaderText();
+    }
+
+    private void PlayDialog()
+    {
+        _uiNarrative.PlayDialog(dialogData, EndCutScene);
     }
 
     private void EndCutScene()
