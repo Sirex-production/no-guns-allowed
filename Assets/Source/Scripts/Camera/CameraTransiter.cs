@@ -4,7 +4,6 @@ using Cinemachine;
 using Extensions;
 using Ingame.Graphics;
 using NaughtyAttributes;
-using Support;
 using UnityEngine;
 using Zenject;
 
@@ -16,12 +15,10 @@ namespace Ingame
         [SerializeField] private CinemachineVirtualCamera playerFocusCamera;
         [Required]
         [SerializeField] private CinemachineVirtualCamera levelOverviewCamera;
-        [SerializeField] private CinemachineVirtualCamera cutSceneCamera;
         [SerializeField] private CinemachineVirtualCamera[] levelTransitionCameras;
 
         private const float GIZMOS_SPHERE_RADIUS = .5f;
 
-        [Inject] private GameController _gameController;
         [Inject] private SectionsManager _sectionsManager;
         [Inject] private EffectsManager _effectsManager;
 
@@ -29,18 +26,16 @@ namespace Ingame
 
         private void Start()
         {
-            _gameController.OnCutSceneStarted += OnCutSceneStarted;
-            _gameController.OnGameplayStarted += OnGameplayStarted;
             _sectionsManager.OnSectionEnter += TransitToCameraWithIndex;
             _sectionsManager.OnLevelOverviewEnter += OnLevelOverviewEnter;
             _sectionsManager.OnLevelOverviewExit += OnLevelOverviewExit;
             _effectsManager.OnPlayerDeathEffectPlayed += FocusOnPlayer;
+
+            this.DoAfterNextFrameCoroutine(() => ChangeVirtualCamera(levelTransitionCameras.First(cam => cam != null)));
         }
 
         private void OnDestroy()
         {
-            _gameController.OnCutSceneStarted -= OnCutSceneStarted;
-            _gameController.OnGameplayStarted -= OnGameplayStarted;
             _sectionsManager.OnSectionEnter -= TransitToCameraWithIndex;
             _sectionsManager.OnLevelOverviewEnter -= OnLevelOverviewEnter;
             _sectionsManager.OnLevelOverviewExit -= OnLevelOverviewExit;
@@ -64,16 +59,6 @@ namespace Ingame
                 
                 Gizmos.DrawSphere(levelCamera.transform.position, GIZMOS_SPHERE_RADIUS);
             }
-        }
-
-        private void OnCutSceneStarted()
-        {
-            ChangeVirtualCamera(cutSceneCamera);
-        }
-
-        private void OnGameplayStarted()
-        {
-            ChangeVirtualCamera(levelTransitionCameras.First(cam => cam != null));
         }
 
         private void TransitToCameraWithIndex(int cameraSectionIndex)
@@ -104,8 +89,6 @@ namespace Ingame
         {
             levelOverviewCamera.Priority = 0;
             playerFocusCamera.Priority = 0;
-            if(cutSceneCamera != null)
-                cutSceneCamera.Priority = 0;
             
             if(levelTransitionCameras == null)
                 return;

@@ -113,10 +113,9 @@ namespace Ingame.Graphics
         private void OnVirtualCameraChanged(CinemachineVirtualCamera virtualCamera)
         {
             _currentVirtualCamera = virtualCamera;
-
-            var multiChanelPerlin = _currentVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-            if(multiChanelPerlin != null)
-                multiChanelPerlin.m_FrequencyGain = frequencyGain;
+            
+            _currentVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain =
+                frequencyGain;
         }
 
         private void ResetCameraTransform()
