@@ -29,6 +29,7 @@ namespace Ingame
 
         private void Start()
         {
+            _gameController.OnCutSceneStarted += OnCutSceneStarted;
             _gameController.OnGameplayStarted += OnGameplayStarted;
             _sectionsManager.OnSectionEnter += TransitToCameraWithIndex;
             _sectionsManager.OnLevelOverviewEnter += OnLevelOverviewEnter;
@@ -38,6 +39,7 @@ namespace Ingame
 
         private void OnDestroy()
         {
+            _gameController.OnCutSceneStarted -= OnCutSceneStarted;
             _gameController.OnGameplayStarted -= OnGameplayStarted;
             _sectionsManager.OnSectionEnter -= TransitToCameraWithIndex;
             _sectionsManager.OnLevelOverviewEnter -= OnLevelOverviewEnter;
@@ -62,6 +64,11 @@ namespace Ingame
                 
                 Gizmos.DrawSphere(levelCamera.transform.position, GIZMOS_SPHERE_RADIUS);
             }
+        }
+
+        private void OnCutSceneStarted()
+        {
+            ChangeVirtualCamera(cutSceneCamera);
         }
 
         private void OnGameplayStarted()

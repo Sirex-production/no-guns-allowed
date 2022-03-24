@@ -12,6 +12,8 @@ namespace Support
         public event Action OnLevelRestart;
         public event Action OnLastLevelFromStaveLoaded;
         public event Action OnGameplayStarted;
+        public event Action OnCutSceneStarted;
+        public event Action OnCutSceneEnded;
 
         private bool _isLevelEnded = false;
 
@@ -50,6 +52,16 @@ namespace Support
         public void StartGameplay()
         {
             OnGameplayStarted?.Invoke();
+        }
+
+        public void StartCutScene()
+        {
+            OnCutSceneStarted?.Invoke();
+        }
+
+        public void EndCutScene()
+        {
+            OnCutSceneEnded?.Invoke();
         }
     }
 }

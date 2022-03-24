@@ -5,6 +5,7 @@ using Extensions;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ingame.UI
 {
@@ -13,6 +14,8 @@ namespace Ingame.UI
     {
         [BoxGroup("References"), Required] 
         [SerializeField] private CanvasGroup parentCanvasGroup;
+        [BoxGroup("References"), Required] 
+        [SerializeField] private Image subtitlesBackgroundImage;
         [BoxGroup("References"), Required]
         [SerializeField] private TMP_Text headerText;
         [BoxGroup("References"), Required]
@@ -30,6 +33,8 @@ namespace Ingame.UI
         [BoxGroup("Animation settings")]
         [SerializeField] [Range(0, 1f)] private float subtitlesTextSpawnSpeed = .5f;
 
+        private float _initialSubtitlesBackgroundAlpha;
+        
         private Coroutine _modifyHeaderCoroutine;
         private Coroutine _modifySubHeaderCoroutine;
         private Coroutine _modifySubtitlesCoroutine;
@@ -37,9 +42,16 @@ namespace Ingame.UI
 
         private void Awake()
         {
+            _initialSubtitlesBackgroundAlpha = subtitlesBackgroundImage.color.a;
+            
             headerText.SetText("");
             subHeaderText.SetText("");
             subtitlesText.SetText("");
+        }
+
+        private void Start()
+        {
+            subtitlesBackgroundImage.DOFade(0, 0);
         }
 
         private IEnumerator PlayDialogRoutine(DialogData dialogData)
@@ -62,6 +74,7 @@ namespace Ingame.UI
             }
             
             PrintSubtitlesText(" ");
+            subtitlesBackgroundImage.DOFade(0, displayAnimationDuration / 2);
         }
 
         public void ShowNarrativeSection()
@@ -126,13 +139,14 @@ namespace Ingame.UI
 
         public void PlayDialog(DialogData dialogData)
         {
-            if(dialogData == null)
+            if (dialogData == null)
                 return;
-            
-            if(_dialogCoroutine != null)
+
+            if (_dialogCoroutine != null)
                 StopCoroutine(_dialogCoroutine);
-            
-            _dialogCoroutine = StartCoroutine(PlayDialogRoutine(dialogData));
+
+            subtitlesBackgroundImage.DOFade(_initialSubtitlesBackgroundAlpha, displayAnimationDuration / 2)
+                .OnComplete(() => _dialogCoroutine = StartCoroutine(PlayDialogRoutine(dialogData)));
         }
     }
 }

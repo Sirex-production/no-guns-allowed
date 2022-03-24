@@ -8,12 +8,13 @@ namespace Ingame.UI
 {
     public class UiLevelTransition : MonoBehaviour
     {
-        [Required] [SerializeField] private Animator levelTransitionAnimator;
+        [Required] 
+        [SerializeField] private Animator levelTransitionAnimator;
 
         [Inject] private GameController _gameController;
         [Inject] private LevelManager _levelManager;
         
-        private const float TIME_OFFSET_AFTER_ANIMATION = .2f;
+        private const float TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION = .2f;
 
         private void Start()
         {
@@ -21,6 +22,7 @@ namespace Ingame.UI
             _gameController.OnLevelLoaded += OnLevelLoaded;
             _gameController.OnLevelRestart += OnLevelRestart;
             _gameController.OnLastLevelFromStaveLoaded += OnLastLevelFromSaveLoaded;
+            _gameController.OnCutSceneEnded += PlayGamePlayTransitionAnimation;
             
             PlayOpenAnimation();
         }
@@ -31,52 +33,58 @@ namespace Ingame.UI
             _gameController.OnNextLevelLoaded -= OnNextLevelLoad;
             _gameController.OnLevelLoaded -= OnLevelLoaded;
             _gameController.OnLevelRestart -= OnLevelRestart;
+            _gameController.OnLastLevelFromStaveLoaded -= OnLastLevelFromSaveLoaded;
+            _gameController.OnCutSceneEnded -= PlayGamePlayTransitionAnimation;
         }
 
         private void OnNextLevelLoad()
         {
             PlayCloseAnimation();
             var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
-            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => _levelManager.LoadNextLevel());
+            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () => _levelManager.LoadNextLevel());
         }
 
         private void OnLevelLoaded(int levelNumber)
         {
             PlayCloseAnimation();
             var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
-            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => _levelManager.LoadLevel(levelNumber));
+            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () => _levelManager.LoadLevel(levelNumber));
         }
 
         private void OnLevelRestart()
         {
             PlayCloseAnimation();
             var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
-            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => _levelManager.RestartLevel());
+            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () => _levelManager.RestartLevel());
         }
         
         private void OnLastLevelFromSaveLoaded()
         {
             PlayCloseAnimation();
             var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
-            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION, () => _levelManager.LoadLastLevelFromSave());
+            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () => _levelManager.LoadLastLevelFromSave());
         }
 
         private void PlayOpenAnimation()
         {
-            if(levelTransitionAnimator == null)
-                return;
-            
             levelTransitionAnimator.SetTrigger("Open");
             this.DoAfterNextFrameCoroutine(() => levelTransitionAnimator.ResetTrigger("Open"));
         }
 
         private void PlayCloseAnimation()
         {
-            if(levelTransitionAnimator == null)
-                return;
-            
             levelTransitionAnimator.SetTrigger("Close");
             this.DoAfterNextFrameCoroutine(() => levelTransitionAnimator.ResetTrigger("Close"));
+        }
+
+        private void PlayGamePlayTransitionAnimation()
+        {
+            levelTransitionAnimator.SetTrigger("GameplayTransition");
+            this.WaitAndDoCoroutine(TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () =>
+            {
+                levelTransitionAnimator.ResetTrigger("GameplayTransition");
+                _gameController.StartGameplay();
+            });
         }
     }
 }
