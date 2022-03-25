@@ -19,7 +19,9 @@ namespace Ingame.UI
         [SerializeField] private Button[] buttonsToDisable; 
         [BoxGroup("References"), Tooltip("Images that is covering other UI elements and focuses attention on the target ui element")]
         [SerializeField] private Image[] focusImages;
-        [Space]
+
+        [Space] [BoxGroup("Animation properties")] 
+        [SerializeField] private float delayBeforeTutorial = 0;
         [BoxGroup("Animation properties")]
         [SerializeField] private Color blinkingColor = Color.white;
         [BoxGroup("Animation properties")]
@@ -65,25 +67,28 @@ namespace Ingame.UI
 
         public override void Activate()
         {
-            this.DoAfterNextFrameCoroutine(()=>_inputSystem.Enabled = areImagesActivatedOnActivate);
+            this.WaitAndDoCoroutine(delayBeforeTutorial, () =>
+            {
+                this.DoAfterNextFrameCoroutine(() => _inputSystem.Enabled = areImagesActivatedOnActivate);
             
-            targetButton.onClick.AddListener(Complete);
+                targetButton.onClick.AddListener(Complete);
 
-            if(areImagesActivatedOnActivate)
-                EnableImages();
-            else
-                DisableImages();
+                if(areImagesActivatedOnActivate)
+                    EnableImages();
+                else
+                    DisableImages();
             
-            if(areButtonsActivatedOnActivate)
-                EnableButtons();
-            else
-                DisableButtons();
+                if(areButtonsActivatedOnActivate)
+                    EnableButtons();
+                else
+                    DisableButtons();
             
-            TurnOnFocusImages();
-            HighlightButton();
+                TurnOnFocusImages();
+                HighlightButton();
             
-            if(activateLogMessage != null || !activateLogMessage.IsEmpty()) 
-                _uiController.DisplayLogMessage(activateLogMessage, LogDisplayType.DisplayAndKeep);
+                if(activateLogMessage != null || !activateLogMessage.IsEmpty()) 
+                    _uiController.DisplayLogMessage(activateLogMessage, LogDisplayType.DisplayAndKeep);
+            });
         }
         
         public override void Complete()

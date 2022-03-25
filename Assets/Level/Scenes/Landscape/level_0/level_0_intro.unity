@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f555e258f1e2f4ea534ea114a5a52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogData: {fileID: 11400000, guid: 6ae7c7b8032c3264eb4c0280e4831663, type: 2}
+  dialogData: {fileID: 11400000, guid: afaecb0baf822be4aa0556a56f160e8f, type: 2}
   headerText: GOVNO_2
   subheaderText: ETO UZHE NE VONYAET
 --- !u!95 &583018043
