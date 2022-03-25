@@ -12022,7 +12022,7 @@ MonoBehaviour:
   areImagesActivatedOnComplete: 1
   areButtonsActivatedOnActivate: 1
   areButtonsActivatedOnComplete: 1
-  isTargetButtonEnabledAfterComplete: 0
+  isTargetButtonEnabledAfterComplete: 1
   activateNextTutorial: 0
 --- !u!1 &8917878976285088225
 GameObject:
