@@ -22,8 +22,7 @@ namespace Ingame.UI
             _gameController.OnLevelLoaded += OnLevelLoaded;
             _gameController.OnLevelRestart += OnLevelRestart;
             _gameController.OnLastLevelFromStaveLoaded += OnLastLevelFromSaveLoaded;
-            _gameController.OnCutSceneEnded += PlayGamePlayTransitionAnimation;
-            
+
             PlayOpenAnimation();
         }
 
@@ -33,9 +32,7 @@ namespace Ingame.UI
             _gameController.OnNextLevelLoaded -= OnNextLevelLoad;
             _gameController.OnLevelLoaded -= OnLevelLoaded;
             _gameController.OnLevelRestart -= OnLevelRestart;
-            _gameController.OnLastLevelFromStaveLoaded -= OnLastLevelFromSaveLoaded;
-            _gameController.OnCutSceneEnded -= PlayGamePlayTransitionAnimation;
-        }
+            _gameController.OnLastLevelFromStaveLoaded -= OnLastLevelFromSaveLoaded; }
 
         private void OnNextLevelLoad()
         {
@@ -75,16 +72,6 @@ namespace Ingame.UI
         {
             levelTransitionAnimator.SetTrigger("Close");
             this.DoAfterNextFrameCoroutine(() => levelTransitionAnimator.ResetTrigger("Close"));
-        }
-
-        private void PlayGamePlayTransitionAnimation()
-        {
-            levelTransitionAnimator.SetTrigger("GameplayTransition");
-            this.WaitAndDoCoroutine(TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () =>
-            {
-                levelTransitionAnimator.ResetTrigger("GameplayTransition");
-                _gameController.StartGameplay();
-            });
         }
     }
 }

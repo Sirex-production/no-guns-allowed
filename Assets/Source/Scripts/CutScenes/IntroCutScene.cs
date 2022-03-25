@@ -1,4 +1,3 @@
-using Extensions;
 using Ingame.UI;
 using NaughtyAttributes;
 using Support;
@@ -16,26 +15,7 @@ public class IntroCutScene : MonoBehaviour
 
     [Inject] private GameController _gameController;
     [Inject] private UiNarrative _uiNarrative;
-
-    private void Start()
-    {
-        _gameController.OnGameplayStarted += OnGameplayStarted;
-    }
-
-    private void OnDestroy()
-    {
-        _gameController.OnGameplayStarted -= OnGameplayStarted;
-    }
-
-    private void OnGameplayStarted()
-    {
-        this.SetGameObjectInactive();
-    }
     
-    private void StartCutScene()
-    {
-        _gameController.StartCutScene();
-    }
     
     private void ShowHeader()
     {
@@ -56,13 +36,6 @@ public class IntroCutScene : MonoBehaviour
 
     private void PlayDialog()
     {
-        _uiNarrative.PlayDialog(dialogData, EndCutScene);
-    }
-
-    private void EndCutScene()
-    {
-        _uiNarrative.HideNarrativeSection();
-
-        _gameController.EndCutScene();
+        _uiNarrative.PlayDialog(dialogData, () => _gameController.LoadNextLevel());
     }
 }

@@ -8,8 +8,7 @@ namespace Support
 {
     public class LevelManager : MonoBehaviour
     {
-        [Inject] 
-        private SaveLoadSystem _saveLoadSystem;
+        [Inject] private SaveLoadSystem _saveLoadSystem;
         
         public void ManageLevelDependingOnWinningCondition(bool isVictory)
         {

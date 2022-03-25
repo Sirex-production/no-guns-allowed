@@ -11,10 +11,7 @@ namespace Support
         public event Action<int> OnLevelLoaded;
         public event Action OnLevelRestart;
         public event Action OnLastLevelFromStaveLoaded;
-        public event Action OnGameplayStarted;
-        public event Action OnCutSceneStarted;
-        public event Action OnCutSceneEnded;
-
+        
         private bool _isLevelEnded = false;
 
         public void EndLevel(bool isVictory)
@@ -47,21 +44,6 @@ namespace Support
         public void LoadLastLevelFromSave()
         {
             OnLastLevelFromStaveLoaded?.Invoke();
-        }
-
-        public void StartGameplay()
-        {
-            OnGameplayStarted?.Invoke();
-        }
-
-        public void StartCutScene()
-        {
-            OnCutSceneStarted?.Invoke();
-        }
-
-        public void EndCutScene()
-        {
-            OnCutSceneEnded?.Invoke();
         }
     }
 }

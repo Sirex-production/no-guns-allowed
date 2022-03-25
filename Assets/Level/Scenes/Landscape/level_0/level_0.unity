@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4433259, g: 0.48600596, b: 0.53677523, a: 1}
+  m_IndirectSpecularColor: {r: 0.4433261, g: 0.4860065, b: 0.5367757, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10177,7 +10177,7 @@ Camera:
   m_GameObject: {fileID: 417128940}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.28235295, g: 0.28235295, b: 0.28235295, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -49847,7 +49847,7 @@ PrefabInstance:
     - target: {fileID: 7226707244272326704, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: invokableObjects.Array.data[1]
       value: 
-      objectReference: {fileID: 1733734580}
+      objectReference: {fileID: 0}
     - target: {fileID: 7226707244272326704, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: deactivatePanelAfterInteraction
       value: 1
@@ -49995,17 +49995,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7226707245615650025, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
   m_PrefabInstance: {fileID: 1733734578}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1733734580 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8228968095808543130, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
-  m_PrefabInstance: {fileID: 1733734578}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c4cec5ca3df72499a87c889ed7cacd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1736412853
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1034,6 +1034,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7685924280552080533}
+  - {fileID: 4539336201306549037}
   m_Father: {fileID: 7372922522025238785}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3016,7 +3017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4539336201306549037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3024,14 +3025,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2625206916927062839}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5760493814991797}
   - {fileID: 2606027241117509501}
-  m_Father: {fileID: 7685924280552080533}
-  m_RootOrder: 7
+  m_Father: {fileID: 5537737716193236272}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3891,7 +3892,8 @@ MonoBehaviour:
   delayBeforeNextTutorial: 0
   activateLogMessage: now lets move back
   completeLogMessage: nice
-  deactivateInputSystemOnActivate: 1
+  isInputSystemActivatedOnActivate: 0
+  isInputSystemActivatedOnComplete: 1
   activateNextTutorial: 1
 --- !u!1 &3050701433017786357
 GameObject:
@@ -4912,8 +4914,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDashesController: {fileID: 7628812272792672188}
-  gameMenuCanvasGroup: {fileID: 7666801171877280866}
-  bordersCanvasGroup: {fileID: 3020451520395362463}
   uiVibrationOptionToggles:
   - {fileID: 790279649183777575}
 --- !u!114 &4160692489741235069
@@ -5145,7 +5145,8 @@ MonoBehaviour:
   delayBeforeNextTutorial: 0.5
   activateLogMessage: take a look on the map
   completeLogMessage: good job
-  deactivateInputSystemOnActivate: 1
+  isInputSystemActivatedOnActivate: 0
+  isInputSystemActivatedOnComplete: 0
   activateNextTutorial: 1
 --- !u!1 &3890931520535156308
 GameObject:
@@ -6228,7 +6229,6 @@ RectTransform:
   - {fileID: 4397745265606539398}
   - {fileID: 4154986924187866638}
   - {fileID: 5750599160113356649}
-  - {fileID: 4539336201306549037}
   m_Father: {fileID: 5537737716193236272}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12009,7 +12009,8 @@ MonoBehaviour:
   delayBeforeNextTutorial: 0
   activateLogMessage: 
   completeLogMessage: 
-  deactivateInputSystemOnActivate: 0
+  isInputSystemActivatedOnActivate: 1
+  isInputSystemActivatedOnComplete: 1
   activateNextTutorial: 0
 --- !u!1 &8917878976285088225
 GameObject:

@@ -34,7 +34,9 @@ namespace Ingame.UI
         [BoxGroup("Game properties"), Tooltip("Message that will be displayed to the LOG window when tutorial is completed")]
         [SerializeField] private string completeLogMessage;
         [BoxGroup("Game properties")]
-        [SerializeField] private bool deactivateInputSystemOnActivate = false;
+        [SerializeField] private bool isInputSystemActivatedOnActivate = true;
+        [BoxGroup("Game properties")]
+        [SerializeField] private bool isInputSystemActivatedOnComplete = true;
         [BoxGroup("Game properties")]
         [SerializeField] private bool activateNextTutorial = true;
         
@@ -55,8 +57,7 @@ namespace Ingame.UI
 
         public override void Activate()
         {
-            if(deactivateInputSystemOnActivate)
-                _inputSystem.Enabled = false;
+            _inputSystem.Enabled = isInputSystemActivatedOnActivate;
             
             targetButton.onClick.AddListener(Complete);
 
@@ -83,7 +84,8 @@ namespace Ingame.UI
             {
                 if(activateNextTutorial)
                     _tutorialsManager.ActivateNext();
-                
+               
+                _inputSystem.Enabled = isInputSystemActivatedOnComplete;
                 this.SetGameObjectInactive();
             });
         }
