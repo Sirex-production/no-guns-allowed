@@ -13,11 +13,18 @@ MonoBehaviour:
   m_Name: Level0IntroCutSceneDialog
   m_EditorClassIdentifier: 
   dialog:
-  - phrase: huinya 1
+  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: NGA, this is bio-whale. Customer
+      code 33256, <color=#D51C49>request status Urgent</color>'
+    pauseAfterPhrase: 1.5
+  - phrase: '<color=#D51C49>[OPERATOR]</color>: NGA listening...'
     pauseAfterPhrase: 1
-  - phrase: yes...
-    pauseAfterPhrase: 0.5
-  - phrase: pliz help
+  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: Our cargo ship was captured by our
+      concurents'
+    pauseAfterPhrase: 1.5
+  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: We request to stop the ship to prevent
+      our product from stealing and provide assault conditions for our security forces'
+    pauseAfterPhrase: 1.5
+  - phrase: '<color=#D51C49>[OPERATOR]</color>: NGA, Copy that...'
     pauseAfterPhrase: 1
-  - phrase: okay i am gay
+  - phrase: '<color=#D51C49>[OPERATOR]</color>: NGA, Sending the quick response crew...'
     pauseAfterPhrase: 2

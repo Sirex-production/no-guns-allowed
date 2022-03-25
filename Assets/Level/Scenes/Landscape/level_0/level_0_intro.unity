@@ -515,6 +515,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8294357103896016960, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: subHeaderTextSpawnSpeed
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294357103896016960, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: subtitlesTextSpawnSpeed
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 8379204805930557046, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -589,8 +597,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogData: {fileID: 11400000, guid: afaecb0baf822be4aa0556a56f160e8f, type: 2}
-  headerText: GOVNO_2
-  subheaderText: ETO UZHE NE VONYAET
+  headerText: STOLEN CARGO
+  subheaderText: Far repuclican space [FRS]
 --- !u!95 &583018043
 Animator:
   serializedVersion: 3
