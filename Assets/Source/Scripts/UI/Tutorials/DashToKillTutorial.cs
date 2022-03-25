@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Extensions;
+using Ingame.Graphics;
 using ModestTree;
 using NaughtyAttributes;
 using Support;
@@ -32,6 +33,7 @@ namespace Ingame.UI
         [BoxGroup("Game properties"), Tooltip("Message that will be displayed to the LOG window when tutorial is completed")]
         [SerializeField] private string completeLogMessage;
 
+        [Inject] private EffectsManager _effectsManager;
         [Inject] private GameController _gameController;
         [Inject] private TutorialsManager _tutorialsManager;
         [Inject] private UiController _uiController;
@@ -46,14 +48,14 @@ namespace Ingame.UI
 
         private void Start()
         {
-            PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
+            _effectsManager.OnEnemyKillEffectPlayed += OnEnemyKillEffectPlayed;
             _gameController.OnLevelEnded += OnLevelEnd;
             _gameController.OnLevelRestart += OnLevelRestart;
         }
 
         private void OnDestroy()
         {
-            PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
+            _effectsManager.OnEnemyKillEffectPlayed -= OnEnemyKillEffectPlayed;
             _gameController.OnLevelEnded -= OnLevelEnd;
             _gameController.OnLevelRestart -= OnLevelRestart;
         }
@@ -74,9 +76,9 @@ namespace Ingame.UI
             this.SetGameObjectInactive();
         }
         
-        private void OnDashPerformed(Vector3 _)
+        private void OnEnemyKillEffectPlayed(DamageType damageType)
         {
-            PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
+            _effectsManager.OnEnemyKillEffectPlayed -= OnEnemyKillEffectPlayed;
             Complete();
         }
 

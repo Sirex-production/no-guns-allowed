@@ -31235,14 +31235,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 820087715335786172, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
-      propertyPath: areImagesActivatedOnActivate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 820087715335786172, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
-      propertyPath: areImagesActivatedOnComplete
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 820087715335786172, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: imagesToDisable.Array.data[0]
       value: 
       objectReference: {fileID: 468257268}
@@ -31600,10 +31592,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: imagesToDisable.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
-      propertyPath: areImagesActivatedOnActivate
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}

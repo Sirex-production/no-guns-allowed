@@ -40,6 +40,12 @@ namespace Ingame.UI
         [BoxGroup("Game properties")]
         [SerializeField] private bool areImagesActivatedOnComplete = true;
         [BoxGroup("Game properties")]
+        [SerializeField] private bool areButtonsActivatedOnActivate = true;
+        [BoxGroup("Game properties")]
+        [SerializeField] private bool areButtonsActivatedOnComplete = true;
+        [BoxGroup("Game properties")]
+        [SerializeField] private bool isTargetButtonEnabledAfterComplete = true;
+        [BoxGroup("Game properties")]
         [SerializeField] private bool activateNextTutorial = true;
         
         [Inject] private TutorialsManager _tutorialsManager;
@@ -68,7 +74,11 @@ namespace Ingame.UI
             else
                 DisableImages();
             
-            DisableButtons();
+            if(areButtonsActivatedOnActivate)
+                EnableButtons();
+            else
+                DisableButtons();
+            
             TurnOnFocusImages();
             HighlightButton();
             
@@ -82,7 +92,11 @@ namespace Ingame.UI
                 EnableImages();
             else
                 DisableImages();
-            EnableButtons();
+            
+            if(areButtonsActivatedOnComplete)
+                EnableButtons();
+            else
+                DisableButtons();
             TurnOffFocusImages(true);
             
             if(completeLogMessage != null || !completeLogMessage.IsEmpty())
@@ -91,6 +105,8 @@ namespace Ingame.UI
             targetButton.onClick.RemoveListener(Complete);
             _animationSequence.Kill();
 
+            targetButton.interactable = isTargetButtonEnabledAfterComplete;
+            
             this.WaitAndDoCoroutine(delayBeforeNextTutorial, () =>
             {
                 if(activateNextTutorial)

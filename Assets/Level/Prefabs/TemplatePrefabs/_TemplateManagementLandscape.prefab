@@ -3880,6 +3880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetButton: {fileID: 6607853925313963261}
+  imagesToDisable: []
   buttonsToDisable:
   - {fileID: 5293179366266424523}
   - {fileID: 3669747235830171070}
@@ -3892,8 +3893,11 @@ MonoBehaviour:
   delayBeforeNextTutorial: 0
   activateLogMessage: now lets move back
   completeLogMessage: nice
-  isInputSystemActivatedOnActivate: 0
-  isInputSystemActivatedOnComplete: 1
+  areImagesActivatedOnActivate: 1
+  areImagesActivatedOnComplete: 1
+  areButtonsActivatedOnActivate: 1
+  areButtonsActivatedOnComplete: 1
+  isTargetButtonEnabledAfterComplete: 1
   activateNextTutorial: 1
 --- !u!1 &3050701433017786357
 GameObject:
@@ -5133,6 +5137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetButton: {fileID: 6607853925313963261}
+  imagesToDisable: []
   buttonsToDisable:
   - {fileID: 5293179366266424523}
   - {fileID: 3669747235830171070}
@@ -5145,8 +5150,11 @@ MonoBehaviour:
   delayBeforeNextTutorial: 0.5
   activateLogMessage: take a look on the map
   completeLogMessage: good job
-  isInputSystemActivatedOnActivate: 0
-  isInputSystemActivatedOnComplete: 0
+  areImagesActivatedOnActivate: 0
+  areImagesActivatedOnComplete: 0
+  areButtonsActivatedOnActivate: 0
+  areButtonsActivatedOnComplete: 0
+  isTargetButtonEnabledAfterComplete: 0
   activateNextTutorial: 1
 --- !u!1 &3890931520535156308
 GameObject:
@@ -11997,6 +12005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetButton: {fileID: 3669747235830171070}
+  imagesToDisable: []
   buttonsToDisable:
   - {fileID: 5293179366266424523}
   - {fileID: 6607853925313963261}
@@ -12009,8 +12018,11 @@ MonoBehaviour:
   delayBeforeNextTutorial: 0
   activateLogMessage: 
   completeLogMessage: 
-  isInputSystemActivatedOnActivate: 1
-  isInputSystemActivatedOnComplete: 1
+  areImagesActivatedOnActivate: 1
+  areImagesActivatedOnComplete: 1
+  areButtonsActivatedOnActivate: 1
+  areButtonsActivatedOnComplete: 1
+  isTargetButtonEnabledAfterComplete: 0
   activateNextTutorial: 0
 --- !u!1 &8917878976285088225
 GameObject:
