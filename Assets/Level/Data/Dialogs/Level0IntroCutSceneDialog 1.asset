@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0c53a6442901e247a89b94e1b787638, type: 3}
-  m_Name: IntroCutSceneDialog
+  m_Name: Level0IntroCutSceneDialog 1
   m_EditorClassIdentifier: 
   dialog:
   - phrase: huinya 1

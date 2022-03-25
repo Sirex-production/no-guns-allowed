@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Ingame.UI
@@ -15,6 +16,8 @@ namespace Ingame.UI
     [Serializable]
     public class DialogPhrasePart
     {
+        [ResizableTextArea]
+        [AllowNesting]
         public string phrase;
         public float pauseAfterPhrase;
     }
