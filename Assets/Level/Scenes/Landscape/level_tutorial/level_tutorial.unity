@@ -7422,6 +7422,17 @@ Transform:
   m_Father: {fileID: 639658832}
   m_RootOrder: 59
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &468257268 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4958237237180980108, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+  m_PrefabInstance: {fileID: 9090654336668902411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &471397908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31213,12 +31224,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 692912506354509083, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.5003662
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 788479583896810871, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 820087715335786172, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: imagesToDisable.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 820087715335786172, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: areImagesActivatedOnActivate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820087715335786172, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: areImagesActivatedOnComplete
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820087715335786172, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: imagesToDisable.Array.data[0]
+      value: 
+      objectReference: {fileID: 468257268}
     - target: {fileID: 1058170904908808055, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
@@ -31557,7 +31584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7807426843430682799, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.099975586
+      value: -0.100097656
       objectReference: {fileID: 0}
     - target: {fileID: 7811905056495568598, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_fontAsset
@@ -31571,6 +31598,22 @@ PrefabInstance:
       propertyPath: focusImageTargetAlpha
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: imagesToDisable.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: areImagesActivatedOnActivate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: imagesToDisable.Array.data[0]
+      value: 
+      objectReference: {fileID: 468257268}
+    - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: isInputSystemActivatedOnActivate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8319468891104170453, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_fontSize
       value: 58.2
@@ -31581,7 +31624,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
     - target: {fileID: 8369464644707217913, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.10006714
+      value: -0.100097656
       objectReference: {fileID: 0}
     - target: {fileID: 8373003881317634107, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.y

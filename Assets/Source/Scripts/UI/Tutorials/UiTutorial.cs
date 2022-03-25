@@ -13,6 +13,8 @@ namespace Ingame.UI
     {
         [BoxGroup("References"), Required]
         [SerializeField] private Button targetButton;
+        [BoxGroup("References"), Tooltip("Images that will be disabled during the active stage of the tutorial")]
+        [SerializeField] private Image[] imagesToDisable;
         [BoxGroup("References"), Tooltip("Buttons that will be disabled during the active stage of the tutorial")]
         [SerializeField] private Button[] buttonsToDisable; 
         [BoxGroup("References"), Tooltip("Images that is covering other UI elements and focuses attention on the target ui element")]
@@ -34,9 +36,9 @@ namespace Ingame.UI
         [BoxGroup("Game properties"), Tooltip("Message that will be displayed to the LOG window when tutorial is completed")]
         [SerializeField] private string completeLogMessage;
         [BoxGroup("Game properties")]
-        [SerializeField] private bool isInputSystemActivatedOnActivate = true;
+        [SerializeField] private bool areImagesActivatedOnActivate = true;
         [BoxGroup("Game properties")]
-        [SerializeField] private bool isInputSystemActivatedOnComplete = true;
+        [SerializeField] private bool areImagesActivatedOnComplete = true;
         [BoxGroup("Game properties")]
         [SerializeField] private bool activateNextTutorial = true;
         
@@ -57,10 +59,15 @@ namespace Ingame.UI
 
         public override void Activate()
         {
-            _inputSystem.Enabled = isInputSystemActivatedOnActivate;
+            this.DoAfterNextFrameCoroutine(()=>_inputSystem.Enabled = areImagesActivatedOnActivate);
             
             targetButton.onClick.AddListener(Complete);
 
+            if(areImagesActivatedOnActivate)
+                EnableImages();
+            else
+                DisableImages();
+            
             DisableButtons();
             TurnOnFocusImages();
             HighlightButton();
@@ -71,6 +78,10 @@ namespace Ingame.UI
         
         public override void Complete()
         {
+            if(areImagesActivatedOnActivate)
+                EnableImages();
+            else
+                DisableImages();
             EnableButtons();
             TurnOffFocusImages(true);
             
@@ -85,7 +96,7 @@ namespace Ingame.UI
                 if(activateNextTutorial)
                     _tutorialsManager.ActivateNext();
                
-                _inputSystem.Enabled = isInputSystemActivatedOnComplete;
+                this.DoAfterNextFrameCoroutine(()=>_inputSystem.Enabled = areImagesActivatedOnComplete);
                 this.SetGameObjectInactive();
             });
         }
@@ -125,6 +136,34 @@ namespace Ingame.UI
                 
                 focusImage.SetGameObjectActive();
                 focusImage.DOFade(focusImageTargetAlpha, focusImageFadeTime);
+            }
+        }
+
+        private void DisableImages()
+        {
+            if(imagesToDisable == null || imagesToDisable.IsEmpty())
+                return;
+
+            foreach (var image in imagesToDisable)
+            {
+                if(image == null)
+                    continue;
+                
+                image.enabled = false;
+            }
+        }
+        
+        private void EnableImages()
+        {
+            if(imagesToDisable == null || imagesToDisable.IsEmpty())
+                return;
+
+            foreach (var image in imagesToDisable)
+            {
+                if(image == null)
+                    continue;
+                
+                image.enabled = true;
             }
         }
 
