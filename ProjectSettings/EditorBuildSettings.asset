@@ -9,9 +9,15 @@ EditorBuildSettings:
     path: Assets/Level/Scenes/Landscape/main_menu_level.unity
     guid: cd3767745c475174489d76431b383c8e
   - enabled: 1
-    path: Assets/Level/Scenes/Landscape/level_0/level_0_intro.unity
-    guid: a04b8550fd41d1b4287dd804636c21cd
+    path: Assets/Level/Scenes/Landscape/level_tutorial/level_tutorial_intro.unity
+    guid: 0e2bd06a4a28f9548ad93533fa6530a8
   - enabled: 1
     path: Assets/Level/Scenes/Landscape/level_tutorial/level_tutorial.unity
     guid: 5637b30d762cdf7448230c2e999f5acd
+  - enabled: 1
+    path: Assets/Level/Scenes/Landscape/level_0/level_0_intro.unity
+    guid: a04b8550fd41d1b4287dd804636c21cd
+  - enabled: 1
+    path: Assets/Level/Scenes/Landscape/level_0/level_0.unity
+    guid: dba27b8134004c747add7bdf276ced82
   m_configObjects: {}
