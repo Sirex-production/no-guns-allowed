@@ -92,7 +92,7 @@ namespace Ingame
                 Disable();
         }
 
-        private void Disable()
+        public void Disable()
         {
             foreach (var invokableObject in invokableObjectWhenDisabledInvoked)
             {
