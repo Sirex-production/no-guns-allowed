@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level0IntroCutSceneDialog
   m_EditorClassIdentifier: 
   dialog:
-  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: NGA, this is bio-whale. Customer
-      code 33256, <color=#D51C49>request status Urgent</color>'
+  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: ... this is is bio-whale. Customer
+      code 33256, request status <color=#D51C49>Urgent</color>'
     pauseAfterPhrase: 1.5
-  - phrase: '<color=#D51C49>[OPERATOR]</color>: NGA listening...'
+  - phrase: '<color=#D51C49>[OPERATOR]</color>: simak listening...'
     pauseAfterPhrase: 1
   - phrase: '<color=#09E6A3>[CUSTOMER]</color>: Our cargo ship was captured by our
       concurents'
@@ -24,7 +24,10 @@ MonoBehaviour:
   - phrase: '<color=#09E6A3>[CUSTOMER]</color>: We request to stop the ship to prevent
       our product from stealing and provide assault conditions for our security forces'
     pauseAfterPhrase: 1.5
-  - phrase: '<color=#D51C49>[OPERATOR]</color>: NGA, Copy that...'
+  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: Your mission is to <color=#D51C49>capture
+      management room</color> to gain full ship controll'
+    pauseAfterPhrase: 2
+  - phrase: '<color=#D51C49>[OPERATOR]</color>: Copy that...'
     pauseAfterPhrase: 1
-  - phrase: '<color=#D51C49>[OPERATOR]</color>: NGA, Sending the quick response crew...'
+  - phrase: '<color=#D51C49>[OPERATOR]</color>: Sending the quick response crew...'
     pauseAfterPhrase: 2

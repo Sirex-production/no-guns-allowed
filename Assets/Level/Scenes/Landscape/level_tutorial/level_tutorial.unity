@@ -18626,6 +18626,22 @@ PrefabInstance:
       propertyPath: deactivatePanelAfterInteraction
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7226707244272326705, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: m_Size.y
+      value: 7.762041
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226707244272326705, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: m_Size.z
+      value: 9.209329
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226707244272326705, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: m_Center.y
+      value: 1.7251062
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226707244272326705, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: m_Center.z
+      value: 2.6415825
+      objectReference: {fileID: 0}
     - target: {fileID: 7226707244272326706, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0

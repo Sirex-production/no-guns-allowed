@@ -19,7 +19,8 @@ namespace Ingame.Graphics
         // Start is called before the first frame update
         private void Start()
         {
-            primaryTrail.emitting = false;
+            if(primaryTrail != null)
+                primaryTrail.emitting = false;
             foreach (var trail in secondaryTrails)
                 trail.emitting = true;
 
@@ -37,7 +38,8 @@ namespace Ingame.Graphics
 
         private void SwitchActiveTrails(bool primaryTrailEmittingValue)
         {
-            primaryTrail.emitting = primaryTrailEmittingValue;
+            if(primaryTrail != null)
+                primaryTrail.emitting = primaryTrailEmittingValue;
             foreach (var trail in secondaryTrails)
                 trail.emitting = !trail.emitting;
         }
