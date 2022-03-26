@@ -64,7 +64,7 @@ MonoBehaviour:
   invokableObjectWhenDisabledInvoked:
   - {fileID: 1164912964048839984}
   - {fileID: 2712080890165006806}
-  deactivatePanelAfterInteraction: 0
+  deactivatePanelAfterInteraction: 1
   logApproachText: Open the door
   logInteractionText: Door was opened
 --- !u!114 &6023137605351743358
