@@ -13,7 +13,7 @@ namespace Ingame.UI
     public class DashToKillTutorial : MonoTutorial
     {
         [BoxGroup("References"), Required]
-        [SerializeField] private Image playerImage;
+        [SerializeField] private CanvasGroup playerCanvasGroup;
         [BoxGroup("References"), Required]
         [SerializeField] private Image enemyImage;
         [BoxGroup("References"), Required]
@@ -98,19 +98,19 @@ namespace Ingame.UI
             if(activateLogMessage != null || !activateLogMessage.IsEmpty()) 
                 _uiController.DisplayLogMessage(activateLogMessage, LogDisplayType.DisplayAndKeep);
             
-            playerImage.DOFade(0, 0);
+            playerCanvasGroup.DOFade(0, 0);
             bloodImage.DOFade(0, 0);
             enemyImage.DOFade(0, 0);
 
             _animationSequence = DOTween.Sequence()
-                .Append(playerImage.DOFade(1, animationDuration)) //Shows player
+                .Append(playerCanvasGroup.DOFade(1, animationDuration)) //Shows player
                 .Append(enemyImage.DOFade(1, animationDuration)) //Shows enemy
-                .Append(playerImage.rectTransform.DOLocalMove(enemyImage.rectTransform.localPosition, dashAnimationDuration)) //Dashes player to enemy
+                .Append(playerCanvasGroup.transform.DOLocalMove(enemyImage.rectTransform.localPosition, dashAnimationDuration)) //Dashes player to enemy
                 .Append(enemyImage.DOFade(0, 0)) //Hides enemy
                 .Append(bloodImage.DOFade(1, animationDuration)) //Shows blood
                 .Append(bloodImage.rectTransform.DOScale(_initialBloodImageScale * bloodImageScaleMultiplier, animationDuration)) //Shows blood animation
                 .Append(bloodImage.rectTransform.DOScale(_initialBloodImageScale, animationDuration)) //Shows blood animation
-                .Append(playerImage.DOFade(0, animationDuration)//Hides player
+                .Append(playerCanvasGroup.DOFade(0, animationDuration)//Hides player
                     .OnPlay(() => bloodImage.DOFade(0, animationDuration))) //Hides blood
                 .SetLoops(-1);
         }

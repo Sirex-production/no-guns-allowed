@@ -3562,6 +3562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1158517055}
+  - component: {fileID: 1158517056}
   m_Layer: 5
   m_Name: Missions
   m_TagString: Untagged
@@ -3597,6 +3598,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1158517056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158517054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b947a5b2a087674bb190749949b33c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areButtonsUpdatedDueToProgress: 1
+  levelButtons:
+  - {fileID: 2141615411}
+  - {fileID: 1402465047}
+  - {fileID: 1498619830}
+  - {fileID: 1906520360}
+  - {fileID: 31394172}
+  - {fileID: 1656132665}
+  - {fileID: 1658368279}
+  - {fileID: 2111337566}
 --- !u!1 &1202366653
 GameObject:
   m_ObjectHideFlags: 0
