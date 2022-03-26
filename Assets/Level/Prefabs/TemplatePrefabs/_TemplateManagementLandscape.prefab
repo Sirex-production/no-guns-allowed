@@ -3886,6 +3886,7 @@ MonoBehaviour:
   - {fileID: 3669747235830171070}
   focusImages:
   - {fileID: 4000882625156698313}
+  delayBeforeTutorial: 0
   blinkingColor: {r: 0, g: 1, b: 0.1644926, a: 1}
   blinkingAnimationDuration: 1
   focusImageFadeTime: 0.3
@@ -4879,6 +4880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707f06153e5b23f4c82d8e47a8e68c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelData: {fileID: 11400000, guid: 06906c439e679824ab16f2a642a43959, type: 2}
 --- !u!114 &7307027780803863607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5143,6 +5145,7 @@ MonoBehaviour:
   - {fileID: 3669747235830171070}
   focusImages:
   - {fileID: 4000882625156698313}
+  delayBeforeTutorial: 0
   blinkingColor: {r: 0, g: 1, b: 0.16470589, a: 1}
   blinkingAnimationDuration: 1
   focusImageFadeTime: 0.3
@@ -6442,9 +6445,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6741857446096658789}
-        m_TargetAssemblyTypeName: Ingame.ButtonsBehaviour, Assembly-CSharp
-        m_MethodName: RestartLevel
-        m_Mode: 1
+        m_TargetAssemblyTypeName: Ingame.TemplateButtonsBehaviour, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12011,6 +12014,7 @@ MonoBehaviour:
   - {fileID: 6607853925313963261}
   focusImages:
   - {fileID: 4000882625156698313}
+  delayBeforeTutorial: 0
   blinkingColor: {r: 0, g: 1, b: 0.1644926, a: 1}
   blinkingAnimationDuration: 1
   focusImageFadeTime: 0.3

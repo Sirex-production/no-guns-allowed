@@ -10285,6 +10285,17 @@ MonoBehaviour:
   fontStyle: 0
   fontColor: {r: 0, g: 0, b: 0, a: 255}
   backgroundColor: {r: 0.25338197, g: 0.735849, b: 0.505789, a: 255}
+--- !u!114 &611467868 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8185595786488736764, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+  m_PrefabInstance: {fileID: 9090654336668902411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &628510245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2212bafbeae910648a8000e82104b47f, type: 3}
@@ -22148,6 +22159,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2388d524070159a4aab9d72305ecd310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1425768484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8713246529823223183, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+  m_PrefabInstance: {fileID: 9090654336668902411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1429262835
 GameObject:
   m_ObjectHideFlags: 0
@@ -32408,6 +32430,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6683824128575324935, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6888932819547153102, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -32521,6 +32547,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: areButtonsActivatedOnActivate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938951202964297778, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: imagesToDisable.Array.data[0]
       value: 
       objectReference: {fileID: 468257268}
@@ -32552,6 +32582,22 @@ PrefabInstance:
       propertyPath: completeLogMessage
       value: proceed forward
       objectReference: {fileID: 0}
+    - target: {fileID: 8475957455920160255, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: imagesToDisable.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475957455920160255, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: areButtonsActivatedOnActivate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475957455920160255, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: imagesToDisable.Array.data[0]
+      value: 
+      objectReference: {fileID: 611467868}
+    - target: {fileID: 8475957455920160255, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
+      propertyPath: imagesToDisable.Array.data[1]
+      value: 
+      objectReference: {fileID: 1425768484}
     - target: {fileID: 8555914990237534154, guid: c7ef869b9ea8cae48b4ff24f6cd6ca61, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.099853516

@@ -29,11 +29,6 @@ namespace Ingame
             _gameController.RestartLevel();
         }
 
-        public void LoadNextLevel()
-        {
-            _gameController.LoadNextLevel();
-        }
-        
         public void LoadMainMenu()
         {
             Time.timeScale = 1;
@@ -88,6 +83,11 @@ namespace Ingame
                 _sectionsManager.ExitLevelOverview();
             else
                 _sectionsManager.EnterLevelOverview();
+        }
+        
+        public void LoadLevel(int levelNumber)
+        {
+            _gameController.LoadLevel(levelNumber);
         }
     }
 }

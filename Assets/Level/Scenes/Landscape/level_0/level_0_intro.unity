@@ -599,6 +599,7 @@ MonoBehaviour:
   dialogData: {fileID: 11400000, guid: afaecb0baf822be4aa0556a56f160e8f, type: 2}
   headerText: STOLEN CARGO
   subheaderText: Far repuclican space [FRS]
+  levelToLoadAfterTheDialog: 4
 --- !u!95 &583018043
 Animator:
   serializedVersion: 3

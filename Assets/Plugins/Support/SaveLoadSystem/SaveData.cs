@@ -13,6 +13,7 @@ namespace Support.SLS
         public const bool DEFAULT_IS_VIBRATION_ENABLED = true;
         
         public SaveDataHolder<int> CurrentLevelNumber { get; } = new SaveDataHolder<int>(DEFAULT_CURRENT_LEVEL);
+        public SaveDataHolder<int> LastUnlockedLevelNumber { get; } = new SaveDataHolder<int>(DEFAULT_CURRENT_LEVEL);
         public SaveDataHolder<float> AimSensitivity  { get; } = new SaveDataHolder<float>(DEFAULT_AIM_SENSITIVITY);
         public SaveDataHolder<bool> IsVibrationEnabled { get; } = new SaveDataHolder<bool>(DEFAULT_IS_VIBRATION_ENABLED);
     }

@@ -18,27 +18,18 @@ namespace Ingame.UI
 
         private void Start()
         {
-            _gameController.OnNextLevelLoaded += OnNextLevelLoad;
             _gameController.OnLevelLoaded += OnLevelLoaded;
             _gameController.OnLevelRestart += OnLevelRestart;
-            _gameController.OnLastLevelFromStaveLoaded += OnLastLevelFromSaveLoaded;
+            _gameController.OnLastPlayedLevelFromStaveLoaded += LastPlayedPlayedLevelFromSaveLoaded;
 
             PlayOpenAnimation();
         }
 
-
         private void OnDestroy()
         {
-            _gameController.OnNextLevelLoaded -= OnNextLevelLoad;
             _gameController.OnLevelLoaded -= OnLevelLoaded;
             _gameController.OnLevelRestart -= OnLevelRestart;
-            _gameController.OnLastLevelFromStaveLoaded -= OnLastLevelFromSaveLoaded; }
-
-        private void OnNextLevelLoad()
-        {
-            PlayCloseAnimation();
-            var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
-            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () => _levelManager.LoadNextLevel());
+            _gameController.OnLastPlayedLevelFromStaveLoaded -= LastPlayedPlayedLevelFromSaveLoaded; 
         }
 
         private void OnLevelLoaded(int levelNumber)
@@ -55,11 +46,11 @@ namespace Ingame.UI
             this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () => _levelManager.RestartLevel());
         }
         
-        private void OnLastLevelFromSaveLoaded()
+        private void LastPlayedPlayedLevelFromSaveLoaded()
         {
             PlayCloseAnimation();
             var currentState = levelTransitionAnimator.GetCurrentAnimatorStateInfo(0);
-            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () => _levelManager.LoadLastLevelFromSave());
+            this.WaitAndDoCoroutine(currentState.length + TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION, () => _levelManager.LoadLastPlayedLevel());
         }
 
         private void PlayOpenAnimation()

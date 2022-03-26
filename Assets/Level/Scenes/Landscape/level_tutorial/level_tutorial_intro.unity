@@ -1804,6 +1804,7 @@ MonoBehaviour:
   dialogData: {fileID: 11400000, guid: 6ae7c7b8032c3264eb4c0280e4831663, type: 2}
   headerText: Mind refresh
   subheaderText: Loading memory data...
+  levelToLoadAfterTheDialog: 2
 --- !u!114 &1974190238
 MonoBehaviour:
   m_ObjectHideFlags: 0

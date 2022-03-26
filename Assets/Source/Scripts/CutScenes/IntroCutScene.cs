@@ -12,7 +12,9 @@ public class IntroCutScene : MonoBehaviour
     [SerializeField] private string headerText;
     [BoxGroup("Narrative settings")] 
     [SerializeField] private string subheaderText;
-
+    [BoxGroup("Level settings")]
+    [SerializeField] private int levelToLoadAfterTheDialog;
+    
     [Inject] private GameController _gameController;
     [Inject] private UiNarrative _uiNarrative;
     
@@ -36,6 +38,6 @@ public class IntroCutScene : MonoBehaviour
 
     private void PlayDialog()
     {
-        _uiNarrative.PlayDialog(dialogData, () => _gameController.LoadNextLevel());
+        _uiNarrative.PlayDialog(dialogData, () => _gameController.LoadLevel(levelToLoadAfterTheDialog));
     }
 }

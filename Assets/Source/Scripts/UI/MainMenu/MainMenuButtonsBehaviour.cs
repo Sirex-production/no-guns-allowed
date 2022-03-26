@@ -55,19 +55,14 @@ namespace Ingame.UI
             this.WaitAndDoCoroutine(animationDuration, developersMenu.PlayAppearanceAnimation);
         }
 
-        public void LoadNextLevel()
-        { 
-            _gameController.LoadNextLevel();
-        }
-
         public void LoadLevel(int levelNumber)
         {
             _gameController.LoadLevel(levelNumber);
         }
 
-        public void LoadLastLevelFromSave()
+        public void LoadLastPlayedLevelFromSave()
         {
-            _gameController.LoadLastLevelFromSave();
+            _gameController.LoadLastPlayedLevelFromSave();
         }
     }
 }
