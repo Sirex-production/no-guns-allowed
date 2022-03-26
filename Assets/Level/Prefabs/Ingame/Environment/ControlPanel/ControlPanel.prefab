@@ -60,7 +60,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb868f108de682b1084efe3897da145c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invokableObjects:
+  invokableObjects: []
+  invokableObjectWhenDisabledInvoked:
   - {fileID: 1164912964048839984}
   - {fileID: 2712080890165006806}
   deactivatePanelAfterInteraction: 0

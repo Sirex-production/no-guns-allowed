@@ -1,4 +1,5 @@
 using Ingame.UI;
+using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 #if UNITY_EDITOR
@@ -12,12 +13,15 @@ namespace Ingame
     [RequireComponent(typeof(Collider))]
     public class InvokableButton : MonoBehaviour
     {
-        [SerializeField] private MonoInvokable[] invokableObjects;
-        [SerializeField] private bool deactivatePanelAfterInteraction = false;
         [Tooltip("Text that will be displayed in log when player approaches the button")]
         [SerializeField] private string logApproachText;
         [Tooltip("Text that will be displayed in log when player interacts with the button")]
         [SerializeField] private string logInteractionText;
+        [Space]
+        [SerializeField] private bool deactivatePanelAfterInteraction = false;
+        [ShowIf(nameof(deactivatePanelAfterInteraction))]
+        [SerializeField] private MonoInvokable[] invokableObjectWhenDisabledInvoked;
+        [SerializeField] private MonoInvokable[] invokableObjects;
 
         [Inject] private UiController _uiController;
 
@@ -85,7 +89,20 @@ namespace Ingame
             }
 
             if (deactivatePanelAfterInteraction)
-                _isWorking = false;
+                Disable();
+        }
+
+        private void Disable()
+        {
+            foreach (var invokableObject in invokableObjectWhenDisabledInvoked)
+            {
+                if(invokableObject == null)
+                    continue;
+                
+                invokableObject.Invoke();
+            }
+            
+            _isWorking = false;
         }
     }
 }
