@@ -390,7 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectTypes: 02000000
   isEffectDestroyedAfterSomeTime: 1
-  timeAfterEffectWillBeDestroyed: 8
+  timeAfterEffectWillBeDestroyed: 0
   destructionForce: 15
   timeToSwitchLayer: 5
   destructionParts:

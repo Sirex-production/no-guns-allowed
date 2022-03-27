@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectTypes: 00000000
   isEffectDestroyedAfterSomeTime: 1
-  timeAfterEffectWillBeDestroyed: 5
+  timeAfterEffectWillBeDestroyed: 1
   bodyPartsForce: 10
   particles:
   - {fileID: 8902624414663485745}

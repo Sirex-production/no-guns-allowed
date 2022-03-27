@@ -11,7 +11,7 @@ namespace Ingame.Graphics
         [SerializeField] [Min(0)] private float timeToSwitchLayer;
         [SerializeField] private List<Rigidbody> destructionParts;
 
-        private const float PAUSE_BETWEEN_REMOVING_PARTS = .5f; 
+        private const float PAUSE_BETWEEN_REMOVING_PARTS = .3f; 
         
         protected override void Start()
         {
