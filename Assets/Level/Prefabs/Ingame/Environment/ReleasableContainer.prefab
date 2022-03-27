@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 3493725744995800913}
   - component: {fileID: 3493725744995800912}
   - component: {fileID: 3493725744995800915}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ChandelierPieceCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 3493725745088167790}
   - component: {fileID: 3493725745088167791}
   - component: {fileID: 7504315205396527954}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15013,6 +15013,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8606fe23b4f83e94e8bc31040821bb2f, type: 3}
       propertyPath: m_Name
       value: chain
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8606fe23b4f83e94e8bc31040821bb2f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8606fe23b4f83e94e8bc31040821bb2f, type: 3}
