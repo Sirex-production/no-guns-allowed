@@ -5070,6 +5070,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 066c11659699cfc4bbf8c3f294669f08, type: 3}
   m_PrefabInstance: {fileID: 196567170}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &197191489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2718714137204787779, guid: 905aa58eb2260b244be627f809f2cb0d, type: 3}
+  m_PrefabInstance: {fileID: 278036655}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &198589004
 GameObject:
   m_ObjectHideFlags: 0
@@ -47085,6 +47090,8 @@ GameObject:
   - component: {fileID: 1606735621}
   - component: {fileID: 1606735623}
   - component: {fileID: 1606735622}
+  - component: {fileID: 1606735627}
+  - component: {fileID: 1606735626}
   m_Layer: 0
   m_Name: SpaceCapusleRoom
   m_TagString: Untagged
@@ -47172,10 +47179,12 @@ MonoBehaviour:
   invokeOnStartList:
   - {fileID: 1606735625}
   - {fileID: 1606735623}
+  - {fileID: 1606735627}
   invokeAfterArrivalList:
   - {fileID: 1606735621}
   - {fileID: 1606735622}
   - {fileID: 1137616051}
+  - {fileID: 1606735626}
 --- !u!114 &1606735625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47191,6 +47200,36 @@ MonoBehaviour:
   destroyAfterInvoke: 1
   enableGameObject: 0
   gameObjectToProcess: {fileID: 366562229}
+--- !u!114 &1606735626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606735619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2388d524070159a4aab9d72305ecd310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyAfterInvoke: 1
+  enableGameObject: 1
+  gameObjectToProcess: {fileID: 197191489}
+--- !u!114 &1606735627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606735619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2388d524070159a4aab9d72305ecd310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyAfterInvoke: 1
+  enableGameObject: 0
+  gameObjectToProcess: {fileID: 197191489}
 --- !u!4 &1607412279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 68470d7bc5425e249a26d68d339058ea, type: 3}
