@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 738314462437823802}
   - component: {fileID: 4978522381522550393}
   - component: {fileID: 2512678720090944117}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: dot left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8391867962853405189}
   - component: {fileID: 495647378789576667}
   - component: {fileID: 4283612220868815732}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 386034844218308330}
   - component: {fileID: 7207090752135380117}
   - component: {fileID: 8742823843046128171}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: right fly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 5486728048289469809}
   - component: {fileID: 6523455180230749626}
   - component: {fileID: 6282588053874183255}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 6315693638585637927}
   - component: {fileID: 3139679073359142202}
   - component: {fileID: 7488937469142848603}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: left fly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 8400890871222737322}
   - component: {fileID: 140561670348817346}
   - component: {fileID: 7001903220595867110}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: dot right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 8975018294596007249}
   - component: {fileID: 7708803286764295697}
   - component: {fileID: 3452076679587515662}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,6 +821,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1191744917888380572}
     m_Modifications:
+    - target: {fileID: 5135773494945646403, guid: 528116962ee180240a7ece9be7729e2c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6316791733024230998, guid: 528116962ee180240a7ece9be7729e2c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -856,6 +860,10 @@ PrefabInstance:
     - target: {fileID: 7865462186853122163, guid: 528116962ee180240a7ece9be7729e2c, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037588642480418687, guid: 528116962ee180240a7ece9be7729e2c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528116962ee180240a7ece9be7729e2c, type: 3}

@@ -74,6 +74,18 @@ public class ShaderPropertyEditor : MonoBehaviour
 
     private void Awake()
     {
+        _propertyBlock = new MaterialPropertyBlock();
+
+        foreach (var property in properties)
+        {
+            foreach (var meshRenderer in rendererReferences)
+            {
+                meshRenderer.GetPropertyBlock(_propertyBlock);
+                SetProperty(property);
+                meshRenderer.SetPropertyBlock(_propertyBlock);
+            }
+        }
+        
         Destroy(this);
     }
 }

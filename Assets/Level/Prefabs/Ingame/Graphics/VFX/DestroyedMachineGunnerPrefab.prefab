@@ -1685,6 +1685,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1191744917888380572}
     m_Modifications:
+    - target: {fileID: 5135773494945646403, guid: 528116962ee180240a7ece9be7729e2c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6316791733024230998, guid: 528116962ee180240a7ece9be7729e2c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1740,6 +1744,10 @@ PrefabInstance:
     - target: {fileID: 9037588642480418687, guid: 528116962ee180240a7ece9be7729e2c, type: 3}
       propertyPath: m_Name
       value: ExplosionEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037588642480418687, guid: 528116962ee180240a7ece9be7729e2c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528116962ee180240a7ece9be7729e2c, type: 3}

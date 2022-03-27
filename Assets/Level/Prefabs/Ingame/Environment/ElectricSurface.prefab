@@ -9840,6 +9840,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coils_s_1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fcbb89b3dca2be04fb812e75d9165aac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcbb89b3dca2be04fb812e75d9165aac, type: 3}
 --- !u!4 &886565502305244370 stripped
@@ -9901,6 +9905,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fcbb89b3dca2be04fb812e75d9165aac, type: 3}
       propertyPath: m_Name
       value: Coils_s_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fcbb89b3dca2be04fb812e75d9165aac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcbb89b3dca2be04fb812e75d9165aac, type: 3}
