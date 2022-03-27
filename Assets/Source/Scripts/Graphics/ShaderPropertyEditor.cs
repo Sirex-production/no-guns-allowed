@@ -43,8 +43,14 @@ public class ShaderPropertyEditor : MonoBehaviour
 
         foreach (var property in properties)
         {
+            if(property == null)
+                continue;
+            
             foreach (var meshRenderer in rendererReferences)
             {
+                if(meshRenderer == null)
+                    continue;
+                
                 meshRenderer.GetPropertyBlock(_propertyBlock);
                 SetProperty(property);
                 meshRenderer.SetPropertyBlock(_propertyBlock);
