@@ -14,28 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - phrase: Just before we throw you into the action...
-    pauseAfterPhrase: 1
-  - phrase: Lets recap the <color=#D51C49>protcol</color> and review your memory
+    pauseAfterPhrase: 0.8
+  - phrase: Let's recap the <color=#D51C49>protocol</color> and review your memory
       replay...
-    pauseAfterPhrase: 1
+    pauseAfterPhrase: 0.8
   - phrase: 'Protocol statement <color=#D51C49>#0.0 "Model description"</color>:'
     pauseAfterPhrase: 0.6
-  - phrase: You are an operator of <color=#D51C49>s.1.3.3.7</color> assault android
+  - phrase: You are an operator of <color=#D51C49>s.1.2.1.0</color> assault android
     pauseAfterPhrase: 1
-  - phrase: The model is extremely fast and light, intendent to be operated in space...
-    pauseAfterPhrase: 1.5
-  - phrase: All the firearms were removed due to Protocol statement <color=#D51C49>#1.2</color>
+  - phrase: The model is extremely fast and light, intended to be operated in space...
     pauseAfterPhrase: 1
+  - phrase: All the firearms were removed due to the Protocol statement <color=#D51C49>#1.2</color>
+    pauseAfterPhrase: 0.8
   - phrase: 'Protocol statement <color=#D51C49>#1.2 "Rules of engagement"</color>:'
     pauseAfterPhrase: 0.6
-  - phrase: 'The damage done to the environment should be reduced as possible '
+  - phrase: The damage done to the environment should be reduced as possible
     pauseAfterPhrase: 0.5
-  - phrase: To meet customer expectations...
+  - phrase: to meet customer expectations...
     pauseAfterPhrase: 0.5
   - phrase: 'Protocol statement <color=#D51C49>#1.3 "Potential threats"</color>:'
     pauseAfterPhrase: 0.5
-  - phrase: <color=#D51C49>All intelegence-operating objects</color> on the operation
-      region may be considered as <color=#D51C49>threat</color>...
+  - phrase: All <color=#D51C49>intelligent-operating objects</color> on the operation
+      region may be considered a <color=#D51C49>threat</color>...
     pauseAfterPhrase: 1
-  - phrase: Loading memory replay to configure user controlls...
+  - phrase: Loading memory replays to configure user controls...
     pauseAfterPhrase: 1

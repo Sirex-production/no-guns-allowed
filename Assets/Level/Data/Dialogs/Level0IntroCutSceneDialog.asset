@@ -13,21 +13,23 @@ MonoBehaviour:
   m_Name: Level0IntroCutSceneDialog
   m_EditorClassIdentifier: 
   dialog:
-  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: ... this is is bio-whale. Customer
-      code 33256, request status <color=#D51C49>Urgent</color>'
+  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: This is <color=#09E6A3>bio-whale</color>.
+      Customer code 33256, request status <color=#D51C49>Urgent</color>'
     pauseAfterPhrase: 1.5
-  - phrase: '<color=#D51C49>[OPERATOR]</color>: simak listening...'
+  - phrase: '<color=#D51C49>[OPERATOR]</color>: <color=#D51C49>simak</color> listening...'
     pauseAfterPhrase: 1
-  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: Our cargo ship was captured by our
-      concurents'
-    pauseAfterPhrase: 1.5
-  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: We request to stop the ship to prevent
-      our product from stealing and provide assault conditions for our security forces'
-    pauseAfterPhrase: 1.5
-  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: Your mission is to <color=#D51C49>capture
+  - phrase: '<color=#09E6A3>[bio-whale]</color>: Our cargo ship was captured...'
+    pauseAfterPhrase: 0.8
+  - phrase: '<color=#09E6A3>[bio-whale]</color>: We request to stop the ship to prevent
+      our product from stealing...'
+    pauseAfterPhrase: 0.8
+  - phrase: '<color=#09E6A3>[bio-whale]</color>: and provide assault conditions for
+      our security forces...'
+    pauseAfterPhrase: 0.8
+  - phrase: '<color=#09E6A3>[bio-whale]</color>: Your mission is to <color=#D51C49>capture
       management room</color> to gain full ship controll'
     pauseAfterPhrase: 2
-  - phrase: '<color=#D51C49>[OPERATOR]</color>: Copy that...'
+  - phrase: '<color=#D51C49>[simak]</color>: Copy that...'
     pauseAfterPhrase: 1
-  - phrase: '<color=#D51C49>[OPERATOR]</color>: Sending the quick response crew...'
+  - phrase: '<color=#D51C49>[simak]</color>: Sending the quick response crew...'
     pauseAfterPhrase: 2
