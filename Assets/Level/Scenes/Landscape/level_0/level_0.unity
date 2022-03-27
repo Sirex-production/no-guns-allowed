@@ -14947,6 +14947,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2809703596700050906, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: properties.Array.data[0].color.g
+      value: 0.7607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809703596700050906, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: properties.Array.data[0].color.r
+      value: 0.28235295
+      objectReference: {fileID: 0}
     - target: {fileID: 5704549740153210776, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -26842,6 +26850,18 @@ PrefabInstance:
     - target: {fileID: 2411404310894137855, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809703596700050906, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: properties.Array.data[0].color.b
+      value: 1.6156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809703596700050906, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: properties.Array.data[0].color.g
+      value: 0.87058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809703596700050906, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+      propertyPath: properties.Array.data[0].color.r
+      value: 1.6627451
       objectReference: {fileID: 0}
     - target: {fileID: 6076650485826871056, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: duration
@@ -42716,6 +42736,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.2445993, y: 0.54003936, z: 5.9874477}
   m_Center: {x: 1.6222999, y: 0, z: 0}
+--- !u!1 &1332921829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7226707245053424007, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+  m_PrefabInstance: {fileID: 2118960981}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1332921830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332921829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35427097a9e49eb4ea2af92c20ad5783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererReferences:
+  - {fileID: 1686061013}
+  properties:
+  - name: _BaseColor
+    type: 2
+    intValue: 0
+    floatValue: 0
+    color: {r: 0.1321645, g: 0.14703292, b: 0.6226415, a: 0}
 --- !u!1001 &1333027957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55702,6 +55747,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3730336098147616398, guid: 0c53d52c94abdf54a8c0e2185381be1d, type: 3}
   m_PrefabInstance: {fileID: 1683020892}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &1686061013 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1873163083165016545, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+  m_PrefabInstance: {fileID: 2118960981}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1688240346 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 066c11659699cfc4bbf8c3f294669f08, type: 3}
@@ -67843,7 +67893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7226707245615650024, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: m_Name
-      value: UnlockableDoor
+      value: PanelPack
       objectReference: {fileID: 0}
     - target: {fileID: 7226707245615650025, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
       propertyPath: m_RootOrder
@@ -69066,8 +69116,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.43529412, g: 1, b: 0, a: 1}
-      key1: {r: 0.43529412, g: 1, b: 0, a: 1}
+      key0: {r: 0.43529412, g: 1, b: 0, a: 0.39215687}
+      key1: {r: 0.43529412, g: 1, b: 0, a: 0.39215687}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
