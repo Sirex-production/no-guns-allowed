@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 3493725744995800913}
   - component: {fileID: 3493725744995800912}
   - component: {fileID: 3493725744995800915}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: ChandelierPieceCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
