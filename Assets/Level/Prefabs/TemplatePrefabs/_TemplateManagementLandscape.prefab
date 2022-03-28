@@ -8602,11 +8602,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Thank you for playing our <color=#AFBE8F>public prototype</color>! \n\nIf
-    you feel like you have tried everything that we can suggest, we would like to
-    invite you to leave feedback on our game.\n\nHere at <color=#BDB9CB>Sirex production</color>,
+  m_text: "Thank you for playing our <color=#D51C49>dev demo</color>! \n\nIf you
+    feel like you have tried everything that we can suggest, we would like to invite
+    you to leave feedback on our game.\n\nHere at <color=#BDB9CB>Sirex productions</color>,
     we are creating alongside with community. Leaving a comment on our work will
-    significantly help us to develop the game of the dream\n\n<color=#AFBE80>Let's
+    significantly help us to develop the game of the dream\n\n<color=green>Let's
     move together!</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -11611,7 +11611,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PUBLIC PROTOTYPE V.1.4
+  m_text: DEV DEMO 1.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}

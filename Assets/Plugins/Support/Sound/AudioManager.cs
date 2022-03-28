@@ -10,7 +10,7 @@ namespace Support.Sound
         [BoxGroup("References"), Required]
         [SerializeField] private AudioSource musicAudioSource;
         [Space]
-        [BoxGroup("Data"), Required] 
+        [BoxGroup("Data"), Required, Expandable] 
         [SerializeField] private AudioData audioData;
 
         private UiSfxName _lastUsedUiSfxName = UiSfxName.None;

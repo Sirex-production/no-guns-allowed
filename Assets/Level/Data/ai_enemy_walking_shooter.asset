@@ -24,4 +24,4 @@ MonoBehaviour:
   ignoreBarriers: 0
   enterRestStateTime: 2
   meleeDamage: 5
-  pauseBetweenShots: 1
+  pauseBetweenShots: 0.7
