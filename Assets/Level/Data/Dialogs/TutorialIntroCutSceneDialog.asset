@@ -28,7 +28,7 @@ MonoBehaviour:
     pauseAfterPhrase: 0.8
   - phrase: 'Protocol statement <color=#D51C49>#1.2 "Rules of engagement"</color>:'
     pauseAfterPhrase: 0.6
-  - phrase: The damage done to the environment should be reduced as possible
+  - phrase: The damage done to the environment should be reduced as much as possible
     pauseAfterPhrase: 0.5
   - phrase: to meet customer expectations...
     pauseAfterPhrase: 0.5

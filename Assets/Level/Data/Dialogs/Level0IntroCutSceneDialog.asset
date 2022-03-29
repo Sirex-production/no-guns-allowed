@@ -27,7 +27,7 @@ MonoBehaviour:
       our security forces...'
     pauseAfterPhrase: 0.8
   - phrase: '<color=#09E6A3>[bio-whale]</color>: Your mission is to <color=#D51C49>capture
-      management room</color> to gain full ship controll'
+      management room</color> to gain full ship control'
     pauseAfterPhrase: 2
   - phrase: '<color=#D51C49>[simak]</color>: Copy that...'
     pauseAfterPhrase: 1

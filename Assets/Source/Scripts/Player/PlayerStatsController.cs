@@ -46,7 +46,8 @@ namespace Ingame
         private void Awake()
         {
             _effectsFactory = GetComponent<EffectsFactory>();
-            
+
+            _currentHp = data.InitialHp;
             _currentNumberOfCharges = data.InitialNumberOfCharges;
             _chargeRegenerationTimeModifier = 1;
         }
