@@ -30,7 +30,7 @@ namespace Ingame.AI
             _currentHp -= amountOfDamage;
             
             if(_currentHp < 1)
-                _aiBehaviourController.Die();
+                _aiBehaviourController.Die(damageType);
         }
 
         public override void Heal(float amountOfHp)

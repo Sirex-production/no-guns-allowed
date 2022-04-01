@@ -12,11 +12,14 @@ namespace Ingame.AI
         [SerializeField] private AiData _aiData;
 
         [Inject] private AnalyticsWrapper _analyticsWrapper;
+        [Inject] private ActorManager _actorManager;
+        [Inject] private EffectsManager _effectsManager;
         
         private IMovable _aiMovementController;
         private IPatrolable _aiPatrolController;
         private ICombatable _aiCombatController;
         private ActorStats _aiActorStats;
+        private ShootingEnemyAnimator _shootingEnemyAnimator;
         private EffectsFactory _effectsFactory;
         private Context _context;
 
@@ -25,6 +28,7 @@ namespace Ingame.AI
         public IPatrolable AiPatrolController => _aiPatrolController;
         public ICombatable AiCombatController => _aiCombatController;
         public ActorStats AiActorStats => _aiActorStats;
+        public ShootingEnemyAnimator ShootingEnemyAnimator => _shootingEnemyAnimator;
         public EffectsFactory EffectsFactory => _effectsFactory;
         
         private void Awake()
@@ -33,6 +37,7 @@ namespace Ingame.AI
             _aiPatrolController = GetComponent<IPatrolable>();
             _aiCombatController = GetComponent<ICombatable>();
             _aiActorStats = GetComponent<ActorStats>();
+            _shootingEnemyAnimator = GetComponent<ShootingEnemyAnimator>();
             _effectsFactory = GetComponent<EffectsFactory>();
         }
 
@@ -62,9 +67,11 @@ namespace Ingame.AI
             _context.EnterRest();
         }
 
-        public void Die()
+        public void Die(DamageType damageType)
         {
-            ActorManager.Instance.RemoveActor(_aiActorStats);
+            _effectsManager.PlayKillEnemyEffects(damageType);
+            
+            _actorManager.RemoveActor(_aiActorStats);
             _analyticsWrapper.LevelStats.AddKilledEnemyToStats();
             _context.Die();
         }

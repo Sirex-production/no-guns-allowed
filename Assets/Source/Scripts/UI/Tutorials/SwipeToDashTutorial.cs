@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Extensions;
+using NaughtyAttributes;
 using Support;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,25 +10,26 @@ namespace Ingame.UI
 {
     public class SwipeToDashTutorial : MonoTutorial
     {
+        [BoxGroup("References"), Required]
         [SerializeField] private CanvasGroup parentCanvasGroup;
+        [BoxGroup("References"), Required]
         [SerializeField] private Image fingerImage;
         [Space]
+        [BoxGroup("Animation options")]
         [SerializeField] private float animationDuration = 1f;
-        [SerializeField] private float fingerScaleOffset = 2f;
-        [SerializeField] private float fingerDistanceOffset = 30f;
+        [Space]
+        [BoxGroup("Game properties"), Tooltip("Message that will be displayed to the LOG window when tutorial is activated")]
+        [SerializeField] private string activateLogMessage;
+        [BoxGroup("Game properties"), Tooltip("Message that will be displayed to the LOG window when tutorial is completed")]
+        [SerializeField] private string completeLogMessage;
+        [Space]
+        [BoxGroup("Tutorial properties")]
+        [SerializeField] private bool activateNextTutorial = true;
+        
         [Inject] private GameController _gameController;
+        [Inject] private TutorialsManager _tutorialsManager;
+        [Inject] private UiController _uiController;
         
-        
-        private Vector3 _initialFingerScale;
-        private Vector2 _initialFingerPosition;
-        private Sequence _animationSequence;
-
-        private void Awake()
-        {
-            _initialFingerScale = fingerImage.rectTransform.localScale;
-            _initialFingerPosition = fingerImage.rectTransform.position;
-        }
-
         private void Start()
         {
             PlayerEventController.Instance.OnDashPerformed += OnDashPerformed;
@@ -44,17 +46,11 @@ namespace Ingame.UI
 
         private void OnLevelEnd(bool _)
         {
-            if(_animationSequence != null)
-                _animationSequence.Kill();
-            
             this.SetGameObjectInactive();
         }
 
         private void OnLevelRestart()
         {
-            if(_animationSequence != null)
-                _animationSequence.Kill();
-            
             this.SetGameObjectInactive();
         }
 
@@ -64,24 +60,23 @@ namespace Ingame.UI
             PlayerEventController.Instance.OnDashPerformed -= OnDashPerformed;
         }
 
-        private void Complete()
+        public override void Complete()
         {
-            if(_animationSequence != null)
-                _animationSequence.Kill();
+            _uiController.DisplayLogMessage(completeLogMessage, LogDisplayType.DisplayAndKeep);
+            
             if (parentCanvasGroup != null)
-                parentCanvasGroup.DOFade(0, animationDuration).OnComplete(() => TutorialsManager.Instance.ActivateNext());
+                parentCanvasGroup.DOFade(0, animationDuration).OnComplete(() =>
+                {
+                    if(activateNextTutorial)
+                        _tutorialsManager.ActivateNext();
+                });
         }
 
         public override void Activate()
         {
+            _uiController.DisplayLogMessage(activateLogMessage, LogDisplayType.DisplayAndKeep);
+            
             parentCanvasGroup.alpha = 1;
-            _animationSequence = DOTween.Sequence()
-                .Append(fingerImage.rectTransform.DOScale(_initialFingerScale * fingerScaleOffset, animationDuration))
-                .Append(fingerImage.rectTransform.DOScale(_initialFingerScale, animationDuration))
-                .Append(fingerImage.rectTransform.DOMoveX(_initialFingerPosition.x + fingerDistanceOffset, animationDuration))
-                .Append(fingerImage.rectTransform.DOMoveX(_initialFingerPosition.x - fingerDistanceOffset, animationDuration))
-                .Append(fingerImage.rectTransform.DOMoveX(_initialFingerPosition.x, animationDuration))
-                .SetLoops(-1);
         }
     }
 }

@@ -3,6 +3,7 @@ using Extensions;
 using MoreMountains.NiceVibrations;
 using Support;
 using Support.SLS;
+using Support.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -12,13 +13,12 @@ namespace Ingame
     public class TemplateButtonsBehaviour : MonoBehaviour
     {
         [SerializeField] [Min(0)] private float fadeAnimationDuration = .5f;
-        [Inject] 
-        private GameController _gameController;
-        [Inject]
-        private SaveLoadSystem _saveLoadSystem;
-        [Inject]
-        private SectionsManager _sectionsManager;
         
+        [Inject] private GameController _gameController;
+        [Inject] private SaveLoadSystem _saveLoadSystem;
+        [Inject] private SectionsManager _sectionsManager;
+        [Inject] private AudioManager _audioManager;
+
         public void OpenUrl(string urlToOpen)
         {
             Application.OpenURL(urlToOpen);
@@ -29,11 +29,6 @@ namespace Ingame
             _gameController.RestartLevel();
         }
 
-        public void LoadNextLevel()
-        {
-            _gameController.LoadNextLevel();
-        }
-        
         public void LoadMainMenu()
         {
             Time.timeScale = 1;
@@ -45,6 +40,20 @@ namespace Ingame
             VibrationController.Vibrate(HapticTypes.Selection);
         }
 
+        public void PlayTerminalBeep()
+        {
+            _audioManager.PlayUiSfx(UiSfxName.Beep1);
+        }
+
+        public void ChangeVibrationDueToToggle(Toggle toggle)
+        {
+            if (_saveLoadSystem != null)
+            {
+                _saveLoadSystem.SaveData.IsVibrationEnabled.Value = toggle.isOn;
+                VibrationController.SetMode(toggle.isOn ? VibrationMode.Auto : VibrationMode.Disabled);
+            }
+        }
+        
         public void ChangeAimSensitivity(Slider slider)
         {
             if(_saveLoadSystem != null)
@@ -74,6 +83,11 @@ namespace Ingame
                 _sectionsManager.ExitLevelOverview();
             else
                 _sectionsManager.EnterLevelOverview();
+        }
+        
+        public void LoadLevel(int levelNumber)
+        {
+            _gameController.LoadLevel(levelNumber);
         }
     }
 }

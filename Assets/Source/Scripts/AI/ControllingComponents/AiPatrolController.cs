@@ -71,30 +71,44 @@ namespace Ingame.AI
         [Button("Add new patrolling point")]
         private void AddNewPatrollingPoint()
         {
-            var patrollingPoint = new GameObject("PatrolPoint");
-            patrollingPoint.transform.parent = patrollingPointsParent;
-            patrollingPoint.transform.position = transform.position;
+            var patrollingPoint = new GameObject("PatrolPoint")
+            {
+                transform =
+                {
+                    parent = patrollingPointsParent,
+                    position = transform.position
+                }
+            };
 
             patrolPoints.Add(patrollingPoint.transform);
         }
 
         private void MoveToNextPoint()
         {
-            if(!_isPatrolling)
+            if (!_isPatrolling)
                 return;
-            
-            if(patrolPoints == null || patrolPoints.Count < 1)
+
+            if (patrolPoints == null || patrolPoints.Count < 1)
                 return;
-            
+
             _currentPatrolPointIndex++;
-            
-            if(_currentPatrolPointIndex >= patrolPoints.Count && !_aiBehaviourController.AiData.IsLooped)
+
+            if (_currentPatrolPointIndex >= patrolPoints.Count && !_aiBehaviourController.AiData.IsLooped)
                 return;
-            
+
             if (_currentPatrolPointIndex >= patrolPoints.Count && _aiBehaviourController.AiData.IsLooped)
                 _currentPatrolPointIndex = 0;
 
-            _aiBehaviourController.AiMovementController.Follow(patrolPoints[_currentPatrolPointIndex], _aiBehaviourController.AiData.Speed, MoveToNextPoint);
+            var actualPatrolPointTransform = patrolPoints[_currentPatrolPointIndex];
+            var actualPatrolPointPos = actualPatrolPointTransform.position;
+            var targetRotation = Quaternion.LookRotation(actualPatrolPointPos - transform.position);
+            targetRotation.eulerAngles = Vector3.up * targetRotation.eulerAngles.y;
+
+
+            _aiBehaviourController.AiMovementController.Rotate(targetRotation, _aiBehaviourController.AiData.RotationSpeed,
+                () => _aiBehaviourController.AiMovementController.Follow(actualPatrolPointTransform,
+                    _aiBehaviourController.AiData.Speed, MoveToNextPoint));
+
         }
 
         public void StartPatrolling()

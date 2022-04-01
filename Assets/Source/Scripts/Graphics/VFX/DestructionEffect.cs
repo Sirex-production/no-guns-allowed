@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Extensions;
 using UnityEngine;
@@ -10,7 +11,12 @@ namespace Ingame.Graphics
         [SerializeField] [Min(0)] private float timeToSwitchLayer;
         [SerializeField] private List<Rigidbody> destructionParts;
 
-        private float _timeToRemoveComponents = 5.0f; 
+        private const float PAUSE_BETWEEN_REMOVING_PARTS = .3f; 
+        
+        protected override void Start()
+        {
+            this.WaitAndDoCoroutine(timeAfterEffectWillBeDestroyed, RemoveComponents);
+        }
 
         public override void PlayEffect(Transform instanceTargetTransform)
         {
@@ -27,8 +33,7 @@ namespace Ingame.Graphics
                 destructionPart.transform.parent = null;
                 destructionPart.AddForce(forceDirection * destructionForce, ForceMode.Impulse);
             }
-
-            this.WaitAndDoCoroutine(_timeToRemoveComponents, RemoveComponents);
+            
             this.WaitAndDoCoroutine(timeToSwitchLayer, SwitchLayer);
         }
 
@@ -39,15 +44,24 @@ namespace Ingame.Graphics
                 destructionPart.gameObject.layer = newLayer;
         }
 
-        private void RemoveComponents()
+        private IEnumerator RemoveComponentsRoutine()
         {
             foreach (var destructionPart in destructionParts)
             {
-                var bcComponent = destructionPart.GetComponent<BoxCollider>();
-                Destroy(bcComponent);
+                if(destructionPart == null)
+                    continue;
+                
+                Destroy(destructionPart.gameObject);
 
-                Destroy(destructionPart);
+                yield return new WaitForSeconds(PAUSE_BETWEEN_REMOVING_PARTS);
             }
+            
+            Destroy(gameObject);
+        }
+
+        private void RemoveComponents()
+        {
+            StartCoroutine(RemoveComponentsRoutine());
         }
     }
 }

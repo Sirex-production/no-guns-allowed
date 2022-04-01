@@ -1,6 +1,7 @@
 using System.Collections;
 using Extensions;
 using Ingame.AI;
+using Ingame.Graphics;
 using Ingame.UI;
 using MoreMountains.NiceVibrations;
 using Support;
@@ -13,10 +14,10 @@ namespace Ingame
     public class PlayerStatsController : ActorStats
     {
         [SerializeField] private PlayerData data;
-
-        [Inject] private GameController _gameController;
+        
         [Inject] private AnalyticsWrapper _analyticsWrapper;
         [Inject] private UiController _uiController;
+        [Inject] private EffectsManager _effectsManager;
         
         private const int NUMBER_OF_REGENERATED_CHARGES_PER_TICK = 1;
         private const int CHARGES_USED_TO_PERFORM_DASH = 1;
@@ -28,7 +29,8 @@ namespace Ingame
         private bool _isInvincible = false;
         private int _chargeRegenerationTimeModifier;
         private int _currentNumberOfCharges;
-
+        private EffectsFactory _effectsFactory;
+        
         public PlayerData Data => data;
 
         public override ActorSide ActorSide => ActorSide.Player;
@@ -38,10 +40,14 @@ namespace Ingame
         public int CurrentNumberOfCharges => _currentNumberOfCharges;
         public bool IsAbleToDash => _isAlive && _currentNumberOfCharges > 0 || !Data.AreChargesUsed;
         public int ChargeRegenerationTimeModifier { get => _chargeRegenerationTimeModifier; set => _chargeRegenerationTimeModifier = value; }
+        public bool IsFullyCharged => _currentNumberOfCharges >= data.InitialNumberOfCharges;
 
 
         private void Awake()
         {
+            _effectsFactory = GetComponent<EffectsFactory>();
+
+            _currentHp = data.InitialHp;
             _currentNumberOfCharges = data.InitialNumberOfCharges;
             _chargeRegenerationTimeModifier = 1;
         }
@@ -59,8 +65,19 @@ namespace Ingame
         {
             if (other.transform.TryGetComponent(out HitBox actorStats) && IsInvincible)
             {
-                actorStats.TakeDamage(data.Damage, DamageType.Melee);
+                actorStats.TakeDamage(data.Damage, DamageType.PlayerMelee);
                 VibrationController.Vibrate(HapticTypes.RigidImpact);
+                _effectsManager.PlayPlayerAttackEffect();
+            }
+        }
+        
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.transform.TryGetComponent(out HitBox actorStats) && IsInvincible)
+            {
+                actorStats.TakeDamage(data.Damage, DamageType.PlayerMelee);
+                VibrationController.Vibrate(HapticTypes.RigidImpact);
+                _effectsManager.PlayPlayerAttackEffect();
             }
         }
         
@@ -79,7 +96,9 @@ namespace Ingame
             if(_analyticsWrapper != null)
                 _analyticsWrapper.LevelStats.AddPlayerDeathToStats(damageType);
             
-            _gameController.EndLevel(false);
+            _effectsManager.PlayPlayerDeathEffect();
+            _effectsFactory.PlayAllEffects(EffectType.PlayerDeath);
+            
             Destroy(gameObject);
         }
 
@@ -119,8 +138,9 @@ namespace Ingame
 
         public override void TakeDamage(float amountOfDamage, DamageType damageType)
         {
-            if(IsInvincible && damageType != DamageType.Obstacle)
-                return;
+            if(IsInvincible)
+                if(damageType != DamageType.Environment && damageType != DamageType.Explosion)
+                    return;
             
             amountOfDamage = Mathf.Abs(amountOfDamage);
 

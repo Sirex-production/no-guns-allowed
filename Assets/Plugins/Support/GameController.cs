@@ -7,11 +7,10 @@ namespace Support
     public class GameController : MonoBehaviour
     {
         public event Action<bool> OnLevelEnded;
-        public event Action OnNextLevelLoaded;
         public event Action<int> OnLevelLoaded;
         public event Action OnLevelRestart;
-        public event Action OnLastLevelFromStaveLoaded;
-
+        public event Action OnLastPlayedLevelFromStaveLoaded;
+        
         private bool _isLevelEnded = false;
 
         public void EndLevel(bool isVictory)
@@ -26,11 +25,6 @@ namespace Support
             OnLevelEnded?.Invoke(isVictory);
         }
 
-        public void LoadNextLevel()
-        {
-            OnNextLevelLoaded?.Invoke();
-        }
-
         public void RestartLevel()
         {
             OnLevelRestart?.Invoke();
@@ -41,9 +35,9 @@ namespace Support
             OnLevelLoaded?.Invoke(levelNumber);
         }
 
-        public void LoadLastLevelFromSave()
+        public void LoadLastPlayedLevelFromSave()
         {
-            OnLastLevelFromStaveLoaded?.Invoke();
+            OnLastPlayedLevelFromStaveLoaded?.Invoke();
         }
     }
 }

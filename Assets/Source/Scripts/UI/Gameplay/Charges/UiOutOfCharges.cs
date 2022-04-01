@@ -24,12 +24,14 @@ namespace Ingame.UI
 
         private void Start()
         {
-            PlayerEventController.Instance.OnDashCancelled += TriggerMessage;
+            if(PlayerEventController.Instance != null)
+                PlayerEventController.Instance.OnDashCancelled += TriggerMessage;
         }
 
         private void OnDestroy()
         {
-            PlayerEventController.Instance.OnDashCancelled -= TriggerMessage;
+            if(PlayerEventController.Instance != null)
+                PlayerEventController.Instance.OnDashCancelled -= TriggerMessage;
         }
 
         private IEnumerator OutOfChargesRoutine()

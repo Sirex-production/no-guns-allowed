@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Support
 {
-	public class InputSystem : MonoSingleton<InputSystem>, IPointerDownHandler, IPointerUpHandler, IDragHandler
+	public class InputSystem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
 		[SerializeField] private float minimumDeltaSwipe = 2f;
 		
@@ -18,6 +18,12 @@ namespace Support
 		private bool _isHolding = true;
 		private bool _isAbleToInput = true;
 		private Vector2 _deltaSwipe = Vector2.zero;
+
+		public bool Enabled
+		{
+			get => _isAbleToInput;
+			set => _isAbleToInput = value;
+		}
 
 		public void OnPointerDown(PointerEventData eventData)
 		{

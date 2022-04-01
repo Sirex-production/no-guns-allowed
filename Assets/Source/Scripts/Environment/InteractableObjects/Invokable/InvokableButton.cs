@@ -1,4 +1,5 @@
 using Ingame.UI;
+using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 #if UNITY_EDITOR
@@ -12,17 +13,20 @@ namespace Ingame
     [RequireComponent(typeof(Collider))]
     public class InvokableButton : MonoBehaviour
     {
-        [SerializeField] private Invokable[] invokableObjects;
-        [SerializeField] private bool deactivatePanelAfterInteraction = false;
         [Tooltip("Text that will be displayed in log when player approaches the button")]
         [SerializeField] private string logApproachText;
         [Tooltip("Text that will be displayed in log when player interacts with the button")]
         [SerializeField] private string logInteractionText;
+        [Space]
+        [SerializeField] private bool deactivatePanelAfterInteraction = false;
+        [ShowIf(nameof(deactivatePanelAfterInteraction))]
+        [SerializeField] private MonoInvokable[] invokableObjectWhenDisabledInvoked;
+        [SerializeField] private MonoInvokable[] invokableObjects;
 
         [Inject] private UiController _uiController;
 
         private bool _isWorking = true;
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if(!other.TryGetComponent(out PlayerEventController _) || !_isWorking)
@@ -73,7 +77,7 @@ namespace Ingame
         {
             if(invokableObjects == null || invokableObjects.Length < 1)
                 return;
-            
+
             _uiController.DisplayLogMessage(logInteractionText, LogDisplayType.DisplayAndClear);
             
             foreach (var invokableObject in invokableObjects)
@@ -85,7 +89,20 @@ namespace Ingame
             }
 
             if (deactivatePanelAfterInteraction)
-                _isWorking = false;
+                Disable();
+        }
+
+        public void Disable()
+        {
+            foreach (var invokableObject in invokableObjectWhenDisabledInvoked)
+            {
+                if(invokableObject == null)
+                    continue;
+                
+                invokableObject.Invoke();
+            }
+            
+            _isWorking = false;
         }
     }
 }

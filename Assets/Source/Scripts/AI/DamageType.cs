@@ -2,6 +2,8 @@ public enum DamageType
 {
     None,
     Melee,
-    Obstacle,
-    Projectile
+    Environment,
+    Projectile,
+    Explosion,
+    PlayerMelee
 }

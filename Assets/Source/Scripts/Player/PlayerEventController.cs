@@ -18,6 +18,7 @@ namespace Ingame
 
         public event Action<Vector3> OnDashPerformed;
         public event Action<Vector3> OnAim;
+        public event Action<bool> OnFrozenChanged;
         public event Action OnDashStop;
         public event Action OnDashCancelled;
         public event Action<PlayerMovementController.SurfaceInteractionType> OnSurfaceInteraction;
@@ -56,6 +57,11 @@ namespace Ingame
         public void InteractWithSurface(PlayerMovementController.SurfaceInteractionType surfaceInteractionType)
         {
             OnSurfaceInteraction?.Invoke(surfaceInteractionType);
+        }
+
+        public void ChangeFrozen(bool isFrozen)
+        {
+            OnFrozenChanged?.Invoke(isFrozen);
         }
     }
 }

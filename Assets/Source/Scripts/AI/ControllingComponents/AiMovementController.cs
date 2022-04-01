@@ -22,7 +22,14 @@ namespace Ingame.AI
             _aiBehaviourController = GetComponent<AiBehaviourController>();
             _characterController = GetComponent<CharacterController>();
         }
-        
+
+        private void Update()
+        {
+            if (_aiBehaviourController.AiData.UseGravity)
+                _characterController.Move(Physics.gravity * Time.deltaTime);
+
+        }
+
         #region Routines
         private IEnumerator ApplyGravityRoutine()
         {
@@ -49,7 +56,7 @@ namespace Ingame.AI
                 var velocity = Vector3.Normalize(transformToFollow.position - transform.position);
                 velocity *= speed;
                 if (_aiBehaviourController.AiData.UseGravity)
-                    velocity += Physics.gravity;
+                    velocity.y = 0;
                 velocity *= Time.deltaTime;
 
                 _characterController.Move(velocity);
@@ -57,7 +64,7 @@ namespace Ingame.AI
                 yield return null;
             }
 
-            transform.position = transformToFollow.position;
+            // transform.position = transformToFollow.position;
             _gravityCoroutine ??= StartCoroutine(ApplyGravityRoutine());
             onEnd?.Invoke();
         }
@@ -65,7 +72,7 @@ namespace Ingame.AI
         private IEnumerator MoveToRoutine(Vector3 destination, float speed, Action onEnd)
         {
             destination.z = transform.position.z;
-            
+
             bool IsPatrollingPointReached()
             {
                 if (!_aiBehaviourController.AiData.UseGravity)
@@ -78,31 +85,33 @@ namespace Ingame.AI
             {
                 var velocity = Vector3.Normalize(destination - transform.position);
                 velocity *= speed;
-                if(_aiBehaviourController.AiData.UseGravity)
-                    velocity += Physics.gravity;
+                if (_aiBehaviourController.AiData.UseGravity)
+                    velocity.y = 0;
+                
                 velocity *= Time.deltaTime;
                 
                 _characterController.Move(velocity);
                 
                 yield return null;
             }
-
-            transform.position = destination;
+            
+            // transform.position = destination;
             _gravityCoroutine ??= StartCoroutine(ApplyGravityRoutine());
             onEnd?.Invoke();
         }
 
-        private IEnumerator RotateRoutine(Vector3 rotation, float speed)
+        private IEnumerator RotateRoutine(Quaternion rotation, float speed, Action onEnd)
         {
-            while (transform.eulerAngles != rotation)
+            while (Mathf.Abs(Quaternion.Dot(transform.rotation , rotation)) < 1 - .0001f)
             {
-                var rotationVelocity = Vector3.Normalize(rotation - transform.eulerAngles);
-                rotationVelocity *= speed * Time.deltaTime;
-
-                transform.Rotate(rotationVelocity);
-                
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, speed * Time.deltaTime);
+            
                 yield return null;
             }
+
+            transform.rotation = rotation;
+            
+            onEnd?.Invoke();
         }
         #endregion
 
@@ -118,6 +127,9 @@ namespace Ingame.AI
                 StopCoroutine(_gravityCoroutine);
             
             _followCoroutine = StartCoroutine(FollowRoutine(transformToFollow, speed, onEnd));
+            
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetWalking(true);
         }
 
         public void MoveTo(Vector3 destination, float speed, Action onEnd = null)
@@ -132,19 +144,28 @@ namespace Ingame.AI
                 StopCoroutine(_gravityCoroutine);
             
             _moveCoroutine = StartCoroutine(MoveToRoutine(destination, speed, onEnd));
+            
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetWalking(true);
         }
 
-        public void Rotate(Vector3 rotation, float speed)
+        public void Rotate(Quaternion rotation, float speed, Action onEnd = null)
         {
             if(_rotateCoroutine != null)
                 StopCoroutine(_rotateCoroutine);
 
-            _rotateCoroutine = StartCoroutine(RotateRoutine(rotation, speed));
+            _rotateCoroutine = StartCoroutine(RotateRoutine(rotation, speed, onEnd));
+            
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetWalking(false);
         }
 
         public void StopMotion()
         {
             StopAllCoroutines();
+            
+            if(_aiBehaviourController.ShootingEnemyAnimator != null)
+                _aiBehaviourController.ShootingEnemyAnimator.SetWalking(false);
         }
     }
 }

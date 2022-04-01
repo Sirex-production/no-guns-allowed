@@ -2,31 +2,35 @@ using System.Collections;
 using Extensions;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Zenject;
 
 namespace Ingame.Graphics.VFX
 {
-    public class VignetteController : IVolumeComponentController<Vignette>
+    public class VignetteController : VolumeComponentController<Vignette>
     {
         [SerializeField] [Range(0, 1)] private float startValue;
         [SerializeField] [Range(0, 1)] private float endValue;
         [SerializeField] [Min(0)] private float lerpDuration;
         [SerializeField] [Min(0)] private float timeoutBeforeStart = .3f;
 
+        [Inject] private EffectsManager _effectsManager;
 
         private void Start()
         {
             if(PlayerEventController.Instance == null)
                 return;
-            EffectsManager.Instance.OnSlowMotionEnter += OnSlowMotionEnter;
-            EffectsManager.Instance.OnSlowMotionExit += DoReset;
+            
+            _effectsManager.OnSlowMotionEnter += OnSlowMotionEnter;
+            _effectsManager.OnSlowMotionExit += Reset;
         }
 
         private void OnDestroy()
         {
             if(PlayerEventController.Instance == null)
                 return;
-            EffectsManager.Instance.OnSlowMotionEnter -= OnSlowMotionEnter;
-            EffectsManager.Instance.OnSlowMotionExit -= DoReset;
+            
+            _effectsManager.OnSlowMotionEnter -= OnSlowMotionEnter;
+            _effectsManager.OnSlowMotionExit -= Reset;
         }
 
         protected override IEnumerator OnModificationRoutine()
@@ -43,6 +47,9 @@ namespace Ingame.Graphics.VFX
             effectToChange.intensity.value = startValue;
             while (timeElapsed <= lerpDuration)
             {
+                if (PlayerEventController.Instance == null)
+                    yield break;
+                
                 var playerPosition = PlayerEventController.Instance.transform.position;
                 var playerPositionOnScreen = mainCamera.WorldToScreenPoint(playerPosition);
                 var x = playerPositionOnScreen.x / mainCamera.pixelWidth;
@@ -60,7 +67,7 @@ namespace Ingame.Graphics.VFX
             this.WaitAndDoCoroutine(timeoutBeforeStart, Modify);
         }
 
-        public override void DoReset()
+        public override void Reset()
         {
             StopAllCoroutines();
 

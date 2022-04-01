@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Support
 {
-    public class PoolManager : MonoSingleton<PoolManager>
+    public class PoolManager : MonoBehaviour
     {
         private readonly Dictionary<int, Queue<ObjectInstance>> _poolDictionary = new Dictionary<int, Queue<ObjectInstance>>();
 

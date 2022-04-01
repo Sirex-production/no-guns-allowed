@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0c53a6442901e247a89b94e1b787638, type: 3}
+  m_Name: Level0IntroCutSceneDialog
+  m_EditorClassIdentifier: 
+  dialog:
+  - phrase: '<color=#09E6A3>[CUSTOMER]</color>: This is <color=#09E6A3>bio-whale</color>.
+      Customer code 33256, request status <color=#D51C49>Urgent</color>'
+    pauseAfterPhrase: 1.5
+  - phrase: '<color=#D51C49>[OPERATOR]</color>: <color=#D51C49>simak</color> listening...'
+    pauseAfterPhrase: 1
+  - phrase: '<color=#09E6A3>[bio-whale]</color>: Our cargo ship was captured...'
+    pauseAfterPhrase: 0.8
+  - phrase: '<color=#09E6A3>[bio-whale]</color>: We request to stop the ship to prevent
+      our product from stealing...'
+    pauseAfterPhrase: 0.8
+  - phrase: '<color=#09E6A3>[bio-whale]</color>: and provide assault conditions for
+      our security forces...'
+    pauseAfterPhrase: 0.8
+  - phrase: '<color=#09E6A3>[bio-whale]</color>: Your mission is to <color=#D51C49>capture
+      management room</color> to gain full ship control'
+    pauseAfterPhrase: 2
+  - phrase: '<color=#D51C49>[simak]</color>: Copy that...'
+    pauseAfterPhrase: 1
+  - phrase: '<color=#D51C49>[simak]</color>: Sending the quick response crew...'
+    pauseAfterPhrase: 2

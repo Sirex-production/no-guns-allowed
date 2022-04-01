@@ -1,27 +1,25 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Extensions;
 using Ingame.AI;
+using Ingame.Graphics;
+using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Zenject;
 
 namespace Ingame
 {
     public class LethalObject : MonoBehaviour
     {
-        [SerializeField] private float damage = 1;
-        [SerializeField] private float timeToSwitchLayer = 3;
-        [SerializeField] private float componentRemovalPollFrequency = 1;
+        [SerializeField] [Layer] private int staticSurfacesLayer = 0;
+        [SerializeField] private ParticleSystem[] particles;
 
-        private BoxCollider[] _children;
+        [Inject] private EffectsManager _effectsManager;
 
-        private void Awake()
-        {
-            _children = transform.GetComponentsInChildren<BoxCollider>();
-            
-            this.WaitAndDoCoroutine(timeToSwitchLayer, SwitchLayer);
-        }
+        private const float SHAKE_DURATION = 0.1f; 
+        private const float DAMAGE = 1000f;
+        private const float COMPONENT_REMOVAL_POLL_FREQUENCY = 1f;
+
+        private bool _isInvoked;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -32,8 +30,22 @@ namespace Ingame
             if (hitbox.AttachedActorStats.IsInvincible) 
                 return;
 
+            hitbox.TakeDamage(DAMAGE, DamageType.Environment);
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (other.gameObject.layer != staticSurfacesLayer || _isInvoked)
+                return;
+
+            _isInvoked = true;
+            foreach (var particle in particles)
+            {
+                if (particle != null)
+                    particle.Play();
+            }
+            _effectsManager.ShakeEnvironment(SHAKE_DURATION);
             StartCoroutine(ComponentRemovalCoroutine());
-            hitbox.TakeDamage(damage, DamageType.Obstacle);
         }
 
         private IEnumerator ComponentRemovalCoroutine()
@@ -41,9 +53,9 @@ namespace Ingame
             var rigidBodyComponent = GetComponent<Rigidbody>();
             while (true)
             {
-                if (!(rigidBodyComponent.velocity.sqrMagnitude < 0.01f))
+                if (rigidBodyComponent.velocity.sqrMagnitude > 0.01f)
                 {
-                    yield return new WaitForSeconds(componentRemovalPollFrequency);
+                    yield return new WaitForSeconds(COMPONENT_REMOVAL_POLL_FREQUENCY);
                     continue;
                 }
 
@@ -52,23 +64,14 @@ namespace Ingame
             }
         }
 
-        private void SwitchLayer()
-        {
-            var newLayer = LayerMask.NameToLayer("Ignore Collision With Dashing Player");
-            foreach (var child in _children)
-                child.gameObject.layer = newLayer;
-        }
-
         private void RemoveComponents()
         {
+            foreach (var particle in particles)
+            {
+                if (particle != null)
+                    Destroy(particle.gameObject);
+            }
             Destroy(gameObject.GetComponent<Rigidbody>());
-
-            //foreach (var child in _children)
-            //{
-            //    child.TryGetComponent(out BoxCollider boxColliderComponent);
-            //    Destroy(boxColliderComponent);
-            //}
-
             Destroy(this);
         }
     }
