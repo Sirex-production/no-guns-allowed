@@ -10,7 +10,7 @@ namespace Support
     {
         [SerializeField] private List<LevelDataContainer> levelDataContainers;
         
-        public List<LevelDataContainer> LevelDataContainers => levelDataContainers;
+        public int TotalNumberOfLevels => levelDataContainers.Count;
         
         public int GetSceneIndexByLevel(int levelNumber)
         {

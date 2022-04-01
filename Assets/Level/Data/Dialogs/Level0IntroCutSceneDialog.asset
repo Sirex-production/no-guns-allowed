@@ -21,7 +21,7 @@ MonoBehaviour:
   - phrase: '<color=#09E6A3>[bio-whale]</color>: Our cargo ship was captured...'
     pauseAfterPhrase: 0.8
   - phrase: '<color=#09E6A3>[bio-whale]</color>: We request to stop the ship to prevent
-      our product from stealing...'
+      it from being stolen...'
     pauseAfterPhrase: 0.8
   - phrase: '<color=#09E6A3>[bio-whale]</color>: and provide assault conditions for
       our security forces...'
