@@ -5,17 +5,26 @@ namespace Support.Sound
     [CreateAssetMenu(menuName = "Data/Support/AudioData", fileName = "NewAudioData")]
     public class AudioData : ScriptableObject
     {
-        [SerializeField] private SerializableDictionary<UiSfxName, AudioClip> uiVfxClips;
-        [SerializeField] private SerializableDictionary<MusicName, AudioClip> musicClips;
-        
-        public AudioClip GetUiFvx(UiSfxName uiSfxName)
+        [SerializeField] private SerializableDictionary<AudioName, AudioClip> audioClips;
+
+        public AudioClip GetAudioClip(AudioName audioName)
         {
-            return uiVfxClips[uiSfxName];
+            if(audioClips.Contains(audioName))
+                return audioClips[audioName];
+
+            return null;
         }
-        
-        public AudioClip GetMusic(MusicName musicName)
-        {
-            return musicClips[musicName];
-        }
+    }
+    
+    public enum AudioName
+    {
+        none,
+        ui_button_beep,
+        ui_letters_spawn,
+        player_dash,
+        player_sword_swing,
+        environment_container_fall,
+        environment_wall_destruction,
+        environment_chain_break
     }
 }

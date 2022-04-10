@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9602d4a418e2b44af55a04ccf9086e, type: 3}
   m_Name: AudioData
   m_EditorClassIdentifier: 
-  uiVfxClips:
-    m_keys: 0200000001000000
+  audioClips:
+    m_keys: 01000000020000000300000004000000050000000600000007000000
     m_values:
     - {fileID: 8300000, guid: 8087f4dc790dfbd4ab68b4bbb7b40523, type: 3}
-    - {fileID: 8300000, guid: c20006d4b1cd8ce4bb7eb85972e8afbf, type: 3}
-  musicClips:
-    m_keys: 
-    m_values: []
+    - {fileID: 8300000, guid: 34c9a8460db5f7344b0811684cfbc546, type: 3}
+    - {fileID: 8300000, guid: c520a98e4202b9740a9947fff1e231e7, type: 3}
+    - {fileID: 8300000, guid: 94b8b3a24516f6549a5a91ab1e1ef24e, type: 3}
+    - {fileID: 8300000, guid: 66ebfb01fd8d7a64fbfdac767f89f493, type: 3}
+    - {fileID: 8300000, guid: 971b1beb0e280b44eb4864e91ac68324, type: 3}
+    - {fileID: 8300000, guid: a378966762a7d87418856b8993d3e235, type: 3}

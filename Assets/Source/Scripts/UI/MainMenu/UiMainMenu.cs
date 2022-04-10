@@ -62,7 +62,7 @@ namespace Ingame.UI
         private void SkipAppearanceAnimation()
         {
             StopAllCoroutines();
-            _audioManager.StopUiSfx();
+            _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn);
             
             menuText.SetText(_initialMenuTextContent);
             characterOutputText.SetText(_initialCharacterTextContent);
@@ -102,10 +102,10 @@ namespace Ingame.UI
             feedbackButtonCanvasGroup.SetGameObjectInactive();
             discordButtonCanvasGroup.SetGameObjectInactive();
             
-            this.WaitAndDoCoroutine(INITIAL_SOUND_DELAY, ()=>_audioManager.PlayUiSfx(UiSfxName.LettersBeep1, true));
+            this.WaitAndDoCoroutine(INITIAL_SOUND_DELAY, ()=>_audioManager.PlaySound(AudioName.ui_letters_spawn, true));
             this.SpawnTextCoroutine(menuText, _initialMenuTextContent, letterSpawnDelayTime, () =>
             {
-                _audioManager.StopUiSfx();
+                _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn);
                 ShowButtons();
                 ShowCharacterText();
             });
@@ -141,8 +141,8 @@ namespace Ingame.UI
             characterSectionCanvasGroup.DOFade(1, characterSectionFadeAnimationTime)
                 .OnComplete(() =>
                 {
-                    _audioManager.PlayUiSfx(UiSfxName.LettersBeep1, true);
-                    this.SpawnTextCoroutine(characterOutputText, characterTextContent, letterSpawnDelayTime, () => _audioManager.StopUiSfx());
+                    _audioManager.PlaySound(AudioName.ui_letters_spawn, true);
+                    this.SpawnTextCoroutine(characterOutputText, characterTextContent, letterSpawnDelayTime, () => _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn));
                 });
         }
     }

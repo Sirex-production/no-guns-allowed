@@ -1,5 +1,6 @@
 using Ingame.AI;
 using Ingame.Graphics;
+using Support.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +11,12 @@ namespace Ingame
         [SerializeField] private Rigidbody bodyToRelease;
 
         [Inject] private EffectsManager _effectsManager;
+        [Inject] private AudioManager _audioManager;
+        
+        public override void Invoke()
+        {
+            ReleaseObject();
+        }
         
         private void OnTriggerEnter(Collider other)
         {
@@ -41,15 +48,12 @@ namespace Ingame
             return true;
         }
 
-        public override void Invoke()
-        {
-            ReleaseObject();
-        }
-
         private void ReleaseObject()
         {
+            _audioManager.PlaySound(AudioName.environment_chain_break);
+            
             bodyToRelease.isKinematic = false;
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }
