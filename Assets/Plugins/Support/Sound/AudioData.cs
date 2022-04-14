@@ -39,6 +39,7 @@ namespace Support.Sound
         environment_space_ship_fly_sound,
         ambient_space,
         ui_tv_on,
-        ui_tv_off
+        ui_tv_off,
+        ui_detection
     }
 }

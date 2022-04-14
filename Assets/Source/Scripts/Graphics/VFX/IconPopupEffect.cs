@@ -1,8 +1,10 @@
 using DG.Tweening;
 using Extensions;
 using NaughtyAttributes;
+using Support.Sound;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Ingame.Graphics
 {
@@ -14,7 +16,11 @@ namespace Ingame.Graphics
         [Foldout("Animation settings")] [SerializeField] [Min(0)] private float blinkingTime = .3f;
         [Space] 
         [SerializeField] private bool alwaysLookAtCamera = true;
+        [Space] 
+        [SerializeField] private AudioName audioNameToPlayOnPopup = AudioName.none;
 
+        [Inject] private readonly AudioManager _audioManager;
+        
         private Sequence _imageAnimationSequence;
 
         protected override void Start()
@@ -44,6 +50,8 @@ namespace Ingame.Graphics
         {
             if(instanceTargetTransform != null)
                 transform.parent = instanceTargetTransform;
+            
+            _audioManager.PlaySound(audioNameToPlayOnPopup);
             
             var initialColor = detectionImage.color;
 
