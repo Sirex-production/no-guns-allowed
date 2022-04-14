@@ -26,7 +26,12 @@ namespace Ingame.Graphics
             {
                 if (PlayerEventController.Instance.StatsController.IsInvincible)
                 {
-                    _audioManager.PlaySound(AudioName.environment_wall_destruction);
+                    _audioManager.PlayRandomizedSound(false,
+                        AudioName.environment_wall_destruction_1, 
+                        AudioName.environment_wall_destruction_2,
+                        AudioName.environment_wall_destruction_3,
+                        AudioName.environment_wall_destruction_4);
+                    
                     _effectsFactory.PlayAllEffects(EffectType.Destruction);
                     _effectsManager.PlayPlayerAttackEffect();
                     Destroy(gameObject);
@@ -61,7 +66,12 @@ namespace Ingame.Graphics
             if (dotProductBetweenDashAndWallDirection < MIN_COS_OF_ANGLE_TO_BREAK_THE_WALL)
                 return;
 
-            _audioManager.PlaySound(AudioName.environment_wall_destruction);
+            _audioManager.PlayRandomizedSound(false,
+                AudioName.environment_wall_destruction_1, 
+                AudioName.environment_wall_destruction_2,
+                AudioName.environment_wall_destruction_3,
+                AudioName.environment_wall_destruction_4);
+            
             _effectsFactory.PlayAllEffects(EffectType.Destruction);
             _effectsManager.PlayPlayerAttackEffect();
             Destroy(gameObject);

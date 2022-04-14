@@ -12,6 +12,8 @@ namespace Ingame.AI
     public class AiCombatController : MonoBehaviour, ICombatable
     {
         [Inject] private ActorManager _actorManager;
+
+        private const float MAX_VISION_DISTANCE = 60f;
         
         private AiBehaviourController _aiBehaviourController;
         private bool _isInCombat = false;
@@ -71,7 +73,7 @@ namespace Ingame.AI
                 {
                     var direction = Vector3.Normalize(actorStats.transform.position - transform.position);
                     
-                    if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 30f, raycastMask, QueryTriggerInteraction.Ignore))
+                    if (Physics.Raycast(transform.position, direction, out RaycastHit hit, MAX_VISION_DISTANCE, raycastMask, QueryTriggerInteraction.Ignore))
                     {
                         if (hit.collider.transform == actorStats.transform)
                         {

@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Extensions;
 using ModestTree;
 using NaughtyAttributes;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Support.Sound
 {
@@ -32,14 +35,27 @@ namespace Support.Sound
             
             if(audioClip == null)
                 return;
+
+            try
+            {
+                var audioPair = _audio.First(pair => !pair.audioSource.isPlaying);
+                var audioSource = audioPair.audioSource;
             
-            var audioPair = _audio.First(pair => !pair.audioSource.isPlaying);
-            var audioSource = audioPair.audioSource;
-            
-            audioPair.audioName = audioName;
-            audioSource.clip = audioClip;
-            audioSource.loop = isLopped;
-            audioSource.Play();
+                audioPair.audioName = audioName;
+                audioSource.clip = audioClip;
+                audioSource.loop = isLopped;
+                audioSource.Play();
+            }
+            catch (Exception)
+            {
+                this.SafeDebug("All audio sources are busy", LogType.Error);
+            }
+        }
+
+        public void PlayRandomizedSound(bool isLooped, params AudioName[] audioNames)
+        {
+            var randomSoundName = audioNames[Random.Range(0, audioNames.Length)];
+            PlaySound(randomSoundName, isLooped);
         }
 
         public void StopAllSoundsWithName(params AudioName[] audioNames)

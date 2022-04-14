@@ -22,14 +22,21 @@ namespace Ingame
         {
             _playerEventController.OnDashPerformed += OnDashPerformed;
             _effectsManager.OnEnemyKillEffectPlayed += OnPlayerAttackEffectPlayed;
+            _playerEventController.OnDashCancelled += OnDashCanceled;
         }
 
         private void OnDestroy()
         {
             _playerEventController.OnDashPerformed -= OnDashPerformed;
             _effectsManager.OnEnemyKillEffectPlayed -= OnPlayerAttackEffectPlayed;
+            _playerEventController.OnDashCancelled -= OnDashCanceled;
         }
-        
+
+        private void OnDashCanceled()
+        {
+            _audioManager.PlaySound(AudioName.ui_out_of_charges);
+        }
+
         private void OnDashPerformed(Vector3 _)
         {
             _audioManager.PlaySound(AudioName.player_dash);
@@ -37,8 +44,12 @@ namespace Ingame
 
         private void OnPlayerAttackEffectPlayed(DamageType damageType)
         {
-            if(damageType == DamageType.PlayerMelee)
-                _audioManager.PlaySound(AudioName.player_sword_swing);
+            if (damageType == DamageType.PlayerMelee)
+                _audioManager.PlayRandomizedSound(false,
+                    AudioName.player_sword_swing_1,
+                    AudioName.player_sword_swing_2,
+                    AudioName.player_sword_swing_3,
+                    AudioName.player_sword_swing_4);
         }
     }
 }

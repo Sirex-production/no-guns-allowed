@@ -62,7 +62,12 @@ namespace Ingame.UI
         private void SkipAppearanceAnimation()
         {
             StopAllCoroutines();
-            _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn);
+            _audioManager.StopAllSoundsWithName
+            (
+                AudioName.ui_letters_spawn_long_1,
+                AudioName.ui_letters_spawn_long_2,
+                AudioName.ui_letters_spawn_long_3
+            );
             
             menuText.SetText(_initialMenuTextContent);
             characterOutputText.SetText(_initialCharacterTextContent);
@@ -102,10 +107,22 @@ namespace Ingame.UI
             feedbackButtonCanvasGroup.SetGameObjectInactive();
             discordButtonCanvasGroup.SetGameObjectInactive();
             
-            this.WaitAndDoCoroutine(INITIAL_SOUND_DELAY, ()=>_audioManager.PlaySound(AudioName.ui_letters_spawn, true));
+            this.WaitAndDoCoroutine(INITIAL_SOUND_DELAY, () => _audioManager.PlayRandomizedSound
+            (
+                true,
+                AudioName.ui_letters_spawn_long_1,
+                AudioName.ui_letters_spawn_long_2,
+                AudioName.ui_letters_spawn_long_3
+            ));
+            
             this.SpawnTextCoroutine(menuText, _initialMenuTextContent, letterSpawnDelayTime, () =>
             {
-                _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn);
+                _audioManager.StopAllSoundsWithName
+                (
+                    AudioName.ui_letters_spawn_long_1,
+                    AudioName.ui_letters_spawn_long_2,
+                    AudioName.ui_letters_spawn_long_3
+                );
                 ShowButtons();
                 ShowCharacterText();
             });
@@ -141,8 +158,19 @@ namespace Ingame.UI
             characterSectionCanvasGroup.DOFade(1, characterSectionFadeAnimationTime)
                 .OnComplete(() =>
                 {
-                    _audioManager.PlaySound(AudioName.ui_letters_spawn, true);
-                    this.SpawnTextCoroutine(characterOutputText, characterTextContent, letterSpawnDelayTime, () => _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn));
+                    _audioManager.PlayRandomizedSound(
+                        true,
+                        AudioName.ui_letters_spawn_long_1,
+                        AudioName.ui_letters_spawn_long_2,
+                        AudioName.ui_letters_spawn_long_3
+                        );
+                    
+                    this.SpawnTextCoroutine(characterOutputText, characterTextContent, letterSpawnDelayTime, () => _audioManager.StopAllSoundsWithName
+                    (
+                        AudioName.ui_letters_spawn_long_1,
+                        AudioName.ui_letters_spawn_long_2,
+                        AudioName.ui_letters_spawn_long_3
+                    ));
                 });
         }
     }

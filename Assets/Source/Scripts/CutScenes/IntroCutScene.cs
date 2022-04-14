@@ -1,6 +1,7 @@
 using Ingame.UI;
 using NaughtyAttributes;
 using Support;
+using Support.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -15,10 +16,9 @@ public class IntroCutScene : MonoBehaviour
     [BoxGroup("Level settings")]
     [SerializeField] private int levelToLoadAfterTheDialog;
     
-    [Inject] private GameController _gameController;
-    [Inject] private UiNarrative _uiNarrative;
-    
-    
+    [Inject] private readonly GameController _gameController;
+    [Inject] private readonly UiNarrative _uiNarrative;
+
     private void ShowHeader()
     {
         _uiNarrative.ShowNarrativeSection();

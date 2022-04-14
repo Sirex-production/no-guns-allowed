@@ -289,6 +289,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6741857446096658789}
+        m_TargetAssemblyTypeName: Ingame.TemplateButtonsBehaviour, Assembly-CSharp
+        m_MethodName: PlayTerminalBeep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &586368937952784114
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,6 +437,18 @@ MonoBehaviour:
       - m_Target: {fileID: 6741857446096658789}
         m_TargetAssemblyTypeName: Ingame.ButtonsBehaviour, Assembly-CSharp
         m_MethodName: ClickVibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6741857446096658789}
+        m_TargetAssemblyTypeName: Ingame.TemplateButtonsBehaviour, Assembly-CSharp
+        m_MethodName: PlayTerminalBeep
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5588,6 +5612,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6741857446096658789}
+        m_TargetAssemblyTypeName: Ingame.TemplateButtonsBehaviour, Assembly-CSharp
+        m_MethodName: PlayTerminalBeep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4382128269623645227
 GameObject:
   m_ObjectHideFlags: 0
@@ -6382,6 +6418,18 @@ MonoBehaviour:
       - m_Target: {fileID: 6741857446096658789}
         m_TargetAssemblyTypeName: Ingame.ButtonsBehaviour, Assembly-CSharp
         m_MethodName: ClickVibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6741857446096658789}
+        m_TargetAssemblyTypeName: Ingame.TemplateButtonsBehaviour, Assembly-CSharp
+        m_MethodName: PlayTerminalBeep
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9007,6 +9055,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6741857446096658789}
+        m_TargetAssemblyTypeName: Ingame.TemplateButtonsBehaviour, Assembly-CSharp
+        m_MethodName: PlayTerminalBeep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7167409687800163349
 GameObject:
   m_ObjectHideFlags: 0
@@ -9767,7 +9827,6 @@ MonoBehaviour:
   analyticsWrapper: {fileID: 4160692489741235069}
   tutorialsManager: {fileID: 3166584358924357195}
   inputSystem: {fileID: 6908834343615251490}
-  audioManager: {fileID: 0}
 --- !u!1 &7358723069436586359
 GameObject:
   m_ObjectHideFlags: 0
@@ -11159,6 +11218,18 @@ MonoBehaviour:
       - m_Target: {fileID: 6741857446096658789}
         m_TargetAssemblyTypeName: Ingame.ButtonsBehaviour, Assembly-CSharp
         m_MethodName: ClickVibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6741857446096658789}
+        m_TargetAssemblyTypeName: Ingame.TemplateButtonsBehaviour, Assembly-CSharp
+        m_MethodName: PlayTerminalBeep
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
