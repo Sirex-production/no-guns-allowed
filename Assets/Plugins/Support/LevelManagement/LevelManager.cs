@@ -40,7 +40,6 @@ namespace Support
         public void RestartLevel()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            // LoadLevel(_saveLoadSystem.SaveData.CurrentLevelNumber.Value);
         }
 
         public void LoadLastPlayedLevel()

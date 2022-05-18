@@ -3,9 +3,11 @@ using System.Collections;
 using DG.Tweening;
 using Extensions;
 using NaughtyAttributes;
+using Support.Sound;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Ingame.UI
 {
@@ -33,6 +35,8 @@ namespace Ingame.UI
         [BoxGroup("Animation settings")]
         [SerializeField] [Range(0, 1f)] private float subtitlesTextSpawnSpeed = .5f;
 
+        [Inject] private readonly AudioManager _audioManager;
+        
         private float _initialSubtitlesBackgroundAlpha;
         
         private Coroutine _modifyHeaderCoroutine;
@@ -54,22 +58,37 @@ namespace Ingame.UI
             subtitlesBackgroundImage.DOFade(0, 0);
         }
 
-        private IEnumerator PlayDialogRoutine(DialogData dialogData, Action onComplete)
+        private IEnumerator PlayDialogRoutine(DialogData dialogData, Action onComplete, Action onLetterSpawned)
         {
             var dialogPhrasesPairs = dialogData.Dialog;
-            
             foreach (var dialogPhrasesPair in dialogPhrasesPairs)
             {
                 if(dialogPhrasesPair == null || string.IsNullOrEmpty(dialogPhrasesPair.phrase))
                     continue;
                 
+                _audioManager.PlayRandomizedSound
+                (
+                    true,
+                    AudioName.ui_letters_spawn_long_1,
+                    AudioName.ui_letters_spawn_long_2,
+                    AudioName.ui_letters_spawn_long_3
+                );
+                
                 var phrase = dialogPhrasesPair.phrase;
                 var pause = new WaitForSeconds(dialogPhrasesPair.pauseAfterPhrase);
                 var isPhraseCompleted = false;
                 
-                PrintSubtitlesText(phrase, () => isPhraseCompleted = true);
+                PrintSubtitlesText(phrase, () => isPhraseCompleted = true, onLetterSpawned);
 
-                yield return new WaitUntil( () => isPhraseCompleted);
+                yield return new WaitUntil(() => isPhraseCompleted);
+                
+                _audioManager.StopAllSoundsWithName
+                (
+                    AudioName.ui_letters_spawn_long_1,
+                    AudioName.ui_letters_spawn_long_2,
+                    AudioName.ui_letters_spawn_long_3
+                );
+                
                 yield return pause;
             }
             
@@ -98,8 +117,10 @@ namespace Ingame.UI
                 StopCoroutine(_modifyHeaderCoroutine);
             
             headerText.SetText("");
+            _audioManager.PlayRandomizedSound(true, AudioName.ui_letters_spawn_long_1);
             
-            _modifyHeaderCoroutine = this.SpawnTextCoroutine(headerText, content, headerTextSpawnSpeed);
+            _modifyHeaderCoroutine = this.SpawnTextCoroutine(headerText, content, headerTextSpawnSpeed, 
+                () => _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn_long_1));
         }
 
         public void PrintSubHeaderText(string content)
@@ -107,19 +128,21 @@ namespace Ingame.UI
             if(_modifySubHeaderCoroutine != null)
                 StopCoroutine(_modifySubHeaderCoroutine);
             
-            subHeaderText.SetText("");    
+            subHeaderText.SetText("");
+            _audioManager.PlayRandomizedSound(true, AudioName.ui_letters_spawn_long_2);
             
-            _modifySubHeaderCoroutine = this.SpawnTextCoroutine(subHeaderText, content, subHeaderTextSpawnSpeed);
+            _modifySubHeaderCoroutine = this.SpawnTextCoroutine(subHeaderText, content, subHeaderTextSpawnSpeed, 
+                () => _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn_long_2));
         }
 
-        public void PrintSubtitlesText(string content, Action onEnd = null)
+        public void PrintSubtitlesText(string content, Action onEnd = null, Action onLetterSpawned = null)
         {
             if(_modifySubtitlesCoroutine != null)
                 StopCoroutine(_modifySubtitlesCoroutine);
 
             subtitlesText.SetText("");
             
-            _modifySubtitlesCoroutine = this.SpawnTextCoroutine(subtitlesText, content, subtitlesTextSpawnSpeed, onEnd);
+            _modifySubtitlesCoroutine = this.SpawnTextCoroutine(subtitlesText, content, subtitlesTextSpawnSpeed, onEnd, onLetterSpawned);
         }
 
         public void HideHeaderText()
@@ -138,7 +161,7 @@ namespace Ingame.UI
             _modifySubHeaderCoroutine = this.DeleteTextLetterByLetterCoroutine(subHeaderText, subHeaderTextSpawnSpeed);
         }
 
-        public void PlayDialog(DialogData dialogData, Action onComplete = null)
+        public void PlayDialog(DialogData dialogData, Action onComplete = null, Action onLetterSpawned = null)
         {
             if (dialogData == null)
                 return;
@@ -147,7 +170,7 @@ namespace Ingame.UI
                 StopCoroutine(_dialogCoroutine);
 
             subtitlesBackgroundImage.DOFade(_initialSubtitlesBackgroundAlpha, displayAnimationDuration / 2)
-                .OnComplete(() => _dialogCoroutine = StartCoroutine(PlayDialogRoutine(dialogData, onComplete)));
+                .OnComplete(() => _dialogCoroutine = StartCoroutine(PlayDialogRoutine(dialogData, onComplete, onLetterSpawned)));
         }
     }
 }

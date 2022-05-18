@@ -12,11 +12,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9602d4a418e2b44af55a04ccf9086e, type: 3}
   m_Name: AudioData
   m_EditorClassIdentifier: 
-  uiVfxClips:
-    m_keys: 0200000001000000
+  audioClips:
+    m_keys: 01000000020000000400000006000000080000000300000005000000090000000a0000000b000000070000000c0000000d0000000e0000000f00000010000000110000001300000012000000140000001500000016000000
     m_values:
-    - {fileID: 8300000, guid: 8087f4dc790dfbd4ab68b4bbb7b40523, type: 3}
-    - {fileID: 8300000, guid: c20006d4b1cd8ce4bb7eb85972e8afbf, type: 3}
-  musicClips:
-    m_keys: 
-    m_values: []
+    - audioClip: {fileID: 8300000, guid: 8087f4dc790dfbd4ab68b4bbb7b40523, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 34c9a8460db5f7344b0811684cfbc546, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: c520a98e4202b9740a9947fff1e231e7, type: 3}
+      volume: 1
+      pitch: 3
+    - audioClip: {fileID: 8300000, guid: 66ebfb01fd8d7a64fbfdac767f89f493, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: a378966762a7d87418856b8993d3e235, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 29b06a4968f8bb046859ebbf64220de5, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 94b8b3a24516f6549a5a91ab1e1ef24e, type: 3}
+      volume: 0.3
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: c4969e9e312eb5d4b8dc83136950d8b1, type: 3}
+      volume: 0.3
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: dba3e5cb122cdc14c9d6b5efb8f68017, type: 3}
+      volume: 0.3
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: e9e41f54ba12d1b4a995cb7b55e32d7d, type: 3}
+      volume: 0.3
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: a88fd1f1ddfc18146aae2900cb5a25f0, type: 3}
+      volume: 0.05
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: d025cbf9e41362c48b5522f76d68a9d2, type: 3}
+      volume: 0.05
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 45a30db01a75fac4e88be2fac9cb40d9, type: 3}
+      volume: 0.05
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 70fef8a19713b204e90db3fe759844cc, type: 3}
+      volume: 0.05
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 9f6f559ff7279f24e8fdbbd02717d6c1, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 2c0ad1bc9c008ac49a20794a6b1fe054, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 9222cef0f5cd0374b9318e6c5086adfc, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 22310995af83a5844b5b24a5d8b6b75c, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 37e3cf971ee9a504090df4997fcc8a10, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 0796fed0852cc3d469c5870ccbe24fc0, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 05176d5d8e2653e46bb918af2b9352f9, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 6f405940ebf1fcc498a4cf92cd275602, type: 3}
+      volume: 1
+      pitch: 1

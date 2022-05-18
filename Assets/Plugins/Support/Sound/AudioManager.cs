@@ -1,72 +1,82 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Extensions;
+using ModestTree;
 using NaughtyAttributes;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Support.Sound
 {
-    public class AudioManager : MonoBehaviour
+    public sealed class AudioManager : MonoBehaviour
     {
-        [BoxGroup("References"), Required]
-        [SerializeField] private AudioSource uiSfxAudioSource;
-        [BoxGroup("References"), Required]
-        [SerializeField] private AudioSource musicAudioSource;
+        [SerializeField] [Min(1)] private int numberOfAudioSources;
         [Space]
-        [BoxGroup("Data"), Required, Expandable] 
+        [BoxGroup("Data"), Required] //Do not add Expandable attribute. It leads to the inspector bugs 
         [SerializeField] private AudioData audioData;
 
-        private UiSfxName _lastUsedUiSfxName = UiSfxName.None;
-        private MusicName _lastUsedMusicName = MusicName.None;
+        private List<AudioPair> _audio;
 
         private void Awake()
         {
-            uiSfxAudioSource = gameObject.AddComponent<AudioSource>();
-            musicAudioSource = gameObject.AddComponent<AudioSource>();
+            _audio = new List<AudioPair>(numberOfAudioSources);
+
+            for (int i = 0; i < numberOfAudioSources; i++) 
+                _audio.Add(new AudioPair{audioName = AudioName.none, audioSource = gameObject.AddComponent<AudioSource>()});
         }
-
-        public void PlayUiSfx(UiSfxName uiSfxName, bool isLooped = false)
+        
+        public void PlaySound(AudioName audioName, bool isLopped = false)
         {
-            if(uiSfxName == UiSfxName.None)
+            if(audioName == AudioName.none)
                 return;
-
-            if (uiSfxName == _lastUsedUiSfxName)
-            {
-                uiSfxAudioSource.Play();
-                return;
-            }
             
-            var uiAudioClip = audioData.GetUiFvx(uiSfxName);
-
-            _lastUsedUiSfxName = uiSfxName;
-            uiSfxAudioSource.clip = uiAudioClip;
-            uiSfxAudioSource.loop = isLooped;
-            uiSfxAudioSource.Play();
-        }
-
-        public void StopUiSfx()
-        {
-            uiSfxAudioSource.Stop();
-        }
-
-        public void PlayMusic(MusicName musicName)
-        {
-            if(musicName == MusicName.None)
-                return;
-
-            if (musicName == _lastUsedMusicName)
-            {
-                musicAudioSource.Play();
-                return;
-            }
+            var audioClipSettings = audioData.GetAudioClip(audioName);
             
-            var musicAudioClip = audioData.GetMusic(musicName);
+            if(audioClipSettings == null)
+                return;
 
-            _lastUsedMusicName = musicName;
-            musicAudioSource.clip = musicAudioClip;
-            musicAudioSource.Play();
+            try
+            {
+                var audioPair = _audio.First(pair => !pair.audioSource.isPlaying);
+                var audioSource = audioPair.audioSource;
+
+                audioPair.audioName = audioName;
+                audioSource.clip = audioClipSettings.audioClip;
+                audioSource.loop = isLopped;
+                audioSource.Play();
+            }
+            catch (Exception)
+            {
+                this.SafeDebug("All audio sources are busy", LogType.Error);
+            }
         }
 
-        public void StopMusic()
+        public void PlayRandomizedSound(bool isLooped, params AudioName[] audioNames)
         {
-            musicAudioSource.Stop();
+            var randomSoundName = audioNames[Random.Range(0, audioNames.Length)];
+            PlaySound(randomSoundName, isLooped);
         }
+
+        public void StopAllSoundsWithName(params AudioName[] audioNames)
+        {
+            if(audioNames == null || audioNames.IsEmpty())
+                return;
+            
+            foreach (var pair in _audio.Where(pair => audioNames.Contains(pair.audioName)))
+            {
+                var audioSource = pair.audioSource;
+                
+                audioSource.Stop();
+                audioSource.loop = false;
+                audioSource.clip = null;
+            }
+        }
+    }
+
+    internal sealed class AudioPair
+    {
+        public AudioName audioName;
+        public AudioSource audioSource;
     }
 }

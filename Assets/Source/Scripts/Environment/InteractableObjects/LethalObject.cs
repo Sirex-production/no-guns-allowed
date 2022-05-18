@@ -3,6 +3,7 @@ using Extensions;
 using Ingame.AI;
 using Ingame.Graphics;
 using NaughtyAttributes;
+using Support.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +14,8 @@ namespace Ingame
         [SerializeField] [Layer] private int staticSurfacesLayer = 0;
         [SerializeField] private ParticleSystem[] particles;
 
-        [Inject] private EffectsManager _effectsManager;
+        [Inject] private readonly EffectsManager _effectsManager;
+        [Inject] private readonly AudioManager _audioManager;
 
         private const float SHAKE_DURATION = 0.1f; 
         private const float DAMAGE = 1000f;
@@ -44,6 +46,8 @@ namespace Ingame
                 if (particle != null)
                     particle.Play();
             }
+            
+            _audioManager.PlaySound(AudioName.environment_container_fall);
             _effectsManager.ShakeEnvironment(SHAKE_DURATION);
             StartCoroutine(ComponentRemovalCoroutine());
         }

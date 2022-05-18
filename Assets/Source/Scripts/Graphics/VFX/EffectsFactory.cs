@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Ingame.Graphics
 {
@@ -8,6 +9,8 @@ namespace Ingame.Graphics
     {
         [Space]
         [SerializeField] private List<EffectEntity> effectEntities;
+
+        [Inject] private readonly DiContainer _diContainer;
 
         private const float GIZMOS_CUBE_SIZE = .3f; 
         
@@ -40,8 +43,8 @@ namespace Ingame.Graphics
                 
                 if(!effectEntity.effectPrefab.EffectTypes.Contains(effectType))
                     continue;
-
-                var effect = Instantiate(effectEntity.effectPrefab, effectEntity.effectTransform.position, effectEntity.effectTransform.rotation);
+                
+                var effect = _diContainer.InstantiatePrefab(effectEntity.effectPrefab, effectEntity.effectTransform.position, effectEntity.effectTransform.rotation, null).GetComponent<Effect>();
                 effect.PlayEffect(effectEntity.effectTransform);
             }
         }

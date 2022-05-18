@@ -1,4 +1,5 @@
 using System.Collections;
+using Extensions;
 using Support;
 using UnityEngine;
 using Zenject;
@@ -23,6 +24,7 @@ namespace Ingame.Graphics.VFX
         private void Start()
         {
             _gameController.OnLevelRestart += ResetTimeScale;
+            _gameController.OnLevelEnded += OnLevelEnded;
             
             if(PlayerEventController.Instance == null)
                 return;
@@ -33,11 +35,17 @@ namespace Ingame.Graphics.VFX
         private void OnDestroy()
         {
             _gameController.OnLevelRestart -= ResetTimeScale;
+            _gameController.OnLevelEnded -= OnLevelEnded;
             
             if(PlayerEventController.Instance == null)
                 return;
             _effectsManager.OnSlowMotionEnter -= DecreaseTimeScale;
             _effectsManager.OnSlowMotionExit -= ResetTimeScale;
+        }
+
+        private void OnLevelEnded(bool _)
+        {
+            this.DoAfterNextFrameCoroutine(ResetTimeScale);
         }
 
         private void DecreaseTimeScale()

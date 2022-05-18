@@ -4,7 +4,6 @@ namespace Ingame.AI
 {
     public class ShootingEnemyRestStage : State
     {
-        
         public ShootingEnemyRestStage(Context context) : base(context)
         {
             _currentContext.AiBehaviourController.AiPatrolController.StartPatrolling();
@@ -16,6 +15,7 @@ namespace Ingame.AI
         {
             _currentContext.AiBehaviourController.AiPatrolController.StopPatrolling();
             _currentContext.AiBehaviourController.EffectsFactory.PlayAllEffects(EffectType.Detection);
+            
             
             return new ShootingEnemyCombatState(actorStats, _currentContext);
         }

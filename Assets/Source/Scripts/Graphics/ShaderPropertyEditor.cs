@@ -37,6 +37,29 @@ public class ShaderPropertyEditor : MonoBehaviour
 
     private MaterialPropertyBlock _propertyBlock;
 
+    private void Awake()
+    {
+        _propertyBlock = new MaterialPropertyBlock();
+
+        foreach (var property in properties)
+        {
+            if(property == null)
+                continue;
+            
+            foreach (var meshRenderer in rendererReferences)
+            {
+                if(meshRenderer == null)
+                    continue;
+                
+                meshRenderer.GetPropertyBlock(_propertyBlock);
+                SetProperty(property);
+                meshRenderer.SetPropertyBlock(_propertyBlock);
+            }
+        }
+        
+        Destroy(this);
+    }
+    
     private void OnValidate()
     {
         _propertyBlock = new MaterialPropertyBlock();
@@ -76,22 +99,5 @@ public class ShaderPropertyEditor : MonoBehaviour
                 _propertyBlock.SetColor(propertyID, property.color);
                 break;
         }
-    }  
-
-    private void Awake()
-    {
-        _propertyBlock = new MaterialPropertyBlock();
-
-        foreach (var property in properties)
-        {
-            foreach (var meshRenderer in rendererReferences)
-            {
-                meshRenderer.GetPropertyBlock(_propertyBlock);
-                SetProperty(property);
-                meshRenderer.SetPropertyBlock(_propertyBlock);
-            }
-        }
-        
-        Destroy(this);
     }
 }

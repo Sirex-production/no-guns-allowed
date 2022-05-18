@@ -1,6 +1,7 @@
 using Extensions;
 using NaughtyAttributes;
 using Support;
+using Support.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -11,9 +12,10 @@ namespace Ingame.UI
         [Required] 
         [SerializeField] private Animator levelTransitionAnimator;
 
-        [Inject] private GameController _gameController;
-        [Inject] private LevelManager _levelManager;
-        
+        [Inject] private readonly GameController _gameController;
+        [Inject] private readonly LevelManager _levelManager;
+        [Inject] private readonly AudioManager _audioManager;
+
         private const float TIME_OFFSET_AFTER_ANIMATION_FOR_SCENE_TRANSITION = .2f;
 
         private void Start()
@@ -55,12 +57,14 @@ namespace Ingame.UI
 
         private void PlayOpenAnimation()
         {
+            _audioManager.PlaySound(AudioName.ui_tv_on);
             levelTransitionAnimator.SetTrigger("Open");
             this.DoAfterNextFrameCoroutine(() => levelTransitionAnimator.ResetTrigger("Open"));
         }
 
         private void PlayCloseAnimation()
         {
+            _audioManager.PlaySound(AudioName.ui_tv_off);
             levelTransitionAnimator.SetTrigger("Close");
             this.DoAfterNextFrameCoroutine(() => levelTransitionAnimator.ResetTrigger("Close"));
         }

@@ -355,6 +355,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: PlaySpaceAmbient
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 2.35
     functionName: ShowHeader
     data: 
@@ -376,8 +383,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 8.016666
+    functionName: PlaySpaceShipFlySound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 10.95
     functionName: PlayDialog
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 60.25
+    functionName: StopSpaceAmbient
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
