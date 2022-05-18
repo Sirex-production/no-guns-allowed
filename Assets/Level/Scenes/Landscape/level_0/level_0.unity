@@ -44041,31 +44041,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.2445993, y: 0.54003936, z: 5.9874477}
   m_Center: {x: 1.6222999, y: 0, z: 0}
---- !u!1 &1332921829 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7226707245053424007, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
-  m_PrefabInstance: {fileID: 2118960981}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1332921830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1332921829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35427097a9e49eb4ea2af92c20ad5783, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rendererReferences:
-  - {fileID: 1686061013}
-  properties:
-  - name: _BaseColor
-    type: 2
-    intValue: 0
-    floatValue: 0
-    color: {r: 0.1321645, g: 0.14703292, b: 0.6226415, a: 0}
 --- !u!1001 &1333027957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70285,13 +70260,39 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -21.96
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2809703596700050906, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
 --- !u!4 &2118960982 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7226707245615650025, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
   m_PrefabInstance: {fileID: 2118960981}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2118960983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 215666553188941876, guid: 7fd664ef6230dcb41b0f77101cab7a94, type: 3}
+  m_PrefabInstance: {fileID: 2118960981}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2118960984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118960983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35427097a9e49eb4ea2af92c20ad5783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererReferences:
+  - {fileID: 1686061013}
+  properties:
+  - name: _BaseColor
+    type: 2
+    intValue: 0
+    floatValue: 0
+    color: {r: 0.1321645, g: 0.14703292, b: 0.6226415, a: 0}
 --- !u!1001 &2120325344
 PrefabInstance:
   m_ObjectHideFlags: 0

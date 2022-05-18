@@ -16,7 +16,8 @@ namespace Ingame
         private const float TIME_AFTER_DASH_WILL_BE_STOPPED = .15f;
 
         [Inject] private InputSystem _inputSystem;
-
+        [Inject] private readonly GameController _gameController;
+        
         private PlayerEventController _playerEventController;
         private Rigidbody _rigidbody;
         private Vector3 _initialDashPosition;
@@ -71,6 +72,9 @@ namespace Ingame
 
         private void Dash(Vector2 _)
         {
+            if(_gameController.IsLevelEnded)
+                return;
+            
             if (aim == null || !_playerEventController.StatsController.IsAbleToDash)
             {
                 _playerEventController.CancelDash();

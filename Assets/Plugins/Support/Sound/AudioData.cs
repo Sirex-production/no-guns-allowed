@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Support.Sound
@@ -5,9 +6,9 @@ namespace Support.Sound
     [CreateAssetMenu(menuName = "Data/Support/AudioData", fileName = "NewAudioData")]
     public class AudioData : ScriptableObject
     {
-        [SerializeField] private SerializableDictionary<AudioName, AudioClip> audioClips;
+        [SerializeField] private SerializableDictionary<AudioName, AudioClipSettings> audioClips;
 
-        public AudioClip GetAudioClip(AudioName audioName)
+        public AudioClipSettings GetAudioClip(AudioName audioName)
         {
             if(audioClips.Contains(audioName))
                 return audioClips[audioName];
@@ -15,7 +16,17 @@ namespace Support.Sound
             return null;
         }
     }
-    
+
+    [Serializable]
+    public class AudioClipSettings
+    {
+        public AudioClip audioClip;
+        [Range(0, 1)]
+        public float volume = 1;
+        [Range(-3, 3)]
+        public float pitch = 1;
+    }
+
     public enum AudioName
     {
         none,

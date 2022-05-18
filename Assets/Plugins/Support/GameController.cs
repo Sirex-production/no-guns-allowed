@@ -12,6 +12,8 @@ namespace Support
         public event Action OnLastPlayedLevelFromStaveLoaded;
         
         private bool _isLevelEnded = false;
+        
+        public bool IsLevelEnded => _isLevelEnded;
 
         public void EndLevel(bool isVictory)
         {

@@ -31,18 +31,18 @@ namespace Support.Sound
             if(audioName == AudioName.none)
                 return;
             
-            var audioClip = audioData.GetAudioClip(audioName);
+            var audioClipSettings = audioData.GetAudioClip(audioName);
             
-            if(audioClip == null)
+            if(audioClipSettings == null)
                 return;
 
             try
             {
                 var audioPair = _audio.First(pair => !pair.audioSource.isPlaying);
                 var audioSource = audioPair.audioSource;
-            
+
                 audioPair.audioName = audioName;
-                audioSource.clip = audioClip;
+                audioSource.clip = audioClipSettings.audioClip;
                 audioSource.loop = isLopped;
                 audioSource.Play();
             }
