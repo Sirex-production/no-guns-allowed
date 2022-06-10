@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using Extensions;
 using NaughtyAttributes;
+using Support;
 using Support.Sound;
 using TMPro;
 using UnityEngine;
@@ -24,6 +25,8 @@ namespace Ingame.UI
         [SerializeField] private TMP_Text subHeaderText;
         [BoxGroup("References"), Required]
         [SerializeField] private TMP_Text subtitlesText;
+        [BoxGroup("References"), Required]
+        [SerializeField] private CanvasGroup skipButtonCanvasGroup;
         [Space]
         [BoxGroup("Animation settings")]
         [SerializeField] [Range(0, 1f)] private float displayAnimationDuration = .1f;
@@ -35,10 +38,11 @@ namespace Ingame.UI
         [BoxGroup("Animation settings")]
         [SerializeField] [Range(0, 1f)] private float subtitlesTextSpawnSpeed = .5f;
 
+        [Inject] private readonly GameController _gameController;
         [Inject] private readonly AudioManager _audioManager;
-        
+
         private float _initialSubtitlesBackgroundAlpha;
-        
+
         private Coroutine _modifyHeaderCoroutine;
         private Coroutine _modifySubHeaderCoroutine;
         private Coroutine _modifySubtitlesCoroutine;
@@ -56,6 +60,21 @@ namespace Ingame.UI
         private void Start()
         {
             subtitlesBackgroundImage.DOFade(0, 0);
+            skipButtonCanvasGroup.alpha = 0;
+            
+            skipButtonCanvasGroup.SetGameObjectInactive();
+
+            _gameController.OnLevelLoaded += OnLevelLoaded;
+        }
+
+        private void OnDestroy()
+        {
+            _gameController.OnLevelLoaded -= OnLevelLoaded;
+        }
+
+        private void OnLevelLoaded(int _)
+        {
+            this.SetGameObjectInactive();
         }
 
         private IEnumerator PlayDialogRoutine(DialogData dialogData, Action onComplete, Action onLetterSpawned)
@@ -171,6 +190,18 @@ namespace Ingame.UI
 
             subtitlesBackgroundImage.DOFade(_initialSubtitlesBackgroundAlpha, displayAnimationDuration / 2)
                 .OnComplete(() => _dialogCoroutine = StartCoroutine(PlayDialogRoutine(dialogData, onComplete, onLetterSpawned)));
+        }
+
+        public void ShowSkipButton()
+        {
+            skipButtonCanvasGroup.SetGameObjectActive();
+            skipButtonCanvasGroup.DOFade(1, displayAnimationDuration);
+        }
+
+        public void HideSkipButton()
+        {
+            skipButtonCanvasGroup.DOFade(0, displayAnimationDuration)
+                .OnComplete(skipButtonCanvasGroup.SetGameObjectInactive);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Extensions;
 using MoreMountains.NiceVibrations;
@@ -88,6 +89,11 @@ namespace Ingame
         public void LoadLevel(int levelNumber)
         {
             _gameController.LoadLevel(levelNumber);
+        }
+
+        public void StopAllSounds()
+        {
+            _audioManager.StopAllSoundsWithName(Enum.GetValues(typeof(AudioName)) as AudioName[]);
         }
     }
 }
