@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using DG.Tweening;
-using Extensions;
+using Ingame.Sound;
 using NaughtyAttributes;
 using Support;
-using Support.Sound;
+using Support.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,7 +39,7 @@ namespace Ingame.UI
         [SerializeField] [Range(0, 1f)] private float subtitlesTextSpawnSpeed = .5f;
 
         [Inject] private readonly GameController _gameController;
-        [Inject] private readonly AudioManager _audioManager;
+        [Inject] private readonly LegacyAudioManager _legacyAudioManager;
 
         private float _initialSubtitlesBackgroundAlpha;
 
@@ -85,7 +85,7 @@ namespace Ingame.UI
                 if(dialogPhrasesPair == null || string.IsNullOrEmpty(dialogPhrasesPair.phrase))
                     continue;
                 
-                _audioManager.PlayRandomizedSound
+                _legacyAudioManager.PlayRandomizedSound
                 (
                     true,
                     AudioName.ui_letters_spawn_long_1,
@@ -101,7 +101,7 @@ namespace Ingame.UI
 
                 yield return new WaitUntil(() => isPhraseCompleted);
                 
-                _audioManager.StopAllSoundsWithName
+                _legacyAudioManager.StopAllSoundsWithName
                 (
                     AudioName.ui_letters_spawn_long_1,
                     AudioName.ui_letters_spawn_long_2,
@@ -136,10 +136,10 @@ namespace Ingame.UI
                 StopCoroutine(_modifyHeaderCoroutine);
             
             headerText.SetText("");
-            _audioManager.PlayRandomizedSound(true, AudioName.ui_letters_spawn_long_1);
+            _legacyAudioManager.PlayRandomizedSound(true, AudioName.ui_letters_spawn_long_1);
             
             _modifyHeaderCoroutine = this.SpawnTextCoroutine(headerText, content, headerTextSpawnSpeed, 
-                () => _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn_long_1));
+                () => _legacyAudioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn_long_1));
         }
 
         public void PrintSubHeaderText(string content)
@@ -148,10 +148,10 @@ namespace Ingame.UI
                 StopCoroutine(_modifySubHeaderCoroutine);
             
             subHeaderText.SetText("");
-            _audioManager.PlayRandomizedSound(true, AudioName.ui_letters_spawn_long_2);
+            _legacyAudioManager.PlayRandomizedSound(true, AudioName.ui_letters_spawn_long_2);
             
             _modifySubHeaderCoroutine = this.SpawnTextCoroutine(subHeaderText, content, subHeaderTextSpawnSpeed, 
-                () => _audioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn_long_2));
+                () => _legacyAudioManager.StopAllSoundsWithName(AudioName.ui_letters_spawn_long_2));
         }
 
         public void PrintSubtitlesText(string content, Action onEnd = null, Action onLetterSpawned = null)

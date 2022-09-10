@@ -1,5 +1,5 @@
 using Ingame.AI;
-using Support.Sound;
+using Ingame.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +9,7 @@ namespace Ingame.Graphics
     public class BreakableWall : MonoBehaviour
     {
         [Inject] private EffectsManager _effectsManager;
-        [Inject] private AudioManager _audioManager;
+        [Inject] private LegacyAudioManager _legacyAudioManager;
         
         private const float MIN_COS_OF_ANGLE_TO_BREAK_THE_WALL = .75f;
         
@@ -26,7 +26,7 @@ namespace Ingame.Graphics
             {
                 if (PlayerEventController.Instance.StatsController.IsInvincible)
                 {
-                    _audioManager.PlayRandomizedSound(false,
+                    _legacyAudioManager.PlayRandomizedSound(false,
                         AudioName.environment_wall_destruction_1, 
                         AudioName.environment_wall_destruction_2,
                         AudioName.environment_wall_destruction_3,
@@ -66,7 +66,7 @@ namespace Ingame.Graphics
             if (dotProductBetweenDashAndWallDirection < MIN_COS_OF_ANGLE_TO_BREAK_THE_WALL)
                 return;
 
-            _audioManager.PlayRandomizedSound(false,
+            _legacyAudioManager.PlayRandomizedSound(false,
                 AudioName.environment_wall_destruction_1, 
                 AudioName.environment_wall_destruction_2,
                 AudioName.environment_wall_destruction_3,

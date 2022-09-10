@@ -1,7 +1,7 @@
 using DG.Tweening;
-using Extensions;
 using NaughtyAttributes;
 using Support;
+using Support.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

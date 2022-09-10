@@ -38,9 +38,13 @@ Material:
     - Vector1_6cf638bbc27540de880a198a4b81f608: -0.11
     - Vector1_cb036b1a842f480b8199c7c96f09cff6: 0.18
     - Vector1_ff4722688802464aad994b74da269b29: 0.4
+    - _FresnelPower: 0.4
+    - _QueueControl: 0
+    - _QueueOffset: 0
     m_Colors:
     - Color_bc9485cc55fa4bf9b6118c646c923477: {r: 0, g: 1.4980392, b: 1.427451, a: 0}
     - EmissionColor: {r: 1.4757303, g: 0.12712115, b: 0, a: 0}
+    - _EmissionColor: {r: 0.005418401, g: 0.9747209, b: 1.148698, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1344022322411769431
 MonoBehaviour:

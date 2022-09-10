@@ -1,9 +1,9 @@
 using DG.Tweening;
-using Extensions;
 using Ingame.Graphics;
 using ModestTree;
 using NaughtyAttributes;
 using Support;
+using Support.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

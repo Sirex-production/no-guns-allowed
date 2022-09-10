@@ -2,9 +2,9 @@ using Ingame.UI;
 using NaughtyAttributes;
 using Support;
 using Support.SLS;
-using Support.Sound;
 using UnityEngine;
 using Zenject;
+using Support.Audio;
 
 namespace Ingame.DI
 {
@@ -25,7 +25,7 @@ namespace Ingame.DI
         [Required]
         [SerializeField] private TutorialsManager tutorialsManager;
         [Required]
-        [SerializeField] private InputSystem inputSystem;
+        [SerializeField] private TouchScreenInputSystem touchScreenInputSystem;
 
         public override void InstallBindings()
         {
@@ -57,8 +57,8 @@ namespace Ingame.DI
                 .FromInstance(tutorialsManager)
                 .AsSingle();
 
-            Container.Bind<InputSystem>()
-                .FromInstance(inputSystem)
+            Container.Bind<TouchScreenInputSystem>()
+                .FromInstance(touchScreenInputSystem)
                 .AsSingle();
         }
     }

@@ -1,6 +1,6 @@
 using DG.Tweening;
-using Extensions;
 using Support;
+using Support.Extensions;
 using Support.SLS;
 using UnityEngine;
 using Zenject;

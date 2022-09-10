@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Extensions;
+using Support.Extensions;
 using UnityEngine;
 
 namespace Ingame.Graphics

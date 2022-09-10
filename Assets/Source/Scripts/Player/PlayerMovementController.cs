@@ -1,4 +1,4 @@
-using Extensions;
+using Support.Extensions;
 using Support;
 using UnityEngine;
 using Zenject;
@@ -15,7 +15,7 @@ namespace Ingame
         private const float MINIMAL_DISTANCE_TO_PERFORM_DASH = 0f;
         private const float TIME_AFTER_DASH_WILL_BE_STOPPED = .15f;
 
-        [Inject] private InputSystem _inputSystem;
+        [Inject] private TouchScreenInputSystem _touchScreenInputSystem;
         [Inject] private readonly GameController _gameController;
         
         private PlayerEventController _playerEventController;
@@ -37,12 +37,12 @@ namespace Ingame
         private void Start()
         {
             _playerEventController = PlayerEventController.Instance;
-            _inputSystem.OnReleaseAction += Dash;
+            _touchScreenInputSystem.OnReleaseAction += Dash;
         }
 
         private void OnDestroy()
         {
-            _inputSystem.OnReleaseAction -= Dash;
+            _touchScreenInputSystem.OnReleaseAction -= Dash;
         }
 
         private void OnCollisionEnter()

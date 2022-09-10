@@ -1,6 +1,6 @@
 using DG.Tweening;
-using Extensions;
 using NaughtyAttributes;
+using Support.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

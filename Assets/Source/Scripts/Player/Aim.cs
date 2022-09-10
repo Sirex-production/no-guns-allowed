@@ -1,4 +1,4 @@
-using Extensions;
+using Support.Extensions;
 using NaughtyAttributes;
 using Support;
 using Support.SLS;
@@ -18,7 +18,7 @@ namespace Ingame
         [SerializeField] [Range(0, 10)] private float sensitivity = 5f;
 
         [Inject] private SaveLoadSystem _saveLoadSystem;
-        [Inject] private InputSystem _inputSystem;
+        [Inject] private TouchScreenInputSystem _touchScreenInputSystem;
 
         private SpriteRenderer _spriteRenderer;
         private int ignoreRaycastLayers;
@@ -43,8 +43,8 @@ namespace Ingame
 
         private void Start()
         {
-            _inputSystem.OnReleaseAction += OnReleaseAction;
-            _inputSystem.OnDragAction += Move;
+            _touchScreenInputSystem.OnReleaseAction += OnReleaseAction;
+            _touchScreenInputSystem.OnDragAction += Move;
             _saveLoadSystem.SaveData.AimSensitivity.OnValueChanged += SetSensitivity;
 
             if(!isSaveLoadSystemIgnored)
@@ -53,8 +53,8 @@ namespace Ingame
 
         private void OnDestroy()
         {
-            _inputSystem.OnReleaseAction -= OnReleaseAction;
-            _inputSystem.OnDragAction -= Move;
+            _touchScreenInputSystem.OnReleaseAction -= OnReleaseAction;
+            _touchScreenInputSystem.OnDragAction -= Move;
             _saveLoadSystem.SaveData.AimSensitivity.OnValueChanged -= SetSensitivity;
         }
         

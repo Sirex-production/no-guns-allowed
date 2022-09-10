@@ -1,7 +1,7 @@
 using DG.Tweening;
-using Extensions;
+using Ingame.Sound;
+using Support.Extensions;
 using NaughtyAttributes;
-using Support.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -19,7 +19,7 @@ namespace Ingame.Graphics
         [Space] 
         [SerializeField] private AudioName audioNameToPlayOnPopup = AudioName.none;
 
-        [Inject] private readonly AudioManager _audioManager;
+        [Inject] private readonly LegacyAudioManager _legacyAudioManager;
         
         private Sequence _imageAnimationSequence;
 
@@ -51,7 +51,7 @@ namespace Ingame.Graphics
             if(instanceTargetTransform != null)
                 transform.parent = instanceTargetTransform;
             
-            _audioManager.PlaySound(audioNameToPlayOnPopup);
+            _legacyAudioManager.PlaySound(audioNameToPlayOnPopup);
             
             var initialColor = detectionImage.color;
 

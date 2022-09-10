@@ -4332,7 +4332,7 @@ MonoBehaviour:
     LOADING
     SYSTEM...
 
-    VERSION: <color=#D51C49>DEV DEMO 1.1</color>;
+    VERSION: <color=#D51C49>DEV DEMO 1.2</color>;
 
     TESTER: <color=#D51C49>#34212</color>;
 
@@ -7458,7 +7458,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 137.9
+  m_fontSize: 163.65
   m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7578,7 +7578,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DEV DEMO 1.1
+  m_text: DEV DEMO 1.2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}

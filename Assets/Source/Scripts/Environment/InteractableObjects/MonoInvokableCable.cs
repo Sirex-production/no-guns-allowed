@@ -1,6 +1,6 @@
 using Ingame.AI;
 using Ingame.Graphics;
-using Support.Sound;
+using Ingame.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +11,7 @@ namespace Ingame
         [SerializeField] private Rigidbody bodyToRelease;
 
         [Inject] private EffectsManager _effectsManager;
-        [Inject] private AudioManager _audioManager;
+        [Inject] private LegacyAudioManager _legacyAudioManager;
         
         public override void Invoke()
         {
@@ -50,7 +50,7 @@ namespace Ingame
 
         private void ReleaseObject()
         {
-            _audioManager.PlaySound(AudioName.environment_chain_break);
+            _legacyAudioManager.PlaySound(AudioName.environment_chain_break);
             
             bodyToRelease.isKinematic = false;
             Destroy(gameObject);
