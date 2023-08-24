@@ -1,8 +1,8 @@
 using DG.Tweening;
-using Extensions;
 using ModestTree;
 using NaughtyAttributes;
 using Support;
+using Support.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -51,7 +51,7 @@ namespace Ingame.UI
         [SerializeField] private bool activateNextTutorial = true;
         
         [Inject] private TutorialsManager _tutorialsManager;
-        [Inject] private InputSystem _inputSystem;
+        [Inject] private TouchScreenInputSystem _touchScreenInputSystem;
         [Inject] private UiController _uiController;
 
         private Image _targetButtonImage;
@@ -69,7 +69,7 @@ namespace Ingame.UI
         {
             this.WaitAndDoCoroutine(delayBeforeTutorial, () =>
             {
-                this.DoAfterNextFrameCoroutine(() => _inputSystem.Enabled = areImagesActivatedOnActivate);
+                this.DoAfterNextFrameCoroutine(() => _touchScreenInputSystem.Enabled = areImagesActivatedOnActivate);
             
                 targetButton.onClick.AddListener(Complete);
 
@@ -117,7 +117,7 @@ namespace Ingame.UI
                 if(activateNextTutorial)
                     _tutorialsManager.ActivateNext();
                
-                this.DoAfterNextFrameCoroutine(()=>_inputSystem.Enabled = areImagesActivatedOnComplete);
+                this.DoAfterNextFrameCoroutine(()=>_touchScreenInputSystem.Enabled = areImagesActivatedOnComplete);
                 this.SetGameObjectInactive();
             });
         }

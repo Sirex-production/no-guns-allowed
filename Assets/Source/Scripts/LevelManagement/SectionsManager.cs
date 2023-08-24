@@ -12,7 +12,7 @@ namespace Ingame
         
         [ReadOnly][SerializeField] private int _currentSection = 0;
 
-        [Inject] private InputSystem _inputSystem;
+        [Inject] private TouchScreenInputSystem _touchScreenInputSystem;
         
         private bool _isInLevelOverview = false;
         
@@ -31,7 +31,7 @@ namespace Ingame
         public void EnterSection(int sectionId)
         {
             _currentSection = sectionId;
-            _inputSystem.Enabled = true;
+            _touchScreenInputSystem.Enabled = true;
 
             OnSectionEnter?.Invoke(sectionId);
         }
@@ -39,7 +39,7 @@ namespace Ingame
         public void EnterLevelOverview()
         {
             _isInLevelOverview = true;
-            _inputSystem.Enabled = false;
+            _touchScreenInputSystem.Enabled = false;
 
             OnLevelOverviewEnter?.Invoke();
         }
@@ -47,7 +47,7 @@ namespace Ingame
         public void ExitLevelOverview()
         {
             _isInLevelOverview = false;
-            _inputSystem.Enabled = true;
+            _touchScreenInputSystem.Enabled = true;
             
             OnLevelOverviewExit?.Invoke(_currentSection);
         }

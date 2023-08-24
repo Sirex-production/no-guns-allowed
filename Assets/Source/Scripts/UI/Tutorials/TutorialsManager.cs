@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Extensions;
 using Support;
+using Support.Extensions;
 using UnityEngine;
 
 namespace Ingame.UI

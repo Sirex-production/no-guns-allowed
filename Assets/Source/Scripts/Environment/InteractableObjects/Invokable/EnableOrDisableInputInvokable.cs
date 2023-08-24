@@ -8,11 +8,11 @@ namespace Ingame
     {
         [SerializeField] private bool isInputSystemEnabled;
 
-        [Inject] private InputSystem _inputSystem;
+        [Inject] private TouchScreenInputSystem _touchScreenInputSystem;
         
         public override void Invoke()
         {
-            _inputSystem.Enabled = isInputSystemEnabled;
+            _touchScreenInputSystem.Enabled = isInputSystemEnabled;
             
             base.Invoke();
         }

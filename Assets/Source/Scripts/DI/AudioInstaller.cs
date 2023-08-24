@@ -1,5 +1,5 @@
+using Ingame.Sound;
 using NaughtyAttributes;
-using Support.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -8,12 +8,12 @@ namespace Ingame.DI
     public class AudioInstaller : MonoInstaller
     {
         [Required]
-        [SerializeField] private AudioManager audioManager;
+        [SerializeField] private LegacyAudioManager legacyAudioManager;
         
         public override void InstallBindings()
         {
-            Container.Bind<AudioManager>()
-                .FromInstance(audioManager)
+            Container.Bind<LegacyAudioManager>()
+                .FromInstance(legacyAudioManager)
                 .AsSingle();
         }
     }

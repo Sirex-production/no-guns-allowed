@@ -1,9 +1,10 @@
+using System;
 using DG.Tweening;
-using Extensions;
+using Ingame.Sound;
 using MoreMountains.NiceVibrations;
 using Support;
+using Support.Extensions;
 using Support.SLS;
-using Support.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -17,7 +18,7 @@ namespace Ingame
         [Inject] private GameController _gameController;
         [Inject] private SaveLoadSystem _saveLoadSystem;
         [Inject] private SectionsManager _sectionsManager;
-        [Inject] private AudioManager _audioManager;
+        [Inject] private LegacyAudioManager _legacyAudioManager;
 
         public void OpenUrl(string urlToOpen)
         {
@@ -42,7 +43,7 @@ namespace Ingame
 
         public void PlayTerminalBeep()
         {
-            _audioManager.PlaySound(AudioName.ui_button_beep);
+            _legacyAudioManager.PlaySound(AudioName.ui_button_beep);
         }
 
         public void ChangeVibrationDueToToggle(Toggle toggle)
@@ -88,6 +89,11 @@ namespace Ingame
         public void LoadLevel(int levelNumber)
         {
             _gameController.LoadLevel(levelNumber);
+        }
+
+        public void StopAllSounds()
+        {
+            _legacyAudioManager.StopAllSoundsWithName(Enum.GetValues(typeof(AudioName)) as AudioName[]);
         }
     }
 }

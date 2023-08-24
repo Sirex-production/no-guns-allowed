@@ -1,4 +1,4 @@
-using Support.Sound;
+using Ingame.Sound;
 using UnityEngine;
 using Zenject;
 
@@ -6,21 +6,21 @@ namespace Ingame
 {
     public class CutSceneSoundInvoker : MonoBehaviour
     {
-        [Inject] private readonly AudioManager _audioManager;
+        [Inject] private readonly LegacyAudioManager _legacyAudioManager;
 
         public void PlaySpaceShipFlySound()
         {
-            _audioManager.PlaySound(AudioName.environment_space_ship_fly_sound);
+            _legacyAudioManager.PlaySound(AudioName.environment_space_ship_fly_sound);
         }
 
         public void PlaySpaceAmbient()
         {
-            _audioManager.PlaySound(AudioName.ambient_space);
+            _legacyAudioManager.PlaySound(AudioName.ambient_space);
         }
 
         public void StopSpaceAmbient()
         {
-            _audioManager.StopAllSoundsWithName(AudioName.ambient_space);
+            _legacyAudioManager.StopAllSoundsWithName(AudioName.ambient_space);
         }
     }
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
-using Extensions;
+using Support.Extensions;
 using Ingame.Graphics;
 using NaughtyAttributes;
 using UnityEngine;

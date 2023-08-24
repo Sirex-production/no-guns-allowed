@@ -1,8 +1,8 @@
 using System.Collections;
-using Extensions;
 using Ingame.Graphics;
 using NaughtyAttributes;
 using Support;
+using Support.Extensions;
 using UnityEngine;
 using Zenject;
 

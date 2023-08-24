@@ -1,8 +1,8 @@
 using DG.Tweening;
-using Extensions;
+using Ingame.Sound;
 using NaughtyAttributes;
 using Support;
-using Support.Sound;
+using Support.Extensions;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -29,8 +29,8 @@ namespace Ingame.UI
         [BoxGroup("Animation settings")] [SerializeField] [Min(0)] private float buttonFadeAnimationTime = .5f;
         [BoxGroup("Animation settings")] [SerializeField] [Min(0)] private float pauseBetweenFadingButtons = .5f;
 
-        [Inject] private InputSystem _inputSystem;
-        [Inject] private AudioManager _audioManager;
+        [Inject] private TouchScreenInputSystem _touchScreenInputSystem;
+        [Inject] private LegacyAudioManager _legacyAudioManager;
 
         private const float INITIAL_SOUND_DELAY = .3f;
         
@@ -46,12 +46,12 @@ namespace Ingame.UI
         private void Start()
         {
             PlayAppearanceAnimation();
-            _inputSystem.OnTouchAction += OnTouch;
+            _touchScreenInputSystem.OnTouchAction += OnTouch;
         }
 
         private void OnDestroy()
         {
-            _inputSystem.OnTouchAction -= OnTouch;
+            _touchScreenInputSystem.OnTouchAction -= OnTouch;
         }
 
         private void OnTouch(Vector2 _)
@@ -62,7 +62,7 @@ namespace Ingame.UI
         private void SkipAppearanceAnimation()
         {
             StopAllCoroutines();
-            _audioManager.StopAllSoundsWithName
+            _legacyAudioManager.StopAllSoundsWithName
             (
                 AudioName.ui_letters_spawn_long_1,
                 AudioName.ui_letters_spawn_long_2,
@@ -107,7 +107,7 @@ namespace Ingame.UI
             feedbackButtonCanvasGroup.SetGameObjectInactive();
             discordButtonCanvasGroup.SetGameObjectInactive();
             
-            this.WaitAndDoCoroutine(INITIAL_SOUND_DELAY, () => _audioManager.PlayRandomizedSound
+            this.WaitAndDoCoroutine(INITIAL_SOUND_DELAY, () => _legacyAudioManager.PlayRandomizedSound
             (
                 true,
                 AudioName.ui_letters_spawn_long_1,
@@ -117,7 +117,7 @@ namespace Ingame.UI
             
             this.SpawnTextCoroutine(menuText, _initialMenuTextContent, letterSpawnDelayTime, () =>
             {
-                _audioManager.StopAllSoundsWithName
+                _legacyAudioManager.StopAllSoundsWithName
                 (
                     AudioName.ui_letters_spawn_long_1,
                     AudioName.ui_letters_spawn_long_2,
@@ -158,14 +158,14 @@ namespace Ingame.UI
             characterSectionCanvasGroup.DOFade(1, characterSectionFadeAnimationTime)
                 .OnComplete(() =>
                 {
-                    _audioManager.PlayRandomizedSound(
+                    _legacyAudioManager.PlayRandomizedSound(
                         true,
                         AudioName.ui_letters_spawn_long_1,
                         AudioName.ui_letters_spawn_long_2,
                         AudioName.ui_letters_spawn_long_3
                         );
                     
-                    this.SpawnTextCoroutine(characterOutputText, characterTextContent, letterSpawnDelayTime, () => _audioManager.StopAllSoundsWithName
+                    this.SpawnTextCoroutine(characterOutputText, characterTextContent, letterSpawnDelayTime, () => _legacyAudioManager.StopAllSoundsWithName
                     (
                         AudioName.ui_letters_spawn_long_1,
                         AudioName.ui_letters_spawn_long_2,

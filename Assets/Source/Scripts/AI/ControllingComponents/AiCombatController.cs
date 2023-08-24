@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using Extensions;
+using Support.Extensions;
 using UnityEngine;
 using Zenject;
 

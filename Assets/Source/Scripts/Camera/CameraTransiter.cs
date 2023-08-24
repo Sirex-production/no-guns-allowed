@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Cinemachine;
-using Extensions;
+using Support.Extensions;
 using Ingame.Graphics;
 using NaughtyAttributes;
 using UnityEngine;

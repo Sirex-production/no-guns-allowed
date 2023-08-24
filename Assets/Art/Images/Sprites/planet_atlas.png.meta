@@ -45,6 +45,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -304,6 +305,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      planet_atlas_5: 2278628634377474320
+      planet_atlas_0: 8320790289734041677
+      planet_atlas_1: 346152300354605621
+      planet_atlas_6: 5584511306734210318
+      planet_atlas_3: -6865252599389041452
+      planet_atlas_4: -3582760483773047475
+      planet_atlas_2: 9087400271663001860
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
